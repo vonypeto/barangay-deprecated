@@ -19,25 +19,12 @@ use Carbon\Carbon;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.test');
-});
 
-//Route::get('/dashboard','PagesController@dashboard');
 
-//Route::get('/resident',[PagesController::class, 'resident']);
-Route::get('/dashboard',[PagesController::class, 'dashboard','Carbon' => 'Carbon\Carbon']);
+//Route::get('/dashboard',[PagesController::class, 'dashboard','Carbon' ]);
 Route::get('/blotter',[BlotterController::class, 'show']);
 Route::get('/schedule',[ScheduleController::class, 'show']);
-//Route::get('/setting/account',[PagesController::class, 'account']);
 Route::get('/setting/maintenance',[BrgyOfficialController::class, 'show']);
 Route::get('/setting/account',[AccountController::class, 'show']);
 Route::get('/resident',[ResidentInfoController::class, 'show']);
-
-Route::get('/time',function(){
-
-    $current = new Carbon();
-    echo $current;
-
-    });
 
