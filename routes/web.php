@@ -21,7 +21,7 @@ use Carbon\Carbon;
 
 
 
-//Route::get('/dashboard',[PagesController::class, 'dashboard','Carbon' ]);
+Route::get('/dashboard',[PagesController::class, 'dashboard']);
 Route::get('/blotter',[BlotterController::class, 'show']);
 Route::get('/schedule',[ScheduleController::class, 'show']);
 Route::get('/setting/maintenance',[BrgyOfficialController::class, 'show']);
