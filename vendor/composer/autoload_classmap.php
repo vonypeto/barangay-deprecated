@@ -17,7 +17,7 @@ return array(
     'App\\Http\\Controllers\\PagesController' => $baseDir . '/app/Http/Controllers/PagesController.php',
     'App\\Http\\Controllers\\PersonInvolveController' => $baseDir . '/app/Http/Controllers/PersonInvolveController.php',
     'App\\Http\\Controllers\\ResidentInfoController' => $baseDir . '/app/Http/Controllers/ResidentInfoController.php',
-    'App\\Http\\Controllers\\SessionController' => $baseDir . '/app/Http/Controllers/SessionController.php',
+    'App\\Http\\Controllers\\ScheduleController' => $baseDir . '/app/Http/Controllers/ScheduleController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',

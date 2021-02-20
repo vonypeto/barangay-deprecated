@@ -26,6 +26,16 @@
       width: 17.2rem !important;
     }
 
+
+.list-none{
+
+
+    list-style-type:none;
+
+}
+
+
+
     #page-content-wrapper {
     min-width: 100vw;
     }

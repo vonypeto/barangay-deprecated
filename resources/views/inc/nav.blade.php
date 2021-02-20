@@ -6,12 +6,12 @@
       <img class="logo" src="{{url('logo/unnamed.png')}}">
    </div>
    <div class="list-group list-group-flush w-100 pt-3 bg-light">
-      <li><a href="/dashboard"  class="list-group-item list-group-item-action bg-light text-adjust {{ (request()->is('dashboard*')) ? 'active-page' : '' }}"><i class="fa fa-home fa-lg icon-adjust"></i> Dashboard</a> </li>
-      <li><a href="/resident"       class="list-group-item list-group-item-action bg-light text-adjust {{ (request()->is('resident*')) ? 'active-page' : '' }}"><i class="fa fa-user-o fa-lg icon-adjust"></i> Resident Information</a> </li>
-      <li><a href="/blotter" class="list-group-item list-group-item-action bg-light text-adjust {{ (request()->is('blotter*')) ? 'active-page' : '' }}"><i class="fa fa-folder fa-lg icon-adjust"></i> Blotters Record</a> </li>
-      <li><a href="/schedule" class="list-group-item list-group-item-action bg-light text-adjust {{ (request()->is('schedule*')) ? 'active-page' : '' }}"><i class="fa fa-suitcase fa-lg icon-adjust"></i> Settlement Schedule</a> </li>
-      <li><a href="/certificate" class="list-group-item list-group-item-action bg-light text-adjust {{ (request()->is('certificate*')) ? 'active-page active' : '' }}"><i class="fa fa-certificate fa-lg icon-adjust"></i> Certificate Issurance</a> </li>
-      <li>
+      <li class="list-none"><a href="/dashboard"  class="list-group-item list-group-item-action bg-light text-adjust {{ (request()->is('dashboard*')) ? 'active-page' : '' }}"><i class="fa fa-home fa-lg icon-adjust"></i> Dashboard</a> </li>
+      <li class="list-none"><a href="/resident"       class="list-group-item list-group-item-action bg-light text-adjust {{ (request()->is('resident*')) ? 'active-page' : '' }}"><i class="fa fa-user-o fa-lg icon-adjust"></i> Resident Information</a> </li>
+      <li class="list-none"><a href="/blotter" class="list-group-item list-group-item-action bg-light text-adjust {{ (request()->is('blotter*')) ? 'active-page' : '' }}"><i class="fa fa-folder fa-lg icon-adjust"></i> Blotters Record</a> </li>
+      <li class="list-none"><a href="/schedule" class="list-group-item list-group-item-action bg-light text-adjust {{ (request()->is('schedule*')) ? 'active-page' : '' }}"><i class="fa fa-suitcase fa-lg icon-adjust"></i> Settlement Schedule</a> </li>
+      <li class="list-none"><a href="/certificate" class="list-group-item list-group-item-action bg-light text-adjust {{ (request()->is('certificate*')) ? 'active-page active' : '' }}"><i class="fa fa-certificate fa-lg icon-adjust"></i> Certificate Issurance</a> </li>
+      <li class="list-none" >
          <button id="dropdown-btn" class="dropdown-btn list-group-item list-group-item-action bg-light text-adjust  {{ (request()->is('setting*')) ? 'active-page' : '' }}"><i class="fa fa-wrench fa-lg icon-adjust"></i>Setting
          <span class="fa fa-caret-down align"></span>
          </button>
