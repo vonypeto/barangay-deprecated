@@ -53,7 +53,7 @@
 
 
 
-  <table id="resident" class="display-nones table dataTables_info resident table-striped jambo_table bulk_action text-center border">
+  <table id="resident" class="dataTables_info table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer">
             <thead>
                <tr class="headings">
                 <th class="column-title" hidden>Resident_ID</th>
