@@ -23105,6 +23105,7 @@ span.align {
   float: right;
   text-align: right;
   display: none;
+  width: 100% !important;
 }
 
 .datatable-element {
