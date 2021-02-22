@@ -29,6 +29,7 @@
 
 
 <script>
+    /*
   function routeToDashboard(){
         console.log("asdsa")
         event.preventDefault();
@@ -63,5 +64,5 @@
 
     }
 
-
+*/
 </script>

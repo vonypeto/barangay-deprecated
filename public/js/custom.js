@@ -173,3 +173,7 @@ window.onload = function(){
 
 
   }
+
+  $('#resident-modal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+  })

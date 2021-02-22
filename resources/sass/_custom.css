@@ -174,7 +174,7 @@ span.align {
   .topnav button {
     float: left;
     display: block;
-    color: black;
+    color: white !important;
     text-align: center;
 
     text-decoration: none;
@@ -198,7 +198,10 @@ span.align {
     font-size: 17px;
     border: none;
   }
+  .modal-input input[type=text] {
 
+    border: 1px solid #ccc;
+  }
   .topnav .search-container button {
     float: right !important;
     padding: 6px 10px !important;

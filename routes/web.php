@@ -28,3 +28,8 @@ Route::get('/setting/maintenance',[BrgyOfficialController::class, 'show']);
 Route::get('/setting/account',[AccountController::class, 'show']);
 Route::get('/resident',[ResidentInfoController::class, 'show']);
 
+//start von
+Route::post('/resident/add',[ResidentInfoController::class, 'store']);
+
+
+//end von
