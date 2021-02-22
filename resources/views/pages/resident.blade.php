@@ -18,7 +18,7 @@
 
         $("#residentform").submit(function(e) {
 
-
+                alert(1);
         e.preventDefault();
         $.ajax({
           type: "POST",
@@ -144,9 +144,11 @@
             <div class="ln_solid"></div>
             <div class="item form-group">
               <div class="col-md-6 col-sm-6 offset-md-3">
+                <button type="submit" class="btn btn-success resident-button">Submit</button>
+                <a class="btn btn-primary" type="button" data-dismiss="modal" style="margin-left: 4px;" >Cancel</a>
 
-                <a class="btn btn-primary" type="reset">Reset</a>
-                <button type="submit" class="btn btn-success">Submit</button>
+
+                <input class="btn btn-primary" type="reset" value="Reset">
               </div>
             </div>
 
@@ -160,7 +162,7 @@
 
         </div>
         <div class="modal-footer text-white">
-            <button class="btn btn-primary" type="button" data-dismiss="modal" >Cancel</button>
+
         </div>
       </div>
     </div>

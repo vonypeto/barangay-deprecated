@@ -12,7 +12,7 @@
 
 
 
-      <script type="text/javascript" src="{{ URL::asset('js/custom.js') }}"></script>
+
    </head>
    <body>
       <div class="d-flex overflow-auto" id="wrapper">
@@ -47,5 +47,5 @@
 <!---datatable-->
 <script type="text/javascript" src=" https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 
-
+<script type="text/javascript" src="{{ URL::asset('js/custom.js') }}"></script>
 </html>

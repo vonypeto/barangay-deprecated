@@ -22827,6 +22827,10 @@ body {
   list-style-type: none;
 }
 
+.resident-button {
+  font-size: 16px !important;
+}
+
 #page-content-wrapper {
   min-width: 100vw;
 }
