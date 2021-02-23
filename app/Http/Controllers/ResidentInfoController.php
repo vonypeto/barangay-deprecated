@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\resident_info;
 use Illuminate\Http\Request;
 
+use Yajra\DataTables\DataTables;
 class ResidentInfoController extends Controller
 {
     /**
@@ -12,10 +13,28 @@ class ResidentInfoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+
+        if($request->ajax()){
+
+            $data = resident_info::latest()->get();
+            return Datatables::of($data)
+                       ->addIndexColumn()
+                    ->addcolumn('action',function($row){
+                    $button = '<button name="show" id="'.$row->resident_id.'" class="btn btn-primary btn-xs pr-4 pl-4"><i class="fa fa-folder fa-lg"></i>  </button>';
+                    $button .=  '<button name="edit id="'.$row->resident_id.'" class="edit btn btn-info btn-xs pr-4 pl-4"><i class="fa fa-pencil fa-lg"></i> </button>';
+                        return $button;
+
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+
+        }
+        return view('pages.sample_data');
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -36,7 +55,14 @@ class ResidentInfoController extends Controller
     public function store(Request $request)
     {
         //
-        return "welcome";
+
+    $resident = new resident_info();
+
+        $resident->lastname = $request->input('lastname');
+        $resident->save();
+
+
+
     }
 
     /**
@@ -47,7 +73,8 @@ class ResidentInfoController extends Controller
      */
     public function show(resident_info $resident_info)
     {
-        $resident_info = resident_info::all();
+       $resident_info = resident_info::all();
+
 
         return view('pages.resident',['resident_info'=>$resident_info]);
 

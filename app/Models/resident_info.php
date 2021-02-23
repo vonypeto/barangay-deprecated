@@ -12,5 +12,6 @@ class resident_info extends Model
     //Primary Key
     public $primaryKey = 'resident_id';
     // Timestamps
+    protected $fillable=['lastname'];
     public $timestamps = true;
 }

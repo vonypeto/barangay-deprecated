@@ -65,10 +65,84 @@ function filterschedule () {
         $('#global_filter').val()
     ).draw();
   }
+
+
+
+
+
+
+  //$('div.table-container').load(url)
+
+
+
+
 $(document).ready(function() {
 
+    $('#sampsle').DataTable({
+        processing: true,
+        serverSide: true,
+        pageLength: 5,
+        ajax:{
 
-  $('#resident').DataTable({sDom: 'lrtip'});
+            url: '{{ route("sample.index") }}'
+        },columns: [
+        {
+            data: 'action',
+            name: 'action',
+            orderable:false
+        },
+
+        { data: 'lastname',
+          name: 'lastname',
+        }]
+
+    });
+
+
+    var table = $('#sample').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('sample.index') }}",
+        columns: [
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+
+            {data: 'lastname', name: 'lastname'},
+
+        ]
+    });
+    //$('resident').DataTable().ajax.reload();
+/*
+
+
+
+    var table = $('#resident').DataTable({
+        sDom: 'lrtip',
+        "ajax" : {
+            "url" : "{{ route('resident') }}",
+            "type" : "GET",
+            "dataType" :"dataType: 'json'"
+        },"columns" : [ {
+
+
+            "defaultContent" : "<a href='#' class='btn btn-primary btn-xs pr-4 pl-4'><i class='fa fa-folder fa-lg'></i>  </a><a href='#' class='btn btn-info btn-xs pr-4 pl-4'><i class='fa fa-pencil fa-lg'></i> </a>"
+        },{"data" : "lastname"
+        },{"data" : "firstName"
+        }, {"data" : "middlename"
+       }, {"data" : "alias"
+        }, {"data" : "civilstatus"
+
+        }, {"data" : "mobile_no"
+        }, {"data" : "birthday"
+        }, {"data" : "gender"
+        }, {"data" : "voterstatus"
+        } ],
+        "sDom": 'lfrtip'
+
+    });
+*/
+
+
+
   $('#table_unschedule').DataTable({sDom: 'lrtip'});
   $('#table_schedule').DataTable({sDom: 'lrtip'});
   $('#table_today').DataTable({sDom: 'lrtip'});
@@ -112,6 +186,75 @@ $('#ressident').DataTable({
 
 
 
+
+
+
+
+
+
+
+
+
+
+ $("#residentform").submit(function(e) {
+  e.preventDefault();
+
+  var action_url = '';
+  action_url = '{{route(resident.add) }}';
+
+  $.ajax({
+    url: action_url,
+    method: "POST",
+    data:$(this).serialize(),
+    dataType:"json",
+    success:function(data){
+        alert("saved");
+        var html = '';
+        if(data.errors){
+            alert("saved");
+            html = '<div class="alert alert-danger">';
+
+        }
+        if(data.success){
+            console.log("saved");
+            alert("saved");
+            $('#resident').DataTable().ajax.reload();
+
+        }
+    }
+
+
+  });
+
+});
+
+
+/*
+
+ $.ajax({
+   type: "POST",
+   url: "/resident/add",
+   data: $('#residentform').serialize(),
+   success: function(response){
+     console.log(response)
+     alert("Data Saved");
+     $('#residentmodal').modal('hide');
+   //  table.DataTable().ajax.reload();
+
+   },
+   error: function(error){
+   //  $('#residentmodal').modal('hide');
+
+     console.log(error)
+     alert("Data Not Saved");
+     $('#resident').DataTable().ajax.reload();
+
+   }
+
+
+ });
+
+*/
 
 
 } );
@@ -169,7 +312,7 @@ window.onload = function(){
    }
 
    var xvent =document.getElementById('schedule').style.display = "block";
-   xvent.evt.currentTarget.className = " active";
+   //xvent.evt.currentTarget.className = " active";
 
 
   }
@@ -177,3 +320,8 @@ window.onload = function(){
   $('#resident-modal').on('shown.bs.modal', function () {
     $('#myInput').trigger('focus')
   })
+
+
+
+
+

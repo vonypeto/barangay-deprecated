@@ -12,59 +12,7 @@
   <button class="btn btn-success text-white " data-toggle="modal" data-target="#residentmodal">New Resident <i class="fa fa-plus"></i></button>
 
 
-  <script>
 
-    $(document).ready(function(){
-
-        $("#residentform").submit(function(e) {
-
-                alert(1);
-        e.preventDefault();
-        $.ajax({
-          type: "POST",
-          url: "/resident/add",
-          data: $('#residentform').serialize(),
-          success: function(response){
-            console.log(response)
-          //  $('#residentmodal').modal('hide');
-            alert("Data Saved");
-            $('#residentmodal').modal('hide');
-
-          },
-          error: function(error){
-          //  $('#residentmodal').modal('hide');
-            console.log(error)
-            alert("Data Not Saved");
-            $('#residentmodal').modal('hide');
-
-          }
-
-
-        });
-
-
-      });
-
-
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </script>
 
 
 
@@ -100,47 +48,15 @@
 
 
           <form id="residentform"  class="modal-input">
-
+            {{ csrf_field() }}
             <div class="item form-group">
               <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 ">
-                <input type="text" id="first-name" required="required" class="form-control ">
+                <input type="text" id="lastname" name="lastname" required="required" class="form-control ">
               </div>
             </div>
-            <div class="item form-group">
-              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Last Name <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 ">
-                <input type="text" id="last-name" name="last-name" required="required" class="form-control">
-              </div>
-            </div>
-            <div class="item form-group">
-              <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Middle Name / Initial</label>
-              <div class="col-md-6 col-sm-6 ">
-                <input id="middle-name" class="form-control" type="text" name="middle-name">
-              </div>
-            </div>
-            <div class="item form-group">
-              <label class="col-form-label col-md-3 col-sm-3 label-align">Gender</label>
-              <div class="col-md-6 col-sm-6 ">
-                <div id="gender" class="btn-group" data-toggle="buttons">
-                  <label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                    <input type="radio" name="gender" value="male" class="join-btn"> &nbsp; Male &nbsp;
-                  </label>
-                  <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                    <input type="radio" name="gender" value="female" class="join-btn"> Female
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="item form-group">
-              <label class="col-form-label col-md-3 col-sm-3 label-align">Date Of Birth <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 ">
-                <input id="birthday" class="date-picker form-control" required="required" type="text">
-              </div>
-            </div>
+
             <div class="ln_solid"></div>
             <div class="item form-group">
               <div class="col-md-6 col-sm-6 offset-md-3">
@@ -223,9 +139,10 @@
   <table id="resident" class="dataTables_info table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer">
             <thead>
                <tr class="headings">
-                <th class="column-title" hidden>Resident_ID</th>
+
                   <th class="column-title">Action</th>
                   <th class="column-title">Last Name </th>
+                 <!--
                   <th class="column-title">First Name </th>
                   <th class="column-title">Middle Name </th>
                   <th class="column-title">Alias</th>
@@ -234,38 +151,13 @@
                   <th class="column-title">Birthday</th>
                   <th class="column-title">Gender</th>
                   <th class="column-title">Voter Status</th>
-
+                 -->
                   </th>
                   <th class="bulk-actions" hidden colspan="7">
                      <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                   </th>
                </tr>
             </thead>
-            <tbody>
-
-
-                @if(count($resident_info))
-                @foreach($resident_info as $resident_info)
-               <tr class="even pointer">
-                <td class=" " hidden >{{ $resident_info->resident_id }}</td>
-                  <td class=" pt-1 pb-1">
-                     <a href="#" class="btn btn-primary btn-xs pr-4 pl-4"><i class="fa fa-folder fa-lg"></i>  </a>
-                     <a href="#" class="btn btn-info btn-xs pr-4 pl-4"><i class="fa fa-pencil fa-lg"></i> </a>
-                  </td>
-                  <td class=" ">{{ $resident_info->lastname }}</td>
-                  <td class=" ">{{ $resident_info->firstname }}</td>
-                  <td class=" ">{{ $resident_info->middlename }}</td>
-                  <td class=" ">{{ $resident_info->alias }}</td>
-                  <td class=" ">{{ $resident_info->civilstatus }}</td>
-                  <td class=" ">{{ $resident_info->mobile_no }}</td>
-                  <td class=" ">{{ $resident_info->birthday }}</td>
-                  <td class=" ">{{ $resident_info->gender }}</td>
-                  <td class=" ">{{ $resident_info->voterstatus }}</td>
-               </tr>
-               @endforeach
-
-
-               @endif
 
 
             </tbody>

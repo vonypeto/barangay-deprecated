@@ -13,6 +13,7 @@
 
 
 
+
    </head>
    <body>
       <div class="d-flex overflow-auto" id="wrapper">
@@ -31,21 +32,22 @@
 
 
 
+   <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+   <script type="text/javascript" src=" {{ URL::asset('js/app.js') }}"></script>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
-
-<script type="text/javascript" src=" {{ URL::asset('js/app.js') }}"></script>
-
+ <!---datatable-->
 
 
+ <script type="text/javascript" src=" https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 
-<!--pagination-->
-<script type="text/javascript" src="{{ URL::asset('js/pagination.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('js/pagination.min.js') }}"></script>
 
-<!---datatable-->
-<script type="text/javascript" src=" https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 
-<script type="text/javascript" src="{{ URL::asset('js/custom.js') }}"></script>
+   <script type="text/javascript" src="{{ URL::asset('js/custom.js') }}"></script>
+
+   <!--pagination-->
+   <script type="text/javascript" src="{{ URL::asset('js/pagination.js') }}"></script>
+   <script type="text/javascript" src="{{ URL::asset('js/pagination.min.js') }}"></script>
+
+
+
 </html>
