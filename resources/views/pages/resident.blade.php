@@ -63,9 +63,10 @@
          </div>
          <div class="row pt-4 pl-4 pr-4">
             <div class=" col-sm-12 overflow-auto display-nones ">
-               <table  class="dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer">
+               <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer">
                   <thead>
                      <tr class="headings">
+                     
                         <th class="column-title">Action</th>
                         <th class="column-title">Resident_ID</th>
                         <th class="column-title">Last Name </th>

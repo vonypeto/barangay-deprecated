@@ -28,7 +28,7 @@ class ResidentInfoController extends Controller
 
                            $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->resident_id.'" data-original-title="Edit" class="edit btn btn-primary  btn-xs pr-4 pl-4 editResident"><i class="fa fa-pencil fa-lg"></i> </a>';
 
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->resident_id.'" data-original-title="Delete" class="btn btn-danger btn-xs pr-4 pl-4 deleteBook"><i class="fa fa-folder fa-lg"></i> </a>';
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->resident_id.'" data-original-title="Delete" class="btn btn-danger btn-xs pr-4 pl-4 deleteresident"><i class="fa fa-folder fa-lg"></i> </a>';
 
                             return $btn;
                     })
@@ -87,10 +87,12 @@ class ResidentInfoController extends Controller
      * @param  \App\Models\resident_info  $resident_info
      * @return \Illuminate\Http\Response
      */
-    public function edit(resident_info $resident_info)
+    public function edit($id)
     {
-        //
+        $resident_info = resident_info::find($id);
+        return response()->json($resident_info);
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -110,8 +112,10 @@ class ResidentInfoController extends Controller
      * @param  \App\Models\resident_info  $resident_info
      * @return \Illuminate\Http\Response
      */
-    public function destroy(resident_info $resident_info)
+    public function destroy($id)
     {
-        //
+        resident_info::find($id)->delete();
+
+        return response()->json(['success'=>'Book deleted successfully.']);
     }
 }

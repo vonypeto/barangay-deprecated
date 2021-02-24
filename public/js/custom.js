@@ -34,7 +34,7 @@ $(function() {
     });
     $('#createresident').click(function() {
         $('#submit').val("create-resident");
-        $('#lastname').val('');
+        $('#lastname').val('Last Name');
         $('#residentform').trigger("reset");
         $('#modelHeading').html("Create Resident Data");
         $('#residentmodal').modal('show');
@@ -46,8 +46,9 @@ $(function() {
             $('#submit').val("Edit Resident");
             $('#residentmodal').modal('show');
             $('#resident_id').val(data.id);
-       //     $('#title').val(data.title);
-            $('#author').val(data.author);
+            $('#lastname').val(data.lastname);
+      
+          //  $('#author').val(data.author);
         })
     });
     $('#submit').click(function(e) {
@@ -76,18 +77,18 @@ $(function() {
         });
     });
 
-    $('body').on('click', '.deleteBook', function() {
-
+    $('body').on('click', '.deleteresident', function () {
+       
         var book_id = $(this).data("id");
         confirm("Are You sure want to delete !");
 
         $.ajax({
             type: "DELETE",
-            url: "{{ route('books.store') }}" + '/' + book_id,
-            success: function(data) {
+            url: config.routes.resident_store +'/'+book_id,
+            success: function (data) {
                 table.draw();
             },
-            error: function(data) {
+            error: function (data) {
                 console.log('Error:', data);
             }
         });
