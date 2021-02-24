@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\resident_info;
 use Illuminate\Http\Request;
-
 use Yajra\DataTables\DataTables;
+
+
 class ResidentInfoController extends Controller
 {
     /**
@@ -17,22 +18,25 @@ class ResidentInfoController extends Controller
     {
         //
 
-        if($request->ajax()){
+        $test = resident_info::latest()->get();
 
+        if ($request->ajax()) {
             $data = resident_info::latest()->get();
             return Datatables::of($data)
-                       ->addIndexColumn()
-                    ->addcolumn('action',function($row){
-                    $button = '<button name="show" id="'.$row->resident_id.'" class="btn btn-primary btn-xs pr-4 pl-4"><i class="fa fa-folder fa-lg"></i>  </button>';
-                    $button .=  '<button name="edit id="'.$row->resident_id.'" class="edit btn btn-info btn-xs pr-4 pl-4"><i class="fa fa-pencil fa-lg"></i> </button>';
-                        return $button;
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
 
+                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->resident_id.'" data-original-title="Edit" class="edit btn btn-primary  btn-xs pr-4 pl-4 editResident"><i class="fa fa-pencil fa-lg"></i> </a>';
+
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->resident_id.'" data-original-title="Delete" class="btn btn-danger btn-xs pr-4 pl-4 deleteBook"><i class="fa fa-folder fa-lg"></i> </a>';
+
+                            return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
-
         }
-        return view('pages.sample_data');
+
+        return view('pages.resident',compact('test'));
     }
 
 
@@ -56,13 +60,10 @@ class ResidentInfoController extends Controller
     {
         //
 
-    $resident = new resident_info();
+        resident_info::updateOrCreate(['resident_id' => $request->resident_id],
+        ['lastname' => $request->lastname, 'firstname' => $request->firstname]);
 
-        $resident->lastname = $request->input('lastname');
-        $resident->save();
-
-
-
+        return response()->json(['success'=>'resident saved successfully.']);
     }
 
     /**

@@ -23132,3 +23132,7 @@ span.align {
   justify-content: space-between;
   padding: 0.5rem 1rem;
 }
+
+.dataTables_wrapper .dataTables_info {
+  padding-top: 0px !important;
+}

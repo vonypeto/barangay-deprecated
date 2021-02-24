@@ -67,6 +67,7 @@
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript">
   $(function () {
+      alert("{{ route('books.index') }}")
       $.ajaxSetup({
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -79,8 +80,8 @@
         ajax: "{{ route('books.index') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'lastname', name: 'lastname'},
-            {data: 'firstname', name: 'firstname'},
+            {data: 'title', name: 'title'},
+            {data: 'author', name: 'author'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
@@ -88,7 +89,7 @@
         $('#saveBtn').val("create-book");
         $('#book_id').val('');
         $('#bookForm').trigger("reset");
-        $('#modelHeading').html("Create New Book");
+        $('#modelHeading').html("Create New Bookss");
         $('#ajaxModel').modal('show');
     });
     $('body').on('click', '.editBook', function () {

@@ -26,12 +26,12 @@ Route::get('/blotter',[BlotterController::class, 'show']);
 Route::get('/schedule',[ScheduleController::class, 'show']);
 Route::get('/setting/maintenance',[BrgyOfficialController::class, 'show']);
 Route::get('/setting/account',[AccountController::class, 'show']);
-Route::get('/resident',[ResidentInfoController::class, 'index'])->name('/get-resident');
+
 
 //start von
-Route::post('/resident/add',[ResidentInfoController::class, 'store']);
+Route::resource('resident', ResidentInfoController::class);
+
 Route::resource('books', BooksController::class);
-//Route::get('sample-tables', [ResidentInfoController::class, 'index'])->name('sample-tables');
-Route::get('resident',[ResidentInfoController::class, 'index'])->name('get-resident');
+
 
 //end von

@@ -16,10 +16,10 @@ class BooksController extends Controller
     public function index(Request $request)
     {
 
-        $test = resident_info::latest()->get();
+        $test = Book::latest()->get();
 
         if ($request->ajax()) {
-            $data = resident_info::latest()->get();
+            $data = Book::latest()->get();
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
