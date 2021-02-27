@@ -7,18 +7,7 @@ $(function() {
     });
 
 
-    var table = $('.blotter-resident').DataTable({
-        processing: true,
-        dom: 'lrtip',
-        serverSide: true,
-        ajax: 'resident/person/'+ 222 +'/blotter',
-        columns: [
-            {data: 'blotter.blotter_id',name: 'blotter.blotter_id'
 
-            },
-
-            ]
-    });
 
 
 
@@ -74,7 +63,6 @@ $(function() {
 
 
 
-
         $.get(config.routes.resident + '/' + resident_id + '/edit', function(data) {
             $('#modelHeading').html("Modify Resident Data");
             $('#submit').val("Edit Resident");
@@ -102,17 +90,48 @@ $(function() {
 
     $('body').on('click', '.viewresident', function() {
         var resident_id = $(this).data('id');
-        $('#residentviewmodal').modal('show');
-        $.get(config.routes.resident + '/' + resident_id + '/edit', function(data) {
+
+
+        $(".blotter-resident").dataTable().fnDestroy();
+        var table = $('.blotter-resident').DataTable({
+            processing: true,
+            dom: 'lrtip',
+            serverSide: true,
+            ajax: 'resident/person/'+ resident_id +'/blotter',
+            columns: [
+                {data: 'blotter_id',name: 'blotter_id'
+
+                },
+
+                ],
+                success : function(response){
+                    var data = JSON.parse(JSON.stringify(response));
+                    console.log(data);
+                }
+        });
+
+
+
+
+
+
+
+
+
+
+
+       $.get(config.routes.resident + '/' + resident_id + '/edit', function(data) {
+
             $('#modelHeading').html("View Resident Data");
-            $('#submit').val("View Resident");
+            $('#submit').val("Edit Resident");
+            $('#residentviewmodal').modal('show');
+            $('#resident_idv').val(data.resident_id);
 
-            $('#resident_id').val(data.resident_id);
-
-            $('#lastname').val(data.lastname);
+            $('#lastnamev').val(data.lastname);
 
           //  $('#author').val(data.author);
         });
+
     });
 
 

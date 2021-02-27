@@ -87,23 +87,7 @@
                   </thead>
                   </tbody>
                </table>
-               <table  id="blotter-resident" class="bulk_action dataTables_info table blotter-resident datatable-element resident table-striped jambo_table bulk_action text-center border border-modal dataTable no-footer">
-                <thead>
-                   <tr class="headings">
 
-                      <th class="column-title">Blotter-ID</th>
-                      <th class="column-title">Incident Type</th>
-                      <th class="column-title">Status </th>
-                      <th class="column-title">Date Reported </th>
-                      <th class="column-title">Date Incident </th>
-                      <th class="column-title">Incident Location</th>
-
-
-                      </th>
-                   </tr>
-                </thead>
-                </tbody>
-             </table>
                <script>
                   // global app configuration object
                   var config = {
@@ -148,18 +132,37 @@
           <div class="modal-body">
              <form id="residentviewform"  class="modal-input">
                 {{ csrf_field() }}
-                <input type="hidden" name="resident_id" id="resident_id">
+                <input type="hidden" name="resident_idv" id="resident_idv">
                 <div class="item form-group">
                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name <span class="required">*</span>
                    </label>
                    <div class="col-md-6 col-sm-6 ">
-                      <input type="text" id="lastname" name="lastname" required="required" class="form-control ">
+                      <input type="text" id="lastnamev" name="lastnamev" required="required" class="form-control ">
                    </div>
                 </div>
 
                 <div class="row">
             <div class="col-sm-12">
 
+
+
+                <table  id="blotter-resident" class="bulk_action dataTables_info table blotter-resident datatable-element resident table-striped jambo_table bulk_action text-center border border-modal dataTable no-footer">
+                    <thead>
+                       <tr class="headings">
+
+                          <th class="column-title">Blotter-ID</th>
+                          <th class="column-title">Incident Type</th>
+                          <th class="column-title">Status </th>
+                          <th class="column-title">Date Reported </th>
+                          <th class="column-title">Date Incident </th>
+                          <th class="column-title">Incident Location</th>
+
+
+                          </th>
+                       </tr>
+                    </thead>
+                    </tbody>
+                 </table>
             </div>
 
 
