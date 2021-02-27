@@ -7,6 +7,28 @@ $(function() {
     });
 
 
+    var table = $('.blotter-resident').DataTable({
+        processing: true,
+        dom: 'lrtip',
+        serverSide: true,
+        ajax: 'resident/person/'+ 222 +'/blotter',
+        columns: [
+            {data: 'blotter.blotter_id',name: 'blotter.blotter_id'
+
+            },
+
+            ]
+    });
+
+
+
+
+
+
+
+
+
+
     // resident show table
     var table = $('.resident-table').DataTable({
         processing: true,
@@ -14,6 +36,11 @@ $(function() {
         serverSide: true,
         ajax: config.routes.resident,
         columns: [{
+                data: 'checkbox',
+                name: 'checkbox',
+                orderable: false,
+                searchable: false
+            },{
                 data: 'action',
                 name: 'action',
                 orderable: false,
@@ -29,7 +56,7 @@ $(function() {
             },{data: 'gender',name: 'gender'
             },{data: 'voterstatus',name: 'voterstatus'
             },
-            
+
             ]
     });
     $('#createresident').click(function() {
@@ -40,17 +67,61 @@ $(function() {
         $('#residentmodal').modal('show');
     });
     $('body').on('click', '.editResident', function() {
+
+
         var resident_id = $(this).data('id');
+
+
+
+
+
         $.get(config.routes.resident + '/' + resident_id + '/edit', function(data) {
             $('#modelHeading').html("Modify Resident Data");
             $('#submit').val("Edit Resident");
             $('#residentmodal').modal('show');
-            $('#resident_id').val(data.id);
+            $('#resident_id').val(data.resident_id);
+
             $('#lastname').val(data.lastname);
-      
+
           //  $('#author').val(data.author);
-        })
+        });
+
+
+
+
+
+
+
+
+
     });
+
+
+
+
+
+    $('body').on('click', '.viewresident', function() {
+        var resident_id = $(this).data('id');
+        $('#residentviewmodal').modal('show');
+        $.get(config.routes.resident + '/' + resident_id + '/edit', function(data) {
+            $('#modelHeading').html("View Resident Data");
+            $('#submit').val("View Resident");
+
+            $('#resident_id').val(data.resident_id);
+
+            $('#lastname').val(data.lastname);
+
+          //  $('#author').val(data.author);
+        });
+    });
+
+
+
+
+
+
+
+
     $('#submit').click(function(e) {
         e.preventDefault();
         $(this).html('Save');
@@ -65,26 +136,73 @@ $(function() {
             success: function(data) {
                 $('#residentmodal').modal('hide');
                 $('#residentform').trigger("reset");
-               
+
                 table.draw();
 
             },
             error: function(data) {
                 console.log('Error:', data);
-                
+
                 $('#submit').html('Save Changes');
             }
         });
     });
 
     $('body').on('click', '.deleteresident', function () {
-       
-        var book_id = $(this).data("id");
-        confirm("Are You sure want to delete !");
 
-        $.ajax({
+        var resident_id = $(this).data("id");
+
+        if (confirm("Are You sure want to delete !")) {
+            $.ajax({
+                type: "DELETE",
+                url: config.routes.resident_store +'/'+resident_id,
+                success: function (data) {
+                    table.draw();
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+        } else {
+
+        }
+
+    });
+
+
+    $('#check-all').click(function(){
+
+         $('.checkBoxClass').prop('checked', $(this).prop('checked'));
+
+    });
+
+    function validate() {
+        alert(1);
+        if (document.getElementById('checked').checked) {
+            alert("checked");
+        } else {
+            alert("You didn't check it! Let me check it for you.");
+        }
+    }
+
+    $('#bulkdelete').click(function(e){
+
+        e.preventDefault();
+
+        var total=0;
+        $("input:checkbox[name=ids]:checked").each(function(){
+            total += 1;
+        });
+
+
+        if (confirm("Number of Data to Delete: " + total)) {
+        $("input:checkbox[name=ids]:checked").each(function(){
+            var resident_id = $(this).data("id");
+
+
+           $.ajax({
             type: "DELETE",
-            url: config.routes.resident_store +'/'+book_id,
+            url: config.routes.resident_store +'/'+resident_id,
             success: function (data) {
                 table.draw();
             },
@@ -92,7 +210,13 @@ $(function() {
                 console.log('Error:', data);
             }
         });
+
+        });
+      }
+
     });
+
+
 
 });
 
@@ -311,3 +435,10 @@ window.onload = function() {
 $('#resident-modal').on('shown.bs.modal', function() {
     $('#myInput').trigger('focus')
 })
+
+
+
+
+
+
+

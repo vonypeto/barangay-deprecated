@@ -8,10 +8,12 @@
 <div class="Resident-Content main-wrapper col-sm-12 text-left h-100  pr-0 pl-0 " >
    <div class="col-sm-12 pl-0 pr-0 search-bars" >
       <div class="topnav navbar navbar">
+          <div>
          <button id="createresident" class="btn btn-success text-white " data-toggle="modal" data-target="#residentmodal">New Resident <i class="fa fa-plus"></i></button>
-         
-         
-         
+         <button id="bulkdelete" class="btn btn-danger text-white " style="margin-left:2px;" > <i class="fa fa-trash"></i></button>
+          </div>
+
+
          <div class="modal fade" id="residentmodal" name="residentmodal" tabindex="-1" role="dialog" aria-labelledby="resident-modal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                <div class="modal-content">
@@ -22,12 +24,10 @@
                      </button>
                   </div>
 
-
-
-
                   <div class="modal-body">
                      <form id="residentform"  class="modal-input">
                         {{ csrf_field() }}
+                        <input type="hidden" name="resident_id" id="resident_id">
                         <div class="item form-group">
                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name <span class="required">*</span>
                            </label>
@@ -66,7 +66,10 @@
                <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer">
                   <thead>
                      <tr class="headings">
-                     
+                        <th >
+                            <input class="icheckbox_flat-green" type="checkbox"   id="check-all" >
+
+                          </th>
                         <th class="column-title">Action</th>
                         <th class="column-title">Resident_ID</th>
                         <th class="column-title">Last Name </th>
@@ -78,25 +81,113 @@
                         <th class="column-title">Birthday</th>
                         <th class="column-title">Gender</th>
                         <th class="column-title">Voter Status</th>
+
                         </th>
                      </tr>
                   </thead>
                   </tbody>
                </table>
+               <table  id="blotter-resident" class="bulk_action dataTables_info table blotter-resident datatable-element resident table-striped jambo_table bulk_action text-center border border-modal dataTable no-footer">
+                <thead>
+                   <tr class="headings">
+
+                      <th class="column-title">Blotter-ID</th>
+                      <th class="column-title">Incident Type</th>
+                      <th class="column-title">Status </th>
+                      <th class="column-title">Date Reported </th>
+                      <th class="column-title">Date Incident </th>
+                      <th class="column-title">Incident Location</th>
+
+
+                      </th>
+                   </tr>
+                </thead>
+                </tbody>
+             </table>
                <script>
                   // global app configuration object
                   var config = {
                       routes: {
                           resident: "{{ route('resident.index') }}",
-                          resident_store: "{{ route('resident.store') }}"
+                          resident_store: "{{ route('resident.store') }}",
+
                       }
+
                   };
+
                </script>
             </div>
          </div>
       </div>
    </div>
 </div>
+
+
+
+
+
+
+
+
+<div class="modal fade" id="residentviewmodal" name="residentviewmodal" tabindex="-1" role="dialog" aria-labelledby="resident-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="modelHeading"></h5>
+
+
+
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+
+
+
+
+          <div class="modal-body">
+             <form id="residentviewform"  class="modal-input">
+                {{ csrf_field() }}
+                <input type="hidden" name="resident_id" id="resident_id">
+                <div class="item form-group">
+                   <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name <span class="required">*</span>
+                   </label>
+                   <div class="col-md-6 col-sm-6 ">
+                      <input type="text" id="lastname" name="lastname" required="required" class="form-control ">
+                   </div>
+                </div>
+
+                <div class="row">
+            <div class="col-sm-12">
+
+            </div>
+
+
+
+
+
+
+        </div>
+                <div class="ln_solid"></div>
+
+             </form>
+          </div>
+          <div class="modal-footer text-white">
+          </div>
+       </div>
+    </div>
+ </div>
+
+
+
+
+
+
+
+
+
+
+
 @endsection
 <!----------------------------------------------------------------
    <td>
@@ -104,7 +195,7 @@
                                <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                                <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                              </td>
-   
-   
+
+
    --->
 

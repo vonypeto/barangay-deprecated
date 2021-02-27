@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\person_involve;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use App\Models\blotters;
+use Illuminate\Support\Facades\DB;
 
 class PersonInvolveController extends Controller
 {
@@ -12,74 +15,48 @@ class PersonInvolveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        $blotter = blotters::latest()->get();
+        if ($request->ajax()) {
+
+                    $data2 = blotters::latest()->get();
+                    return Datatables::of($data2)
+                    ->make(true);
+
+
+
+        }
+
+        return view('pages.resident',compact('blotter'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function blotter($resident_id){
+
+
+
+
+        $person_involve = DB::table('person_involves')
+      //  ->select('blotters.blotter_id','blotters.incident_type','blotters.status','blotters.date_reported','blotters.date_incident','blotters.incident_location')
+      ->select('blotters.blotter_id')
+
+      ->join('blotters','blotters.blotter_id','=','person_involves.blotter_id')
+      //  ->where('blotters.blotter_id','=',$blotter_id)
+        ->where(    'person_involves.resident_id','=',$resident_id)
+        ->get();
+       return response()->json(array($person_involve));
+
+
+
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\person_involve  $person_involve
-     * @return \Illuminate\Http\Response
-     */
-    public function show(person_involve $person_involve)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\person_involve  $person_involve
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(person_involve $person_involve)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\person_involve  $person_involve
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, person_involve $person_involve)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\person_involve  $person_involve
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(person_involve $person_involve)
-    {
-        //
-    }
 }

@@ -30,6 +30,12 @@ Route::get('/setting/account',[AccountController::class, 'show']);
 
 //start von
 Route::resource('resident', ResidentInfoController::class);
+Route::get('resident/person/{resident_id}', [ResidentInfoController::class, 'person']);
+Route::get('resident/person/{resident_id}/blotter/', [ResidentInfoController::class, 'blotter']);
+Route::get('resident/person/{resident_id}/', [PersonInvolveController::class, 'index']);
+
+
+
 
 Route::resource('books', BooksController::class);
 
