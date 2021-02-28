@@ -3,15 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\area_setting;
+use Illuminate\Support\Facades\DB;
 class PagesController extends Controller
 {
     //
 
-    public function  resident(){
+    public function  sampledata(){
 
-        return view('pages.resident');
-
+        $area_setting = DB::table('area_settings')
+        ->where('area','=','wwww')->first();
+        $add = 1;
+        echo $add + $area_setting->population;
+        /*
+        $area_setting = $area_setting->get();
+        foreach ($area_setting as $area_setting) {
+            $add +=  $area_setting->population;
+        }
+        foreach ($area_setting as $area_setting) {
+            echo $add;
+        }
+*/
     }
 
 
