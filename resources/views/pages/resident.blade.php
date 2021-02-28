@@ -92,7 +92,7 @@
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Birth of Place
                             </label>
                             <div class="col-md-12 col-sm-12 ">
-                               <input type="text" id="Birthplace" name="Birthplace" required="required" class="form-control ">
+                               <input type="text" id="birthplace" name="birthplace" required="required" class="form-control ">
                             </div>
                          </div>
 
