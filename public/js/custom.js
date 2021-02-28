@@ -7,9 +7,26 @@ $(function() {
     });
 
 
+    $('#manage_account').DataTable();
 
 
+    $('#official').DataTable();
 
+    $('#region').DataTable();
+
+
+    $('#table_unschedule').DataTable({
+        sDom: 'lrtip'
+    });
+    $('#table_schedule').DataTable({
+        sDom: 'lrtip'
+    });
+    $('#table_today').DataTable({
+        sDom: 'lrtip'
+    });
+    $('#settled').DataTable({
+        sDom: 'lrtip'
+    });
 
 
 
@@ -38,10 +55,10 @@ $(function() {
             },{data: 'lastname',name: 'lastname'
             },{data: 'firstname',name: 'firstname'
             },{data: 'middlename',name: 'middlename'
-            },{data: 'alias',name: 'alias'
+
             },{data: 'civilstatus',name: 'civilstatus'
             },{data: 'mobile_no',name: 'mobile_no'
-            },{data: 'birthday',name: 'birthday'
+
             },{data: 'gender',name: 'gender'
             },{data: 'voterstatus',name: 'voterstatus'
             },
@@ -61,8 +78,6 @@ $(function() {
         var resident_id = $(this).data('id');
 
 
-
-
         $.get(config.routes.resident + '/' + resident_id + '/edit', function(data) {
             $('#modelHeading').html("Modify Resident Data");
             $('#submit').val("Edit Resident");
@@ -76,16 +91,7 @@ $(function() {
 
 
 
-
-
-
-
-
-
     });
-
-
-
 
 
     $('body').on('click', '.viewresident', function() {
@@ -110,16 +116,6 @@ $(function() {
                 }
         });
 
-
-
-
-
-
-
-
-
-
-
        $.get(config.routes.resident + '/' + resident_id + '/edit', function(data) {
 
             $('#modelHeading').html("View Resident Data");
@@ -129,15 +125,10 @@ $(function() {
 
             $('#lastnamev').val(data.lastname);
 
-          //  $('#author').val(data.author);
+
         });
 
     });
-
-
-
-
-
 
 
 
@@ -182,19 +173,13 @@ $(function() {
                     console.log('Error:', data);
                 }
             });
-        } else {
-
         }
-
     });
 
 
     $('#check-all').click(function(){
-
          $('.checkBoxClass').prop('checked', $(this).prop('checked'));
-
     });
-
     function validate() {
         alert(1);
         if (document.getElementById('checked').checked) {
@@ -203,9 +188,7 @@ $(function() {
             alert("You didn't check it! Let me check it for you.");
         }
     }
-
     $('#bulkdelete').click(function(e){
-
         e.preventDefault();
 
         var total=0;
@@ -235,10 +218,7 @@ $(function() {
 
     });
 
-
-
 });
-
 
 
 
@@ -256,16 +236,6 @@ for (i = 0; i < dropdown.length; i++) {
         }
     });
 }
-
-
-jQuery(document).ready(function($) {
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-})
-
-
 
 
 function filterGlobal() {
@@ -301,20 +271,25 @@ function filtersettled() {
 
 $(document).ready(function() {
 
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    var selectAge = document.getElementById("selectAge");
+    var contents;
+    for (let i = 0; i <= 100; i++) {
+        if(i == 0 ){
+            if(i == 0 ){
 
+                contents += "<option>-Select Age- </option>";
+            }
 
-    $('#table_unschedule').DataTable({
-        sDom: 'lrtip'
-    });
-    $('#table_schedule').DataTable({
-        sDom: 'lrtip'
-    });
-    $('#table_today').DataTable({
-        sDom: 'lrtip'
-    });
-    $('#settled').DataTable({
-        sDom: 'lrtip'
-    });
+        }
+
+      contents += "<option>" + i + "</option>";
+    }
+    selectAge.innerHTML = contents;
+
     $('input.global_filter').on('keyup click', function() {
         filterGlobal();
         filterschedule();
@@ -323,17 +298,9 @@ $(document).ready(function() {
         filtersettled();
     });
 
-    $('#manage_account').DataTable();
 
 
-    $('#official').DataTable();
-
-    $('#region').DataTable();
-
-
-
-
-    $("#residentform").submit(function(e) {
+    $("#residentforms").submit(function(e) {
         e.preventDefault();
 
         var action_url = '';
@@ -422,14 +389,9 @@ window.onload = function() {
 
     if (dropdownshow.classList.contains('active')) {
 
-        dropdownshow.style.display = "block";
-
-
+        dropdownshow.style.display = "block"
 
     }
-
-
-
     var dropdown = document.getElementsByClassName("dropdown-btn");
     var i;
 
@@ -447,10 +409,7 @@ window.onload = function() {
 
     var xvent = document.getElementById('schedule').style.display = "block";
     //xvent.evt.currentTarget.className = " active";
-
-
 }
-
 $('#resident-modal').on('shown.bs.modal', function() {
     $('#myInput').trigger('focus')
 })

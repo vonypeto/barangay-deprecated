@@ -34,6 +34,7 @@ Route::get('resident/person/{resident_id}', [ResidentInfoController::class, 'per
 Route::get('resident/person/{resident_id}/blotter/', [ResidentInfoController::class, 'blotter']);
 Route::get('resident/person/{resident_id}/', [PersonInvolveController::class, 'index']);
 
+Route::get('sampledata', [PagesController::class, 'sampledata']);
 
 
 

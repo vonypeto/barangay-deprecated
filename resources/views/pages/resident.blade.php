@@ -28,16 +28,290 @@
                      <form id="residentform"  class="modal-input">
                         {{ csrf_field() }}
                         <input type="hidden" name="resident_id" id="resident_id">
-                        <div class="item form-group">
-                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name <span class="required">*</span>
-                           </label>
-                           <div class="col-md-6 col-sm-6 ">
-                              <input type="text" id="lastname" name="lastname" required="required" class="form-control ">
+                        <div class="row">
+                            <div class="col-sm-6">
+
+
+
+
+
+                        <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                            <div class="col-sm-6" >
+                              <label >Last Name</label>
+                              <input type="text" class="form-control" name="lastname" id="lastname" placeholder="" value="" required="">
+
+                            </div>
+                            <div class="col-sm-6 ">
+                              <label >First Name</label>
+                              <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" value="" required="">
+
+                            </div>
+                          </div>
+
+                          <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                            <div class="col-sm-6" >
+                              <label >Middle Name</label>
+                              <input type="text" class="form-control" name="middlename" id="middlename" placeholder="" value="" required="">
+
+                            </div>
+                            <div class="col-sm-6 ">
+                              <label >Alias</label>
+                              <input type="text" class="form-control" name="alias" id="alias" placeholder="" value="" required="">
+
+                            </div>
+                          </div>
+
+
+
+
+
+                          <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                            <div class="col-sm-6" >
+                              <label >Birthday</label>
+                              <input type="date" id="birthday" name="birthday" required="required" class="form-control ">
+
+                            </div>
+                            <div class="col-sm-6 ">
+                              <label >Age</label>
+                              <br>
+                              <select name="age" id="selectAge" style="height:38px">
+                                <option value="">-Select Age-</option></select>
+                            </div>
+                          </div>
+
+
+
+
+
+
+
+
+
+
+                         <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Birth of Place
+                            </label>
+                            <div class="col-md-12 col-sm-12 ">
+                               <input type="text" id="Birthplace" name="Birthplace" required="required" class="form-control ">
+                            </div>
+                         </div>
+
+
+                         <div class="item form-group border solid " style="margin-left: 15px;margin-right: 15px;">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Gender
+                            </label>
+                            <div class="col-md-12 col-sm-12 ">
+                                <input type="radio" id="male" name="gender" value="Male">
+                                <label for="male">Male</label><br>
+                                <input type="radio" id="female" name="gender" value="Female">
+                                <label for="female">Female</label><br>    </div>
+                         </div>
+
+
+
+
+
+                         <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                            <div class="col-sm-6 item form-group" >
+                                <label >Voter Status</label>
+                                <br>
+                                <select name="voterstatus"  style="height:38px; width: 100%">
+                                <option value="">-Select Voter Status-</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+
+                              </select>
+                            </div>
+                            <div class="col-sm-6 item form-group">
+                              <label >Civil Status</label>
+                              <br>
+                              <select name="civilstatus"  style="height:38px; width: 100%">
+                              <option value="">-Select Marital Status-</option>
+                              <option value="Single">Single</option>
+                              <option value="Married">Married</option>
+                              <option value="Widowed">Widowed</option>
+                              <option value="Separated">Separated</option>
+                              <option value="Divorced">Divorced</option>
+                            </select>
+                            </div>
+                          </div>
+
+                          <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">CitizenShip
+                            </label>
+                            <div class="col-md-12 col-sm-12 ">
+                               <input type="text" id="citizenship" name="citizenship" required="required" class="form-control ">
+                            </div>
+                         </div>
+
+
+
+
+                        <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                           <div class="col-sm-6" >
+                             <label >Telephone</label>
+                             <input type="text" class="form-control" name="telephone" id="telephone" placeholder="" value="" required="">
+
                            </div>
+                           <div class="col-sm-6 ">
+                             <label >Mobile</label>
+                             <input type="text" class="form-control" name="mobile" id="mobile" placeholder="" value="" required="">
+
+                           </div>
+                         </div>
+                         <div class="item form-group">
+                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Area
+                           </label>
+                           <div class="col-md-12 col-sm-12 ">
+                              <select name="area"  style="height:38px; width: 100%">
+                                 <option value="">-Select Area-</option>
+                                 @if(count($area_setting) > 0)
+                                 @foreach ($area_setting as $area_setting)
+                                 <option value="{{  $area_setting->area}}" >{{ $area_setting->area }}</option>
+
+
+                                 @endforeach
+                                 @endif
+
+
+                               </select>
+                              </div>
                         </div>
+
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                            <div class="col-sm-6" >
+                              <label >Height</label>
+                              <input type="number" class="form-control" name="height" id="height" placeholder="" value="0" required="">
+
+                            </div>
+                            <div class="col-sm-6 ">
+                              <label >Weight</label>
+                              <input type="number" class="form-control" name="weight" id="weight" placeholder="" value="0" required="">
+
+                            </div>
+                          </div>
+
+                          <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Email
+                            </label>
+                            <div class="col-md-12 col-sm-12 ">
+                               <input type="email" id="email" name="email" required="required" class="form-control ">
+                            </div>
+                         </div>
+
+
+
+
+
+
+
+                          <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                           <div class="col-sm-6" >
+                             <label >PAG-IBIG</label>
+                             <input type="number" class="form-control" name="PAG_IBIG" id="PAG_IBIG" placeholder="" value="" required="">
+
+                           </div>
+                           <div class="col-sm-6 ">
+                             <label >PHILHEALTH</label>
+                             <input type="number" class="form-control" name="PHILHEALTH" id="PHILHEALTH" placeholder="" value="" required="">
+
+                           </div>
+                         </div>
+
+
+                         <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                           <div class="col-sm-6" >
+                             <label >SSS</label>
+                             <input type="text" class="form-control" name="SSS" id="SSS" placeholder="" value="" required="">
+
+                           </div>
+                           <div class="col-sm-6 ">
+                             <label >TIN</label>
+                             <input type="text" class="form-control" name="TIN" id="TIN" placeholder="" value="" required="">
+
+                           </div>
+                         </div>
+
+
+
+
+
+
+
+                         <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Spouse
+                            </label>
+                            <div class="col-md-12 col-sm-12 ">
+                               <input type="text" id="spouse" name="spouse" required="required" value="N/A" class="form-control ">
+                            </div>
+                         </div>
+
+
+
+                         <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Father
+                            </label>
+                            <div class="col-md-12 col-sm-12 ">
+                               <input type="text" id="father" name="father" required="required" class="form-control ">
+                            </div>
+                         </div>
+
+
+
+                         <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Mother
+                            </label>
+                            <div class="col-md-12 col-sm-12 ">
+                               <input type="text" id="mother" name="mother" required="required" class="form-control ">
+                            </div>
+                         </div>
+
+
+
+                         <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Address 1
+                            </label>
+                            <div class="col-md-12 col-sm-12 ">
+                               <input type="text" id="address_1" name="address_1" required="required" class="form-control ">
+                            </div>
+                         </div>
+
+
+
+                         <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Address 2
+                            </label>
+                            <div class="col-md-12 col-sm-12 ">
+                               <input type="text" id="address_2" name="address_2" required="required" class="form-control ">
+                            </div>
+                         </div>
+
+
+
+
+
+
+
+
+
+                    </div>
+
+
+                <!----------------
+                -->
+
+
+
+
+
+
+                    </div>
                         <div class="ln_solid"></div>
                         <div class="item form-group">
-                           <div class="col-md-6 col-sm-6 offset-md-3">
+                           <div class="col-md-12 col-sm-12 offset-md-4">
                               <button type="submit" id="submit" class="btn btn-success resident-button">Submit</button>
                               <a class="btn btn-primary" type="button" data-dismiss="modal" style="margin-left: 4px;" >Cancel</a>
                               <input class="btn btn-primary" type="reset" value="Reset">
@@ -75,10 +349,10 @@
                         <th class="column-title">Last Name </th>
                         <th class="column-title">First Name </th>
                         <th class="column-title">Middle Name </th>
-                        <th class="column-title">Alias</th>
+
                         <th class="column-title">Civil Status</th>
                         <th class="column-title">Mobile No.</th>
-                        <th class="column-title">Birthday</th>
+
                         <th class="column-title">Gender</th>
                         <th class="column-title">Voter Status</th>
 
@@ -133,15 +407,20 @@
              <form id="residentviewform"  class="modal-input">
                 {{ csrf_field() }}
                 <input type="hidden" name="resident_idv" id="resident_idv">
+
+
                 <div class="item form-group">
                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name <span class="required">*</span>
                    </label>
+
                    <div class="col-md-6 col-sm-6 ">
                       <input type="text" id="lastnamev" name="lastnamev" required="required" class="form-control ">
                    </div>
                 </div>
 
                 <div class="row">
+
+
             <div class="col-sm-12">
 
 
