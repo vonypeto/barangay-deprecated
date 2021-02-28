@@ -12,7 +12,7 @@
 <div class="container">
     <h1>Laravel 7 Crud with Ajax</h1>
     <a class="btn btn-success" href="javascript:void(0)" id="createNewBook"> Create New Book</a>
-    <table class="table table-bordered data-table">
+    <table id="data-table" class="table table-bordered data-table">
         <thead>
             <tr>
                 <th>No</th>
@@ -67,12 +67,19 @@
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript">
   $(function () {
-      alert("{{ route('books.index') }}")
+
       $.ajaxSetup({
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
     });
+
+
+   //var table = $('.data-table').DataTable();
+
+
+
+
     var table = $('.data-table').DataTable({
         processing: true,
         dom: 'lrtip',
@@ -85,6 +92,8 @@
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
+
+
     $('#createNewBook').click(function () {
         $('#saveBtn').val("create-book");
         $('#book_id').val('');
@@ -94,6 +103,7 @@
     });
     $('body').on('click', '.editBook', function () {
       var book_id = $(this).data('id');
+      alert(book_id);
       $.get("{{ route('books.index') }}" +'/' + book_id +'/edit', function (data) {
           $('#modelHeading').html("Edit Book");
           $('#saveBtn').val("edit-book");
