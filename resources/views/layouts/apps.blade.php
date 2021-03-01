@@ -12,7 +12,18 @@
 
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
+      <script>
+        // global app configuration object
+        var config = {
+            routes: {
+                resident: "{{ route('resident.index') }}",
+                resident_store: "{{ route('resident.store') }}",
 
+            }
+
+        };
+
+     </script>
 
 
    </head>
