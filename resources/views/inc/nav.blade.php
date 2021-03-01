@@ -29,6 +29,7 @@
 
 
 <script>
+    /*
   function routeToDashboard(){
         console.log("asdsa")
         event.preventDefault();
@@ -62,6 +63,8 @@
         $("dashboards").attr("class", "asdasd");
 
     }
+
+*/
 
 
 </script>
