@@ -12,5 +12,8 @@ class blotters extends Model
     //Primary Key
     public $primaryKey = 'blotter_id';
     // Timestamps
+    protected $fillable = [
+        'incident_narrative'
+    ];
     public $timestamps = true;
 }

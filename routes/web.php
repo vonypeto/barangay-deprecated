@@ -1,5 +1,7 @@
 <?php
+
 use App\Http\Controllers\BooksController;;
+
 use App\Http\Controllers\BrgyOfficialController;
 use App\Http\Controllers\ResidentInfoController;
 use App\Http\Controllers\AccountController;
@@ -21,11 +23,10 @@ use Carbon\Carbon;
 
 
 
-Route::get('/dashboard',[PagesController::class, 'dashboard']);
-Route::get('/blotter',[BlotterController::class, 'show']);
-Route::get('/schedule',[ScheduleController::class, 'show']);
-Route::get('/setting/maintenance',[BrgyOfficialController::class, 'show']);
-Route::get('/setting/account',[AccountController::class, 'show']);
+Route::get('/dashboard', [PagesController::class, 'dashboard']);
+Route::get('/schedule', [ScheduleController::class, 'show']);
+Route::get('/setting/maintenance', [BrgyOfficialController::class, 'show']);
+Route::get('/setting/account', [AccountController::class, 'show']);
 
 
 //start von
@@ -42,3 +43,8 @@ Route::resource('books', BooksController::class);
 
 
 //end von
+
+// Rojhon pogi
+Route::get('/blotter', [BlotterController::class, 'show']);
+Route::resource('blotters', BlotterController::class);
+// Rojhon pogi paren
