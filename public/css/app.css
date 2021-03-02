@@ -22827,6 +22827,10 @@ body {
   list-style-type: none;
 }
 
+.resident-button {
+  font-size: 16px !important;
+}
+
 #page-content-wrapper {
   min-width: 100vw;
 }
@@ -22940,6 +22944,10 @@ span.align {
   border-bottom: 1px solid grey !important;
 }
 
+.border-modal {
+  padding-top: 0px !important;
+}
+
 .topnav {
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.65);
@@ -22948,7 +22956,7 @@ span.align {
 .topnav button {
   float: left;
   display: block;
-  color: black;
+  color: white !important;
   text-align: center;
   text-decoration: none;
   font-size: 17px;
@@ -22967,6 +22975,10 @@ span.align {
   padding: 6px;
   font-size: 17px;
   border: none;
+}
+
+.modal-input input[type=text] {
+  border: 1px solid #ccc;
 }
 
 .topnav .search-container button {
@@ -23123,4 +23135,29 @@ span.align {
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1rem;
+}
+
+.dataTables_wrapper .dataTables_info {
+  padding-top: 0px !important;
+}
+
+.icheckbox_flat-green {
+  display: inline-block;
+  *display: inline;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  background-position-x: 0%;
+  background-position-y: 0%;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.icheckbox_flat-green:after {
+  content: "";
+  position: absolute;
+  display: none;
 }

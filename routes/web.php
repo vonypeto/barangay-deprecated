@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\BooksController;;
 use App\Http\Controllers\BrgyOfficialController;
 use App\Http\Controllers\ResidentInfoController;
 use App\Http\Controllers\AccountController;
@@ -26,5 +26,19 @@ Route::get('/blotter',[BlotterController::class, 'show']);
 Route::get('/schedule',[ScheduleController::class, 'show']);
 Route::get('/setting/maintenance',[BrgyOfficialController::class, 'show']);
 Route::get('/setting/account',[AccountController::class, 'show']);
-Route::get('/resident',[ResidentInfoController::class, 'show']);
 
+
+//start von
+Route::resource('resident', ResidentInfoController::class);
+Route::get('resident/person/{resident_id}', [ResidentInfoController::class, 'person']);
+Route::get('resident/person/{resident_id}/blotter/', [ResidentInfoController::class, 'blotter']);
+
+
+Route::get('sampledata', [PagesController::class, 'sampledata']);
+
+
+
+Route::resource('books', BooksController::class);
+
+
+//end von

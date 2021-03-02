@@ -20,13 +20,13 @@ class CreateResidentInfosTable extends Migration
             $table->string('middlename')->nullable();
             $table->string('alias')->nullable();
             $table->date('birthday')->nullable();
-            $table->bigInteger('age')->unsigned();
+            $table->bigInteger('age')->unsigned()->nullable();
             $table->string('gender')->nullable();
             $table->string('civilstatus')->nullable();
             $table->string('voterstatus')->nullable();
             $table->string('birth_of_place')->nullable();
             $table->string('citizenship')->nullable();
-            $table->bigInteger('telephone_no')->unsigned()->nullable();
+            $table->string('telephone_no')->nullable();
             $table->bigInteger('mobile_no')->unsigned()->nullable();
             $table->bigInteger('height')->unsigned()->nullable();
             $table->bigInteger('weight')->unsigned()->nullable();

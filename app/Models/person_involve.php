@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class person_involve extends Model
 {
     use HasFactory;
-    protected $table = 'person_involve';
+    protected $table = 'person_involves';
     //Primary Key
     public $primaryKey = 'person_id';
     // Timestamps
