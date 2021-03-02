@@ -8,7 +8,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\Models\area_setting;
 use App\Models\PersonInvolveController;
-
+use Carbon\Carbon;
 class ResidentInfoController extends Controller
 {
 
@@ -80,11 +80,18 @@ class ResidentInfoController extends Controller
     public function blotter($resident_id,Request $request){
         if($request->ajax()){
             $data = DB::table('person_involves')
-            ->select('blotters.blotter_id')
+            ->select('blotters.incident_type','blotters.status','blotters.date_reported','blotters.date_incident','blotters.incident_location','blotters.blotter_id')
             ->join('blotters','blotters.blotter_id','=','person_involves.blotter_id')
             ->where('person_involves.resident_id','=',$resident_id)
             ->get();
-            return(Datatables::of($data)->make(true));
+            return(Datatables::of($data)
+            ->editColumn('date_reported', function ($blotter) {
+                return $blotter->date_reported ? with(new Carbon($blotter->date_reported))->format('m/d/Y') : '';
+            })
+            ->editColumn('date_incident', function ($blotter) {
+                return $blotter->date_incident ? with(new Carbon($blotter->date_incident))->format('m/d/Y') : '';
+            })
+            ->make(true));
         }
 }
     public function edit($id)

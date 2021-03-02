@@ -1,4 +1,25 @@
+
+jQuery.ajaxSetup({
+    converters: {
+      "text json_with_dates": function( text ) {
+
+        var with_dates = text.replace(/\"date\(([^)]*)\)\"/g, function(a, date){
+          var dateParts = date.split("-");
+          return "new Date(" + dateParts[0] + "," + dateParts[1] + "," + dateParts[2] + ")";
+        });
+
+        var converted = eval("(" + with_dates + ")");
+        return converted;
+      }
+    }
+  });
+
+
+
 $(function() {
+
+
+
 
     var selectAge = document.getElementById("selectAge");
     var contents;
@@ -130,11 +151,19 @@ $(function() {
             processing: true,
             dom: 'lrtip',
             serverSide: true,
-            ajax: 'resident/person/'+ resident_id +'/blotter',
+            ajax: {url:'resident/person/'+ resident_id +'/blotter',
+                  dataType: 'json_with_dates',
+                    },
             columns: [
                 {data: 'blotter_id',name: 'blotter_id'
+                },{data: 'incident_type',name: 'incident_type'
+                },{data: 'status',name: 'status'
+                },{data: 'date_reported',name: 'date_reported',
 
+                },{data: 'date_incident',name: 'date_incident'
+                },{data: 'incident_location',name: 'incident_location'
                 },
+
 
                 ],
                 success : function(response){
@@ -150,7 +179,36 @@ $(function() {
             $('#residentviewmodal').modal('show');
             $('#resident_idv').val(data.resident_id);
 
+
             $('#lastnamev').val(data.lastname);
+            $('#firstnamev').val(data.firstname);
+            $('#middlenamev').val(data.middlename);
+            $('#aliasv').val(data.alias);
+            $('#birthdayv').val(data.birthday);
+            $('#agev').val(data.age);
+            $('#birthplacev').val(data.birth_of_place);
+            $('input[name^="genderv"][value="'+data.gender+'"').prop('checked',true);
+            $('#voterstatusv').val(data.voterstatus);
+            $('#civilstatusv').val(data.civilstatus);
+            $('#citizenshipv').val(data.citizenship);
+            $('#telephonev').val(data.telephone_no);
+            $('#mobilev').val(data.mobile_no);
+            $('#areav').val(data.area);
+            $('#heightv').val(data.height);
+            $('#weightv').val(data.weight);
+            $('#emailv').val(data.email);
+            $('#PAG_IBIGv').val(data.PAG_IBIG);
+            $('#PHILHEALTHv').val(data.PHILHEALTH);
+            $('#SSSv').val(data.SSS);
+            $('#TINv').val(data.TIN);
+            $('#spousev').val(data.spouse);
+            $('#fatherv').val(data.father);
+            $('#motherv').val(data.mother);
+            $('#address_1v').val(data.address_1);
+            $('#address_2v').val(data.address_2);
+
+
+
 
 
         });

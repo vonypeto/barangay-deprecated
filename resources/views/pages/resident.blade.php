@@ -456,7 +456,7 @@
                     </div>
                     <div class="col-sm-6 ">
                       <label >First Name</label>
-                      <input readonly  type="text" class="form-control" name="firstnamev" id="firstnamev" >
+                      <input  type="text" class="form-control" id="lastnamev" name="lastnamev"  readonly >
 
                     </div>
                   </div>
@@ -513,9 +513,9 @@
                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Gender
                     </label>
                     <div class="col-md-12 col-sm-12 ">
-                        <input readonly type="radio" id="male" name="gender" value="Male">
+                        <input readonly type="radio" id="male" name="genderv" value="Male">
                         <label for="male">Male</label><br>
-                        <input readonly type="radio" id="female" name="gender" value="Female">
+                        <input readonly type="radio" id="female" name="genderv" value="Female">
                         <label for="female">Female</label><br>    </div>
                  </div>
 
@@ -540,7 +540,7 @@
                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">CitizenShip
                     </label>
                     <div class="col-md-12 col-sm-12 ">
-                       <input type="text" id="citizenship" name="citizenship" placeholder="Ex: Filipino"  required="required" class="form-control ">
+                       <input type="text" readonly  id="citizenshipv" name="citizenshipv" placeholder="Ex: Filipino"  required="required" class="form-control ">
                     </div>
                  </div>
 
@@ -587,7 +587,7 @@
                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Email
                     </label>
                     <div class="col-md-12 col-sm-12 ">
-                       <input type="email" id="email" name="email" required="required" placeholder="Ex: johnmark@gmail.com" class="form-control ">
+                       <input type="email" id="emailv" name="emailv" readonly   class="form-control ">
                     </div>
                  </div>
 
@@ -600,12 +600,12 @@
                   <div class="row" style="margin-left: 0px;margin-right: 0px;">
                    <div class="col-sm-6" >
                      <label >PAG-IBIG</label>
-                     <input type="text" class="form-control" onkeypress="return isNumberKey(event)"  name="PAG_IBIG" id="PAG_IBIG" placeholder="Ex: 1234-5678-9101" maxlength = "14" value="" required="">
+                     <input type="text" class="form-control" readonly  name="PAG_IBIGv" id="PAG_IBIGv" >
 
                    </div>
                    <div class="col-sm-6 ">
                      <label >PHILHEALTH</label>
-                     <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="PHILHEALTH" id="PHILHEALTH" placeholder="Ex: 0028-1215160-9" maxlength = "14" value="" required="">
+                     <input type="text" class="form-control" readonly name="PHILHEALTHv" id="PHILHEALTHv" >
 
                    </div>
                  </div>
@@ -614,12 +614,12 @@
                  <div class="row" style="margin-left: 0px;margin-right: 0px;">
                    <div class="col-sm-6" >
                      <label >SSS</label>
-                     <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="SSS" id="SSS" placeholder="Ex: 04-0751449-0"  maxlength = "12" value="" required="">
+                     <input type="text" class="form-control" readonly name="SSSv" id="SSSv" >
 
                    </div>
                    <div class="col-sm-6 ">
                      <label >TIN</label>
-                     <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="TIN" id="TIN" placeholder="Ex: 123-456-789-000" maxlength = "15" value="" required="">
+                     <input type="text" class="form-control"  readonly name="TINv" id="TINv" >
 
                    </div>
                  </div>
@@ -631,30 +631,30 @@
 
 
                  <div class="item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Spouse
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" >Spouse
                     </label>
                     <div class="col-md-12 col-sm-12 ">
-                       <input type="text" id="spouse" name="spouse" required="required" placeholder="N/A" class="form-control ">
+                       <input type="text" id="spousev" readonly name="spousev"  class="form-control ">
                     </div>
                  </div>
 
 
 
                  <div class="item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Father
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" >Father
                     </label>
                     <div class="col-md-12 col-sm-12 ">
-                       <input type="text" id="father" name="father" placeholder="N/A" required="required" class="form-control ">
+                       <input type="text" id="fatherv" readonly name="fatherv"  class="form-control ">
                     </div>
                  </div>
 
 
 
                  <div class="item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Mother
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" >Mother
                     </label>
                     <div class="col-md-12 col-sm-12 ">
-                       <input type="text" id="mother" name="mother" required="required" value="" placeholder="N/A" class="form-control ">
+                       <input type="text" id="motherv" readonly name="motherv"  class="form-control ">
                     </div>
                  </div>
 
@@ -664,19 +664,17 @@
                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Address 1
                     </label>
                     <div class="col-md-12 col-sm-12 ">
-                       <input type="text" id="address_1" name="address_1" placeholder="Ex: P.O. Box 1201, Manila Central Post Office
-                       1050 Manila" required="required" class="form-control ">
+                       <input type="text" id="address_1v" readonly  name="address_1v" class="form-control ">
                     </div>
                  </div>
 
 
 
                  <div class="item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Address 2
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" >Address 2
                     </label>
                     <div class="col-md-12 col-sm-12 ">
-                       <input type="text" id="address_2" name="address_2" placeholder="Ex: P.O. Box 1121, Araneta Center Post Office
-                       1135 Quezon City, Metro Manila" required="required" class="form-control ">
+                       <input type="text" id="address_2v" readonly  name="address_2v"  class="form-control ">
                     </div>
                  </div>
 
@@ -778,10 +776,10 @@
                           <th class="column-title">Incident Location</th>
 
 
-                          </th>
+
                        </tr>
                     </thead>
-                    </tbody>
+
                  </table>
             </div>
 
