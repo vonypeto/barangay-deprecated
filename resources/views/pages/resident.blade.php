@@ -338,8 +338,8 @@
             </div>
          </div>
          <div class="row pt-4 pl-4 pr-4">
-            <div style="overflow-x:auto;" class=" col-sm-12 overflow-auto display-nones ">
-               <table  class=" bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer">
+            <div  class=" col-sm-12 overflow-auto display-nones ">
+               <table   class=" bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer">
                   <thead>
                      <tr class="headings">
                         <th >
@@ -352,11 +352,11 @@
                         <th class="column-title">First Name </th>
                         <th class="column-title">Middle Name </th>
 
-                        <th class="column-title">Civil Status</th>
+
                         <th class="column-title">Mobile No.</th>
 
                         <th class="column-title">Gender</th>
-                        <th class="column-title">Voter Status</th>
+
 
                         </th>
                      </tr>
@@ -382,7 +382,7 @@
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
        <div class="modal-content">
           <div class="modal-header">
-             <h5 class="modal-title" id="modelHeading"></h5>
+             <h5 class="modal-title" id="modelHeading">View Resident Data</h5>
 
 
 
@@ -400,14 +400,364 @@
                 <input type="hidden" name="resident_idv" id="resident_idv">
 
 
-                <div class="item form-group">
-                   <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name <span class="required">*</span>
-                   </label>
 
-                   <div class="col-md-6 col-sm-6 ">
-                      <input type="text" id="lastnamev" name="lastnamev" required="required" class="form-control ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="row">
+                    <div class="col-sm-6">
+
+
+
+
+
+                <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                    <div class="col-sm-6" >
+                      <label >Last Name</label>
+                      <input type="text" class="form-control" readonly id="lastnamev" name="lastnamev"   readonly>
+
+                    </div>
+                    <div class="col-sm-6 ">
+                      <label >First Name</label>
+                      <input readonly  type="text" class="form-control" name="firstnamev" id="firstnamev" >
+
+                    </div>
+                  </div>
+
+                  <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                    <div class="col-sm-6" >
+                      <label >Middle Name</label>
+                      <input type="text"  readonly class="form-control" name="middlenamev" id="middlenamev" >
+
+                    </div>
+                    <div class="col-sm-6 ">
+                      <label >Alias</label>
+                      <input type="text" class="form-control" readonly name="aliasv" id="aliasv" >
+
+                    </div>
+                  </div>
+
+
+
+
+
+                  <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                    <div class="col-sm-6" >
+                      <label >Birthday</label>
+                      <input type="date" id="birthdayv" name="birthdayv" readonly required="required" class="form-control ">
+
+                    </div>
+                    <div class="col-sm-6 ">
+                      <label >Age</label>
+                      <input type="text" id="agev" name="agev" readonly required="required" class="form-control ">
+
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
+
+
+                 <div class="item form-group">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" >Birth of Place
+                    </label>
+                    <div class="col-md-12 col-sm-12 ">
+                       <input type="text" id="birthplacev" readonly name="birthplacev"  class="form-control ">
+                    </div>
+                 </div>
+
+
+                 <div class="item form-group border solid " style="margin-left: 15px;margin-right: 15px;">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Gender
+                    </label>
+                    <div class="col-md-12 col-sm-12 ">
+                        <input readonly type="radio" id="male" name="gender" value="Male">
+                        <label for="male">Male</label><br>
+                        <input readonly type="radio" id="female" name="gender" value="Female">
+                        <label for="female">Female</label><br>    </div>
+                 </div>
+
+
+
+
+
+                 <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                    <div class="col-sm-6" >
+                      <label >Voter Status</label>
+                      <input type="text" class="form-control" readonly id="voterstatusv" name="voterstatusv"   readonly>
+
+                    </div>
+                    <div class="col-sm-6 ">
+                      <label >Civil Status</label>
+                      <input readonly  type="text" class="form-control" name="civilstatusv" id="civilstatusv" >
+
+                    </div>
+                  </div>
+
+                  <div class="item form-group">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">CitizenShip
+                    </label>
+                    <div class="col-md-12 col-sm-12 ">
+                       <input type="text" id="citizenship" name="citizenship" placeholder="Ex: Filipino"  required="required" class="form-control ">
+                    </div>
+                 </div>
+
+
+
+
+                <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                   <div class="col-sm-6" >
+                     <label >Telephone</label>
+                     <input type="text" class="form-control"  readonly name="telephonev" id="telephonev" >
+
                    </div>
+                   <div class="col-sm-6 ">
+                     <label >Mobile</label>
+                     <input type="text" class="form-control" readonly name="mobilev" id="mobilev"  >
+
+                   </div>
+                 </div>
+                 <div class="item form-group">
+                   <label class="col-form-label col-md-3 col-sm-3 label-align" >Area
+                   </label>
+                   <div class="col-md-12 col-sm-12 ">
+                    <input type="text" class="form-control" readonly name="areav" id="areav"  >
+                      </div>
                 </div>
+
+            </div>
+
+            <div class="col-sm-6">
+                <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                    <div class="col-sm-6" >
+                      <label >Height</label>
+                      <input type="number" class="form-control" readonly name="heightv" id="heightv" >
+
+                    </div>
+                    <div class="col-sm-6 ">
+                      <label >Weight</label>
+                      <input type="number" class="form-control" readonly name="weightv" id="weightv" >
+
+                    </div>
+                  </div>
+
+                  <div class="item form-group">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Email
+                    </label>
+                    <div class="col-md-12 col-sm-12 ">
+                       <input type="email" id="email" name="email" required="required" placeholder="Ex: johnmark@gmail.com" class="form-control ">
+                    </div>
+                 </div>
+
+
+
+
+
+
+
+                  <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                   <div class="col-sm-6" >
+                     <label >PAG-IBIG</label>
+                     <input type="text" class="form-control" onkeypress="return isNumberKey(event)"  name="PAG_IBIG" id="PAG_IBIG" placeholder="Ex: 1234-5678-9101" maxlength = "14" value="" required="">
+
+                   </div>
+                   <div class="col-sm-6 ">
+                     <label >PHILHEALTH</label>
+                     <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="PHILHEALTH" id="PHILHEALTH" placeholder="Ex: 0028-1215160-9" maxlength = "14" value="" required="">
+
+                   </div>
+                 </div>
+
+
+                 <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                   <div class="col-sm-6" >
+                     <label >SSS</label>
+                     <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="SSS" id="SSS" placeholder="Ex: 04-0751449-0"  maxlength = "12" value="" required="">
+
+                   </div>
+                   <div class="col-sm-6 ">
+                     <label >TIN</label>
+                     <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="TIN" id="TIN" placeholder="Ex: 123-456-789-000" maxlength = "15" value="" required="">
+
+                   </div>
+                 </div>
+
+
+
+
+
+
+
+                 <div class="item form-group">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Spouse
+                    </label>
+                    <div class="col-md-12 col-sm-12 ">
+                       <input type="text" id="spouse" name="spouse" required="required" placeholder="N/A" class="form-control ">
+                    </div>
+                 </div>
+
+
+
+                 <div class="item form-group">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Father
+                    </label>
+                    <div class="col-md-12 col-sm-12 ">
+                       <input type="text" id="father" name="father" placeholder="N/A" required="required" class="form-control ">
+                    </div>
+                 </div>
+
+
+
+                 <div class="item form-group">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Mother
+                    </label>
+                    <div class="col-md-12 col-sm-12 ">
+                       <input type="text" id="mother" name="mother" required="required" value="" placeholder="N/A" class="form-control ">
+                    </div>
+                 </div>
+
+
+
+                 <div class="item form-group">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Address 1
+                    </label>
+                    <div class="col-md-12 col-sm-12 ">
+                       <input type="text" id="address_1" name="address_1" placeholder="Ex: P.O. Box 1201, Manila Central Post Office
+                       1050 Manila" required="required" class="form-control ">
+                    </div>
+                 </div>
+
+
+
+                 <div class="item form-group">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Address 2
+                    </label>
+                    <div class="col-md-12 col-sm-12 ">
+                       <input type="text" id="address_2" name="address_2" placeholder="Ex: P.O. Box 1121, Araneta Center Post Office
+                       1135 Quezon City, Metro Manila" required="required" class="form-control ">
+                    </div>
+                 </div>
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+        <!----------------
+        -->
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 <div class="row">
 

@@ -57,11 +57,11 @@ $(function() {
             },{data: 'firstname',name: 'firstname'
             },{data: 'middlename',name: 'middlename'
 
-            },{data: 'civilstatus',name: 'civilstatus'
+
             },{data: 'mobile_no',name: 'mobile_no'
 
             },{data: 'gender',name: 'gender'
-            },{data: 'voterstatus',name: 'voterstatus'
+
             },
             ]
     });
