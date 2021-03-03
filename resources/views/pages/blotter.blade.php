@@ -26,13 +26,64 @@
          </div>
 
          <div class="modal-body">
+
             <form id="blotterform"  name="blotterform" class="modal-input">
                {{ csrf_field() }}
                <input type="hidden" name="blotter_id" id="blotter_id">
+               {{-- <input type="hidden" name="status" id="status"> --}}
 
-               <label for="incident_narrative">Incident Narrative</label>
-               <textarea name="incident_narrative" id="incident_narrative" cols="30" rows="10"></textarea>
-               <button type="submit" id="saveBtn">Save New Blotters</button>
+               <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                  <div class="col-sm-6" >
+                    <label >Incident Location</label>
+                    <input type="text" id="incident_location" name="incident_location" required="required" class="form-control ">
+
+                  </div>
+                  <div class="col-sm-6" >
+                     <label >Incident type</label>
+                     <input type="text" id="incident_type" name="incident_type" required="required" class="form-control ">
+                   </div>
+                </div>
+               
+               <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                  <div class="col-sm-6" >
+                    <label >Date of Incident</label>
+                    <input type="date" id="date_incident" name="date_incident" required="required" class="form-control ">
+
+                  </div>
+                  <div class="col-sm-6" >
+                     <label >Time of Incident</label>
+                     <input type="time" id="time_incident" name="time_incident" required="required" class="form-control ">
+                   </div>
+                </div>
+
+                <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top:1rem;">
+                  <div class="col-sm-6" >
+                    <label >Date Reported</label>
+                    <input type="date" id="date_reported" name="date_reported" required="required" class="form-control ">
+
+                  </div>
+                  <div class="col-sm-6" >
+                     <label >Time Reported</label>
+                     <input type="time" id="time_reported" name="time_reported" required="required" class="form-control ">
+                   </div>
+                </div>
+
+               
+                <div class="item form-group" style="margin-top:1rem;>
+                  <label for="incident_narrative">Incident Narrative</label>
+                  <div class="col-md-12 col-sm-12 ">
+                     <textarea name="incident_narrative" id="incident_narrative" rows="10" style="width: 100%"></textarea>
+                  </div>
+               </div>
+
+               <div class="item form-group">
+                  <div class="col-md-12 col-sm-12 offset-md-4">
+                     <button type="submit" id="saveBtn" class="btn btn-success">Save New Blotters</button>
+                     <a class="btn btn-primary" type="button" data-dismiss="modal" style="margin-left: 4px;" >Cancel</a>
+                     <input class="btn btn-primary" type="reset" value="Reset">
+                  </div>
+               </div>
+
             </form>
          </div>
 
@@ -43,13 +94,13 @@
 </div>
 
 
-
+{{-- 
   <div class="search-container">
     <form action="/action_page.php">
       <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
-  </div>
+  </div> --}}
 </div>
 
 
@@ -113,10 +164,16 @@
                 serverSide: true,
                 ajax: "{{ route('blotters.index') }}",
                 columns: [
-                  //   {data: 'incident_narrative', name: 'incident_narrative'},
                   {data: 'action', name: 'action', orderable: false, searchable: false},
-                    {data: 'blotter_id', name: 'blotter_id'}
+                    {data: 'blotter_id', name: 'blotter_id'},
+                    {data: 'status', name: 'status'},
+                    {   data: 'date_reported', name: 'date_reported'},
+                    {  data: 'time_reported', name: 'time_reported'},
+                    {   data: 'incident_type', name: 'incident_type'},
+                    {     data: 'date_incident', name: 'date_incident'},
+                    { data: 'time_incident', name: 'time_incident'}
                 ]
+                  
             });
              $('#createNewBlotter').click(function () {
                  $('#saveBtn').val("create-blotter");
@@ -133,6 +190,12 @@
                   $('#saveBtn').val("edit-blotter");
                   $('#blottermodal').modal('show');
                   $('#blotter_id').val(data.blotter_id);
+                  $('#incident_location').val(data.incident_location);
+                  $('#incident_type').val(data.incident_type);
+                  $('#date_incident').val(data.date_incident);
+                  $('#time_incident').val(data.time_incident);
+                  $('#date_reported').val(data.date_reported);
+                  $('#time_reported').val(data.time_reported);
                   $('#incident_narrative').val(data.incident_narrative);
                })
             });
@@ -163,9 +226,8 @@
             $('body').on('click', '.deleteBlotter', function () {
             
             var blotter_id = $(this).data("id");
-            confirm("Are You sure want to delete !");
-            
-            $.ajax({
+            if(confirm("Are You sure want to delete !")){
+               $.ajax({
                   type: "DELETE",
                   url: "{{ route('blotters.store') }}"+'/'+blotter_id,
                   success: function (data) {
@@ -175,6 +237,9 @@
                      console.log('Error:', data);
                   }
             });
+            }
+            
+     
          });
 
          });

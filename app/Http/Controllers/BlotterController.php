@@ -56,7 +56,15 @@ class BlotterController extends Controller
     {
         blotters::updateOrCreate(
             ['blotter_id' => $request->blotter_id],
-            ['incident_narrative' => $request->incident_narrative]
+            [
+                'incident_location' => $request->incident_location,
+                'incident_type' => $request->incident_type,
+                'date_incident' => $request->date_incident,
+                'time_incident' => $request->time_incident,
+                'date_reported' => $request->date_reported,
+                'time_reported' => $request->time_reported,
+                'incident_narrative' => $request->incident_narrative
+            ]
         );
 
         return response()->json(['success' => 'NewBlotter saved successfully.']);

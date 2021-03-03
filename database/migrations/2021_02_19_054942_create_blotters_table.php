@@ -15,7 +15,7 @@ class CreateBlottersTable extends Migration
     {
         Schema::create('blotters', function (Blueprint $table) {
             $table->id('blotter_id');
-            $table->string('incident_type',255)->nullable();
+            $table->string('incident_type', 255)->nullable();
             $table->string('status')->nullable();
             $table->string('schedule')->nullable();
             $table->date('schedule_date')->nullable();
@@ -23,7 +23,7 @@ class CreateBlottersTable extends Migration
             $table->datetime('time_reported')->nullable();
             $table->datetime('date_incident')->nullable();
             $table->datetime('time_incident')->nullable();
-            $table->string('incident_location',255)->nullable();
+            $table->string('incident_location', 255)->nullable();
             $table->string('incident_narrative')->nullable();
 
 
