@@ -1,31 +1,25 @@
-
-
 @extends('layouts.apps')
 @section('content')
 <div class="col-sm-12 text-left ">
    <h1 class="border-bottom border-bot pt-3">Account</h1>
 </div>
+
 <div class="main-wrapper col-sm-12 text-left h-100  pr-0 pl-0 " >
 <div class="col-sm-12 pl-0 pr-0 search-bars" >
+
 <!----------------
    EDIT HERE
    ---------------->
 
+{{-- - Tablink - --}}
 <div class="tab-nav ">
     <button class="tablinks active" onclick="schedules(event, 'schedule')">Account Setting</button>
    <button class="tablinks " onclick="schedules(event, 'create') ">Create Account</button>
-   <button class="tablinks" onclick="schedules(event, 'manage')">Manage Account</button>
+   <button class="tablinks"  id="tablink-manage-account" onclick="schedules(event, 'manage')">Manage Account</button>
    <button class="tablinks" onclick="schedules(event, 'session')">Session History</button>
-
 </div>
 
-
-
-
-
-
-
-
+{{-- - Account Setting Tablink - --}}
          <div id="schedule" class="tabcontent">
 
             <div class="col-sm-12 pt-2">
@@ -50,8 +44,7 @@
 
 
 
-
-
+{{-- - Create Account Tablink - --}}
 
 <div id="create" class="tabcontent">
 
@@ -120,8 +113,7 @@
 
 </div>
 
-
-
+{{-- - Manage Account Tablink - --}}
 
 <div id="manage" class="tabcontent">
    <div class="row ">
@@ -168,12 +160,12 @@
 
 
 
-  <table id="manage_account" class="datatable-element table dataTables_info resident table-striped jambo_table bulk_action text-center border" >
+  <table id="manage-account-table" class="datatable-element table dataTables_info resident table-striped jambo_table bulk_action text-center border" >
             <thead>
                <tr class="headings">
                 <th class="column-title" hidden>ID</th>
                   <th class="column-title">Action</th>
-                  <th class="column-title"> Last Name</th>
+                  <th class="column-title">Last Name</th>
                   <th class="column-title">First Name </th>
                   <th class="column-title">Username</th>
                   <th class="column-title">Email</th>
@@ -186,50 +178,10 @@
             </thead>
             <tbody>
 
-                account
-                @if(count($account) > 0)
-                @foreach ($account as $account)
-
-
-               <tr class="even pointer">
-                <td class=" " hidden>{{ $account->account_id }}</td>
-                  <td class=" pt-1 pb-1">
-                     <a href="#" class="btn btn-primary btn-xs pr-4 pl-4"><i class="fa fa-pencil"></i> </a>
-                 <a href="#" class="btn btn-danger btn-xs pr-4 pl-4"><i class="fa fa-trash"></i></a>
-               </td>
-
-                  <td class=" ">{{ $account->last_name }}</td>
-                  <td class=" ">{{ $account->first_name }} </td>
-                  <td class=" ">{{ $account->username }}</td>
-                  <td class=" ">{{ $account->email }}</td>
-
-                  <td class=" ">{{ $account->password }} </td>
-               </tr>
-               @endforeach
-                @endif
             </tbody>
          </table>
 
-
-
-
-
-
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -237,7 +189,7 @@
    </div>
 </div>
 
-
+{{-- - Session History Tablink - --}}
 
 <div id="session" class="tabcontent">
    <div class="topnav navbar ">
@@ -278,7 +230,7 @@
             <tbody>
 
 
-                @if(count($sessions) > 0)
+                {{-- @if(count($sessions) > 0)
                     @foreach ($sessions as $sessions)
 
 
@@ -290,7 +242,7 @@
                   <td class=" ">{{ $sessions->created_at }}</td>
                </tr>
                      @endforeach
-               @endif
+               @endif --}}
 
             </tbody>
          </table>
@@ -302,109 +254,43 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-   <!----------------
-
-
-
-
-
-
-
-
-
-
-<div class=" col-sm-12 text-left h-100  pr-0 pl-0 pt-2 pb-2 text-white" >
-   <div class="row pl-4 pr-4   ">
-      <div class="col-sm-12 border border-bot ">
-      </div>
-   </div>
-   <div class="row pt-4 pl-4 pr-4">
-      <div class="col-sm-12 overflow-auto">
-
-
-
-
-  <table id="resident" class="table dataTables_info resident table-striped jambo_table bulk_action text-center border">
-            <thead>
-               <tr class="headings">
-                  <th class="column-title">Action</th>
-                  <th class="column-title">Name </th>
-                  <th class="column-title">Position </th>
-                  <th class="column-title">Official Committe </th>
-                  </th>
-                  <th class="bulk-actions" hidden colspan="7">
-                     <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                  </th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr class="even pointer">
-                  <td class=" pt-1 pb-1">
-                     <a href="#" class="btn btn-primary btn-xs pr-4 pl-4"><i class="fa fa-folder fa-lg"></i>  </a>
-                     <a href="#" class="btn btn-info btn-xs pr-4 pl-4"><i class="fa fa-pencil fa-lg"></i> </a>
-                  </td>
-                  <td class=" ">121000040</td>
-                  <td class=" ">May 23, 2014 11:47:56 PM </td>
-                  <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
-               </tr>
-               <tr class="odd pointer">
-                  <td class=" pt-1 pb-1">
-                     <a href="#" class="btn btn-primary btn-xs pr-4 pl-4"><i class="fa fa-folder fa-lg"></i>  </a>
-                     <a href="#" class="btn btn-info btn-xs pr-4 pl-4"><i class="fa fa-pencil fa-lg"></i> </a>
-                  </td>
-                  <td class=" ">121000039</td>
-                  <td class=" ">May 23, 2014 11:30:12 PM</td>
-                  <td class=" ">121000208 <i class="success fa fa-long-arrow-up"></i>
-                  </td>
-               </tr>
-            </tbody>
-         </table>
-
-
-
-
-
-
-
-
-
-
-
-
-      </div>
-   </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-      --->
-
-
-
-
 </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+<script type="text/javascript">
+$(function () {
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+
+var table = $('.manage-account-table').DataTable({
+  processing: true,
+  dom: 'lrtip',
+  serverSide: true,
+  ajax: "{{ route('account.index') }}",
+  columns: [
+      {data: 'action', name: 'action', orderable: false, searchable: false},
+      {data: 'last_name', name: 'lastname'},
+      {data: 'first_name', name: 'firstname'},
+      {data: 'username', name: 'username'},
+      {data: 'email', name: 'email'},
+      {data: 'password', name: 'password'},
+      
+  ]
+});
+
+
+</script>
 @endsection
 
 

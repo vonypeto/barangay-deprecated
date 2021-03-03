@@ -25,7 +25,11 @@ Route::get('/dashboard',[PagesController::class, 'dashboard']);
 Route::get('/blotter',[BlotterController::class, 'show']);
 Route::get('/schedule',[ScheduleController::class, 'show']);
 Route::get('/setting/maintenance',[BrgyOfficialController::class, 'show']);
-Route::get('/setting/account',[AccountController::class, 'show']);
+
+//start giannpogi
+Route::resource('/setting/account', AccountController::class);
+
+//Route::get('/setting/account',[AccountController::class, 'show']);
 
 
 //start von
