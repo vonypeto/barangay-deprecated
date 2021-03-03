@@ -12,10 +12,57 @@ class PagesController extends Controller
     public function  sampledata(){
 
         $area_setting = DB::table('area_settings')
-        ->where('area','=','wwww')->first();
-        $add = 1;
-        echo $add + $area_setting->population;
-        /*
+        ->where('area','=','gitna')->first();
+
+       // echo $add + $area_setting->population;
+
+
+        $resident_area = DB::table('area_settings')
+        ->where('area','=','gitna')->count();
+
+       // echo $resident_area;
+
+       $data = DB::table('area_settings')
+       ->select('area')->get();
+
+       if(count($data))
+        foreach ($data as $data) {
+
+            $test = DB::table('resident_infos')
+            ->where('area','=',$data->area)->count();
+
+            area_setting::where('area', '=', $data->area)
+           ->update(['population' => $test]);
+
+            echo $test;
+            echo "<br>";
+
+
+        }
+
+
+
+       /*
+
+
+
+// try this after software
+
+        Flight::where('active', 1)
+      ->where('destination', 'San Diego')
+      ->update(['delayed' => 1]);
+
+
+
+
+
+
+
+
+
+
+
+
         $area_setting = $area_setting->get();
         foreach ($area_setting as $area_setting) {
             $add +=  $area_setting->population;

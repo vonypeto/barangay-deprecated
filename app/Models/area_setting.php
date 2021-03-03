@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class area_setting extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = "area_settings";
     public $primaryKey = 'area_id';
+    protected $fillable=['area','population','area_id'];
 
 
 }

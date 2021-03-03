@@ -67,6 +67,14 @@ class ResidentInfoController extends Controller
         'area'=>$request->area,
         'address_1'=>$request->address_1,
         'address_2'=>$request->address_2]);
+
+        $resident_area = DB::table('resident_infos')
+        ->where('area','=',$request->area)->count();
+        area_setting::updateOrCreate(['area' => $request->area],['population'=>$resident_area]);
+
+
+
+
         return response()->json(['success'=>'resident saved successfully.']);
     }
 
@@ -102,6 +110,20 @@ class ResidentInfoController extends Controller
     public function destroy($id)
     {
         resident_info::find($id)->delete();
+
+        $data = DB::table('area_settings')
+       ->select('area')->get();
+
+       if(count($data))
+        foreach ($data as $data) {
+
+            $test = DB::table('resident_infos')
+            ->where('area','=',$data->area)->count();
+
+            area_setting::where('area', '=', $data->area)
+           ->update(['population' => $test]);
+
+        }
         return response()->json(['success'=>'Resident deleted successfully.']);
     }
 
