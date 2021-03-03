@@ -88,7 +88,7 @@
         ajax: "{{ route('books.index') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'title', name: 'title'},
+            {data: 'author', name: 'title'},
             {data: 'author', name: 'author'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]

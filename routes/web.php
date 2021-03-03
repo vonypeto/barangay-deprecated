@@ -27,9 +27,9 @@ Route::get('/schedule',[ScheduleController::class, 'show']);
 Route::get('/setting/maintenance',[BrgyOfficialController::class, 'show']);
 
 //start giannpogi
-//Route::resource('/setting/account', AccountController::class);
+Route::resource('/setting/account', AccountController::class);
 
-Route::get('/setting/account',[AccountController::class, 'show']);
+//Route::get('/setting/account',[AccountController::class, 'show']);
 
 
 //start von

@@ -122,28 +122,28 @@
             <div class="row">
                <div class="col-sm-6">
                   <div class="form-group row">
-                     <label for="staticEmail" class="col-sm-3 col-form-label">Username</label>
+                     <label for="username" class="col-sm-3 col-form-label">Username</label>
                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="staticEmail" placeholder="Username" value="Select user">
+                        <input type="text" class="form-control" id="username" placeholder="Username" value="">
                      </div>
                   </div>
                   <div class="form-group row">
-                     <label for="staticEmail" class="col-sm-3 col-form-label">Confirm Password</label>
+                     <label for="confirm-password" class="col-sm-3 col-form-label">Confirm Password</label>
                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="staticEmail" placeholder="Verify Password" e="password" class="form-control" id="inputPassword" placeholder="New Password" value=" " >
+                        <input type="text" class="form-control" id="confirm-password" placeholder="Verify Password" value="" >
                      </div>
                   </div>
                </div>
                <div class="col-sm-6">
                   <div class="form-group row">
-                     <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                     <label for="password" class="col-sm-2 col-form-label">Password</label>
                      <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Enter Password" value=" ">
+                        <input type="password" class="form-control" id="password" placeholder="Enter Password" value="">
                      </div>
                   </div>
                   <div class="col-sm-12 pl-0 pr-0  ">
                      <div class="form-group text-right ">
-                        <button type="submit" class="btn btn-success account-button "><i class="  fa fa-check "></i><b ></b></button>
+                        <button type="submit" class="btn btn-success account-button "><i class=" fa fa-check "></i><b></b></button>
 
 
                      </div>
@@ -170,9 +170,6 @@
                   <th class="column-title">Username</th>
                   <th class="column-title">Email</th>
                   <th class="column-title">Password</th>
-                  </th>
-                  <th class="bulk-actions" hidden colspan="7">
-                     <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                   </th>
                </tr>
             </thead>
@@ -263,7 +260,33 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
+<script type="text/javascript">
+   $(function() {
+   
+       $.ajaxSetup({
+           headers: {
+               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+           }
+     });
 
+     var table = $(".manage-account-table").DataTable({
+         processing: true,
+         dom: 'lrtip',
+         serverSide: true,
+         ajax: "{{ route('account.index') }}",
+         columns: [
+             {data: 'action', name: 'action', orderable: false, searchable: false},
+             {data: 'first_name', name: 'firstname'},
+             {data: 'last_name', name: 'lastname'},
+             {data: 'username', name: 'username'},
+             {data: 'email', name: 'email'},
+             {data: 'password', name: 'password'},
+         ]
+         
+     });
+      
+   });
+ </script>
 @endsection
 
 
