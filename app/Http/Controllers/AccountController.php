@@ -22,16 +22,16 @@ class AccountController extends Controller
             $data = Account::latest()->get();
             
             return Datatables::of($data)
-                    // ->addIndexColumn()
-                    // ->addColumn('action', function($row){
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
 
-                    //        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editBook">Edit</a>';
+                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editBook">Edit</a>';
 
-                    //        $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteBook">Delete</a>';
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteBook">Delete</a>';
 
-                    //         return $btn;
-                    // })
-                    // ->rawColumns(['action'])
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
                     ->make(true);
         }
 

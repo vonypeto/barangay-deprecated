@@ -269,7 +269,7 @@
            }
      });
 
-     var table = $(".manage-account-table").DataTable({
+     var table = $("#manage-account-table").DataTable({
          processing: true,
          dom: 'lrtip',
          serverSide: true,

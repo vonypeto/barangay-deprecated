@@ -76,11 +76,6 @@
     });
 
 
-   //var table = $('.data-table').DataTable();
-
-
-
-
     var table = $('.data-table').DataTable({
         processing: true,
         dom: 'lrtip',
