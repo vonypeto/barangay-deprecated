@@ -57,6 +57,7 @@
 
       <div class="row">
       <div class="col-md-12 order-md-1 d-flex justify-content-center pt-4" >
+         {{-- ------------------------------------------------- form ------------------------------------------------------ --}}
          <form class="needs-validation" novalidate="">
             <div class="row">
                <div class="col-md-6 mb-3">
@@ -113,6 +114,7 @@
                <button class="btn btn-primary col-sm-3 text-center btn-lg btn-block center-button" style="margin-top: 0px;"  type="reset">Reset</button>
             </div>
          </form>
+         {{-- ------------------------------------------------- form ------------------------------------------------------ --}}
       </div>
    </div>
 
@@ -130,13 +132,13 @@
                   <div class="form-group row">
                      <label for="staticEmail" class="col-sm-3 col-form-label">Username</label>
                      <div class="col-sm-9">
-                        <input type="text" y class="form-control" id="staticEmail" placeholder="Username">
+                        <input type="text" class="form-control" id="staticEmail" placeholder="Username" value="select user">
                      </div>
                   </div>
                   <div class="form-group row">
                      <label for="staticEmail" class="col-sm-3 col-form-label">Confirm Password</label>
                      <div class="col-sm-9">
-                        <input type="text" y class="form-control" id="staticEmail" placeholder="Verify Password">
+                        <input type="text" class="form-control" id="staticEmail" placeholder="Verify Password" e="password" class="form-control" id="inputPassword" placeholder="New Password" value="" >
                      </div>
                   </div>
                </div>
@@ -144,16 +146,18 @@
                   <div class="form-group row">
                      <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                      <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword" placeholder="New Password">
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Enter Password" value="">
                      </div>
                   </div>
                   <div class="col-sm-12 pl-0 pr-0  ">
                      <div class="form-group text-right ">
                         <button type="submit" class="btn btn-success account-button "><i class="  fa fa-check "></i><b ></b></button>
 
+
                      </div>
                   </div>
                </div>
+
             </div>
          </form>
          <div class="border-buttom border-bot pl-3 pr-3">
@@ -161,9 +165,6 @@
 
 
       <div class="col-sm-12 overflow-auto  pt-2">
-
-
-
 
 
 
@@ -193,14 +194,14 @@
                <tr class="even pointer">
                 <td class=" " hidden>{{ $account->account_id }}</td>
                   <td class=" pt-1 pb-1">
-                     <a href="#" class="btn btn-primary btn-xs pr-4 pl-4"><i class="fa fa-pencil fa-lg"></i>  </a>
-                 <a href="#" class="btn btn-danger btn-xs pr-4 pl-4"><i class="fa fa-times fa-lg"></i>  </a>
+                     <a href="#" class="btn btn-primary btn-xs pr-4 pl-4"><i class="fa fa-pencil"></i> </a>
+                 <a href="#" class="btn btn-danger btn-xs pr-4 pl-4"><i class="fa fa-trash"></i></a>
                </td>
 
                   <td class=" ">{{ $account->last_name }}</td>
                   <td class=" ">{{ $account->first_name }} </td>
                   <td class=" ">{{ $account->username }}</td>
-                  <td class=" ">{{ $account->username }}</td>
+                  <td class=" ">{{ $account->email }}</td>
 
                   <td class=" ">{{ $account->password }} </td>
                </tr>

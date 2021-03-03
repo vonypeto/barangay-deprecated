@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\Sessions;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class AccountController extends Controller
 {
