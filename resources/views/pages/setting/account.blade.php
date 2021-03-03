@@ -124,13 +124,13 @@
                   <div class="form-group row">
                      <label for="staticEmail" class="col-sm-3 col-form-label">Username</label>
                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="staticEmail" placeholder="Username" value="select user">
+                        <input type="text" class="form-control" id="staticEmail" placeholder="Username" value="Select user">
                      </div>
                   </div>
                   <div class="form-group row">
                      <label for="staticEmail" class="col-sm-3 col-form-label">Confirm Password</label>
                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="staticEmail" placeholder="Verify Password" e="password" class="form-control" id="inputPassword" placeholder="New Password" value="" >
+                        <input type="text" class="form-control" id="staticEmail" placeholder="Verify Password" e="password" class="form-control" id="inputPassword" placeholder="New Password" value=" " >
                      </div>
                   </div>
                </div>
@@ -138,7 +138,7 @@
                   <div class="form-group row">
                      <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                      <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Enter Password" value="">
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Enter Password" value=" ">
                      </div>
                   </div>
                   <div class="col-sm-12 pl-0 pr-0  ">
@@ -263,34 +263,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
-<script type="text/javascript">
-$(function () {
 
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-
-
-var table = $('.manage-account-table').DataTable({
-  processing: true,
-  dom: 'lrtip',
-  serverSide: true,
-  ajax: "{{ route('account.index') }}",
-  columns: [
-      {data: 'action', name: 'action', orderable: false, searchable: false},
-      {data: 'last_name', name: 'lastname'},
-      {data: 'first_name', name: 'firstname'},
-      {data: 'username', name: 'username'},
-      {data: 'email', name: 'email'},
-      {data: 'password', name: 'password'},
-      
-  ]
-});
-
-
-</script>
 @endsection
 
 
