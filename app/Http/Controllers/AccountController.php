@@ -69,8 +69,17 @@ class AccountController extends Controller
             "create_account_form_verify_password"=>"required|same:create_account_form_password"
         ],
         [
-            "create_account_form_firstname.required" => "Tang ina mo lagyan mo to!!",
-            "create_account_form_email.ends_with" => "Ayusin mo email mo tang ina ka!"
+            "create_account_form_firstname.required" => "This field cannot be empty",
+            "create_account_form_lastname.required" => "This field cannot be empty",
+            "create_account_form_username.required" => "This field cannot be empty",
+            "create_account_form_email.required" => "This field cannot be empty",
+            "create_account_form_password.required" => "This field cannot be empty",
+            "create_account_form_verify_password.required" => "This field cannot be empty",
+
+            "create_account_form_email.ends_with" => "Valid email is required",
+
+            "create_account_form_password.same" => "Password does not match",
+            "create_account_form_verify_password.same" => "Password does not match",
         ]);
 
 
@@ -126,14 +135,55 @@ class AccountController extends Controller
      * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
-        $accounts = Account::find($request->id);
-        $accounts -> password = $request->password;
-        $accounts->save();
+        $accounts = Account::findorfail($id);
 
-        return response()->json(['success'=>'Password changed successfully.']);
+        $validator2 = Validator::make($request->all(),[
+            "manage_account_username" => "required",
+            "manage_account_password" => "required|same:manage_account_confirm_password",
+            "manage_account_confirm_password" => "required|same:manage_account_password",
+        ],
+        [
+            "manage_account_username.required" => "Username cannot be empty",
+            "manage_account_password.required" => "Password cannot be empty",
+            "manage_account_confirm_password.required" => "Please verify your password",
+            "manage_account_password.same" => "Password does not match",
+            "manage_account_confirm_password.same" => "password does not match",
+
+        ]);
+
+        if (!$validator2->passes()) {
+            return response()->json(['status'=> 0, 'error'=>$validator2->errors()->toArray()]);
+        }
+        else {
+            $values = [
+                'password'=>$request->manage_account_password
+            ];
+
+            $query = DB::table('accounts')->update($values);
+
+            if($query) {
+                return response()->json(['status'=>1, 'msg'=> 'Password has been changed']);
+            }
+        }
     }
+
+
+    //     $request->validate([
+    //         "username" => "required",
+    //         "password" => "required|same:confirm_password",
+    //         "confirm_password" => "required|same:password",
+    //     ]);
+
+    //     $accounts = Account::findorfail($id);
+
+    //     $accounts -> password = $request->password;
+    //     $accounts->save();
+
+    //     return response()->json(['success'=>'Password changed successfully.']);
+    // }
+
 
     /**
      * Remove the specified resource from storage.
@@ -141,8 +191,10 @@ class AccountController extends Controller
      * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Account $account)
+    public function destroy($id)
     {
-        //
+        Account::find($id)->delete();
+
+        return response()->json(['success'=>'Account deleted successfully.']);
     }
 }
