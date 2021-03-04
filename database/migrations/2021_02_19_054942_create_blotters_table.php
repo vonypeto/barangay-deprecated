@@ -24,7 +24,7 @@ class CreateBlottersTable extends Migration
             $table->date('date_incident')->nullable();
             $table->time('time_incident')->nullable();
             $table->string('incident_location', 255)->nullable();
-            $table->string('incident_narrative')->nullable();
+            $table->longText('incident_narrative')->nullable();
 
 
             $table->timestamps();

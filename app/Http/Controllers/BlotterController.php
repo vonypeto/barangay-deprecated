@@ -64,6 +64,8 @@ class BlotterController extends Controller
                 'time_incident' => $request->time_incident,
                 'date_reported' => $request->date_reported,
                 'time_reported' => $request->time_reported,
+                'status' => $request->status,
+                'schedule_date' => $request->schedule_date,
                 'incident_narrative' => $request->incident_narrative
             ]
         );

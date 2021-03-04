@@ -244,6 +244,12 @@ function filterGlobal() {
     ).draw();
 }
 
+function filterblotter() {
+    $('#blotter-table').DataTable().search(
+        $('#global_filter').val()
+    ).draw();
+}
+
 function filterschedule() {
     $('#table_schedule').DataTable().search(
         $('#global_filter').val()
@@ -292,6 +298,7 @@ $(document).ready(function() {
 
     $('input.global_filter').on('keyup click', function() {
         filterGlobal();
+        filterblotter();
         filterschedule();
         filterunschedule();
         filterscheduletoday();

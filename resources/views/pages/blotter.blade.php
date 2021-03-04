@@ -68,6 +68,27 @@
                    </div>
                 </div>
 
+                <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top:1rem;">
+                  <div class="col-sm-6" >
+                    <label >Date Schedule</label>
+                    <input type="date" id="schedule_date" name="schedule_date" required="required" class="form-control ">
+                    <input type="text" hidden id="schedule">
+
+                  </div>
+                 
+                  <div class="col-sm-6" >
+                     <label class="col-form-label col-md-3 col-sm-3 label-align">Status
+                     </label>
+
+                     <div class="col-md-12 col-sm-12 ">
+                         <input type="radio" name="status" value="Ongoing">
+                         <label for="ongoing">Ongoing</label><br>
+                         <input type="radio" name="status" value="Settled">
+                         <label for="settled">Settled</label><br>    
+                     </div>
+                  </div>
+                </div>
+
                
                 <div class="item form-group" style="margin-top:1rem;>
                   <label for="incident_narrative">Incident Narrative</label>
@@ -93,28 +114,62 @@
    </div>
 </div>
 
+<div class="modal fade" id="viewblottermodal" name="viewblottermodal" tabindex="-1" role="dialog" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="viewmodelHeading"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
 
-{{-- 
-  <div class="search-container">
-    <form action="/action_page.php">
-      <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
-  </div> --}}
+         <div class="modal-body">
+            <table  class="bulk_action dataTables_info table datatable-element table-striped jambo_table bulk_action text-center border no-footer">
+               <thead>
+                  <tr class="headings">
+                     <th class="column-title">Blotter Id</th>
+                     <th class="column-title">Status</th>
+                     <th class="column-title">Incident Location</th>
+                     <th class="column-title">Incident Type</th>
+                     <th class="column-title">Incident Date</th>
+                     <th class="column-title">Incident Time</th>
+                     <th class="column-title">Schedule Date</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td id="viewblotter_id"></td>
+                     <td id="status"></td>
+                     <td id="viewincident_location"></td>
+                     <td id="viewincident_type"></td>
+                     <td id="viewdate_incident"></td>
+                     <td id="viewtimeof_incident"></td>
+                     <td id="viewschedule_date"></td>
+                  </tr>
+               </tbody>
+            </table>
+            <h4>Incident Narrative</h4>
+            <textarea name="viewincident_narrative" id="viewincident_narrative" rows="10" style="width: 100%; border:none;" disabled></textarea>
+            {{-- <form id="blotterform"  name="blotterform" class="modal-input">
+            </form> --}}
+         </div>
+
+         <div class="modal-footer text-white">
+         </div>
+      </div>
+   </div>
 </div>
 
 
 
-
-
-
-
-
-
-
-
-
-
+  <div class="search-container">
+    {{-- <form action="/action_page.php"> --}}
+      <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    {{-- </form> --}}
+  </div>
+</div>
 
 
 
@@ -124,12 +179,12 @@
       </div>
    </div>
    <div class="row pt-4 pl-4 pr-4">
-      <div class="col-sm-12 overflow-auto">
+      <div class="col-sm-12 overflow-auto display-nones ">
 
 
 
-
-  <table id="resident" class="dataTables_info table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer data-table">
+        
+  <table id="blotter-table" class="bulk_action dataTables_info table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer data-table">
             <thead>
                <tr class="headings">
                   <th class="column-title">Action</th>
@@ -148,9 +203,19 @@
             </thead>
             <tbody>
             </tbody>
-         </table>
+   </table>
 
          <script type="text/javascript">
+         // var schedulehidden_input = document.getElementById("schedule")
+         // var schedule_date = document.getElementById("schedule_date");
+
+         // if(schedule_date.value == null){
+         //    console.log("Null")
+         // }
+         // else{
+         //    console.log("Not Null")
+         // }
+        
 
             $(function () {
                   $.ajaxSetup({
@@ -161,6 +226,7 @@
 
             var table = $('.data-table').DataTable({
                 processing: true,
+                dom: 'lrtip',
                 serverSide: true,
                 ajax: "{{ route('blotters.index') }}",
                 columns: [
@@ -183,10 +249,29 @@
                  $('#blottermodal').modal('show');
              });
 
+             $('body').on('click', '.viewBlotter', function(){
+               var blotter_id = $(this).data('id');
+               $.get("{{ route('blotters.index') }}" +'/' + blotter_id +'/edit', function (data) {
+                  $('#viewmodelHeading').html("View BLotter");
+                  $('#status').html(data.status);
+                  $('#viewblottermodal').modal('show');
+                  $('#viewblotter_id').html(data.blotter_id);
+                  $('#viewincident_location').html(data.incident_location);
+                  $('#viewincident_type').html(data.incident_type);
+                  $('#viewdate_incident').html(data.date_incident);
+                  $('#viewtimeof_incident').html(data.time_incident);
+                  // $('#date_reported').val(data.date_reported);
+                  // $('#time_reported').val(data.time_reported);
+                  
+                  $('#viewschedule_date').html(data.schedule_date);
+                  $('#viewincident_narrative').val(data.incident_narrative);
+               })
+             });
+
              $('body').on('click', '.editBlotter', function () {
                var blotter_id = $(this).data('id');
                $.get("{{ route('blotters.index') }}" +'/' + blotter_id +'/edit', function (data) {
-                  $('#modelHeading').html("Edit Blotters");
+                  $('#modelHeading').html("Edit Blotter");
                   $('#saveBtn').val("edit-blotter");
                   $('#blottermodal').modal('show');
                   $('#blotter_id').val(data.blotter_id);
@@ -196,6 +281,7 @@
                   $('#time_incident').val(data.time_incident);
                   $('#date_reported').val(data.date_reported);
                   $('#time_reported').val(data.time_reported);
+                  $('#schedule_date').val(data.schedule_date);
                   $('#incident_narrative').val(data.incident_narrative);
                })
             });
