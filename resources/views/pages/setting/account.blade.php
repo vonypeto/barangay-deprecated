@@ -51,60 +51,57 @@
       <div class="row">
       <div class="col-md-12 order-md-1 d-flex justify-content-center pt-4" >
          {{-- ------------------------------------------------- form ------------------------------------------------------ --}}
-         <form class="needs-validation" novalidate="">
+         <form class="needs-validation" novalidate="" id="create_account_form">
             <div class="row">
+
+               {{-- firstname --}}
                <div class="col-md-6 mb-3">
-                  <label for="firstName">First name</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-                  <div class="invalid-feedback">
-                     Valid first name is required.
-                  </div>
+                  <label for="firstname">First name</label>
+                  <input type="text" class="form-control" name="create_account_form_firstname" id="create_account_form_firstname" >
+                  <span class="text-danger error_text create_account_form_firstname_error"></span>
                </div>
+
+               {{-- lastname --}}
                <div class="col-md-6 mb-3">
-                  <label for="lastName">Last name</label>
-                  <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-                  <div class="invalid-feedback">
-                     Valid last name is required.
-                  </div>
+                  <label for="create_account_form_lastname">Last name</label>
+                  <input type="text" class="form-control" name="create_account_form_lastname" id="create_account_form_lastname" >
+                  <span class="text-danger error_text create_account_form_lastname_error"></span>
                </div>
             </div>
+
+            {{-- username --}}
             <div class="mb-3">
-               <label for="username">Username</label>
+               <label for="create_account_form_username">Username</label>
                <div class="input-group">
-                  <div class="input-group-prepend">
-                     <span class="input-group-text">@</span>
-                  </div>
-                  <input type="text" class="form-control" id="username" placeholder="Username" required="">
-                  <div class="invalid-feedback" style="width: 100%;">
-                     Your username is required.
-                  </div>
+                  <input type="text" class="form-control" name="create_account_form_username" id="create_account_form_username">
+                  <span class="text-danger error_text create_account_form_username_error"></span>
                </div>
             </div>
+            {{-- email --}}
             <div class="mb-3">
-               <label for="email">Email <span class="text-muted">(Optional)</span></label>
-               <input type="email" class="form-control" id="email" placeholder="you@example.com">
-               <div class="invalid-feedback">
-                  Please enter a valid email address
-               </div>
+               <label for="create_account_form_email">Email</label>
+               <input type="email" class="form-control" name="create_account_form_email" id="create_account_form_email" placeholder="you@example.com">
+               <span class="text-danger error_text create_account_form_email_error"></span>
             </div>
+            {{-- password --}}
             <div class="mb-3">
-               <label for="address">Password</label>
-               <input type="text" class="form-control" id="address" placeholder="password" required="">
-               <div class="invalid-feedback">
-                  Wrong Password
-               </div>
+               <label for="create_account_form_password">Password</label>
+               <input type="password" class="form-control" name="create_account_form_password" id="create_account_form_password" placeholder="Enter password">
+               <span class="text-danger error_text create_account_form_password_error"></span>
             </div>
+            {{-- password2 --}}
             <div class="mb-3">
-               <label for="address2">Verify Password <span class="text-muted"></span></label>
-               <input type="text" class="form-control" id="address2" placeholder="verify password">
-               <div class="invalid-feedback">
-                  Wrong Password
-               </div>
+               <label for="create_account_form_verify_password">Verify Password</label>
+               <input type="password" class="form-control" name="create_account_form_verify_password" id="create_account_form_verify_password" placeholder="verify password">
+               <span class="text-danger error_text create_account_form_verify_password_error"></span>
             </div>
+
             <hr class="mb-4">
             <div class="text-center button-center d-flex justify-content-center">
-               <button class="btn btn-success col-sm-3 text-center btn-lg btn-block" type="submit">Submit</button>
-               <button class="btn btn-primary col-sm-3 text-center btn-lg btn-block center-button" style="margin-top: 0px;"  type="reset">Reset</button>
+               {{-- submit --}}
+               <button id="submitBtn" name="" class="btn btn-success col-sm-3 text-center btn-lg btn-block" type="submit">Submit</button>
+               {{-- reset --}}
+               <button id="resetBtn" name="" class="btn btn-primary col-sm-3 text-center btn-lg btn-block center-button" style="margin-top: 0px;"  type="reset">Reset</button>
             </div>
          </form>
          {{-- ------------------------------------------------- form ------------------------------------------------------ --}}
@@ -118,32 +115,33 @@
 <div id="manage" class="tabcontent">
    <div class="row ">
       <div class="col-sm-12 pl-3 ">
-         <form>
+         <form id="manage_account_form">
             <div class="row">
                <div class="col-sm-6">
+                  <input type="hidden" name="id" id="manage_account_id" value="" >
                   <div class="form-group row">
-                     <label for="username" class="col-sm-3 col-form-label">Username</label>
+                     <label for="manage_account_username" class="col-sm-3 col-form-label">Username</label>
                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="username" placeholder="Username" value="">
+                        <input type="text" class="form-control"  id="manage_account_username" placeholder="Select User" value="" >
                      </div>
                   </div>
                   <div class="form-group row">
-                     <label for="confirm-password" class="col-sm-3 col-form-label">Confirm Password</label>
+                     <label for="manage_account_confirm-password" class="col-sm-3 col-form-label">Confirm Password</label>
                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="confirm-password" placeholder="Verify Password" value="" >
+                        <input type="text" class="form-control" name="password" id="manage_account_confirm-password" placeholder="Verify Password" value="" >
                      </div>
                   </div>
                </div>
                <div class="col-sm-6">
                   <div class="form-group row">
-                     <label for="password" class="col-sm-2 col-form-label">Password</label>
+                     <label for="manage_account_password" class="col-sm-2 col-form-label">New Password</label>
                      <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password" placeholder="Enter Password" value="">
+                        <input type="password" class="form-control" id="manage_account_password" placeholder="Enter New Password" value="">
                      </div>
                   </div>
                   <div class="col-sm-12 pl-0 pr-0  ">
                      <div class="form-group text-right ">
-                        <button type="submit" class="btn btn-success account-button "><i class=" fa fa-check "></i><b></b></button>
+                        <button type="submit" id="changepasswordBtn"class="btn btn-success account-button "><b>Change Password</b></button>
 
 
                      </div>
@@ -163,8 +161,8 @@
   <table id="manage-account-table" class="datatable-element table dataTables_info resident table-striped jambo_table bulk_action text-center border" >
             <thead>
                <tr class="headings">
-                <th class="column-title" hidden>ID</th>
-                  <th class="column-title">Action</th>
+                <th class="column-title">Action</th>
+                  <th class="column-title">Id</th>
                   <th class="column-title">Last Name</th>
                   <th class="column-title">First Name </th>
                   <th class="column-title">Username</th>
@@ -276,15 +274,79 @@
          ajax: "{{ route('account.index') }}",
          columns: [
              {data: 'action', name: 'action', orderable: false, searchable: false},
-             {data: 'first_name', name: 'firstname'},
-             {data: 'last_name', name: 'lastname'},
-             {data: 'username', name: 'username'},
-             {data: 'email', name: 'email'},
-             {data: 'password', name: 'password'},
+             {data: 'account_id', name: 'account_id'},
+             {data: 'first_name', name: 'create_account_form_firstname'},
+             {data: 'last_name', name: 'create_account_form_lastname'},
+             {data: 'username', name: 'create_account_form_username'},
+             {data: 'email', name: 'create_account_form_email'},
+             {data: 'password', name: 'create_account_form_password'},
          ]
          
      });
+
+
+     $('body').on('click', '#selectBtn', function () {
+      var id = $(this).data('id');
+      var username = $(this).data('username');
+
+
+      $("#manage_account_id").val(id);
+      $("#manage_account_username").val(username);
+      });
+
+      $('#manage_account_form').on('submit', function (e) {
+         e.preventDefault();
+         alert($("#manage_account_id").val())
+         var id = $("#manage_account_id").val()
+
+      //    $.ajax({
+      //     data: $('#manage_account_form').serialize(),
+      //     url: "{{ route('account.index') }}" +'/' + id + "",
+      //     type: "PUT",
+      //     dataType: 'json',
+      //     success: function (data) {
+      //         $('#manage_account_form').trigger("reset");
+      //         alert("dddf");
+      //         table.draw();
+      //     },
+      //     error: function (data) {
+      //         console.log('Error:', data);
+      //     }
+      // });
+      });
+
+
+
       
+      $("#create_account_form").on('submit', function (e) { 
+         e.preventDefault();
+         
+         $.ajax({
+            type:"post",
+            url:"{{ route('account.store') }}",
+            data:new FormData(this),
+            dataType:"json",
+            processData:false,
+            contentType:false,
+            beforeSend:function(){
+               $(document).find('span.error_text').text('');
+            },
+            success: function (data) {
+               if(data.status == 0){
+                  $.each(data.error, function(prefix, val){
+                     $('span.'+prefix+"_error").text(val[0]);
+                  });
+               }
+               else{
+                 $("#create_account_form")[0].reset();
+                 alert(data.msg);
+                 table.draw();
+               }
+            }
+         });
+         
+      });
+
    });
  </script>
 @endsection
