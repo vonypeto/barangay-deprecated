@@ -30,7 +30,6 @@
             <form id="blotterform"  name="blotterform" class="modal-input">
                {{ csrf_field() }}
                <input type="hidden" name="blotter_id" id="blotter_id">
-               {{-- <input type="hidden" name="status" id="status"> --}}
 
                <div class="row" style="margin-left: 0px;margin-right: 0px;">
                   <div class="col-sm-6" >
@@ -72,10 +71,19 @@
                   <div class="col-sm-6" >
                     <label >Date Schedule</label>
                     <input type="date" id="schedule_date" name="schedule_date" required="required" class="form-control ">
-                    <input type="text" hidden id="schedule">
+                    <input type="text" id="schedule" name="schedule" hidden>
 
                   </div>
-                 
+
+                  <div class="col-sm-6" >
+                     <label >Time Schedule</label>
+                     <input type="time" id="schedule_time" name="schedule_time" required="required" class="form-control ">
+                   </div>
+          
+                </div>
+
+                <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top:1rem;">
+                      
                   <div class="col-sm-6" >
                      <label class="col-form-label col-md-3 col-sm-3 label-align">Status
                      </label>
@@ -135,6 +143,7 @@
                      <th class="column-title">Incident Date</th>
                      <th class="column-title">Incident Time</th>
                      <th class="column-title">Schedule Date</th>
+                     <th class="column-title">Schedule Time</th>
                   </tr>
                </thead>
                <tbody>
@@ -146,6 +155,7 @@
                      <td id="viewdate_incident"></td>
                      <td id="viewtimeof_incident"></td>
                      <td id="viewschedule_date"></td>
+                     <td id="viewschedule_time"></td>
                   </tr>
                </tbody>
             </table>
@@ -206,16 +216,6 @@
    </table>
 
          <script type="text/javascript">
-         // var schedulehidden_input = document.getElementById("schedule")
-         // var schedule_date = document.getElementById("schedule_date");
-
-         // if(schedule_date.value == null){
-         //    console.log("Null")
-         // }
-         // else{
-         //    console.log("Not Null")
-         // }
-        
 
             $(function () {
                   $.ajaxSetup({
@@ -264,6 +264,7 @@
                   // $('#time_reported').val(data.time_reported);
                   
                   $('#viewschedule_date').html(data.schedule_date);
+                  $('#viewschedule_time').html(data.schedule_time);
                   $('#viewincident_narrative').val(data.incident_narrative);
                })
              });
@@ -282,6 +283,8 @@
                   $('#date_reported').val(data.date_reported);
                   $('#time_reported').val(data.time_reported);
                   $('#schedule_date').val(data.schedule_date);
+                  $('#schedule_time').val(data.schedule_time);
+                  $('input[name^="status"][value="'+data.status+'"').prop('checked',true);
                   $('#incident_narrative').val(data.incident_narrative);
                })
             });

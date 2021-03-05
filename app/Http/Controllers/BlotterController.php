@@ -55,6 +55,17 @@ class BlotterController extends Controller
      */
     public function store(Request $request)
     {
+
+        if ($request->schedule_date != null && $request->schedule_time != null) {
+            $request->schedule = "Schedule";
+        } else {
+            $request->schedule = "Unschedule";
+        }
+
+        if ($request->status == "Settled") {
+            $request->schedule = "Settled";
+        }
+
         blotters::updateOrCreate(
             ['blotter_id' => $request->blotter_id],
             [
@@ -66,6 +77,8 @@ class BlotterController extends Controller
                 'time_reported' => $request->time_reported,
                 'status' => $request->status,
                 'schedule_date' => $request->schedule_date,
+                'schedule_time' => $request->schedule_time,
+                'schedule' => $request->schedule,
                 'incident_narrative' => $request->incident_narrative
             ]
         );
@@ -96,6 +109,7 @@ class BlotterController extends Controller
         $blotter = blotters::find($id);
         return response()->json($blotter);
     }
+
 
     /**
      * Update the specified resource in storage.

@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\blotters;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+
 class ScheduleController extends Controller
 {
     /**
@@ -47,25 +49,25 @@ class ScheduleController extends Controller
     public function show(blotters $schedule)
     {
         $schedule = DB::table('blotters')
-                    ->where('schedule','=','Schedule')
-                    ->where('schedule_date','<>','')
-                    ->get();
+            ->where('schedule', '=', 'Schedule')
+            ->where('schedule_date', '<>', '')
+            ->get();
         $unschedule = DB::table('blotters')
-                    ->where('schedule','=','Unschedule')
-                    ->whereNull('schedule_date')
-                    ->get();
+            ->where('schedule', '=', 'Unschedule')
+            ->whereNull('schedule_date')
+            ->get();
         $today = DB::table('blotters')
-                    ->where('schedule','=','Schedule')
-                    ->where('schedule_date','=',Carbon::today()->toDateString())
-                    ->get();
+            ->where('schedule', '=', 'Schedule')
+            ->where('schedule_date', '=', Carbon::today()->toDateString())
+            ->get();
         $settled = DB::table('blotters')
-                    ->where('schedule','=','Settled')
-                    ->get();
+            ->where('schedule', '=', 'Settled')
+            ->get();
 
-//->where('schedule_date','<>','')  is null
-//->whereNull('schedule_date') null
+        //->where('schedule_date','<>','')  is null
+        //->whereNull('schedule_date') null
 
-        return view('pages.schedule',['schedule'=>$schedule,'unschedule'=>$unschedule,'today'=>$today,'settled'=>$settled]);
+        return view('pages.schedule', ['schedule' => $schedule, 'unschedule' => $unschedule, 'today' => $today, 'settled' => $settled]);
     }
 
     /**

@@ -21,6 +21,8 @@ class blotters extends Model
         'time_reported',
         'status',
         'schedule_date',
+        'schedule_time',
+        'schedule',
         'incident_narrative'
     ];
     public $timestamps = true;
