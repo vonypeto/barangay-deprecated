@@ -23,34 +23,63 @@
          <div id="schedule" class="tabcontent">
             
             <div class="col-sm-12 pt-2">
-               
                <!-----
                   START HERE
                   --->
-
-                  <div class="container" style="background-color: rgb(7, 110, 151)">
-                     <div class="row">
-                        <div class="col-8" style="border: black solid 2px">
-                           di ako marunong ng bootstrap AHHHHHHHHHHHH!!!!
+               <h2 class="">My Account</h2>
+                  <div class="container rounded-lg bg-dark col-8 p-3 m-3" style="margin-left:100px">
+                     <h3 class="text-white">Account Fullname</h3>
+                     <div class="containder  p-2">
+                        {{-- username --}}
+                        <div class="row rounded-lg bg-white p-3 m-2">
+                           <div class="col">
+                              <p class="m-0">USERNAME</p>
+                              <p class="m-0">Account Username</p>
+                           </div>
+                           <div class="col align-self-center">
+                              <button class="btn btn-dark float-right">Edit</button>
+                           </div>
                         </div>
-                        <div class="col">
+                        {{-- email --}}
+                           <div class="row rounded-lg bg-white p-3 m-2">
+                              <div class="col">
+                                 <p class="m-0">EMAIL</p>
+                                 <p class="m-0">Account Email</p>
+                              </div>
+                              <div class="col align-self-center">
+                                 <button class="btn btn-dark float-right">Edit</button>
+                              </div>
 
                         </div>
+                        {{-- phone number --}}
+                           <div class="row rounded-lg bg-white p-3 m-2">
+                              <div class="col">
+                                 <p class="m-0">PHONE NUMBER</p>
+                                 <p class="m-0">Account Phone Number</p>
+                              </div>
+                              <div class="col align-self-center">
+                                 <button class="btn btn-dark float-right">Edit</button>
+                              </div>
+                        </div>
+                        {{-- password --}}
+                        <div class="row rounded-lg bg-white p-3 m-2">
+                           <div class="col align-self-center">
+                              <p class="m-0">PASSWORD</p>
+                           </div>
+                           <div class="col align-self-center">
+                              <button class="btn btn-dark float-right">Change Pasword</button>
+                           </div>
                      </div>
                   </div>
-                  old password <br>
-                  new password <br>
-                  comfirm new Password <br>
-                  first name <br>
-                  last namespace <br>
-                  email    <br>
-                  username <br>
-                  use your imagination to create a login and account setting
+               </div>
                   <!-----
                      END HERE
                      --->
                   </div>
+
+                  <br>
                </div>
+               
                
                
                
@@ -201,6 +230,7 @@
                               
                            </tbody>
                         </table>
+                        <p>Note*: I'll delete id column pag nag bayad na si von.</p>
                         
                      </div>
                      

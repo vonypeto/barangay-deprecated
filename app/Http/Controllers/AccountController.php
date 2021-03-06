@@ -58,8 +58,10 @@ class AccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
+        $accounts = Account::findorfail($id);
+
         $validator = Validator::make($request->all(),[
             "create_account_form_firstname"=>"required",
             "create_account_form_lastname"=>"required",
@@ -139,17 +141,23 @@ class AccountController extends Controller
     {
         $accounts = Account::findorfail($id);
 
+        $request->request->add(['old_database_password' => $accounts->password]);
+        
         $validator2 = Validator::make($request->all(),[
             "manage_account_username" => "required",
+            "manage_account_current_password" => "required|same:old_database_password",
             "manage_account_new_password" => "required|same:manage_account_confirm_password",
             "manage_account_confirm_password" => "required|same:manage_account_new_password",
         ],
         [
             "manage_account_username.required" => "Username cannot be empty",
-            "manage_account_new_password.required" => "Password cannot be empty",
+            "manage_account_new_password.required" => "New Password cannot be empty",
+            "manage_account_current_password.required" => "Password cannot be empty",
             "manage_account_confirm_password.required" => "Please verify your password",
+            "manage_account_current_password.same" => "Does not match with your old password",
             "manage_account_new_password.same" => "Password does not match",
             "manage_account_confirm_password.same" => "password does not match",
+            
 
         ]);
 
