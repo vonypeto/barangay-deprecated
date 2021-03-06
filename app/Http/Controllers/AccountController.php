@@ -58,9 +58,8 @@ class AccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id, Request $request)
+    public function store(Request $request)
     {
-        $accounts = Account::findorfail($id);
 
         $validator = Validator::make($request->all(),[
             "create_account_form_firstname"=>"required",
@@ -113,9 +112,9 @@ class AccountController extends Controller
      */
     public function show(Account $account,Sessions $session)
     {
-       $account = Account::all();
-       $session = Sessions::all();
-     return view('pages.setting.account',['account'=>$account,'sessions'=>$session]);
+    //    $account = Account::all();
+    //    $session = Sessions::all();
+    //  return view('pages.setting.account',['account'=>$account,'sessions'=>$session]);
      //  return view('hello');
     }
 
@@ -125,9 +124,10 @@ class AccountController extends Controller
      * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function edit(Account $account)
+    public function edit($id)
     {
-        //
+        $account = Account::find($id);
+        return response()->json($account);
     }
 
     /**
@@ -174,9 +174,7 @@ class AccountController extends Controller
             // if($query) {
             //     return response()->json(['status'=>1, 'msg'=> 'Password has been changed']);
             // }
-
-            $accounts = Account::findorfail($id);
-
+            
             $accounts -> password = $request->manage_account_new_password;
             $accounts->save();
 

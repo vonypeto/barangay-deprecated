@@ -41,6 +41,7 @@
                             <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" value="" maxlength="50" required="">
                         </div>
                     </div>
+                    
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Details</label>

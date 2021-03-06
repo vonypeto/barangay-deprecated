@@ -37,7 +37,7 @@
                               <p class="m-0">Account Username</p>
                            </div>
                            <div class="col align-self-center">
-                              <button class="btn btn-dark float-right">Edit</button>
+                              <button class="btn btn-dark float-right " id="username_edit">Edit</button>
                            </div>
                         </div>
                         {{-- email --}}
@@ -47,7 +47,7 @@
                                  <p class="m-0">Account Email</p>
                               </div>
                               <div class="col align-self-center">
-                                 <button class="btn btn-dark float-right">Edit</button>
+                                 <button class="btn btn-dark float-right" id="email_edit">Edit</button>
                               </div>
 
                         </div>
@@ -58,7 +58,7 @@
                                  <p class="m-0">Account Phone Number</p>
                               </div>
                               <div class="col align-self-center">
-                                 <button class="btn btn-dark float-right">Edit</button>
+                                 <button class="btn btn-dark float-right" id="phonenumber_edit">Edit</button>
                               </div>
                         </div>
                         {{-- password --}}
@@ -67,7 +67,7 @@
                               <p class="m-0">PASSWORD</p>
                            </div>
                            <div class="col align-self-center">
-                              <button class="btn btn-dark float-right">Change Pasword</button>
+                              <button class="btn btn-dark float-right" id="password_edit">Change Pasword</button>
                            </div>
                      </div>
                   </div>
@@ -75,15 +75,57 @@
                   <!-----
                      END HERE
                      --->
-                  </div>
+            </div>
 
-                  <br>
+            {{-- - Account Setting Tablink - --}}
+            <div class="container">
+               <!-- Trigger the modal with a button -->
+               {{-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Large Modal</button> --}}
+               
+               <!-- Modal -->
+               <div class="modal fade " id="myModal" role="dialog">
+                  <div class="modal-dialog modal-lg ">
+                     <div class="modal-content">
+                        <div class="modal-header bg-dark text-white">
+                           <h4 class="modal-title ">Change Account Settings</h4>
+                           <button type="button" class="close text-white" data-dismiss="modal" >&times;</button>
+                        </div>
+                        <div class="modal-body">
+                           <form id="account_settings_form" name="account_settings_form" class="form-horizontal m-2">
+                              <input type="hidden" name="current_id" id="current_id">
+                              
+                              {{-- Label 1 --}}
+                              <div class="form-group row p-2">
+                                 <label for="modal_new_input" id="modal_label1"  class="font-weight-bold">Label1</label>
+                                 <div class="col-sm-12">
+                                    <input type="text" class="form-control font-weight-bold" id="modal_new_input" name="new_input_modal">
+                                 </div>
+                              </div>
+                              
+                              {{-- Label 2 --}}
+                              <div class="form-group row p-2">
+                                 <label for="modal_current_password" id="modal_label2" class="font-weight-bold">CURRENT PASSWORD</label>
+                                 <div class="col-sm-12">
+                                    <input type="password" id="current_password_modal" name="modal_current_password" placeholder="Enter Password to save changes" class="form-control ">
+                                 </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                 <button type="submit" class="btn btn-primary float-right" id="saveBtn" value="create" >Save changes
+                                 </button>
+                              </div>
+                           </form>
+
+                   </div>
+                 </div>
                </div>
-               
-               
-               
-               
-               
+             </div>
+            </div>
+         </div>
+      <br>
+
+
+
                {{-- - Create Account Tablink - --}}
                
                <div id="create" class="tabcontent">
@@ -317,6 +359,9 @@
       <script type="text/javascript">
          $(function() {
             
+            //Testing varibles
+            var $current_id = 3;
+
             $.ajaxSetup({
                headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -332,11 +377,11 @@
                columns: [
                {data: 'action', name: 'action', orderable: false, searchable: false},
                {data: 'account_id', name: 'account_id'},
-               {data: 'first_name', name: 'create_account_form_firstname'},
-               {data: 'last_name', name: 'create_account_form_lastname'},
-               {data: 'username', name: 'create_account_form_username'},
-               {data: 'email', name: 'create_account_form_email'},
-               {data: 'password', name: 'create_account_form_password'},
+               {data: 'first_name', name: 'manage_account_form_firstname'},
+               {data: 'last_name', name: 'manage_account_form_lastname'},
+               {data: 'username', name: 'manage_account_form_username'},
+               {data: 'email', name: 'manage_account_form_email'},
+               {data: 'password', name: 'manage_account_form_password'},
                ]
                
             });
@@ -441,9 +486,57 @@
             //Create Account Reset Button
             $("#resetBtn").click(function (e) { 
                $(document).find('span.error_text').text('');
+
             });
-            
+
+            //Modal 
+            $('body').on('click', '#username_edit', function () { 
+
+               var id = 3;  // var id =  $(this).data('id');
+               $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
+               $('#myModal').modal('toggle');
+               $("#myModal").show();
+               $('#modal_label1').text("NEW USERNAME");
+               $("#modal_new_input").val(data.username);
+            })
          });
+
+            $('body').on('click', '#email_edit', function () { 
+      
+               var id = 3; 
+               $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
+                  $('#myModal').modal('toggle');
+                  $("#myModal").show();
+                  $('#modal_label1').text("NEW EMAIL");
+                  $("#modal_new_input").val(data.email);
+               })
+            });
+
+            $('body').on('click', '#phonenumber_edit', function () { 
+               
+               var id = 3; 
+               $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
+                  $('#myModal').modal('toggle');
+                  $("#myModal").show();
+                  $('#modal_label1').text("NEW PHONENUMBER");
+                  $("#modal_new_input").val("Wala pang phone number hehe");
+               })
+
+            });
+           
+            $('body').on('click', '#password_edit', function () { 
+               
+               var id = 3; 
+               $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
+                  $('#myModal').modal('toggle');
+                  $("#myModal").show();
+                  $('#modal_label1').text("NEW PASSWORD");
+                  $("#modal_new_input").val("Enter new password");
+            })
+         });
+               
+            
+      });
       </script>
       @endsection
       
