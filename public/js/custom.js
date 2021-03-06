@@ -41,9 +41,7 @@ $(function() {
         }
     });
     //show default datatable
-    $('#manage_account').DataTable();
-    $('#official').DataTable();
-    $('#region').DataTable();
+
     $('#table_unschedule').DataTable({
         sDom: 'lrtip'
     });
@@ -351,6 +349,10 @@ function filtersettled() {
 
 $(document).ready(function() {
     //
+
+    $('#manage_account').DataTable();
+    $('#official').DataTable();
+    $('#region').DataTable();
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
