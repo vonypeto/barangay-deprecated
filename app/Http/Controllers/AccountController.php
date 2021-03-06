@@ -141,14 +141,14 @@ class AccountController extends Controller
 
         $validator2 = Validator::make($request->all(),[
             "manage_account_username" => "required",
-            "manage_account_password" => "required|same:manage_account_confirm_password",
-            "manage_account_confirm_password" => "required|same:manage_account_password",
+            "manage_account_new_password" => "required|same:manage_account_confirm_password",
+            "manage_account_confirm_password" => "required|same:manage_account_new_password",
         ],
         [
             "manage_account_username.required" => "Username cannot be empty",
-            "manage_account_password.required" => "Password cannot be empty",
+            "manage_account_new_password.required" => "Password cannot be empty",
             "manage_account_confirm_password.required" => "Please verify your password",
-            "manage_account_password.same" => "Password does not match",
+            "manage_account_new_password.same" => "Password does not match",
             "manage_account_confirm_password.same" => "password does not match",
 
         ]);
@@ -157,15 +157,23 @@ class AccountController extends Controller
             return response()->json(['status'=> 0, 'error'=>$validator2->errors()->toArray()]);
         }
         else {
-            $values = [
-                'password'=>$request->manage_account_password
-            ];
+            // $values = [
+            //     'password'=>$request->manage_account_new_password
+            // ];
 
-            $query = DB::table('accounts')->update($values);
+            // $query = DB::table('accounts')->update($values);
 
-            if($query) {
-                return response()->json(['status'=>1, 'msg'=> 'Password has been changed']);
-            }
+            // if($query) {
+            //     return response()->json(['status'=>1, 'msg'=> 'Password has been changed']);
+            // }
+
+            $accounts = Account::findorfail($id);
+
+            $accounts -> password = $request->manage_account_new_password;
+            $accounts->save();
+
+            return response()->json(['status'=>1, 'msg'=> 'Password has been changed']);
+            
         }
     }
 

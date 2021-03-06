@@ -27,6 +27,17 @@
                <!-----
                   START HERE
                   --->
+
+                  <div class="container" style="background-color: rgb(7, 110, 151)">
+                     <div class="row">
+                        <div class="col-8" style="border: black solid 2px">
+                           di ako marunong ng bootstrap AHHHHHHHHHHHH!!!!
+                        </div>
+                        <div class="col">
+
+                        </div>
+                     </div>
+                  </div>
                   old password <br>
                   new password <br>
                   comfirm new Password <br>
@@ -120,29 +131,40 @@
                               <div class="col-sm-6">
                                  <input type="hidden" name="id" id="manage_account_id" value="" >
                                  <div class="form-group row">
+                                    {{-- Username --}}
                                     <label for="manage_account_username"  class="col-sm-3 col-form-label">Username</label>
                                     <div class="col-sm-9">
                                        <input type="text" class="form-control"  name="manage_account_username" id="manage_account_username" placeholder="Select User" value="" readonly>
                                        <span class="text-danger error_text manage_account_username_error"></span>
-                                       
                                     </div>
                                  </div>
                                  <div class="form-group row">
-                                    <label for="manage_account_confirm-password" class="col-sm-3 col-form-label">Confirm Password</label>
+                                    {{-- Current Password --}}
+                                    <label for="manage_account_current_password" class="col-sm-3 col-form-label">Current Password</label>
                                     <div class="col-sm-9">
-                                       <input type="password" class="form-control" name="manage_account_confirm_password" id="manage_account_confirm-password" placeholder="Verify Password" value="" >
-                                       <span class="text-danger error_text manage_account_confirm_password_error"></span>
+                                       <input type="password" class="form-control" name="manage_account_current_password" id="manage_account_current_password" placeholder="Enter Current Password" value="" >
+                                       <span class="text-danger error_text manage_account_current_password_error"></span>
                                     </div>
                                  </div>
                               </div>
                               <div class="col-sm-6">
+                                 {{-- New Password --}}
                                  <div class="form-group row">
-                                    <label for="manage_account_password" class="col-sm-2 col-form-label">New Password</label>
+                                    <label for="manage_account_new_password" class="col-sm-2 col-form-label">New Password</label>
                                     <div class="col-sm-10">
-                                       <input type="password" name="manage_account_password" class="form-control" id="manage_account_password" placeholder="Enter New Password" value="">
-                                       <span class="text-danger error_text manage_account_password_error"></span>
+                                       <input type="password" name="manage_account_new_password" class="form-control" id="manage_account_new_password" placeholder="Enter New Password" value="">
+                                       <span class="text-danger error_text manage_account_new_password_error"></span>
                                     </div>
                                  </div>
+                                 {{-- Confirm Password --}}
+                                 <div class="form-group row">
+                                    <label for="manage_account_confirm_password" class="col-sm-2 col-form-label">Confirm Password</label>
+                                    <div class="col-sm-10">
+                                       <input type="password" name="manage_account_confirm_password" class="form-control" id="manage_account_confirm_password" placeholder="Confirm Password" value="">
+                                       <span class="text-danger error_text manage_account_confirm_password_error"></span>
+                                    </div>
+                                 </div>
+                                 
                                  <div class="col-sm-12 pl-0 pr-0  ">
                                     <div class="form-group text-right ">
                                        <button type="submit" id="changepasswordBtn"class="btn btn-success account-button " disabled><b>Change Password</b></button>
@@ -297,6 +319,7 @@
                
                
                $("#manage_account_id").val(id);
+
                $("#manage_account_username").val(username);
             });
             
@@ -304,6 +327,7 @@
             $('#manage_account_form').on('submit', function (e) {
                e.preventDefault();
                var id = $("#manage_account_id").val();
+               alert($("#manage_account_id").val());
                
                $.ajax({
                   type: "PATCH",
