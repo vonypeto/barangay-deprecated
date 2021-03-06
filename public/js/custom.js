@@ -265,14 +265,8 @@ $(function() {
     $('#check-all').click(function(){
          $('.checkBoxClass').prop('checked', $(this).prop('checked'));
     });
-    function validate() {
-        alert(1);
-        if (document.getElementById('checked').checked) {
-            alert("checked");
-        } else {
-            alert("You didn't check it! Let me check it for you.");
-        }
-    }
+
+
     // Bulk Delete Current Select
     $('#bulkdelete').click(function(e){
         e.preventDefault();
