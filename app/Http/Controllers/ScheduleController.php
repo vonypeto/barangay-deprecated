@@ -55,7 +55,7 @@ class ScheduleController extends Controller
         $unschedule = DB::table('blotters')
             ->where('schedule', '=', 'Unschedule')
             ->whereNull('schedule_date')
-            ->orWhereNull('schedule_time')
+            // ->orWhereNull('schedule_time')
             ->get();
         $today = DB::table('blotters')
             ->where('schedule', '=', 'Schedule')
@@ -64,11 +64,22 @@ class ScheduleController extends Controller
         $settled = DB::table('blotters')
             ->where('schedule', '=', 'Settled')
             ->get();
+        $scheduleCount = $schedule->count();
+        $unscheduleCount = $unschedule->count();
+        $todayCount = $today->count();
+        $settledCount = $settled->count();
 
-        //->where('schedule_date','<>','')  is null
-        //->whereNull('schedule_date') null
 
-        return view('pages.schedule', ['schedule' => $schedule, 'unschedule' => $unschedule, 'today' => $today, 'settled' => $settled]);
+        return view('pages.schedule', [
+            'schedule' => $schedule,
+            'unschedule' => $unschedule,
+            'today' => $today,
+            'settled' => $settled,
+            'scheduleCount' => $scheduleCount,
+            'unscheduleCount' => $unscheduleCount,
+            'todayCount' => $todayCount,
+            'settledCount' => $settledCount
+        ]);
     }
 
     /**

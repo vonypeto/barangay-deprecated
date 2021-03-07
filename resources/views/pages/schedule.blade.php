@@ -320,20 +320,20 @@
  <div class="col-sm-2 pl-2 pr-4 pt-2 pd-1 " >
     <div class="alert alert-primary alert-size border border-secondary" role="alert">
 <h6 class="border-bottom border-bot text-center "><b>Settled Cases</b></h6>
-<h1 class="num-align text-center"><b>1</b></h1>
+<h1 class="num-align text-center"><b>{{ $settledCount }}</b></h1>
 </div>
 
 <div class="alert alert-success alert-size border border-secondary " role="alert">
 <h6 class="border-bottom border-bot text-center schedule-align"><b>Scheduled Cases</b></h6>
-<h1 class="num-align text-center"><b>1</b></h1>
+<h1 class="num-align text-center"><b>{{ $scheduleCount }}</b></h1>
 </div>
 <div class="alert alert-danger alert-size border border-secondary" role="alert">
 <h6 class="border-bottom border-bot text-center schedule-align"><b>Unsettled Cases</b></h6>
-<h1 class="num-align text-center"><b>1</b></h1>
+<h1 class="num-align text-center"><b>{{ $scheduleCount + $unscheduleCount }}</b></h1>
 </div>
 <div class="alert alert-warning alert-size border border-secondary" role="alert">
 <h6 class="border-bottom border-bot text-center schedule-align"><b>Unscheduled Cases</b></h6>
-<h1 class="num-align text-center"><b>1</b></h1>
+<h1 class="num-align text-center"><b>{{$unscheduleCount }}</b></h1>
 </div>
 
  </div>

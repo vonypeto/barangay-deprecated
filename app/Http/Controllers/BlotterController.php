@@ -57,7 +57,13 @@ class BlotterController extends Controller
     public function store(Request $request)
     {
 
-        if ($request->schedule_date != null && $request->schedule_time != null) {
+        // if ($request->schedule_date != null && $request->schedule_time != null) {
+        //     $request->schedule = "Schedule";
+        // } else {
+        //     $request->schedule = "Unschedule";
+        // }
+
+        if ($request->schedule_date != null) {
             $request->schedule = "Schedule";
         } else {
             $request->schedule = "Unschedule";
@@ -78,7 +84,7 @@ class BlotterController extends Controller
                 'time_reported' => $request->time_reported,
                 'status' => $request->status,
                 'schedule_date' => $request->schedule_date,
-                'schedule_time' => $request->schedule_time,
+                // 'schedule_time' => $request->schedule_time,
                 'schedule' => $request->schedule,
                 'incident_narrative' => $request->incident_narrative
             ]

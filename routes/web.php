@@ -8,6 +8,7 @@ use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\BlotterController;
+use App\Http\Controllers\BlotterForResController;
 use App\Http\Controllers\ScheduleController;
 use Carbon\Carbon;
 /*
@@ -45,6 +46,8 @@ Route::resource('books', BooksController::class);
 
 // Rojhon pogi
 Route::get('/blotter', [BlotterController::class, 'show']);
-Route::get('/schedule', [ScheduleController::class, 'show']);
 Route::resource('blotters', BlotterController::class);
+Route::resource('blotterforesident', BlotterForResController::class);
+Route::get('/schedule', [ScheduleController::class, 'show']);
+
 // Rojhon pogi paren
