@@ -13,32 +13,403 @@
 
 
         <div class="topnav navbar navbar">
-  <button class="btn btn-success text-white " href="#home">New Blotter Record <i class="fa fa-plus"></i></button>
+  <button class="btn btn-success text-white " href="#home" data-toggle="modal" data-target="#blottermodal" id="createNewBlotter">New Blotter Record <i class="fa fa-plus"></i></button>
 
-  <div class="search-container">
-    <form action="/action_page.php">
-      <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
-  </div>
+  <div class="modal fade" id="blottermodal" name="blottermodal" tabindex="-1" role="dialog" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="modelHeading"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+
+         <div class="modal-body">
+          
+                     <div class="tab-nav " style="background: rgb(67, 0, 155);">
+                        <button class="tablinks btn btn-info active" onclick="schedules(event, 'schedule') ">Complainants</button>
+                        <button class="tablinks btn btn-info" onclick="schedules(event, 'respondents')">Respondents</button>
+                        <button class="tablinks btn btn-info" onclick="schedules(event, 'victims')">Victims</button>
+                        <button class="tablinks btn btn-info" onclick="schedules(event, 'attackers')">Attackers</button>
+                        <button class="tablinks btn btn-info" onclick="schedules(event, 'inci_detail')">Incident Detail and Narrative</button>
+                     </div>
+               
+                     <form id="blotterform"  name="blotterform" class="modal-input">
+                        {{ csrf_field() }}
+            
+            
+            
+            
+            
+                     <div id="schedule" class="tabcontent">
+                        <div class="topnav navbar navbar">
+                           <div>
+                              <h4 style="color: white">Adding Complainants</h4>
+                           </div>
+                           <div class="search-container">
+                              <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
+                           </div>
+                        </div>
+                    
+                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer">
+                           <thead>
+                              <tr class="headings">
+                                 <th class="column-title">Action</th>
+                                 <th class="column-title">Resident_ID</th>
+                                 <th class="column-title">Full Name </th>
+                                 <th class="column-title">Alias</th>
+                                 </th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              
+                              @forelse ($resident as $residents)
+                           
+                              <tr>
+                                 <th>
+                                    <button class="btn btn-primary">Add</button>
+                                 </th>
+                                 <th>
+                                    {{ $residents -> resident_id }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> lastname }}, {{ $residents -> firstname}}  {{ $residents -> middlename }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> alias}}
+                                 </th>
+                         
+                              </tr>
+                               
+                              @empty
+                                  <h4>No Residents</h4>
+                              @endforelse
+
+                           </tbody>
+                        </table>
+         
+                     </div>
+            
+  
+            
+                     <div id="respondents" class="tabcontent">
+                        <div class="topnav navbar navbar">
+                           <div>
+                              <h4 style="color: white">Adding Respondents</h4>
+                           </div>
+                           <div class="search-container">
+                              <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
+                           </div>
+                        </div>
+                    
+                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer">
+                           <thead>
+                              <tr class="headings">
+                                 <th class="column-title">Action</th>
+                                 <th class="column-title">Resident_ID</th>
+                                 <th class="column-title">Full Name </th>
+                                 <th class="column-title">Alias</th>
+                                 </th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              
+                              @forelse ($resident as $residents)
+                           
+                              <tr>
+                                 <th>
+                                    <button class="btn btn-primary">Add</button>
+                                 </th>
+                                 <th>
+                                    {{ $residents -> resident_id }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> lastname }}, {{ $residents -> firstname}}  {{ $residents -> middlename }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> alias}}
+                                 </th>
+                         
+                              </tr>
+                               
+                              @empty
+                                  <h4>No Residents</h4>
+                              @endforelse
+
+                           </tbody>
+                        </table>
+            
+                     </div>
+            
+            
+            
+            
+            
+            
+            
+            
+                     <div id="victims" class="tabcontent">
+                        <div class="topnav navbar navbar">
+                           <div>
+                              <h4 style="color: white">Adding Victims</h4>
+                           </div>
+                           <div class="search-container">
+                              <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
+                           </div>
+                        </div>
+                    
+                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer">
+                           <thead>
+                              <tr class="headings">
+                                 <th class="column-title">Action</th>
+                                 <th class="column-title">Resident_ID</th>
+                                 <th class="column-title">Full Name </th>
+                                 <th class="column-title">Alias</th>
+                                 </th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              
+                              @forelse ($resident as $residents)
+                           
+                              <tr>
+                                 <th>
+                                    <button class="btn btn-primary">Add</button>
+                                 </th>
+                                 <th>
+                                    {{ $residents -> resident_id }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> lastname }}, {{ $residents -> firstname}}  {{ $residents -> middlename }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> alias}}
+                                 </th>
+                         
+                              </tr>
+                               
+                              @empty
+                                  <h4>No Residents</h4>
+                              @endforelse
+
+                           </tbody>
+                        </table>
+            
+                     </div>
+                     
+                     <div id="attackers" class="tabcontent">
+                        <div class="topnav navbar navbar">
+                           <div>
+                              <h4 style="color: white">Adding Attackers</h4>
+                           </div>
+                           <div class="search-container">
+                              <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
+                           </div>
+                        </div>
+                    
+                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer">
+                           <thead>
+                              <tr class="headings">
+                                 <th class="column-title">Action</th>
+                                 <th class="column-title">Resident_ID</th>
+                                 <th class="column-title">Full Name </th>
+                                 <th class="column-title">Alias</th>
+                                 </th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              
+                              @forelse ($resident as $residents)
+                           
+                              <tr>
+                                 <th>
+                                    <button class="btn btn-primary">Add</button>
+                                 </th>
+                                 <th>
+                                    {{ $residents -> resident_id }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> lastname }}, {{ $residents -> firstname}}  {{ $residents -> middlename }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> alias}}
+                                 </th>
+                         
+                              </tr>
+                               
+                              @empty
+                                  <h4>No Residents</h4>
+                              @endforelse
+
+                           </tbody>
+                        </table>
+            
+                     </div>
+            
+  
+            
+            
+                     <div id="inci_detail" class="tabcontent">
+                      
+                           <input type="hidden" name="blotter_id" id="blotter_id">
+            
+                           <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                              <div class="col-sm-6" >
+                                <label >Incident Location</label>
+                                <input type="text" id="incident_location" name="incident_location" required="required" class="form-control ">
+            
+                              </div>
+                              <div class="col-sm-6" >
+                                 <label >Incident type</label>
+                                 <input type="text" id="incident_type" name="incident_type" required="required" class="form-control ">
+                               </div>
+                            </div>
+                           
+                           <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                              <div class="col-sm-6" >
+                                <label >Date of Incident</label>
+                                <input type="date" id="date_incident" name="date_incident" required="required" class="form-control ">
+            
+                              </div>
+                              <div class="col-sm-6" >
+                                 <label >Time of Incident</label>
+                                 <input type="time" id="time_incident" name="time_incident" required="required" class="form-control ">
+                               </div>
+                            </div>
+            
+                            <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top:1rem;">
+                              <div class="col-sm-6" >
+                                <label >Date Reported</label>
+                                <input type="date" id="date_reported" name="date_reported" required="required" class="form-control ">
+            
+                              </div>
+                              <div class="col-sm-6" >
+                                 <label >Time Reported</label>
+                                 <input type="time" id="time_reported" name="time_reported" required="required" class="form-control ">
+                               </div>
+                            </div>
+            
+                            <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top:1rem;">
+                              <div class="col-sm-6" >
+                                <label >Date Schedule</label>
+                                <input type="date" id="schedule_date" name="schedule_date" required="required" class="form-control ">
+                                <input type="text" id="schedule" name="schedule" hidden>
+            
+                              </div>
+            
+                              <div class="col-sm-6" >
+                                 <label >Time Schedule</label>
+                                 <input type="time" id="schedule_time" name="schedule_time" required="required" class="form-control ">
+                               </div>
+                      
+                            </div>
+            
+                            <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top:1rem;">
+                                  
+                              <div class="col-sm-6" >
+                                 <label class="col-form-label col-md-3 col-sm-3 label-align">Status
+                                 </label>
+            
+                                 <div class="col-md-12 col-sm-12 ">
+                                     <input type="radio" name="status" value="Ongoing">
+                                     <label for="ongoing">Ongoing</label><br>
+                                     <input type="radio" name="status" value="Settled">
+                                     <label for="settled">Settled</label><br>    
+                                 </div>
+                              </div>
+                            </div>
+            
+                           
+                            <div class="item form-group" style="margin-top:1rem;>
+                              <label for="incident_narrative">Incident Narrative</label>
+                              <div class="col-md-12 col-sm-12 ">
+                                 <textarea name="incident_narrative" id="incident_narrative" rows="10" style="width: 100%"></textarea>
+                              </div>
+                           </div>
+            
+                     
+            
+                     
+            
+                     </div>
+
+                     <div class="item form-group" style="margin-top: 1rem;">
+                        <div class="col-md-12 col-sm-12 offset-md-4">
+                           <button type="submit" id="saveBtn" class="btn btn-success">Save New Blotters</button>
+                           <a class="btn btn-primary" type="button" data-dismiss="modal" style="margin-left: 4px;" >Cancel</a>
+                           <input class="btn btn-primary" type="reset" value="Reset">
+                        </div>
+                     </div>
+        
+                  </form>
+      
+         </div>
+
+         <div class="modal-footer text-white">
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="modal fade" id="viewblottermodal" name="viewblottermodal" tabindex="-1" role="dialog" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="viewmodelHeading"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+
+         <div class="modal-body">
+            <table  class="bulk_action dataTables_info table datatable-element table-striped jambo_table bulk_action text-center border no-footer">
+               <thead>
+                  <tr class="headings">
+                     <th class="column-title">Blotter Id</th>
+                     <th class="column-title">Status</th>
+                     <th class="column-title">Incident Location</th>
+                     <th class="column-title">Incident Type</th>
+                     <th class="column-title">Incident Date</th>
+                     <th class="column-title">Incident Time</th>
+                     <th class="column-title">Schedule Date</th>
+                     <th class="column-title">Schedule Time</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td id="viewblotter_id"></td>
+                     <td id="status"></td>
+                     <td id="viewincident_location"></td>
+                     <td id="viewincident_type"></td>
+                     <td id="viewdate_incident"></td>
+                     <td id="viewtimeof_incident"></td>
+                     <td id="viewschedule_date"></td>
+                     <td id="viewschedule_time"></td>
+                  </tr>
+               </tbody>
+            </table>
+            <h4>Incident Narrative</h4>
+            <textarea name="viewincident_narrative" id="viewincident_narrative" rows="10" style="width: 100%; border:none;" disabled></textarea>
+            {{-- <form id="blotterform"  name="blotterform" class="modal-input">
+            </form> --}}
+         </div>
+
+         <div class="modal-footer text-white">
+         </div>
+      </div>
+   </div>
 </div>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <div class="search-container">
+    {{-- <form action="/action_page.php"> --}}
+      <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    {{-- </form> --}}
+  </div>
+</div>
 
 
 
@@ -48,12 +419,12 @@
       </div>
    </div>
    <div class="row pt-4 pl-4 pr-4">
-      <div class="col-sm-12 overflow-auto">
+      <div class="col-sm-12 overflow-auto display-nones ">
 
 
 
-
-  <table id="resident" class="dataTables_info table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer">
+        
+  <table id="blotter-table" class="bulk_action dataTables_info table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer data-table">
             <thead>
                <tr class="headings">
                   <th class="column-title">Action</th>
@@ -71,35 +442,130 @@
                </tr>
             </thead>
             <tbody>
-
-
-                @if(count($blotter))
-                @foreach ($blotter as $blotter)
-
-
-               <tr class="odd pointer">
-                  <td class=" pt-1 pb-1">
-                     <a href="#" class="btn btn-primary btn-xs pr-4 pl-4"><i class="fa fa-folder fa-lg"></i>  </a>
-                       </td>
-                  <td class=" ">{{ $blotter->blotter_id }}</td>
-                  <td class=" ">{{ $blotter->status }}</td>
-                  <td class=" ">{{ Carbon\Carbon::parse($blotter->date_reported)->toDateString() }}</td>
-                  <td class=" "> {{ Carbon\Carbon::parse($blotter->time_reported)->toTimeString() }}</td>
-                  <td class=" ">{{ $blotter->incident_type }}</td>
-                  <td class=" ">{{ Carbon\Carbon::parse($blotter->date_incident)->toDateString() }}</td>
-                  <td class=" "> {{ Carbon\Carbon::parse($blotter->time_incident)->toTimeString() }}</td>
-                  </td>
-               </tr>
-               @endforeach
-               @endif
-
             </tbody>
-         </table>
+   </table>
 
+         <script type="text/javascript">
 
+            $(function () {
+                  $.ajaxSetup({
+                     headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                     }
+               });
 
+            var table = $('.data-table').DataTable({
+                processing: true,
+                dom: 'lrtip',
+                serverSide: true,
+                ajax: "{{ route('blotters.index') }}",
+                columns: [
+                  {data: 'action', name: 'action', orderable: false, searchable: false},
+                    {data: 'blotter_id', name: 'blotter_id'},
+                    {data: 'status', name: 'status'},
+                    {   data: 'date_reported', name: 'date_reported'},
+                    {  data: 'time_reported', name: 'time_reported'},
+                    {   data: 'incident_type', name: 'incident_type'},
+                    {     data: 'date_incident', name: 'date_incident'},
+                    { data: 'time_incident', name: 'time_incident'}
+                ]
+                  
+            });
+             $('#createNewBlotter').click(function () {
+                 $('#saveBtn').val("create-blotter");
+                 $('#blotter_id').val('');
+                 $('#blotterform').trigger("reset");
+                 $('#modelHeading').html("Create New Blotter");
+                 $('#blottermodal').modal('show');
+             });
 
+             $('body').on('click', '.viewBlotter', function(){
+               var blotter_id = $(this).data('id');
+               $.get("{{ route('blotters.index') }}" +'/' + blotter_id +'/edit', function (data) {
+                  $('#viewmodelHeading').html("View BLotter");
+                  $('#status').html(data.status);
+                  $('#viewblottermodal').modal('show');
+                  $('#viewblotter_id').html(data.blotter_id);
+                  $('#viewincident_location').html(data.incident_location);
+                  $('#viewincident_type').html(data.incident_type);
+                  $('#viewdate_incident').html(data.date_incident);
+                  $('#viewtimeof_incident').html(data.time_incident);
+                  // $('#date_reported').val(data.date_reported);
+                  // $('#time_reported').val(data.time_reported);
+                  
+                  $('#viewschedule_date').html(data.schedule_date);
+                  $('#viewschedule_time').html(data.schedule_time);
+                  $('#viewincident_narrative').val(data.incident_narrative);
+               })
+             });
 
+             $('body').on('click', '.editBlotter', function () {
+               var blotter_id = $(this).data('id');
+               $.get("{{ route('blotters.index') }}" +'/' + blotter_id +'/edit', function (data) {
+                  $('#modelHeading').html("Edit Blotter");
+                  $('#saveBtn').val("edit-blotter");
+                  $('#blottermodal').modal('show');
+                  $('#blotter_id').val(data.blotter_id);
+                  $('#incident_location').val(data.incident_location);
+                  $('#incident_type').val(data.incident_type);
+                  $('#date_incident').val(data.date_incident);
+                  $('#time_incident').val(data.time_incident);
+                  $('#date_reported').val(data.date_reported);
+                  $('#time_reported').val(data.time_reported);
+                  $('#schedule_date').val(data.schedule_date);
+                  $('#schedule_time').val(data.schedule_time);
+                  $('input[name^="status"][value="'+data.status+'"').prop('checked',true);
+                  $('#incident_narrative').val(data.incident_narrative);
+               })
+            });
+         
+             $('#saveBtn').click(function (e) {
+                e.preventDefault();
+               //  $(this).html('Save');
+            
+                $.ajax({
+                  data: $('#blotterform').serialize(),
+                  url: "{{ route('blotters.store') }}",
+                  type: "POST",
+                  dataType: 'json',
+                  success: function (data) {
+             
+                      $('#blotterform').trigger("reset");
+                      $('#blottermodal').modal('hide');
+                      table.draw();
+                 
+                  },
+                  error: function (data) {
+                      console.log('Error:', data);
+                      $('#saveBtn').html('Save Changes');
+                  }
+              });
+            });
+
+            $('body').on('click', '.deleteBlotter', function () {
+            
+            var blotter_id = $(this).data("id");
+            if(confirm("Are You sure want to delete !")){
+               $.ajax({
+                  type: "DELETE",
+                  url: "{{ route('blotters.store') }}"+'/'+blotter_id,
+                  success: function (data) {
+                     table.draw();
+                  },
+                  error: function (data) {
+                     console.log('Error:', data);
+                  }
+            });
+            }
+            
+     
+         });
+
+         });
+
+         
+         
+         </script>
 
 
 
@@ -124,4 +590,7 @@
 
 
     </div>
+
 @endsection
+
+

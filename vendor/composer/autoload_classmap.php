@@ -28,6 +28,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Models\\Account' => $baseDir . '/app/Models/Account.php',
+    'App\\Models\\Book' => $baseDir . '/app/Models/Book.php',
     'App\\Models\\Sessions' => $baseDir . '/app/Models/Sessions.php',
     'App\\Models\\area_setting' => $baseDir . '/app/Models/area_setting.php',
     'App\\Models\\blotters' => $baseDir . '/app/Models/blotters.php',
