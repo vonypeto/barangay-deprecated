@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\blotters;
+use App\Models\resident_info;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -94,8 +95,9 @@ class BlotterController extends Controller
      */
     public function show(blotters $blotter)
     {
+        $resident = resident_info::all();
         $blotter = blotters::all();
-        return view('pages.blotter', ['blotter' => $blotter]);
+        return view('pages.blotter', ['blotter' => $blotter,  'resident' => $resident]);
     }
 
     /**

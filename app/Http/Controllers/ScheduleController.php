@@ -55,6 +55,7 @@ class ScheduleController extends Controller
         $unschedule = DB::table('blotters')
             ->where('schedule', '=', 'Unschedule')
             ->whereNull('schedule_date')
+            ->orWhereNull('schedule_time')
             ->get();
         $today = DB::table('blotters')
             ->where('schedule', '=', 'Schedule')

@@ -26,94 +26,324 @@
          </div>
 
          <div class="modal-body">
-
-            <form id="blotterform"  name="blotterform" class="modal-input">
-               {{ csrf_field() }}
-               <input type="hidden" name="blotter_id" id="blotter_id">
-
-               <div class="row" style="margin-left: 0px;margin-right: 0px;">
-                  <div class="col-sm-6" >
-                    <label >Incident Location</label>
-                    <input type="text" id="incident_location" name="incident_location" required="required" class="form-control ">
-
-                  </div>
-                  <div class="col-sm-6" >
-                     <label >Incident type</label>
-                     <input type="text" id="incident_type" name="incident_type" required="required" class="form-control ">
-                   </div>
-                </div>
-               
-               <div class="row" style="margin-left: 0px;margin-right: 0px;">
-                  <div class="col-sm-6" >
-                    <label >Date of Incident</label>
-                    <input type="date" id="date_incident" name="date_incident" required="required" class="form-control ">
-
-                  </div>
-                  <div class="col-sm-6" >
-                     <label >Time of Incident</label>
-                     <input type="time" id="time_incident" name="time_incident" required="required" class="form-control ">
-                   </div>
-                </div>
-
-                <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top:1rem;">
-                  <div class="col-sm-6" >
-                    <label >Date Reported</label>
-                    <input type="date" id="date_reported" name="date_reported" required="required" class="form-control ">
-
-                  </div>
-                  <div class="col-sm-6" >
-                     <label >Time Reported</label>
-                     <input type="time" id="time_reported" name="time_reported" required="required" class="form-control ">
-                   </div>
-                </div>
-
-                <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top:1rem;">
-                  <div class="col-sm-6" >
-                    <label >Date Schedule</label>
-                    <input type="date" id="schedule_date" name="schedule_date" required="required" class="form-control ">
-                    <input type="text" id="schedule" name="schedule" hidden>
-
-                  </div>
-
-                  <div class="col-sm-6" >
-                     <label >Time Schedule</label>
-                     <input type="time" id="schedule_time" name="schedule_time" required="required" class="form-control ">
-                   </div>
           
-                </div>
-
-                <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top:1rem;">
-                      
-                  <div class="col-sm-6" >
-                     <label class="col-form-label col-md-3 col-sm-3 label-align">Status
-                     </label>
-
-                     <div class="col-md-12 col-sm-12 ">
-                         <input type="radio" name="status" value="Ongoing">
-                         <label for="ongoing">Ongoing</label><br>
-                         <input type="radio" name="status" value="Settled">
-                         <label for="settled">Settled</label><br>    
+                     <div class="tab-nav " style="background: rgb(67, 0, 155);">
+                        <button class="tablinks btn btn-info active" onclick="schedules(event, 'schedule') ">Complainants</button>
+                        <button class="tablinks btn btn-info" onclick="schedules(event, 'respondents')">Respondents</button>
+                        <button class="tablinks btn btn-info" onclick="schedules(event, 'victims')">Victims</button>
+                        <button class="tablinks btn btn-info" onclick="schedules(event, 'attackers')">Attackers</button>
+                        <button class="tablinks btn btn-info" onclick="schedules(event, 'inci_detail')">Incident Detail and Narrative</button>
                      </div>
-                  </div>
-                </div>
-
                
-                <div class="item form-group" style="margin-top:1rem;>
-                  <label for="incident_narrative">Incident Narrative</label>
-                  <div class="col-md-12 col-sm-12 ">
-                     <textarea name="incident_narrative" id="incident_narrative" rows="10" style="width: 100%"></textarea>
-                  </div>
-               </div>
+                     <form id="blotterform"  name="blotterform" class="modal-input">
+                        {{ csrf_field() }}
+            
+            
+            
+            
+            
+                     <div id="schedule" class="tabcontent">
+                        <div class="topnav navbar navbar">
+                           <div>
+                              <h4 style="color: white">Adding Complainants</h4>
+                           </div>
+                           <div class="search-container">
+                              <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
+                           </div>
+                        </div>
+                    
+                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer">
+                           <thead>
+                              <tr class="headings">
+                                 <th class="column-title">Action</th>
+                                 <th class="column-title">Resident_ID</th>
+                                 <th class="column-title">Full Name </th>
+                                 <th class="column-title">Alias</th>
+                                 </th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              
+                              @forelse ($resident as $residents)
+                           
+                              <tr>
+                                 <th>
+                                    <button class="btn btn-primary">Add</button>
+                                 </th>
+                                 <th>
+                                    {{ $residents -> resident_id }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> lastname }}, {{ $residents -> firstname}}  {{ $residents -> middlename }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> alias}}
+                                 </th>
+                         
+                              </tr>
+                               
+                              @empty
+                                  <h4>No Residents</h4>
+                              @endforelse
 
-               <div class="item form-group">
-                  <div class="col-md-12 col-sm-12 offset-md-4">
-                     <button type="submit" id="saveBtn" class="btn btn-success">Save New Blotters</button>
-                     <a class="btn btn-primary" type="button" data-dismiss="modal" style="margin-left: 4px;" >Cancel</a>
-                     <input class="btn btn-primary" type="reset" value="Reset">
-                  </div>
-               </div>
+                           </tbody>
+                        </table>
+         
+                     </div>
+            
+  
+            
+                     <div id="respondents" class="tabcontent">
+                        <div class="topnav navbar navbar">
+                           <div>
+                              <h4 style="color: white">Adding Respondents</h4>
+                           </div>
+                           <div class="search-container">
+                              <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
+                           </div>
+                        </div>
+                    
+                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer">
+                           <thead>
+                              <tr class="headings">
+                                 <th class="column-title">Action</th>
+                                 <th class="column-title">Resident_ID</th>
+                                 <th class="column-title">Full Name </th>
+                                 <th class="column-title">Alias</th>
+                                 </th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              
+                              @forelse ($resident as $residents)
+                           
+                              <tr>
+                                 <th>
+                                    <button class="btn btn-primary">Add</button>
+                                 </th>
+                                 <th>
+                                    {{ $residents -> resident_id }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> lastname }}, {{ $residents -> firstname}}  {{ $residents -> middlename }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> alias}}
+                                 </th>
+                         
+                              </tr>
+                               
+                              @empty
+                                  <h4>No Residents</h4>
+                              @endforelse
 
-            </form>
+                           </tbody>
+                        </table>
+            
+                     </div>
+            
+            
+            
+            
+            
+            
+            
+            
+                     <div id="victims" class="tabcontent">
+                        <div class="topnav navbar navbar">
+                           <div>
+                              <h4 style="color: white">Adding Victims</h4>
+                           </div>
+                           <div class="search-container">
+                              <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
+                           </div>
+                        </div>
+                    
+                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer">
+                           <thead>
+                              <tr class="headings">
+                                 <th class="column-title">Action</th>
+                                 <th class="column-title">Resident_ID</th>
+                                 <th class="column-title">Full Name </th>
+                                 <th class="column-title">Alias</th>
+                                 </th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              
+                              @forelse ($resident as $residents)
+                           
+                              <tr>
+                                 <th>
+                                    <button class="btn btn-primary">Add</button>
+                                 </th>
+                                 <th>
+                                    {{ $residents -> resident_id }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> lastname }}, {{ $residents -> firstname}}  {{ $residents -> middlename }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> alias}}
+                                 </th>
+                         
+                              </tr>
+                               
+                              @empty
+                                  <h4>No Residents</h4>
+                              @endforelse
+
+                           </tbody>
+                        </table>
+            
+                     </div>
+                     
+                     <div id="attackers" class="tabcontent">
+                        <div class="topnav navbar navbar">
+                           <div>
+                              <h4 style="color: white">Adding Attackers</h4>
+                           </div>
+                           <div class="search-container">
+                              <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
+                           </div>
+                        </div>
+                    
+                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer">
+                           <thead>
+                              <tr class="headings">
+                                 <th class="column-title">Action</th>
+                                 <th class="column-title">Resident_ID</th>
+                                 <th class="column-title">Full Name </th>
+                                 <th class="column-title">Alias</th>
+                                 </th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              
+                              @forelse ($resident as $residents)
+                           
+                              <tr>
+                                 <th>
+                                    <button class="btn btn-primary">Add</button>
+                                 </th>
+                                 <th>
+                                    {{ $residents -> resident_id }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> lastname }}, {{ $residents -> firstname}}  {{ $residents -> middlename }}
+                                 </th>
+                                 <th>
+                                    {{ $residents -> alias}}
+                                 </th>
+                         
+                              </tr>
+                               
+                              @empty
+                                  <h4>No Residents</h4>
+                              @endforelse
+
+                           </tbody>
+                        </table>
+            
+                     </div>
+            
+  
+            
+            
+                     <div id="inci_detail" class="tabcontent">
+                      
+                           <input type="hidden" name="blotter_id" id="blotter_id">
+            
+                           <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                              <div class="col-sm-6" >
+                                <label >Incident Location</label>
+                                <input type="text" id="incident_location" name="incident_location" required="required" class="form-control ">
+            
+                              </div>
+                              <div class="col-sm-6" >
+                                 <label >Incident type</label>
+                                 <input type="text" id="incident_type" name="incident_type" required="required" class="form-control ">
+                               </div>
+                            </div>
+                           
+                           <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                              <div class="col-sm-6" >
+                                <label >Date of Incident</label>
+                                <input type="date" id="date_incident" name="date_incident" required="required" class="form-control ">
+            
+                              </div>
+                              <div class="col-sm-6" >
+                                 <label >Time of Incident</label>
+                                 <input type="time" id="time_incident" name="time_incident" required="required" class="form-control ">
+                               </div>
+                            </div>
+            
+                            <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top:1rem;">
+                              <div class="col-sm-6" >
+                                <label >Date Reported</label>
+                                <input type="date" id="date_reported" name="date_reported" required="required" class="form-control ">
+            
+                              </div>
+                              <div class="col-sm-6" >
+                                 <label >Time Reported</label>
+                                 <input type="time" id="time_reported" name="time_reported" required="required" class="form-control ">
+                               </div>
+                            </div>
+            
+                            <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top:1rem;">
+                              <div class="col-sm-6" >
+                                <label >Date Schedule</label>
+                                <input type="date" id="schedule_date" name="schedule_date" required="required" class="form-control ">
+                                <input type="text" id="schedule" name="schedule" hidden>
+            
+                              </div>
+            
+                              <div class="col-sm-6" >
+                                 <label >Time Schedule</label>
+                                 <input type="time" id="schedule_time" name="schedule_time" required="required" class="form-control ">
+                               </div>
+                      
+                            </div>
+            
+                            <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top:1rem;">
+                                  
+                              <div class="col-sm-6" >
+                                 <label class="col-form-label col-md-3 col-sm-3 label-align">Status
+                                 </label>
+            
+                                 <div class="col-md-12 col-sm-12 ">
+                                     <input type="radio" name="status" value="Ongoing">
+                                     <label for="ongoing">Ongoing</label><br>
+                                     <input type="radio" name="status" value="Settled">
+                                     <label for="settled">Settled</label><br>    
+                                 </div>
+                              </div>
+                            </div>
+            
+                           
+                            <div class="item form-group" style="margin-top:1rem;>
+                              <label for="incident_narrative">Incident Narrative</label>
+                              <div class="col-md-12 col-sm-12 ">
+                                 <textarea name="incident_narrative" id="incident_narrative" rows="10" style="width: 100%"></textarea>
+                              </div>
+                           </div>
+            
+                     
+            
+                     
+            
+                     </div>
+
+                     <div class="item form-group" style="margin-top: 1rem;">
+                        <div class="col-md-12 col-sm-12 offset-md-4">
+                           <button type="submit" id="saveBtn" class="btn btn-success">Save New Blotters</button>
+                           <a class="btn btn-primary" type="button" data-dismiss="modal" style="margin-left: 4px;" >Cancel</a>
+                           <input class="btn btn-primary" type="reset" value="Reset">
+                        </div>
+                     </div>
+        
+                  </form>
+      
          </div>
 
          <div class="modal-footer text-white">
