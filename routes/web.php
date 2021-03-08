@@ -19,17 +19,10 @@ use Carbon\Carbon;
 |
 */
 
-
-
 Route::get('/dashboard',[PagesController::class, 'dashboard']);
 Route::get('/blotter',[BlotterController::class, 'show']);
 Route::get('/schedule',[ScheduleController::class, 'show']);
 Route::get('/setting/maintenance',[BrgyOfficialController::class, 'show']);
-
-//start giannpogi
-Route::resource('/setting/account', AccountController::class);
-
-//Route::get('/setting/account',[AccountController::class, 'show']);
 
 
 //start von
@@ -37,12 +30,12 @@ Route::resource('resident', ResidentInfoController::class);
 Route::get('resident/person/{resident_id}', [ResidentInfoController::class, 'person']);
 Route::get('resident/person/{resident_id}/blotter/', [ResidentInfoController::class, 'blotter']);
 
-
 Route::get('sampledata', [PagesController::class, 'sampledata']);
 
-
-
 Route::resource('books', BooksController::class);
-
-
 //end von
+
+//start giannpogi
+Route::resource('/setting/account', AccountController::class);
+
+//test
