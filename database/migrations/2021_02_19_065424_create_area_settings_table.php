@@ -17,6 +17,7 @@ class CreateAreaSettingsTable extends Migration
              $table->id('area_id');
              $table->string('area')->nullable();
              $table->bigInteger('population')->unsigned()->nullable();
+             $table->timestamps();
 
         });
     }

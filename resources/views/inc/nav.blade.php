@@ -3,7 +3,8 @@
 <div class="bg-light border-right" id="sidebar-wrapper">
    <div class="sidebar-heading text-center">University of Morong Rizal</div>
    <div class="container-fluid text-center pr-0 pl-0 ">
-      <img class="logo" src="{{url('logo/unnamed.png')}}">
+
+      @include('layouts.image')
    </div>
    <div class="list-group list-group-flush w-100 pt-3 bg-light">
       <li class="list-none"><a href="/dashboard"  class="list-group-item list-group-item-action bg-light text-adjust {{ (request()->is('dashboard*')) ? 'active-page' : '' }}"><i class="fa fa-home fa-lg icon-adjust"></i> Dashboard</a> </li>

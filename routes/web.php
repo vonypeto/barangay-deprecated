@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\BlotterController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\BarangayimageController;
 use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
@@ -29,14 +30,25 @@ Route::get('/setting/account',[AccountController::class, 'show']);
 
 
 //start von
+//resident
 Route::resource('resident', ResidentInfoController::class);
 Route::get('resident/person/{resident_id}', [ResidentInfoController::class, 'person']);
 Route::get('resident/person/{resident_id}/blotter/', [ResidentInfoController::class, 'blotter']);
 
 
+//maintenance
+Route::resource('setting/maintenance', BrgyOfficialController::class);
+Route::get('setting/maintenance/official/table', [BrgyOfficialController::class, 'barangay'])->name('barangay.index');
+Route::post('setting/maintenance/official/table', [BrgyOfficialController::class, 'barangayPOST'])->name('barangay.post');
+Route::get('setting/maintenance/official/table/{barangay}/edit', [BrgyOfficialController::class, 'barangayedit'])->name('barangay.edit');
+Route::delete('setting/maintenance/official/table/{barangay}/', [BrgyOfficialController::class, 'barangaydelete'])->name('barangay.destroy');
+
+Route::get('image/view', [BarangayimageController::class, 'boot']);
+
+//Route::post('setting/maintenance/official/table/{official}/edit', [BrgyOfficialController::class, '']);
 Route::get('sampledata', [PagesController::class, 'sampledata']);
 
-
+Route::post('setting/maintenance/barangay/image', [ BarangayimageController::class, 'store' ])->name('image.store');
 
 Route::resource('books', BooksController::class);
 

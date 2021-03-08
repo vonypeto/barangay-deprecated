@@ -12,5 +12,7 @@ class brgy_official extends Model
     //Primary Key
     public $primaryKey = 'official_id';
     // Timestamps
-    public $timestamps = true;
+    public $timestamps = false;
+
+    protected $fillable=['name','official_id','position','official_committe','year_of_service'];
 }

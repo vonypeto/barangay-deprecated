@@ -21,6 +21,12 @@ class PagesController extends Controller
         ->where('area','=','gitna')->count();
 
        // echo $resident_area;
+       $sss = DB::table('area_settings')
+       ->where('area','=','14')
+       ->get();
+       echo $sss;
+       echo "dasa";
+
 
        $data = DB::table('area_settings')
        ->select('area')->get();

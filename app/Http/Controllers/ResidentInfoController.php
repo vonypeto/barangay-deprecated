@@ -34,6 +34,9 @@ class ResidentInfoController extends Controller
                  })
                    ->rawColumns(['checkbox','action'])
                     ->make(true);
+
+
+
         }
 
         return view('pages.resident',[compact('resident'),'area_setting'=>$area_setting]);
@@ -68,9 +71,22 @@ class ResidentInfoController extends Controller
         'address_1'=>$request->address_1,
         'address_2'=>$request->address_2]);
 
-        $resident_area = DB::table('resident_infos')
-        ->where('area','=',$request->area)->count();
-        area_setting::updateOrCreate(['area' => $request->area],['population'=>$resident_area]);
+        $data = DB::table('area_settings')
+        ->select('area')->get();
+
+        if(count($data))
+         foreach ($data as $data) {
+
+             $test = DB::table('resident_infos')
+             ->where('area','=',$data->area)->count();
+
+             area_setting::where('area', '=', $data->area)
+            ->update(['population' => $test]);
+
+
+
+
+         }
 
 
 
