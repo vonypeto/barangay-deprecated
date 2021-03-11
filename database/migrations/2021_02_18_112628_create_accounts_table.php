@@ -20,6 +20,7 @@ class CreateAccountsTable extends Migration
             $table->string('username')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('password')->nullable();
+            $table->string('type')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

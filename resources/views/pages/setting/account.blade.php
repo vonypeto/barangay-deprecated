@@ -1,5 +1,7 @@
 @extends('layouts.apps')
 @section('content')
+
+<input type="hidden" id="current_user" data-id = {{ session("user.id") }}>
 <div class="col-sm-12 text-left ">
    <h1 class="border-bottom border-bot pt-3">Account</h1>
 </div>
@@ -28,13 +30,36 @@
                   --->
                <h2 class="">My Account</h2>
                   <div class="container rounded-lg bg-dark col-8 p-3 m-3" style="margin-left:100px">
-                     <h3 class="text-white">Account Fullname</h3>
+                     <h3 class="text-white">Customize information</h3>
                      <div class="containder  p-2">
+
+                        {{-- Firstname --}}
+                        <div class="row rounded-lg bg-white p-3 m-2">
+                           <div class="col">
+                              <p class="m-0"><b>FIRST NAME</b></p>
+                              <p class="m-0" id="account_firstname">Account Firstname</p>
+                           </div>
+                           <div class="col align-self-center">
+                              <button class="btn btn-dark float-right" id="firstname_edit">Edit</button>
+                           </div>
+                        </div>
+
+                        {{-- Lastname --}}
+                        <div class="row rounded-lg bg-white p-3 m-2">
+                           <div class="col">
+                              <p class="m-0"><b>LAST NAME</b></p>
+                              <p class="m-0" id="account_lastname">Account Lastname</p>
+                           </div>
+                           <div class="col align-self-center">
+                              <button class="btn btn-dark float-right" id="lastname_edit">Edit</button>
+                           </div>
+                        </div>
+                        
                         {{-- username --}}
                         <div class="row rounded-lg bg-white p-3 m-2">
                            <div class="col">
-                              <p class="m-0">USERNAME</p>
-                              <p class="m-0">Account Username</p>
+                              <p class="m-0"><b>USERNAME</b></p>
+                              <p class="m-0" id="account_username">Account Username</p>
                            </div>
                            <div class="col align-self-center">
                               <button class="btn btn-dark float-right " id="username_edit">Edit</button>
@@ -43,18 +68,17 @@
                         {{-- email --}}
                            <div class="row rounded-lg bg-white p-3 m-2">
                               <div class="col">
-                                 <p class="m-0">EMAIL</p>
-                                 <p class="m-0">Account Email</p>
+                                 <p class="m-0"><b>EMAIL</b></p>
+                                 <p class="m-0" id="account_email">Account Email</p>
                               </div>
                               <div class="col align-self-center">
                                  <button class="btn btn-dark float-right" id="email_edit">Edit</button>
                               </div>
-
                         </div>
                         {{-- phone number --}}
                            <div class="row rounded-lg bg-white p-3 m-2">
                               <div class="col">
-                                 <p class="m-0">PHONE NUMBER</p>
+                                 <p class="m-0"><b>PHONE NUMBER</b></p>
                                  <p class="m-0">Account Phone Number</p>
                               </div>
                               <div class="col align-self-center">
@@ -64,7 +88,7 @@
                         {{-- password --}}
                         <div class="row rounded-lg bg-white p-3 m-2">
                            <div class="col align-self-center">
-                              <p class="m-0">PASSWORD</p>
+                              <p class="m-0"><b>PASSWORD</b></p>
                            </div>
                            <div class="col align-self-center">
                               <button class="btn btn-dark float-right" id="password_edit">Change Pasword</button>
@@ -77,13 +101,12 @@
                      --->
             </div>
 
-            {{-- - Account Setting Tablink - --}}
+            {{-- - Account Setting Tablink Modal - --}}
             <div class="container">
                <!-- Trigger the modal with a button -->
-               {{-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Large Modal</button> --}}
+               {{-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#account_settings_modal">Open Large Modal</button> --}}
                
-               <!-- Modal -->
-               <div class="modal fade " id="myModal" role="dialog">
+               <div class="modal fade " id="account_settings_modal" role="dialog">
                   <div class="modal-dialog modal-lg ">
                      <div class="modal-content">
                         <div class="modal-header bg-dark text-white">
@@ -92,23 +115,37 @@
                         </div>
                         <div class="modal-body">
                            <form id="account_settings_form" name="account_settings_form" class="form-horizontal m-2">
-                              <input type="hidden" name="current_id" id="current_id">
+                              {{-- hidden var --}}
+                              <input type="text" name="current_id" id="current_id" hidden>
+                              <input type="text" name="table_edit" id="table_edit" hidden>
                               
                               {{-- Label 1 --}}
                               <div class="form-group row p-2">
-                                 <label for="modal_new_input" id="modal_label1"  class="font-weight-bold">Label1</label>
+                                 <label for="new_input_modal" id="modal_label1"  class="font-weight-bold">Label1</label>
                                  <div class="col-sm-12">
-                                    <input type="text" class="form-control font-weight-bold" id="modal_new_input" name="new_input_modal">
+                                    <input type="text" class="form-control font-weight-bold" id="new_input_modal" name="new_input_modal">
+                                    <span class="text-danger error_text new_input_modal_error new_input_email_modal_error"></span>
+                                 </div>
+                              </div>
+
+                              {{-- Label 3 // this only show when password is being change --}}
+                              <div class="form-group row p-2" id="password_edit_modal">
+                                 <label for="current_password_modal_confirmation" id="modal_label2" class="font-weight-bold">CONFIRM NEW PASSWORD</label>
+                                 <div class="col-sm-12">
+                                    <input type="password" id="current_password_modal_confirmation" name="current_password_modal" placeholder="Confirm New Password" class="form-control ">
+                                    <span class="text-danger error_text current_password_modal_confirmation_error"></span>
                                  </div>
                               </div>
                               
                               {{-- Label 2 --}}
                               <div class="form-group row p-2">
-                                 <label for="modal_current_password" id="modal_label2" class="font-weight-bold">CURRENT PASSWORD</label>
+                                 <label for="current_password_modal" id="modal_label2" class="font-weight-bold">CURRENT PASSWORD</label>
                                  <div class="col-sm-12">
-                                    <input type="password" id="current_password_modal" name="modal_current_password" placeholder="Enter Password to save changes" class="form-control ">
+                                    <input type="password" id="current_password_modal" name="current_password_modal" placeholder="Enter Password to save changes" class="form-control ">
+                                    <span class="text-danger error_text current_password_modal_error"></span>
                                  </div>
                               </div>
+
                               
                               <div class="form-group">
                                  <button type="submit" class="btn btn-primary float-right" id="saveBtn" value="create" >Save changes
@@ -123,8 +160,6 @@
             </div>
          </div>
       <br>
-
-
 
                {{-- - Create Account Tablink - --}}
                
@@ -359,8 +394,12 @@
       <script type="text/javascript">
          $(function() {
             
+            //Hidding some shit
+            $("#password_edit_modal").hide();
+
             //Testing varibles
-            var $current_id = 3;
+            var current_id = $("#current_user").data("id");
+            showUserInfo(current_id);
 
             $.ajaxSetup({
                headers: {
@@ -489,51 +528,154 @@
 
             });
 
-            //Modal 
-            $('body').on('click', '#username_edit', function () { 
-
-               var id = 3;  // var id =  $(this).data('id');
+            //Account Setting show info function
+            function showUserInfo(id){
                $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
-               $('#myModal').modal('toggle');
-               $("#myModal").show();
-               $('#modal_label1').text("NEW USERNAME");
-               $("#modal_new_input").val(data.username);
-            })
-         });
+                  $("#account_firstname").text(data.first_name);
+                  $("#account_lastname").text(data.last_name);
+                  $("#account_username").text(data.username);
+                  $("#account_email").text(data.email);
+               })
+            }
 
-            $('body').on('click', '#email_edit', function () { 
+            //On modal close
+            $("#account_settings_modal").on("hidden.bs.modal", function () {
+               $("#account_settings_form")[0].reset();
+               $(document).find('span.error_text').text('');
+               $("#password_edit_modal").hide();
+               $("#new_input_modal").attr("name","new_input_modal");
+               $("#current_password_modal_confirmation").attr("name","current_password_modal");
+            });
+
+            // Modal for firstname edit
+            $('body').on('click', '#firstname_edit', function () { 
       
-               var id = 3; 
+               var id = current_id; 
                $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
-                  $('#myModal').modal('toggle');
-                  $("#myModal").show();
-                  $('#modal_label1').text("NEW EMAIL");
-                  $("#modal_new_input").val(data.email);
+                  $('#account_settings_modal').modal('toggle');
+                  $("#account_settings_modal").show();
+
+                  $('#modal_label1').text("NEW FIRST NAME");
+                  $("#new_input_modal").val(data.first_name);
+
+                  $('#current_id').val(id);
+                  $('#table_edit').val("firstname");
                })
             });
 
+            // Modal for Lastname edit
+            $('body').on('click', '#lastname_edit', function () { 
+      
+               var id = current_id; 
+               $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
+                  $('#account_settings_modal').modal('toggle');
+                  $("#account_settings_modal").show();
+
+                  $('#modal_label1').text("NEW LAST NAME");
+                  $("#new_input_modal").val(data.last_name);
+
+                  $('#current_id').val(id);
+                  $('#table_edit').val("lastname");
+               })
+            });
+
+            //Modal for username edit
+            $('body').on('click', '#username_edit', function () { 
+               var id = current_id;  // var id =  $(this).data('id');
+               $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
+               $('#account_settings_modal').modal('toggle');
+               $("#account_settings_modal").show();
+
+               $('#modal_label1').text("NEW USERNAME");
+               $("#new_input_modal").val(data.username);
+
+               $('#current_id').val(id);
+               $('#table_edit').val("username");
+            })
+         });
+            // Modal for email edit
+            $('body').on('click', '#email_edit', function () { 
+      
+               var id = current_id; 
+               $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
+                  $('#account_settings_modal').modal('toggle');
+                  $("#account_settings_modal").show();
+
+                  $('#modal_label1').text("NEW EMAIL");
+                  $("#new_input_modal").val(data.email);
+
+                  $("#new_input_modal").attr("name","new_input_email_modal");
+
+                  $('#current_id').val(id);
+                  $('#table_edit').val("email");
+               })
+            });
+
+             // Modal for phone number edit
             $('body').on('click', '#phonenumber_edit', function () { 
                
-               var id = 3; 
+               var id = current_id; 
                $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
-                  $('#myModal').modal('toggle');
-                  $("#myModal").show();
+                  $('#account_settings_modal').modal('toggle');
+                  $("#account_settings_modal").show();
+
                   $('#modal_label1').text("NEW PHONENUMBER");
-                  $("#modal_new_input").val("Wala pang phone number hehe");
+                  $("#new_input_modal").val("Wala pang phone number hehe");
                })
 
             });
            
+            // Modal for password edit
             $('body').on('click', '#password_edit', function () { 
                
-               var id = 3; 
+               var id = current_id; 
                $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
-                  $('#myModal').modal('toggle');
-                  $("#myModal").show();
+                  $('#account_settings_modal').modal('toggle');
+                  $("#account_settings_modal").show();
+
                   $('#modal_label1').text("NEW PASSWORD");
-                  $("#modal_new_input").val("Enter new password");
-            })
-         });
+                  $("#new_input_modal").val("Enter new password");
+
+                  $('#current_id').val(id);
+                  $('#table_edit').val("password");
+                  
+                  $("#current_password_modal_confirmation").attr("name","current_password_modal_confirmation");
+                  $("#password_edit_modal").show();     
+               })
+           });
+
+         //Modal on submit
+         $("#account_settings_form").on('submit', function (e) { 
+               e.preventDefault();
+               
+               $.ajax({
+                  type:"post",
+                  url:"{{ route("accountSettingCheck") }}",
+                  data: $("#account_settings_form").serialize(),
+                  dataType:"json",
+                  beforeSend:function(){
+                     $(document).find('span.error_text').text('');
+                  },
+                  success: function (data) {
+                     if(data.status == 0){
+                        $.each(data.error, function(prefix, val){
+                           $('span.'+prefix+"_error").text(val[0]);
+                        });
+                     }
+                     else{
+                        $('#account_settings_modal').modal('hide');
+                        table.draw();
+                        alert(data.msg);
+                        showUserInfo(current_id);
+                        $("#account_settings_form")[0].reset();
+                        $(document).find('span.error_text').text('');
+                     }
+                  }
+               });
+               
+            });
+
+         
                
             
       });

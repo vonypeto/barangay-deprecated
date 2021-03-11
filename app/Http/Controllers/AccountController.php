@@ -7,8 +7,12 @@ use App\Models\Sessions;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use app\Rules\emailValidate;
+use Hash;
 use Validator;
 use DB;
+
+// Custom Rules
+use App\Rules\ConfirmPassword;
 
 class AccountController extends Controller
 {
@@ -66,23 +70,23 @@ class AccountController extends Controller
             "create_account_form_lastname"=>"required",
             "create_account_form_username"=>"required",
             "create_account_form_email"=> "required|ends_with:@gmail.com,@yahoo.com",
-            "create_account_form_password"=>"required|same:create_account_form_verify_password",
-            "create_account_form_verify_password"=>"required|same:create_account_form_password"
+            "create_account_form_username"=>"required|same:create_account_form_verify_username",
+            "create_account_form_verify_username"=>"required|same:create_account_form_username"
         ],
         [
             "create_account_form_firstname.required" => "This field cannot be empty",
             "create_account_form_lastname.required" => "This field cannot be empty",
             "create_account_form_username.required" => "This field cannot be empty",
             "create_account_form_email.required" => "This field cannot be empty",
-            "create_account_form_password.required" => "This field cannot be empty",
-            "create_account_form_verify_password.required" => "This field cannot be empty",
+            "create_account_form_username.required" => "This field cannot be empty",
+            "create_account_form_verify_username.required" => "This field cannot be empty",
 
             "create_account_form_email.ends_with" => "Valid email is required",
 
-            "create_account_form_password.same" => "Password does not match",
-            "create_account_form_verify_password.same" => "Password does not match",
+            "create_account_form_username.same" => "username does not match",
+            "create_account_form_verify_username.same" => "username does not match",
         ]);
-
+            
 
         if (!$validator->passes()) {
             return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
@@ -93,7 +97,7 @@ class AccountController extends Controller
                  'last_name'=>$request->create_account_form_lastname,
                  'username'=>$request->create_account_form_username,
                  'email'=>$request->create_account_form_email,
-                 'password'=>$request->create_account_form_password
+                 'username'=>$request->create_account_form_username
             ];
 
             $query = DB::table('accounts')->insert($values);
@@ -141,44 +145,44 @@ class AccountController extends Controller
     {
         $accounts = Account::findorfail($id);
 
-        $request->request->add(['old_database_password' => $accounts->password]);
+        $request->request->add(['old_database_username' => $accounts->username]);
         
-        $validator2 = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),[
             "manage_account_username" => "required",
-            "manage_account_current_password" => "required|same:old_database_password",
-            "manage_account_new_password" => "required|same:manage_account_confirm_password",
-            "manage_account_confirm_password" => "required|same:manage_account_new_password",
+            "manage_account_current_username" => "required|same:old_database_username",
+            "manage_account_new_username" => "required|same:manage_account_confirm_username",
+            "manage_account_confirm_username" => "required|same:manage_account_new_username",
         ],
         [
             "manage_account_username.required" => "Username cannot be empty",
-            "manage_account_new_password.required" => "New Password cannot be empty",
-            "manage_account_current_password.required" => "Password cannot be empty",
-            "manage_account_confirm_password.required" => "Please verify your password",
-            "manage_account_current_password.same" => "Does not match with your old password",
-            "manage_account_new_password.same" => "Password does not match",
-            "manage_account_confirm_password.same" => "password does not match",
+            "manage_account_new_username.required" => "New username cannot be empty",
+            "manage_account_current_username.required" => "username cannot be empty",
+            "manage_account_confirm_username.required" => "Please verify your username",
+            "manage_account_current_username.same" => "Does not match with your old username",
+            "manage_account_new_username.same" => "username does not match",
+            "manage_account_confirm_username.same" => "username does not match",
             
 
         ]);
 
-        if (!$validator2->passes()) {
-            return response()->json(['status'=> 0, 'error'=>$validator2->errors()->toArray()]);
+        if (!$validator->passes()) {
+            return response()->json(['status'=> 0, 'error'=>$validator->errors()->toArray()]);
         }
         else {
             // $values = [
-            //     'password'=>$request->manage_account_new_password
+            //     'username'=>$request->manage_account_new_username
             // ];
 
             // $query = DB::table('accounts')->update($values);
 
             // if($query) {
-            //     return response()->json(['status'=>1, 'msg'=> 'Password has been changed']);
+            //     return response()->json(['status'=>1, 'msg'=> 'username has been changed']);
             // }
             
-            $accounts -> password = $request->manage_account_new_password;
+            $accounts -> username = Hash::make($request->manage_account_new_username);
             $accounts->save();
 
-            return response()->json(['status'=>1, 'msg'=> 'Password has been changed']);
+            return response()->json(['status'=>1, 'msg'=> 'username has been changed']);
             
         }
     }
@@ -186,16 +190,16 @@ class AccountController extends Controller
 
     //     $request->validate([
     //         "username" => "required",
-    //         "password" => "required|same:confirm_password",
-    //         "confirm_password" => "required|same:password",
+    //         "username" => "required|same:confirm_username",
+    //         "confirm_username" => "required|same:username",
     //     ]);
 
     //     $accounts = Account::findorfail($id);
 
-    //     $accounts -> password = $request->password;
+    //     $accounts -> username = $request->username;
     //     $accounts->save();
 
-    //     return response()->json(['success'=>'Password changed successfully.']);
+    //     return response()->json(['success'=>'username changed successfully.']);
     // }
 
 
@@ -210,5 +214,62 @@ class AccountController extends Controller
         Account::find($id)->delete();
 
         return response()->json(['success'=>'Account deleted successfully.']);
+    }
+
+    public function accountSettingCheck(Request $request){
+        $id = $request->current_id;
+        $accounts = Account::findorfail($id);
+        
+        $validator = Validator::make($request->all(),[
+            "new_input_modal" => ["required","sometimes"],
+            "new_input_email_modal" => ["required", "ends_with:@gmail.com,@yahoo.com", "sometimes"],
+            "current_password_modal_confirmation" => ["required", "same:new_input_modal", "sometimes"],
+            "current_password_modal" => ["required", "sometimes", new ConfirmPassword($accounts->email)],
+
+        ],
+        [
+            "new_input_modal.required" => "This cannot be empty.",
+            "new_input_email_modal.required" => "This cannot be empty.",
+            "new_input_email_modal.ends_with" => "We need a valid email!!",
+            "current_password_modal.required" => "Please enter your password!!",
+            "current_password_modal_confirmation.required" => "Verify your new password!!",
+            "current_password_modal_confirmation.same" => "Does not match with new password"
+            
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['status'=> 0, 'error'=>$validator->errors()->toArray()]);
+        }
+        else {
+    
+            if ($request->table_edit == "firstname") {
+                $accounts -> first_name = $request->new_input_modal;
+                session(['user.firstname' => $request->new_input_modal]);
+                $accounts->save();
+            }
+
+            if ($request->table_edit == "lastname") {
+                $accounts -> last_name = $request->new_input_modal;
+                $accounts->save();
+            }
+
+            if ($request->table_edit == "username") {
+                $accounts -> username = $request->new_input_modal;
+                $accounts->save();
+            }
+
+            if ($request->table_edit == "email") {
+                $accounts -> email = $request->new_input_email_modal;
+                $accounts->save();
+            }
+
+            if ($request->table_edit == "password") {
+                $accounts -> password = Hash::make($request->new_input_modal);
+                $accounts->save();
+            }
+    
+            return response()->json(['msg'=>'Account information has been changed successfully.']);
+            
+        }
     }
 }

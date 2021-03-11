@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\BlotterController;
 use App\Http\Controllers\ScheduleController;
+
+use App\Http\Controllers\UserController;
 use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +41,11 @@ Route::resource('books', BooksController::class);
 Route::resource('/setting/account', AccountController::class);
 
 //test
+Route::get("login", [UserController::class, 'login']);
+Route::get("profile", [UserController::class, 'profile']);
+Route::get("register", [UserController::class, 'register']);
+Route::post("register", [UserController::class, 'register_check']);
+Route::post("login", [UserController::class, 'check']);
+Route::get("logout", [UserController::class, 'logout']);
+
+Route::post("/setting/account/form",[AccountController::class, 'accountSettingCheck'])->name("accountSettingCheck");
