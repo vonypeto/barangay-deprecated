@@ -12,5 +12,11 @@ class person_involve extends Model
     //Primary Key
     public $primaryKey = 'person_id';
     // Timestamps
+    protected $fillable = [
+        'blotter_id',
+        'resident_id',
+        'person_involve',
+        'involvement_type'
+    ];
     public $timestamps = true;
 }

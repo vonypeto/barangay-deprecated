@@ -26,6 +26,48 @@
             </div>
          </div>
 
+         <div class="modal fade" id="viewscheduledata" name="viewscheduledata" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="viewmodelHeading"></h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+         
+                  <div class="modal-body">
+                     <h6 id="blotterid_schedule"></h6>
+                     <h6 id="schedule_data"></h6>
+                     <h4>List of Person Involves</h4>
+                     <div class="divv"></div>
+
+                     <table id="blotter_list-table" class="bulk_action dataTables_info table datatable-element table-striped jambo_table bulk_action text-center border no-footer">
+                        <thead>
+                           <tr class="headings">
+                              <th class="column-title">Resident Id</th>
+                              <th class="column-title">FullName</th>
+                              <th class="column-title">Involvement Type</th>
+                              <th class="bulk-actions" hidden colspan="7">
+                                 <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                              </th>
+                           </tr>
+                        </thead>
+                        <tbody class="blotter-list-data">
+              
+
+                        </tbody>
+                     </table>
+
+                 
+                  </div>
+         
+                  <div class="modal-footer text-white">
+                  </div>
+               </div>
+            </div>
+         </div>
+
 
 
 
@@ -64,7 +106,7 @@
 
                    <tr class="odd pointer">
                       <td class=" pt-1 pb-1">
-                         <a href="#" class="btn btn-primary btn-xs pr-4 pl-4"><i class="fa fa-folder fa-lg"></i>  </a>
+                         <a href="#" data-id="{{ $schedule->blotter_id }}" class="btn btn-primary btn-xs pr-4 pl-4 viewSchedule"><i class="fa fa-folder fa-lg"></i>  </a>
                            </td>
                       <td class=" ">{{ $schedule->blotter_id }}</td>
 
@@ -131,7 +173,7 @@
 
                    <tr class="odd pointer">
                       <td class=" pt-1 pb-1">
-                         <a href="#" class="btn btn-primary btn-xs pr-4 pl-4"><i class="fa fa-folder fa-lg"></i>  </a>
+                         <a href="#" data-id="{{ $unschedule->blotter_id }}" class="btn btn-primary btn-xs pr-4 pl-4 viewSchedule"><i class="fa fa-folder fa-lg"></i>  </a>
                            </td>
                       <td class=" ">{{ $unschedule->blotter_id }}</td>
 
@@ -201,7 +243,7 @@
 
                    <tr class="odd pointer">
                       <td class=" pt-1 pb-1">
-                         <a href="#" class="btn btn-primary btn-xs pr-4 pl-4"><i class="fa fa-folder fa-lg"></i>  </a>
+                         <a href="#" data-id="{{ $today->blotter_id }}" class="btn btn-primary btn-xs pr-4 pl-4 viewSchedule"><i class="fa fa-folder fa-lg"></i>  </a>
                            </td>
                       <td class=" ">{{ $today->blotter_id }}</td>
 
@@ -279,7 +321,7 @@
 
                    <tr class="odd pointer">
                       <td class=" pt-1 pb-1">
-                         <a href="#" class="btn btn-primary btn-xs pr-4 pl-4"><i class="fa fa-folder fa-lg"></i>  </a>
+                         <a href="#" data-id="{{ $settled->blotter_id }}" class="btn btn-primary btn-xs pr-4 pl-4 viewSchedule"><i class="fa fa-folder fa-lg"></i>  </a>
                            </td>
                       <td class=" ">{{ $settled->blotter_id }}</td>
 
@@ -334,6 +376,48 @@
 <div class="alert alert-warning alert-size border border-secondary" role="alert">
 <h6 class="border-bottom border-bot text-center schedule-align"><b>Unscheduled Cases</b></h6>
 <h1 class="num-align text-center"><b>{{$unscheduleCount }}</b></h1>
+
+
+<script type="text/javascript">
+
+   $(function () {
+
+      $('body').on('click', '.viewSchedule', function() {
+        var blotter_id = $(this).data('id');
+
+        $.get("{{ route('schedules.index') }}" +'/' + blotter_id +'/edit', function (data) {
+         $('#viewscheduledata').modal('show');
+         $('#viewmodelHeading').html("View Schedule");
+         $('#blotterid_schedule').html("BLotter ID " + data[0].blotter_id);
+         $('#schedule_data').html("Schedule Date: " + data[0].schedule_date);
+
+         var len = data[1].length;
+         var tbody = ' <tbody class="blotter-list-data"></tbody>';
+         if(len > 0){
+            $('.blotter-list-data').remove();
+            $('#blotter_list-table').append(tbody);
+            for(var i = 0; i <len;i++){
+               var resident_id = data[1][i].resident_id;
+               var person_involve = data[1][i].person_involve;
+               var involvement_type = data[1][i].involvement_type;
+               var tr = '<tr>'
+               +'<td>'+ resident_id +'</td>'+
+               '<td>'+ person_involve +'</td>'+
+               '<td>'+ involvement_type +'</td>'+
+               '</tr>'
+             $('.blotter-list-data').append(tr);
+            }
+         }
+         else{
+            console.log("No BLotter Data Available");
+         }
+               });
+
+        });
+
+   });
+
+</script>
 </div>
 
  </div>
