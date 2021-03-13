@@ -62,51 +62,51 @@ class AccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-
-        $validator = Validator::make($request->all(),[
-            "create_account_form_firstname"=>"required",
-            "create_account_form_lastname"=>"required",
-            "create_account_form_username"=>"required",
-            "create_account_form_email"=> "required|ends_with:@gmail.com,@yahoo.com",
-            "create_account_form_username"=>"required|same:create_account_form_verify_username",
-            "create_account_form_verify_username"=>"required|same:create_account_form_username"
-        ],
-        [
-            "create_account_form_firstname.required" => "This field cannot be empty",
-            "create_account_form_lastname.required" => "This field cannot be empty",
-            "create_account_form_username.required" => "This field cannot be empty",
-            "create_account_form_email.required" => "This field cannot be empty",
-            "create_account_form_username.required" => "This field cannot be empty",
-            "create_account_form_verify_username.required" => "This field cannot be empty",
-
-            "create_account_form_email.ends_with" => "Valid email is required",
-
-            "create_account_form_username.same" => "username does not match",
-            "create_account_form_verify_username.same" => "username does not match",
-        ]);
-            
-
-        if (!$validator->passes()) {
-            return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
-        }
-        else {
-            $values = [
-                'first_name'=>$request->create_account_form_firstname,
-                 'last_name'=>$request->create_account_form_lastname,
-                 'username'=>$request->create_account_form_username,
-                 'email'=>$request->create_account_form_email,
-                 'username'=>$request->create_account_form_username
-            ];
-
-            $query = DB::table('accounts')->insert($values);
-
-            if($query) {
-                return response()->json(['status'=>1, 'msg'=> 'Added new account :)']);
-            }
-        }
-    }
+     public function store(Request $request)
+     {
+ 
+         $validator = Validator::make($request->all(),[
+             "create_account_form_firstname"=>"required",
+             "create_account_form_lastname"=>"required",
+             "create_account_form_username"=>"required",
+             "create_account_form_email"=> "required|ends_with:@gmail.com,@yahoo.com|unique:accounts,email",
+             "create_account_form_password"=>"required|same:create_account_form_verify_password",
+             "create_account_form_verify_password"=>"required|same:create_account_form_password"
+         ],
+         [
+             "create_account_form_firstname.required" => "This field cannot be empty",
+             "create_account_form_lastname.required" => "This field cannot be empty",
+             "create_account_form_username.required" => "This field cannot be empty",
+             "create_account_form_email.required" => "This field cannot be empty",
+             "create_account_form_password.required" => "This field cannot be empty",
+             "create_account_form_verify_password.required" => "This field cannot be empty",
+ 
+             "create_account_form_email.ends_with" => "Valid email is required",
+ 
+             "create_account_form_password.same" => "Password does not match",
+             "create_account_form_verify_password.same" => "Password does not match",
+         ]);
+ 
+ 
+         if (!$validator->passes()) {
+             return response()->json(['status'=> 0, 'error'=>$validator->errors()->toArray()]);
+         }
+         else {
+             $values = [
+                 'first_name'=>$request->create_account_form_firstname,
+                  'last_name'=>$request->create_account_form_lastname,
+                  'username'=>$request->create_account_form_username,
+                  'email'=>$request->create_account_form_email,
+                  'password'=>Hash::make($request->create_account_form_password),
+             ];
+ 
+             $query = DB::table('accounts')->insert($values);
+ 
+             if($query) {
+                 return response()->json(['status'=>1, 'msg'=> 'Added new account :)']);
+             }
+         }
+     }
 
     /**
      * Display the specified resource.
@@ -141,44 +141,51 @@ class AccountController extends Controller
      * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function update($id, Request $request)
-    {
-        $accounts = Account::findorfail($id);
-
-        //$request->request->add(['old_database_password' => Hash::check($accounts->password]));
-        
-        $validator = Validator::make($request->all(),[
-            "manage_account_password" => "required",
-            "manage_account_new_password" => "required|same:manage_account_confirm_password",
-            "manage_account_confirm_password" => "required|same:manage_account_new_password",
-
-            //"manage_account_current_password" => "required|same:old_database_password",
-        ],
-        [
-            "manage_account_password.required" => "Username cannot be empty",
-            "manage_account_new_password.required" => "New username cannot be empty",
-            "manage_account_confirm_password.required" => "Please verify your username",
-            "manage_account_new_password.same" => "username does not match",
-            "manage_account_confirm_password.same" => "username does not match",
-
-            //"manage_account_current_password.required" => "username cannot be empty",
-            // "manage_account_current_password.same" => "Does not match with your old username",
-            
-
-        ]);
-
-        if (!$validator->passes()) {
-            return response()->json(['status'=> 0, 'error'=>$validator->errors()->toArray()]);
-        }
-        else {
-            
-            $accounts -> password = $request->manage_account_new_password;
-            $accounts->save();
-
-            return response()->json(['status'=>1, 'msg'=> 'username has been changed']);
-            
-        }
-    }
+     public function update($id, Request $request)
+     {
+         $accounts = Account::findorfail($id);
+ 
+         $request->request->add(['old_database_password' => $accounts->password]);
+         
+         $validator2 = Validator::make($request->all(),[
+             "manage_account_username" => "required",
+             "manage_account_current_password" => "required|same:old_database_password",
+             "manage_account_new_password" => "required|same:manage_account_confirm_password",
+             "manage_account_confirm_password" => "required|same:manage_account_new_password",
+         ],
+         [
+             "manage_account_username.required" => "Username cannot be empty",
+             "manage_account_new_password.required" => "New Password cannot be empty",
+             "manage_account_current_password.required" => "Password cannot be empty",
+             "manage_account_confirm_password.required" => "Please verify your password",
+             "manage_account_current_password.same" => "Does not match with your old password",
+             "manage_account_new_password.same" => "Password does not match",
+             "manage_account_confirm_password.same" => "password does not match",
+             
+ 
+         ]);
+ 
+         if (!$validator2->passes()) {
+             return response()->json(['status'=> 0, 'error'=>$validator2->errors()->toArray()]);
+         }
+         else {
+             // $values = [
+             //     'password'=>$request->manage_account_new_password
+             // ];
+ 
+             // $query = DB::table('accounts')->update($values);
+ 
+             // if($query) {
+             //     return response()->json(['status'=>1, 'msg'=> 'Password has been changed']);
+             // }
+             
+             $accounts -> password = Hash::make($request->manage_account_new_password);
+             $accounts->save();
+ 
+             return response()->json(['status'=>1, 'msg'=> 'Password has been changed']);
+             
+         }
+     }
 
 
     /**
