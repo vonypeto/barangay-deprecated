@@ -413,7 +413,7 @@
                serverSide: true,
                ajax: "{{ route('account.index') }}",
                columns: [
-               {data: 'action', name: 'action', orderable: false, searchable: false},
+               {data: 'action', name: 'action', orderable: false, searchable: true},
                {data: 'account_id', name: 'account_id'},
                {data: 'first_name', name: 'manage_account_form_firstname'},
                {data: 'last_name', name: 'manage_account_form_lastname'},

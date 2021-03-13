@@ -17,11 +17,12 @@ class CreateSessionsTable extends Migration
             $table->id('session_id');
             $table->bigInteger('user_id')->unsigned();
             $table->string('username',255);
-            $table->foreign('user_id')
-                ->references('account_id')
-                ->on('accounts')
-                ->onDelete('cascade');
-                $table->timestamps();
+            $table->timeTz("login_at");
+
+            // $table->foreign('user_id','username')
+            //     ->references('account_id','username')
+            //     ->on('accounts','accounts')
+            //     ->onDelete('cascade','cascade');
         });
     }
 

@@ -17,7 +17,7 @@ class CreateAccountsTable extends Migration
             $table->id('account_id');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('username')->nullable();
+            $table->string('username')->unique()->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('password')->nullable();
             $table->string('type')->nullable();
