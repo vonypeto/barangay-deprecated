@@ -20,7 +20,7 @@ class UserController extends Controller
 {
     public function login(){
         if (session()->has("user")) {
-            return redirect("profile");
+            return redirect("dashboard");
          }
 
         return view("pages.user.login");
@@ -43,6 +43,7 @@ class UserController extends Controller
         session(['user.email' => $request->login_email]);
         session(['user.firstname' => $user->first_name]);
         session(['user.id' => $user->account_id]);
+        session(['user.type' => $user->type]);
         
 
         $data = new Sessions;
@@ -50,8 +51,14 @@ class UserController extends Controller
         $data->username = $user->username;
         $data->login_at = now();
         $query = $data->save();
+        
+        if ($user->type == "client") {
+            return redirect("client");
+        }
+        else {
+            return redirect("dashboard");
+        }
 
-        return redirect("dashboard");
     }
 
     public function register(){
