@@ -145,22 +145,24 @@ class AccountController extends Controller
     {
         $accounts = Account::findorfail($id);
 
-        $request->request->add(['old_database_username' => $accounts->username]);
+        //$request->request->add(['old_database_password' => Hash::check($accounts->password]));
         
         $validator = Validator::make($request->all(),[
-            "manage_account_username" => "required",
-            "manage_account_current_username" => "required|same:old_database_username",
-            "manage_account_new_username" => "required|same:manage_account_confirm_username",
-            "manage_account_confirm_username" => "required|same:manage_account_new_username",
+            "manage_account_password" => "required",
+            "manage_account_new_password" => "required|same:manage_account_confirm_password",
+            "manage_account_confirm_password" => "required|same:manage_account_new_password",
+
+            //"manage_account_current_password" => "required|same:old_database_password",
         ],
         [
-            "manage_account_username.required" => "Username cannot be empty",
-            "manage_account_new_username.required" => "New username cannot be empty",
-            "manage_account_current_username.required" => "username cannot be empty",
-            "manage_account_confirm_username.required" => "Please verify your username",
-            "manage_account_current_username.same" => "Does not match with your old username",
-            "manage_account_new_username.same" => "username does not match",
-            "manage_account_confirm_username.same" => "username does not match",
+            "manage_account_password.required" => "Username cannot be empty",
+            "manage_account_new_password.required" => "New username cannot be empty",
+            "manage_account_confirm_password.required" => "Please verify your username",
+            "manage_account_new_password.same" => "username does not match",
+            "manage_account_confirm_password.same" => "username does not match",
+
+            //"manage_account_current_password.required" => "username cannot be empty",
+            // "manage_account_current_password.same" => "Does not match with your old username",
             
 
         ]);
@@ -169,38 +171,14 @@ class AccountController extends Controller
             return response()->json(['status'=> 0, 'error'=>$validator->errors()->toArray()]);
         }
         else {
-            // $values = [
-            //     'username'=>$request->manage_account_new_username
-            // ];
-
-            // $query = DB::table('accounts')->update($values);
-
-            // if($query) {
-            //     return response()->json(['status'=>1, 'msg'=> 'username has been changed']);
-            // }
             
-            $accounts -> username = Hash::make($request->manage_account_new_username);
+            $accounts -> password = $request->manage_account_new_password;
             $accounts->save();
 
             return response()->json(['status'=>1, 'msg'=> 'username has been changed']);
             
         }
     }
-
-
-    //     $request->validate([
-    //         "username" => "required",
-    //         "username" => "required|same:confirm_username",
-    //         "confirm_username" => "required|same:username",
-    //     ]);
-
-    //     $accounts = Account::findorfail($id);
-
-    //     $accounts -> username = $request->username;
-    //     $accounts->save();
-
-    //     return response()->json(['success'=>'username changed successfully.']);
-    // }
 
 
     /**
