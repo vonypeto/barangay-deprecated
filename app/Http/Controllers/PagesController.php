@@ -11,19 +11,19 @@ class PagesController extends Controller
 
     public function  sampledata(){
 
-        $area_setting = DB::table('area_settings')
-        ->where('area','=','wwww')->first();
-        $add = 1;
-        echo $add + $area_setting->population;
-        /*
-        $area_setting = $area_setting->get();
-        foreach ($area_setting as $area_setting) {
-            $add +=  $area_setting->population;
-        }
-        foreach ($area_setting as $area_setting) {
-            echo $add;
-        }
-*/
+        $data = DB::table('sessions')
+        ->select('username')
+        ->where('user_id', '=', 1);
+
+        $test = DB::table('sessions')
+        ->where('user_id', '=', 1)
+        ->update(['username' => "giannpogi"]);
+
+        echo "tang ina mo tapos na";
+      
+
+
+
     }
 
 
@@ -74,6 +74,10 @@ class PagesController extends Controller
     public function  maintenance(){
 
         return view('pages.setting.maintenance');
+
+    }
+
+    public function jakol(){
 
     }
 }

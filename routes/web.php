@@ -49,3 +49,6 @@ Route::post("login", [UserController::class, 'check']);
 Route::get("logout", [UserController::class, 'logout']);
 
 Route::post("/setting/account/form",[AccountController::class, 'accountSettingCheck'])->name("accountSettingCheck");
+
+Route::get("/setting/account/session/table", [AccountController::class, 'getSessionTable'])->name("getSessionTable");
+

@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use App\Models\Account;
+use App\Models\Sessions;
+
 use Hash;
 use Validator;
 use DB;
@@ -35,10 +38,18 @@ class UserController extends Controller
         ])->validate();
         
         $user = Account::where("email","=", $request->login_email)->first();
+
         session('user');
         session(['user.email' => $request->login_email]);
         session(['user.firstname' => $user->first_name]);
         session(['user.id' => $user->account_id]);
+        
+
+        $data = new Sessions;
+        $data->user_id = $user->account_id;
+        $data->username = $user->username;
+        $data->login_at = now();
+        $query = $data->save();
 
         return redirect("dashboard");
     }

@@ -124,7 +124,7 @@
                                  <label for="new_input_modal" id="modal_label1"  class="font-weight-bold">Label1</label>
                                  <div class="col-sm-12">
                                     <input type="text" class="form-control font-weight-bold" id="new_input_modal" name="new_input_modal">
-                                    <span class="text-danger error_text new_input_modal_error new_input_email_modal_error"></span>
+                                    <span class="text-danger error_text new_input_modal_error new_input_email_modal_error new_input_username_modal_error"></span>
                                  </div>
                               </div>
 
@@ -340,7 +340,7 @@
                         
                         
                         
-                        <table id="resident" class="dataTables_info table datatable-element  resident table-striped jambo_table bulk_action text-center border">
+                        <table class="dataTables_info table datatable-element  resident table-striped jambo_table bulk_action text-center border session_history_table">
                            <thead>
                               <tr class="headings">
                                  <th class="column-title" hidden >session_id </th>
@@ -367,11 +367,11 @@
                                  <td class=" " hidden>{{ $sessions->session_id }}</td>
                                  <td class=" " hidden>{{ $sessions->user_id }}</td>
                                  <td class=" ">{{ $sessions->username }} </td>
-                                 <td class=" ">{{ $sessions->created_at }}</td>
+                                 <td class=" ">{{ $sessions->login_at }}</td>
                               </tr>
                               @endforeach
-                              @endif --}}
-                              
+                              @endif
+                               --}}
                            </tbody>
                         </table>
                         
@@ -398,6 +398,7 @@
 
             //Testing varibles
             var current_id = $("#current_user").data("id");
+            var isFirstname = false;
             showUserInfo(current_id);
 
             $.ajaxSetup({
@@ -409,17 +410,31 @@
             //Table on Manage Account
             var table = $("#manage-account-table").DataTable({
                processing: true,
-               dom: 'lrtip',
                serverSide: true,
                ajax: "{{ route('account.index') }}",
                columns: [
-               {data: 'action', name: 'action', orderable: false, searchable: true},
+               {data: 'action', name: 'action', orderable: true, searchable: true},
                {data: 'account_id', name: 'account_id'},
                {data: 'first_name', name: 'manage_account_form_firstname'},
                {data: 'last_name', name: 'manage_account_form_lastname'},
                {data: 'username', name: 'manage_account_form_username'},
                {data: 'email', name: 'manage_account_form_email'},
                {data: 'password', name: 'manage_account_form_password'},
+               ]
+               
+            });
+
+               //Table on sessionTable
+               var sessionTable = $(".session_history_table").DataTable({
+               processing: true,
+               dom: 'lrtip',
+               serverSide: true,
+               ajax: "/setting/account/session/table",
+               columns: [
+               {data: 'session_id', name: 'session_id', visible:false},
+               {data: 'user_id', name: 'user_id', visible:false},
+               {data: 'username', name: 'username'},
+               {data: 'login_at', name: 'login_at'},
                ]
                
             });
@@ -544,6 +559,7 @@
                $("#password_edit_modal").hide();
                $("#new_input_modal").attr("name","new_input_modal");
                $("#current_password_modal_confirmation").attr("name","current_password_modal");
+               isFirstname = false;
             });
 
             // Modal for firstname edit
@@ -559,6 +575,8 @@
 
                   $('#current_id').val(id);
                   $('#table_edit').val("firstname");
+                  
+                  isFirstname = true;
                })
             });
 
@@ -587,6 +605,8 @@
 
                $('#modal_label1').text("NEW USERNAME");
                $("#new_input_modal").val(data.username);
+
+               $("#new_input_modal").attr("name","new_input_username_modal");
 
                $('#current_id').val(id);
                $('#table_edit').val("username");
@@ -646,7 +666,9 @@
          //Modal on submit
          $("#account_settings_form").on('submit', function (e) { 
                e.preventDefault();
-               
+
+               $firstname = $("#new_input_modal").val();
+             
                $.ajax({
                   type:"post",
                   url:"{{ route("accountSettingCheck") }}",
@@ -664,20 +686,23 @@
                      else{
                         $('#account_settings_modal').modal('hide');
                         table.draw();
+                        sessionTable.draw();
                         alert(data.msg);
                         showUserInfo(current_id);
                         $("#account_settings_form")[0].reset();
                         $(document).find('span.error_text').text('');
+
+                        if(isFirstname == true){
+                           $('#firstname_topnav').html('Welcome, ' + $firstname)
+                        }
                      }
                   }
                });
-               
+
             });
 
-         
-               
-            
       });
+
       </script>
       @endsection
       

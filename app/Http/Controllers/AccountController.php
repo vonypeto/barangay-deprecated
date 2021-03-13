@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+//Models
 use App\Models\Account;
 use App\Models\Sessions;
+
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use app\Rules\emailValidate;
+
+//Add ons
 use Hash;
 use Validator;
 use DB;
@@ -25,6 +29,12 @@ class AccountController extends Controller
     {
         $accounts = Account::latest()->get();
 
+        $sessions = DB::table('sessions')
+                        ->orderBy('session_id', 'desc')
+                        ->get();
+
+        
+        
         if ($request->ajax()) {
             $data = Account::latest()->get();
             
@@ -42,7 +52,22 @@ class AccountController extends Controller
                     ->make(true);
         }
 
-        return view('pages.setting.account',compact('accounts'));
+        return view('pages.setting.account',compact('accounts','sessions'));
+    }
+
+    public function getSessionTable(Request $request){
+
+        if ($request->ajax()) {
+            $data = DB::table('sessions')
+            ->select("session_id","user_id","username","login_at")
+            ->get();
+            return Datatables::of($data)
+
+            // ->editColumn->editColumn('login_at', function ($session) {
+            //     return $session->login_at ? with(new Carbon($session->login_at))->format('h:i:s') : '';
+            // })
+            ->make(true);
+        }
     }
     
 
@@ -208,6 +233,7 @@ class AccountController extends Controller
         
         $validator = Validator::make($request->all(),[
             "new_input_modal" => ["required","sometimes"],
+            "new_input_username_modal" => ["required", "unique:accounts,username","sometimes"],
             "new_input_email_modal" => ["required", "ends_with:@gmail.com,@yahoo.com", "sometimes"],
             "current_password_modal_confirmation" => ["required", "same:new_input_modal", "sometimes"],
             "current_password_modal" => ["required", "sometimes", new ConfirmPassword($accounts->email)],
@@ -218,6 +244,7 @@ class AccountController extends Controller
             "new_input_email_modal.required" => "This cannot be empty.",
             "new_input_email_modal.ends_with" => "We need a valid email!!",
             "current_password_modal.required" => "Please enter your password!!",
+            "new_input_username_modal.unique" => "Username taken.",
             "current_password_modal_confirmation.required" => "Verify your new password!!",
             "current_password_modal_confirmation.same" => "Does not match with new password"
             
@@ -230,8 +257,9 @@ class AccountController extends Controller
     
             if ($request->table_edit == "firstname") {
                 $accounts -> first_name = $request->new_input_modal;
-                session(['user.firstname' => $request->new_input_modal]);
                 $accounts->save();
+
+                session(['user.firstname' => $request->new_input_modal]);
             }
 
             if ($request->table_edit == "lastname") {
@@ -240,12 +268,19 @@ class AccountController extends Controller
             }
 
             if ($request->table_edit == "username") {
-                $accounts -> username = $request->new_input_modal;
+                
+                $test = DB::table('sessions')
+                ->where('user_id', '=', $id)
+                ->update(['username' => $request->new_input_username_modal]);
+
+                $accounts -> username = $request->new_input_username_modal;
                 $accounts->save();
+                
             }
 
             if ($request->table_edit == "email") {
                 $accounts -> email = $request->new_input_email_modal;
+
                 $accounts->save();
             }
 

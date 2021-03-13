@@ -14,7 +14,7 @@
          </li> --}}
 
          <li class="nav-item active">
-            <a class="nav-link text-white text-center" id="nav_bar_display" href="#"> Welcome, {{session("user.firstname")}} <span class="sr-only">(current)</span></a>
+            <a class="nav-link text-white text-center" id="firstname_topnav" href="#"> Welcome, {{session("user.firstname")}} <span class="sr-only">(current)</span></a>
          </li>
 
          
