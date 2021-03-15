@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Account;
 use App\Models\Sessions;
 
+use Carbon\Carbon;
 use Hash;
 use Validator;
 use DB;
@@ -49,7 +50,7 @@ class UserController extends Controller
         $data = new Sessions;
         $data->user_id = $user->account_id;
         $data->username = $user->username;
-        $data->login_at = now();
+        $data->login_at = Carbon::now();
         $query = $data->save();
         
         if ($user->type == "client") {

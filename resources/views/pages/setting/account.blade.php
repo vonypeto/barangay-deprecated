@@ -244,28 +244,20 @@
                                        <span class="text-danger error_text manage_account_username_error"></span>
                                     </div>
                                  </div>
-                                 <div class="form-group row">
-                                    {{-- Current Password --}}
-                                    <label for="manage_account_current_password" class="col-sm-3 col-form-label">Current Password</label>
-                                    <div class="col-sm-9">
-                                       <input type="password" class="form-control" name="manage_account_current_password" id="manage_account_current_password" placeholder="Enter Current Password" value="" >
-                                       <span class="text-danger error_text manage_account_current_password_error"></span>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-sm-6">
                                  {{-- New Password --}}
                                  <div class="form-group row">
-                                    <label for="manage_account_new_password" class="col-sm-2 col-form-label">New Password</label>
-                                    <div class="col-sm-10">
+                                    <label for="manage_account_new_password" class="col-sm-3 col-form-label">New Password</label>
+                                    <div class="col-sm-9">
                                        <input type="password" name="manage_account_new_password" class="form-control" id="manage_account_new_password" placeholder="Enter New Password" value="">
                                        <span class="text-danger error_text manage_account_new_password_error"></span>
                                     </div>
                                  </div>
+                              </div>
+                              <div class="col-sm-6">
                                  {{-- Confirm Password --}}
                                  <div class="form-group row">
-                                    <label for="manage_account_confirm_password" class="col-sm-2 col-form-label">Confirm Password</label>
-                                    <div class="col-sm-10">
+                                    <label for="manage_account_confirm_password" class="col-sm-3 col-form-label">Confirm Password</label>
+                                    <div class="col-sm-9">
                                        <input type="password" name="manage_account_confirm_password" class="form-control" id="manage_account_confirm_password" placeholder="Confirm Password" value="">
                                        <span class="text-danger error_text manage_account_confirm_password_error"></span>
                                     </div>
@@ -274,7 +266,6 @@
                                  <div class="col-sm-12 pl-0 pr-0  ">
                                     <div class="form-group text-right ">
                                        <button type="submit" id="changepasswordBtn"class="btn btn-success account-button " disabled><b>Change Password</b></button>
-                                       
                                        
                                     </div>
                                  </div>
@@ -294,11 +285,12 @@
                               <thead>
                                  <tr class="headings">
                                     <th class="column-title">Action</th>
-                                    <th class="column-title">Id</th>
+                                    <th class="column-title" hidden>Id</th>
                                     <th class="column-title">Last Name</th>
                                     <th class="column-title">First Name </th>
                                     <th class="column-title">Username</th>
                                     <th class="column-title">Email</th>
+                                    <th class="column-title">Type</th>
                                     <th class="column-title">Password</th>
                                  </th>
                               </tr>
@@ -414,11 +406,12 @@
                ajax: "{{ route('account.index') }}",
                columns: [
                {data: 'action', name: 'action', orderable: true, searchable: true},
-               {data: 'account_id', name: 'account_id'},
+               {data: 'account_id', name: 'account_id', visible:false},
                {data: 'first_name', name: 'manage_account_form_firstname'},
                {data: 'last_name', name: 'manage_account_form_lastname'},
                {data: 'username', name: 'manage_account_form_username'},
                {data: 'email', name: 'manage_account_form_email'},
+               {data: 'type', name: 'manage_account_form_type'},
                {data: 'password', name: 'manage_account_form_password'},
                ]
                
@@ -455,9 +448,10 @@
             $('#manage_account_form').on('submit', function (e) {
                e.preventDefault();
                var id = $("#manage_account_id").val();
-               alert($("#manage_account_id").val());
                
-               $.ajax({
+               if(confirm("Are you sure want to change password!?"))
+               {
+                  $.ajax({
                   type: "PATCH",
                   url: "{{ route('account.index') }}"+'/'+id,
                   data: $('#manage_account_form').serialize(),
@@ -481,7 +475,9 @@
                      }
                   }
                   
-               });
+                });
+               }
+
             });
             
             //Delete
@@ -489,20 +485,28 @@
                
                var id = $(this).data("id");
                
-               if(confirm("Are You sure want to delete !")){
-                  $.ajax({
-                     type: "DELETE",
-                     url: "{{ route('account.index') }}"+'/'+id,
-                     
-                     success: function (data) {
-                        table.draw();
-                     },
-                     error: function (data) {
-                        console.log('Error:', data);
-                     }
-                  });
+               if(id == $("#current_user").data('id')){
+                  alert("You cannot delete your own account!!")
                }
-               
+               else
+               {
+                  if(confirm("Are you sure want to delete this account!?"))
+                  {
+                     $.ajax({
+                        type: "DELETE",
+                        url: "{{ route('account.index') }}"+'/'+id,
+                        
+                        success: function (data) {
+                           table.draw();
+                           sessionTable.draw();
+                           alert(data.success);
+                        },
+                        error: function (data) {
+                           console.log('Error:', data);
+                        }
+                      });
+                  }
+               }
                
             });
             
@@ -559,6 +563,8 @@
                $("#password_edit_modal").hide();
                $("#new_input_modal").attr("name","new_input_modal");
                $("#current_password_modal_confirmation").attr("name","current_password_modal");
+               $("#new_input_modal").attr("type","text");
+
                isFirstname = false;
             });
 
@@ -653,11 +659,13 @@
                   $("#account_settings_modal").show();
 
                   $('#modal_label1').text("NEW PASSWORD");
-                  $("#new_input_modal").val("Enter new password");
+                  $("#new_input_modal").attr("placeholder", "Enter new password");
 
                   $('#current_id').val(id);
                   $('#table_edit').val("password");
                   
+
+                  $("#new_input_modal").attr("type","password");
                   $("#current_password_modal_confirmation").attr("name","current_password_modal_confirmation");
                   $("#password_edit_modal").show();     
                })

@@ -11,6 +11,7 @@ use Yajra\DataTables\DataTables;
 use app\Rules\emailValidate;
 
 //Add ons
+use Carbon;
 use Hash;
 use Validator;
 use DB;
@@ -62,10 +63,6 @@ class AccountController extends Controller
             ->select("session_id","user_id","username","login_at")
             ->get();
             return Datatables::of($data)
-
-            // ->editColumn->editColumn('login_at', function ($session) {
-            //     return $session->login_at ? with(new Carbon($session->login_at))->format('h:i:s') : '';
-            // })
             ->make(true);
         }
     }
@@ -93,7 +90,7 @@ class AccountController extends Controller
          $validator = Validator::make($request->all(),[
              "create_account_form_firstname"=>"required",
              "create_account_form_lastname"=>"required",
-             "create_account_form_username"=>"required",
+             "create_account_form_username"=>"required|unique:accounts,username",
              "create_account_form_email"=> "required|ends_with:@gmail.com,@yahoo.com|unique:accounts,email",
              "create_account_form_password"=>"required|same:create_account_form_verify_password",
              "create_account_form_verify_password"=>"required|same:create_account_form_password"
@@ -110,6 +107,11 @@ class AccountController extends Controller
  
              "create_account_form_password.same" => "Password does not match",
              "create_account_form_verify_password.same" => "Password does not match",
+
+             "create_account_form_username.unique" => "Username Taken!",
+             "create_account_form_email.unique" => "Email Taken!",
+
+
          ]);
  
  
@@ -142,10 +144,7 @@ class AccountController extends Controller
      */
     public function show(Account $account,Sessions $session)
     {
-    //    $account = Account::all();
-    //    $session = Sessions::all();
-    //  return view('pages.setting.account',['account'=>$account,'sessions'=>$session]);
-     //  return view('hello');
+        //
     }
 
     /**
@@ -171,22 +170,24 @@ class AccountController extends Controller
      {
          $accounts = Account::findorfail($id);
  
-         $request->request->add(['old_database_password' => $accounts->password]);
+        //  $request->request->add(['old_database_password' => $accounts->password]);
          
          $validator2 = Validator::make($request->all(),[
              "manage_account_username" => "required",
-             "manage_account_current_password" => "required|same:old_database_password",
              "manage_account_new_password" => "required|same:manage_account_confirm_password",
              "manage_account_confirm_password" => "required|same:manage_account_new_password",
+
+            //  "manage_account_current_password" => "required|same:old_database_password",
          ],
          [
              "manage_account_username.required" => "Username cannot be empty",
              "manage_account_new_password.required" => "New Password cannot be empty",
-             "manage_account_current_password.required" => "Password cannot be empty",
              "manage_account_confirm_password.required" => "Please verify your password",
-             "manage_account_current_password.same" => "Does not match with your old password",
              "manage_account_new_password.same" => "Password does not match",
              "manage_account_confirm_password.same" => "password does not match",
+
+            //  "manage_account_current_password.same" => "Does not match with your old password",
+            //  "manage_account_current_password.required" => "Password cannot be empty",
              
  
          ]);
@@ -195,15 +196,6 @@ class AccountController extends Controller
              return response()->json(['status'=> 0, 'error'=>$validator2->errors()->toArray()]);
          }
          else {
-             // $values = [
-             //     'password'=>$request->manage_account_new_password
-             // ];
- 
-             // $query = DB::table('accounts')->update($values);
- 
-             // if($query) {
-             //     return response()->json(['status'=>1, 'msg'=> 'Password has been changed']);
-             // }
              
              $accounts -> password = Hash::make($request->manage_account_new_password);
              $accounts->save();
@@ -218,10 +210,11 @@ class AccountController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Account  $account
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responses
      */
     public function destroy($id)
     {
+        $sessions = DB::table('sessions')->where('user_id', '=', $id)->delete();
         Account::find($id)->delete();
 
         return response()->json(['success'=>'Account deleted successfully.']);

@@ -11,15 +11,16 @@ class PagesController extends Controller
 
     public function  sampledata(){
 
-        $data = DB::table('sessions')
-        ->select('username')
-        ->where('user_id', '=', 1);
+        // $data = DB::table('sessions')
+        // ->select('username')
+        // ->where('user_id', '=', 1);
 
-        $test = DB::table('sessions')
-        ->where('user_id', '=', 1)
-        ->update(['username' => "giannpogi"]);
+        // $test = DB::table('sessions')
+        // ->where('user_id', '=', 1)
+        // ->update(['username' => "giannpogi"]);
 
-        echo "tang ina mo tapos na";
+        
+        echo "running";
       
 
 
