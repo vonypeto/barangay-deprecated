@@ -10,6 +10,9 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\BlotterController;
 use App\Http\Controllers\PersonInvolveController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\UnscheduleController;
+use App\Http\Controllers\ScheduleTodayController;
+use App\Http\Controllers\SettledCasesController;
 use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
@@ -45,10 +48,19 @@ Route::resource('books', BooksController::class);
 //end von
 
 // Rojhon pogi
+// Blotter
 Route::get('/blotter', [BlotterController::class, 'show']);
 Route::resource('blotters', BlotterController::class);
+
+// Person Involves
 Route::resource('personinvolves', PersonInvolveController::class);
-Route::get('/schedule', [ScheduleController::class, 'show']);
+
+//Settlement Schedule
+Route::get('/schedule', [ScheduleController::class, 'index']);
+
 Route::resource('schedules', ScheduleController::class);
+Route::resource('unschedules', UnscheduleController::class);
+Route::resource('scheduletoday', ScheduleTodayController::class);
+Route::resource('settled', SettledCasesController::class);
 
 // Rojhon pogi paren
