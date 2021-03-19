@@ -16,6 +16,11 @@
             routes: {
                 resident: "{{ route('resident.index') }}",
                 resident_store: "{{ route('resident.store') }}",
+                barangay: "{{ route('barangay.index') }}",
+                barangay_post:  "{{ route('barangay.post') }}" ,
+                region : "{{ route('maintenance.index') }}",
+                region_store : "{{ route('maintenance.store') }}",
+
             }
         };
      </script>

@@ -456,7 +456,7 @@
                     </div>
                     <div class="col-sm-6 ">
                       <label >First Name</label>
-                      <input  type="text" class="form-control" id="lastnamev" name="lastnamev"  readonly >
+                      <input  type="text" class="form-control" id="firstnamev" name="firstnamev"  readonly >
 
                     </div>
                   </div>
@@ -810,13 +810,5 @@
 
 
 @endsection
-<!----------------------------------------------------------------
-   <td>
-                               <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                               <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                               <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                             </td>
 
-
-   --->
 

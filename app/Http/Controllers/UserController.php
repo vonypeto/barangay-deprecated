@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 use App\Models\Account;
 use App\Models\Sessions;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
-use Hash;
-use Validator;
-use DB;
+
 
 // Custom Rules
 use App\Rules\ConfirmPassword;
@@ -37,7 +37,7 @@ class UserController extends Controller
             "login_email.required" => "Enter your username!!!",
             "login_password.required" => "Enter your password!!!"
         ])->validate();
-        
+
         $user = Account::where("email","=", $request->login_email)->first();
 
         session('user');
@@ -45,14 +45,14 @@ class UserController extends Controller
         session(['user.firstname' => $user->first_name]);
         session(['user.id' => $user->account_id]);
         session(['user.type' => $user->type]);
-        
+
 
         $data = new Sessions;
         $data->user_id = $user->account_id;
         $data->username = $user->username;
         $data->login_at = Carbon::now();
         $query = $data->save();
-        
+
         if ($user->type == "client") {
             return redirect("client");
         }
@@ -86,7 +86,7 @@ class UserController extends Controller
             "register_password_confirmation.required" => "We need you to verify your password!!!"
         ])->validate();
 
-        
+
         $user = new Account;
         $user->first_name = $request->register_firstname;
         $user->last_name = $request->register_lastname;
@@ -95,12 +95,12 @@ class UserController extends Controller
         $user->password = Hash::make($request->register_password);
         $user->type = "client";
         $query = $user->save();
-        
+
         return back()->with('success_register', 'Account successfully registered!');
     }
 
     public function profile(){
-        
+
         if (!session()->has("user")) {
             return back();
         }

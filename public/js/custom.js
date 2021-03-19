@@ -41,9 +41,7 @@ $(function() {
         }
     });
     //show default datatable
-    $('#manage_account').DataTable();
-    $('#official').DataTable();
-    $('#region').DataTable();
+
     $('#table_unschedule').DataTable({
         sDom: 'lrtip'
     });
@@ -56,6 +54,58 @@ $(function() {
     $('#settled').DataTable({
         sDom: 'lrtip'
     });
+
+
+
+//maintenance
+
+//submit region/area
+$('#regionsaves').click(function (e) {
+    alert(1);
+    e.preventDefault();
+    $(this).html('Save');
+
+    $.ajax({
+      data: $('#areaform').serialize(),
+      url: "setting/maintenance",
+      type: "POST",
+      dataType: 'json',
+      success: function (data) {
+
+          $('#areaform').trigger("reset");
+          $('#areamodal').modal('hide');
+          table.draw();
+
+      },
+      error: function (data) {
+          console.log('Error:', data);
+          $('#regionsave').html('Save Changes');
+      }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // resident show table
     var table = $('.resident-table').DataTable({
@@ -86,10 +136,13 @@ $(function() {
             },
             ]
     });
-     //Resident module CreateResident
+
+
+
+     //Resident module CreateResident POPUP
     $('#createresident').click(function() {
         $('#submit').val("create-resident");
-        $('#lastname').val('Last Name');
+
         $('#residentform').trigger("reset");
         $('#modelHeading').html("Create Resident Data");
         $('#residentmodal').modal('show');
@@ -216,7 +269,7 @@ $(function() {
     });
 
 
-
+    //BUTTOM SUBMIT MODAL
     $('#submit').click(function(e) {
         e.preventDefault();
         $(this).html('Save');
@@ -242,7 +295,7 @@ $(function() {
             }
         });
     });
-
+    //delete table
     $('body').on('click', '.deleteresident', function () {
 
         var resident_id = $(this).data("id");
@@ -265,14 +318,8 @@ $(function() {
     $('#check-all').click(function(){
          $('.checkBoxClass').prop('checked', $(this).prop('checked'));
     });
-    function validate() {
-        alert(1);
-        if (document.getElementById('checked').checked) {
-            alert("checked");
-        } else {
-            alert("You didn't check it! Let me check it for you.");
-        }
-    }
+
+
     // Bulk Delete Current Select
     $('#bulkdelete').click(function(e){
         e.preventDefault();
@@ -330,6 +377,12 @@ function filterGlobal() {
     ).draw();
 }
 
+function filterblotter() {
+    $('#blotter-table').DataTable().search(
+        $('#global_filter').val()
+    ).draw();
+}
+
 function filterschedule() {
     $('#table_schedule').DataTable().search(
         $('#global_filter').val()
@@ -357,14 +410,199 @@ function filtersettled() {
 
 $(document).ready(function() {
     //
+
+    $('#manage_account').DataTable();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+  });
+
+
+
+// MAINTENANCE
+
+
+  var brgytable = $('#official').DataTable({
+      processing: true,
+
+      serverSide: true,
+      ajax: config.routes.barangay,
+      columns: [
+
+          {data: 'name', name: 'name'},
+          {data: 'position', name: 'position'},
+          {data: 'official_committe', name: 'official_committe'},
+          {data: 'year_of_service', name: 'year_of_service'},
+          {data: 'action', name: 'action', orderable: false, searchable: false},
+      ]
+  });
+
+  var table = $('#region').DataTable({
+      processing: true,
+
+      serverSide: true,
+      ajax: config.routes.region,
+      columns: [
+        {data: 'action', name: 'action', orderable: false, searchable: false},
+          {data: 'area', name: 'area'},
+          {data: 'population', name: 'region'},
+
+      ]
+  });
+  //show modal area
+  $('#createarea').click(function () {
+      $('#area_id').val('');
+      $('#areaform').trigger("reset");
+      $('#areamodal').modal('show');
+  });
+  //insert and edit area
+  $('#regionsave').click(function (e) {
+      e.preventDefault();
+      $(this).html('Save');
+      $.ajax({
+        data: $('#areaform').serialize(),
+        url: config.routes.region_store,
+        type: "POST",
+        dataType: 'json',
+        success: function (data) {
+            $('#areaform').trigger("reset");
+            $('#areamodal').modal('hide');
+            alert(JSON.stringify(data));
+            table.draw();
+        },
+        error: function (data) {
+            console.log('Error:', data);
+            $('#regionsave').html('Save Changes');
+        }
+    });
+  });
+  // region delete
+  $('body').on('click', '.trash', function () {
+
+      var area = $(this).data("id");
+      if (confirm("Are You sure want to delete !")) {
+
+      $.ajax({
+          type: "DELETE",
+          url: config.routes.region_store+'/'+area,
+          success: function (data) {
+              table.draw();
+          },
+          error: function (data) {
+              console.log('Error:', data);
+          }
+      });
+
+    }
+  });
+
+
+
+
+
+
+
+
+  // insert and edit from the modal
+  $('#brgysave').click(function (e) {
+     // alert("{{ route('barangay.post') }}");
+      e.preventDefault();
+      $(this).html('Save');
+      $.ajax({
+        data: $('#brgyform').serialize(),
+        url: config.routes.barangay_post,
+        type: "POST",
+        dataType: 'json',
+        success: function (data) {
+            $('#brgyform').trigger("reset");
+            $('#brgymodal').modal('hide');
+            alert(JSON.stringify(data));
+            brgytable.draw();
+        },
+        error: function (data) {
+            console.log('Error:', data);
+            $('#brgysave').html('Save Changes');
+        }
+    });
+  });
+
+
+//show modal for creating
+  $('#createbrgy').click(function () {
+      $('#official_id').val('');
+      $('#brgyform').trigger("reset");
+      $('#brgymodal').modal('show');
+      $('#modelHeading').html("Create New Position");
+  });
+
+  //show modal for editing
+  $('body').on('click', '.editbarangay', function () {
+  var official_id = $(this).data('id');
+
+  $.get(config.routes.barangay +'/' + official_id +'/edit', function (data) {
+      $('#modelHeading').html("Modify Position");
+      $('#brgysave').val("edit-official");
+      $('#brgymodal').modal('show');
+      $('#official_id').val(data.official_id);
+      $('#name').val(data.name);
+      $('#position').val(data.position);
+      $('#position').val(data.position);
+      $('#official_committe').val(data.official_committe);
+      $('#year_of_service').val(data.year_of_service);
+  })
+});
+$('body').on('click', '.deletebarangay', function () {
+
+var barangay = $(this).data("id");
+if (confirm("Are You sure want to delete !")) {
+
+$.ajax({
+    type: "DELETE",
+    url: config.routes.barangay +'/'+barangay,
+    success: function (data) {
+        brgytable.draw();
+    },
+    error: function (data) {
+        console.log('Error:', data);
+    }
+});
+
+}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
 
-
+//filter search bar
     $('input.global_filter').on('keyup click', function() {
         filterGlobal();
+        filterblotter();
         filterschedule();
         filterunschedule();
         filterscheduletoday();

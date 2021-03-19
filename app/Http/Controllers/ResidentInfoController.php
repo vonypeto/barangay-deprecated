@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\Models\area_setting;
-use App\Models\PersonInvolveController;
+
 use Carbon\Carbon;
+use PDF;
 class ResidentInfoController extends Controller
 {
 
@@ -34,6 +35,11 @@ class ResidentInfoController extends Controller
                  })
                    ->rawColumns(['checkbox','action'])
                     ->make(true);
+
+
+
+
+
         }
 
         return view('pages.resident',[compact('resident'),'area_setting'=>$area_setting]);
@@ -67,6 +73,27 @@ class ResidentInfoController extends Controller
         'area'=>$request->area,
         'address_1'=>$request->address_1,
         'address_2'=>$request->address_2]);
+
+        $data = DB::table('area_settings')
+        ->select('area')->get();
+
+        if(count($data))
+         foreach ($data as $data) {
+
+             $test = DB::table('resident_infos')
+             ->where('area','=',$data->area)->count();
+
+             area_setting::where('area', '=', $data->area)
+            ->update(['population' => $test]);
+
+
+
+
+         }
+
+
+
+
         return response()->json(['success'=>'resident saved successfully.']);
     }
 
@@ -102,6 +129,20 @@ class ResidentInfoController extends Controller
     public function destroy($id)
     {
         resident_info::find($id)->delete();
+
+        $data = DB::table('area_settings')
+       ->select('area')->get();
+
+       if(count($data))
+        foreach ($data as $data) {
+
+            $test = DB::table('resident_infos')
+            ->where('area','=',$data->area)->count();
+
+            area_setting::where('area', '=', $data->area)
+           ->update(['population' => $test]);
+
+        }
         return response()->json(['success'=>'Resident deleted successfully.']);
     }
 
