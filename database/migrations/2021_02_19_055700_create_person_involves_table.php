@@ -18,15 +18,16 @@ class CreatePersonInvolvesTable extends Migration
             $table->bigInteger('blotter_id')->unsigned();
             $table->bigInteger('resident_id')->unsigned();
             $table->string('person_involve')->nullable();
+            $table->string('involvement_type')->nullable();
             $table->foreign('resident_id')
                 ->references('resident_id')
                 ->on('resident_infos')
                 ->onDelete('cascade');
 
             $table->foreign('blotter_id')
-            ->references('blotter_id')
-            ->on('blotters')
-            ->onDelete('cascade');
+                ->references('blotter_id')
+                ->on('blotters')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

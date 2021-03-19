@@ -47,48 +47,29 @@
                            <div>
                               <h4 style="color: white">Adding Complainants</h4>
                            </div>
-                           <div class="search-container">
-                              <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
-                           </div>
                         </div>
                     
-                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer">
+                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer complainants-table">
                            <thead>
                               <tr class="headings">
                                  <th class="column-title">Action</th>
-                                 <th class="column-title">Resident_ID</th>
-                                 <th class="column-title">Full Name </th>
+                                 <th class="column-title">FullName</th>
                                  <th class="column-title">Alias</th>
+                                 <th class="column-title">FirstName</th>
+                                 <th class="column-title">MiddleName</th>
+                                 <th class="column-title">LastName</th>
+                                 <th class="bulk-actions" hidden colspan="7">
+                                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                                  </th>
                               </tr>
                            </thead>
                            <tbody>
-                              
-                              @forelse ($resident as $residents)
-                           
-                              <tr>
-                                 <th>
-                                    <button class="btn btn-primary">Add</button>
-                                 </th>
-                                 <th>
-                                    {{ $residents -> resident_id }}
-                                 </th>
-                                 <th>
-                                    {{ $residents -> lastname }}, {{ $residents -> firstname}}  {{ $residents -> middlename }}
-                                 </th>
-                                 <th>
-                                    {{ $residents -> alias}}
-                                 </th>
-                         
-                              </tr>
-                               
-                              @empty
-                                  <h4>No Residents</h4>
-                              @endforelse
+                 
 
                            </tbody>
                         </table>
-         
+
+                        
                      </div>
             
   
@@ -98,48 +79,28 @@
                            <div>
                               <h4 style="color: white">Adding Respondents</h4>
                            </div>
-                           <div class="search-container">
-                              <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
-                           </div>
                         </div>
-                    
-                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer">
+
+                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer respondents-table">
                            <thead>
                               <tr class="headings">
                                  <th class="column-title">Action</th>
-                                 <th class="column-title">Resident_ID</th>
-                                 <th class="column-title">Full Name </th>
+                                 <th class="column-title">FullName</th>
                                  <th class="column-title">Alias</th>
+                                 <th class="column-title">FirstName</th>
+                                 <th class="column-title">MiddleName</th>
+                                 <th class="column-title">LastName</th>
+                                 <th class="bulk-actions" hidden colspan="7">
+                                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                                  </th>
                               </tr>
                            </thead>
                            <tbody>
-                              
-                              @forelse ($resident as $residents)
-                           
-                              <tr>
-                                 <th>
-                                    <button class="btn btn-primary">Add</button>
-                                 </th>
-                                 <th>
-                                    {{ $residents -> resident_id }}
-                                 </th>
-                                 <th>
-                                    {{ $residents -> lastname }}, {{ $residents -> firstname}}  {{ $residents -> middlename }}
-                                 </th>
-                                 <th>
-                                    {{ $residents -> alias}}
-                                 </th>
-                         
-                              </tr>
-                               
-                              @empty
-                                  <h4>No Residents</h4>
-                              @endforelse
+                 
 
                            </tbody>
                         </table>
-            
+                    
                      </div>
             
             
@@ -154,48 +115,27 @@
                            <div>
                               <h4 style="color: white">Adding Victims</h4>
                            </div>
-                           <div class="search-container">
-                              <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
-                           </div>
                         </div>
-                    
-                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer">
+                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer victims-table">
                            <thead>
                               <tr class="headings">
                                  <th class="column-title">Action</th>
-                                 <th class="column-title">Resident_ID</th>
-                                 <th class="column-title">Full Name </th>
+                                 <th class="column-title">FullName</th>
                                  <th class="column-title">Alias</th>
+                                 <th class="column-title">FirstName</th>
+                                 <th class="column-title">MiddleName</th>
+                                 <th class="column-title">LastName</th>
+                                 <th class="bulk-actions" hidden colspan="7">
+                                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                                  </th>
                               </tr>
                            </thead>
                            <tbody>
-                              
-                              @forelse ($resident as $residents)
-                           
-                              <tr>
-                                 <th>
-                                    <button class="btn btn-primary">Add</button>
-                                 </th>
-                                 <th>
-                                    {{ $residents -> resident_id }}
-                                 </th>
-                                 <th>
-                                    {{ $residents -> lastname }}, {{ $residents -> firstname}}  {{ $residents -> middlename }}
-                                 </th>
-                                 <th>
-                                    {{ $residents -> alias}}
-                                 </th>
-                         
-                              </tr>
-                               
-                              @empty
-                                  <h4>No Residents</h4>
-                              @endforelse
+                 
 
                            </tbody>
                         </table>
-            
+                    
                      </div>
                      
                      <div id="attackers" class="tabcontent">
@@ -203,48 +143,28 @@
                            <div>
                               <h4 style="color: white">Adding Attackers</h4>
                            </div>
-                           <div class="search-container">
-                              <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
-                           </div>
+                         
                         </div>
                     
-                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer">
+                        <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer attackers-table">
                            <thead>
                               <tr class="headings">
                                  <th class="column-title">Action</th>
-                                 <th class="column-title">Resident_ID</th>
-                                 <th class="column-title">Full Name </th>
+                                 <th class="column-title">FullName</th>
                                  <th class="column-title">Alias</th>
+                                 <th class="column-title">FirstName</th>
+                                 <th class="column-title">MiddleName</th>
+                                 <th class="column-title">LastName</th>
+                                 <th class="bulk-actions" hidden colspan="7">
+                                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                                  </th>
                               </tr>
                            </thead>
                            <tbody>
-                              
-                              @forelse ($resident as $residents)
-                           
-                              <tr>
-                                 <th>
-                                    <button class="btn btn-primary">Add</button>
-                                 </th>
-                                 <th>
-                                    {{ $residents -> resident_id }}
-                                 </th>
-                                 <th>
-                                    {{ $residents -> lastname }}, {{ $residents -> firstname}}  {{ $residents -> middlename }}
-                                 </th>
-                                 <th>
-                                    {{ $residents -> alias}}
-                                 </th>
-                         
-                              </tr>
-                               
-                              @empty
-                                  <h4>No Residents</h4>
-                              @endforelse
+                 
 
                            </tbody>
                         </table>
-            
                      </div>
             
   
@@ -253,6 +173,7 @@
                      <div id="inci_detail" class="tabcontent">
                       
                            <input type="hidden" name="blotter_id" id="blotter_id">
+                           {{-- <input type="hidden" name="person_id" id="person_id"> --}}
             
                            <div class="row" style="margin-left: 0px;margin-right: 0px;">
                               <div class="col-sm-6" >
@@ -298,10 +219,10 @@
             
                               </div>
             
-                              <div class="col-sm-6" >
+                              {{-- <div class="col-sm-6" >
                                  <label >Time Schedule</label>
                                  <input type="time" id="schedule_time" name="schedule_time" required="required" class="form-control ">
-                               </div>
+                               </div> --}}
                       
                             </div>
             
@@ -373,7 +294,7 @@
                      <th class="column-title">Incident Date</th>
                      <th class="column-title">Incident Time</th>
                      <th class="column-title">Schedule Date</th>
-                     <th class="column-title">Schedule Time</th>
+                     {{-- <th class="column-title">Schedule Time</th> --}}
                   </tr>
                </thead>
                <tbody>
@@ -385,8 +306,28 @@
                      <td id="viewdate_incident"></td>
                      <td id="viewtimeof_incident"></td>
                      <td id="viewschedule_date"></td>
-                     <td id="viewschedule_time"></td>
+                     {{-- <td id="viewschedule_time"></td> --}}
                   </tr>
+               </tbody>
+            </table>
+            <hr>
+
+            <h5>List of Person Involves</h5>
+
+            <table id="blotter_list-table" class="bulk_action dataTables_info table datatable-element table-striped jambo_table bulk_action text-center border no-footer">
+               <thead>
+                  <tr class="headings">
+                     <th class="column-title">Resident Id</th>
+                     <th class="column-title">FullName</th>
+                     <th class="column-title">Involvement Type</th>
+                     <th class="bulk-actions" hidden colspan="7">
+                        <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody class="blotter-list-data">
+     
+   
                </tbody>
             </table>
             <h4>Incident Narrative</h4>
@@ -394,6 +335,8 @@
             {{-- <form id="blotterform"  name="blotterform" class="modal-input">
             </form> --}}
          </div>
+
+        
 
          <div class="modal-footer text-white">
          </div>
@@ -435,7 +378,6 @@
                   <th class="column-title">Incident Type </th>
                   <th class="column-title">Incident Date </th>
                   <th class="column-title">Incident Time</th>
-                  </th>
                   <th class="bulk-actions" hidden colspan="7">
                      <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                   </th>
@@ -454,6 +396,112 @@
                      }
                });
 
+          
+
+            // PersonInvolves
+
+            // Adding Complainants
+            var complainants_table = $('.complainants-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('personinvolves.index') }}",
+                columns: [
+                  {data: 'add_complainant', name: 'add_complainant', orderable: false, searchable: false},
+                  {data: 'fullname', name: 'fullname', orderable: false, searchable: false},
+                  { data: 'alias', name: 'alias'},
+                  { data: 'firstname', name: 'firstname', visible: false},
+                  { data: 'middlename', name: 'middlename', visible: false},
+                  { data: 'lastname', name: 'lastname', visible: false}
+                ]
+                  
+            });
+
+            $('body').on('click', '.addComplainant', function(){
+               var resident_id = $(this).data('id');
+               $.get("{{ route('personinvolves.index') }}" +'/' + resident_id +'/edit', function (data) {
+                  $('.addComplainant' + data.resident_id).trigger('click');
+               })
+             });
+
+            // Adding Complainants End
+
+            // Adding Respondents
+            var respondents_table = $('.respondents-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('personinvolves.index') }}",
+                columns: [
+                  {data: 'add_respondent', name: 'add_respondent', orderable: false, searchable: false},
+                  {data: 'fullname', name: 'fullname', orderable: false, searchable: false},
+                  { data: 'alias', name: 'alias'},
+                  { data: 'firstname', name: 'firstname', visible: false},
+                  { data: 'middlename', name: 'middlename', visible: false},
+                  { data: 'lastname', name: 'lastname', visible: false}
+                ]
+                  
+            });
+
+            $('body').on('click', '.addRespondent', function(){
+               var resident_id = $(this).data('id');
+               $.get("{{ route('personinvolves.index') }}" +'/' + resident_id +'/edit', function (data) {
+                  $('.addRespondent' + data.resident_id).trigger('click');
+               })
+             });
+            // Adding Respondents End
+
+            // Adding Victims
+            var victims_table = $('.victims-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('personinvolves.index') }}",
+                columns: [
+                  {data: 'add_victim', name: 'add_victim', orderable: false, searchable: false},
+                  {data: 'fullname', name: 'fullname', orderable: false, searchable: false},
+                  { data: 'alias', name: 'alias'},
+                  { data: 'firstname', name: 'firstname', visible: false},
+                  { data: 'middlename', name: 'middlename', visible: false},
+                  { data: 'lastname', name: 'lastname', visible: false}
+                ]
+                  
+            });
+
+            $('body').on('click', '.addVictim', function(){
+               var resident_id = $(this).data('id');
+               $.get("{{ route('personinvolves.index') }}" +'/' + resident_id +'/edit', function (data) {
+                  $('.addVictim' + data.resident_id).trigger('click');
+               })
+             });
+
+            // Adding Victims End
+
+            // Adding Attackers
+            var attackers_table = $('.attackers-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('personinvolves.index') }}",
+                columns: [
+                  {data: 'add_attacker', name: 'add_attacker', orderable: false, searchable: false},
+                  {data: 'fullname', name: 'fullname', orderable: false, searchable: false},
+                  { data: 'alias', name: 'alias'},
+                  { data: 'firstname', name: 'firstname', visible: false},
+                  { data: 'middlename', name: 'middlename', visible: false},
+                  { data: 'lastname', name: 'lastname', visible: false}
+                ]
+                  
+            });
+
+            $('body').on('click', '.addAttacker', function(){
+               var resident_id = $(this).data('id');
+               $.get("{{ route('personinvolves.index') }}" +'/' + resident_id +'/edit', function (data) {
+                  $('.addAttacker' + data.resident_id).trigger('click');
+               })
+             });
+
+            // Adding Attackers End
+
+            // PersonInvolves End
+
+            // Blotter and Narrative Report
             var table = $('.data-table').DataTable({
                 processing: true,
                 dom: 'lrtip',
@@ -471,6 +519,8 @@
                 ]
                   
             });
+
+
              $('#createNewBlotter').click(function () {
                  $('#saveBtn').val("create-blotter");
                  $('#blotter_id').val('');
@@ -483,46 +533,101 @@
                var blotter_id = $(this).data('id');
                $.get("{{ route('blotters.index') }}" +'/' + blotter_id +'/edit', function (data) {
                   $('#viewmodelHeading').html("View BLotter");
-                  $('#status').html(data.status);
+                  $('#status').html(data[0].status);
                   $('#viewblottermodal').modal('show');
-                  $('#viewblotter_id').html(data.blotter_id);
-                  $('#viewincident_location').html(data.incident_location);
-                  $('#viewincident_type').html(data.incident_type);
-                  $('#viewdate_incident').html(data.date_incident);
-                  $('#viewtimeof_incident').html(data.time_incident);
-                  // $('#date_reported').val(data.date_reported);
-                  // $('#time_reported').val(data.time_reported);
+                  $('#viewblotter_id').html(data[0].blotter_id);
+                  $('#viewincident_location').html(data[0].incident_location);
+                  $('#viewincident_type').html(data[0].incident_type);
+                  $('#viewdate_incident').html(data[0].date_incident);
+                  $('#viewtimeof_incident').html(data[0].time_incident);
+         
                   
-                  $('#viewschedule_date').html(data.schedule_date);
-                  $('#viewschedule_time').html(data.schedule_time);
-                  $('#viewincident_narrative').val(data.incident_narrative);
+                  $('#viewschedule_date').html(data[0].schedule_date);
+                  // $('#viewschedule_time').html(data[0].schedule_time);
+                  $('#viewincident_narrative').val(data[0].incident_narrative);
+
+                  var len = data[1].length;
+                  var tbody = ' <tbody class="blotter-list-data"></tbody>';
+                  if(len > 0){
+                     $('.blotter-list-data').remove();
+                     $('#blotter_list-table').append(tbody);
+                     for(var i = 0; i <len;i++){
+                        var resident_id = data[1][i].resident_id;
+                        var person_involve = data[1][i].person_involve;
+                        var involvement_type = data[1][i].involvement_type;
+                        var tr = '<tr>'
+                        +'<td>'+ resident_id +'</td>'+
+                        '<td>'+ person_involve +'</td>'+
+                        '<td>'+ involvement_type +'</td>'+
+                        '</tr>'
+                     $('.blotter-list-data').append(tr);
+                     }
+                  }
+                  else{
+                     console.log("No BLotter Data Available");
+                  }
                })
              });
 
              $('body').on('click', '.editBlotter', function () {
                var blotter_id = $(this).data('id');
+               $('#blotterform').trigger("reset");
                $.get("{{ route('blotters.index') }}" +'/' + blotter_id +'/edit', function (data) {
                   $('#modelHeading').html("Edit Blotter");
                   $('#saveBtn').val("edit-blotter");
                   $('#blottermodal').modal('show');
-                  $('#blotter_id').val(data.blotter_id);
-                  $('#incident_location').val(data.incident_location);
-                  $('#incident_type').val(data.incident_type);
-                  $('#date_incident').val(data.date_incident);
-                  $('#time_incident').val(data.time_incident);
-                  $('#date_reported').val(data.date_reported);
-                  $('#time_reported').val(data.time_reported);
-                  $('#schedule_date').val(data.schedule_date);
-                  $('#schedule_time').val(data.schedule_time);
-                  $('input[name^="status"][value="'+data.status+'"').prop('checked',true);
-                  $('#incident_narrative').val(data.incident_narrative);
+                  $('#blotter_id').val(data[0].blotter_id);
+                  $('#incident_location').val(data[0].incident_location);
+                  $('#incident_type').val(data[0].incident_type);
+                  $('#date_incident').val(data[0].date_incident);
+                  $('#time_incident').val(data[0].time_incident);
+                  $('#date_reported').val(data[0].date_reported);
+                  $('#time_reported').val(data[0].time_reported);
+                  $('#schedule_date').val(data[0].schedule_date);
+                  // $('#schedule_time').val(data.schedule_time);
+                  $('input[name^="status"][value="'+data[0].status+'"').prop('checked',true);
+                  $('#incident_narrative').val(data[0].incident_narrative);
+               
+
+                  var complainantLen = data[1].length;
+                  for(var i=0;i<complainantLen; i++){
+                     if(data[1][i].involvement_type == "Complainant" ){
+                        $('.addComplainantp' + data[1][i].resident_id).prop('checked',true);
+                        $('.addComplainant' + data[1][i].resident_id).prop('checked',true);
+                     }
+                  }
+                  
+                  var respondentLen = data[1].length;
+                  for(var i=0;i<respondentLen; i++){
+                     if(data[1][i].involvement_type == "Respondent" ){
+                        $('.addRespondentp' + data[1][i].resident_id).prop('checked',true);
+                        $('.addRespondent' + data[1][i].resident_id).prop('checked',true);
+                     }
+
+                  }
+
+                  var victimLen = data[1].length;
+                  for(var i=0;i<victimLen; i++){
+                     if(data[1][i].involvement_type == "Victim" ){
+                        $('.addVictimp' + data[1][i].resident_id).prop('checked',true);
+                        $('.addVictim' + data[1][i].resident_id).prop('checked',true);
+                     }
+
+                  }
+
+                  var attackerLen = data[1].length;
+                  for(var i=0;i<attackerLen; i++){
+                     if(data[1][i].involvement_type == "Attacker" ){
+                        $('.addAttackerp' + data[1][i].resident_id).prop('checked',true);
+                        $('.addAttacker' + data[1][i].resident_id).prop('checked',true);
+                     }
+
+                  }
                })
             });
          
              $('#saveBtn').click(function (e) {
                 e.preventDefault();
-               //  $(this).html('Save');
-            
                 $.ajax({
                   data: $('#blotterform').serialize(),
                   url: "{{ route('blotters.store') }}",
@@ -533,7 +638,7 @@
                       $('#blotterform').trigger("reset");
                       $('#blottermodal').modal('hide');
                       table.draw();
-                 
+                  
                   },
                   error: function (data) {
                       console.log('Error:', data);
@@ -560,6 +665,7 @@
             
      
          });
+               // Blotter and Narrative Report End
 
          });
 

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\blotters;
 use App\Models\resident_info;
+use App\Models\person_involve;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Foreach_;
 
 class BlotterController extends Controller
 {
@@ -57,7 +60,13 @@ class BlotterController extends Controller
     public function store(Request $request)
     {
 
-        if ($request->schedule_date != null && $request->schedule_time != null) {
+        // if ($request->schedule_date != null && $request->schedule_time != null) {
+        //     $request->schedule = "Schedule";
+        // } else {
+        //     $request->schedule = "Unschedule";
+        // }
+
+        if ($request->schedule_date != null) {
             $request->schedule = "Schedule";
         } else {
             $request->schedule = "Unschedule";
@@ -67,7 +76,7 @@ class BlotterController extends Controller
             $request->schedule = "Settled";
         }
 
-        blotters::updateOrCreate(
+        $blotters = blotters::updateOrCreate(
             ['blotter_id' => $request->blotter_id],
             [
                 'incident_location' => $request->incident_location,
@@ -78,11 +87,25 @@ class BlotterController extends Controller
                 'time_reported' => $request->time_reported,
                 'status' => $request->status,
                 'schedule_date' => $request->schedule_date,
-                'schedule_time' => $request->schedule_time,
+                // 'schedule_time' => $request->schedule_time,
                 'schedule' => $request->schedule,
                 'incident_narrative' => $request->incident_narrative
             ]
         );
+
+        $blotter_id = $blotters->blotter_id;
+        DB::table('person_involves')->where('blotter_id',  $blotter_id)->delete();
+
+        foreach ($request->ids as $key => $ids) {
+            $data = new person_involve();
+            $data->blotter_id = $blotter_id;
+            $data->resident_id = $ids;
+            $data->person_involve = $request->person_involve[$key];
+            $data->involvement_type = $request->involvement_type[$key];
+            $data->save();
+        }
+
+
 
         return response()->json(['success' => 'NewBlotter saved successfully.']);
     }
@@ -108,8 +131,11 @@ class BlotterController extends Controller
      */
     public function edit($id)
     {
+
         $blotter = blotters::find($id);
-        return response()->json($blotter);
+        $person_involve = person_involve::where('blotter_id', $blotter->blotter_id)->get();
+
+        return response()->json([$blotter, $person_involve]);
     }
 
 
