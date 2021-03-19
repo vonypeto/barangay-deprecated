@@ -41,6 +41,7 @@
                             <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" value="" maxlength="50" required="">
                         </div>
                     </div>
+                    
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Details</label>
@@ -65,6 +66,7 @@
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    
 <script type="text/javascript">
   $(function () {
 
@@ -75,11 +77,6 @@
     });
 
 
-   //var table = $('.data-table').DataTable();
-
-
-
-
     var table = $('.data-table').DataTable({
         processing: true,
         dom: 'lrtip',
@@ -87,7 +84,7 @@
         ajax: "{{ route('books.index') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'title', name: 'title'},
+            {data: 'author', name: 'title'},
             {data: 'author', name: 'author'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
@@ -132,6 +129,8 @@
           error: function (data) {
               console.log('Error:', data);
               $('#saveBtn').html('Save Changes');
+
+            
           }
       });
     });

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
    <head>
@@ -24,9 +22,7 @@
                 region_store : "{{ route('maintenance.store') }}",
 
             }
-
         };
-
      </script>
 
 
@@ -69,5 +65,3 @@
 
 
 </html>
-
-

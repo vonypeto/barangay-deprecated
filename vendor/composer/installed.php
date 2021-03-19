@@ -1,4 +1,4 @@
-<?php return array (
+z<?php return array (
   'root' =>
   array (
     'pretty_version' => 'dev-main',

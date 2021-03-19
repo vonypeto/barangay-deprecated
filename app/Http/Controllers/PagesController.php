@@ -110,6 +110,17 @@ class PagesController extends Controller
 
         $pdf = PDF::loadView('invoice');
         return $pdf->download('invoice.pdf');
+        // $data = DB::table('sessions')
+        // ->select('username')
+        // ->where('user_id', '=', 1);
+
+        // $test = DB::table('sessions')
+        // ->where('user_id', '=', 1)
+        // ->update(['username' => "giannpogi"]);
+
+
+        echo "running";
+
 
 
 
@@ -163,6 +174,10 @@ class PagesController extends Controller
     public function  maintenance(){
 
         return view('pages.setting.maintenance');
+
+    }
+
+    public function jakol(){
 
     }
 }

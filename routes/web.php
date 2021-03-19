@@ -14,6 +14,8 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\UnscheduleController;
 use App\Http\Controllers\ScheduleTodayController;
 use App\Http\Controllers\SettledCasesController;
+
+use App\Http\Controllers\UserController;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -40,6 +42,11 @@ Route::get('/setting/account',[AccountController::class, 'show']);
 Route::get('/dashboard', [PagesController::class, 'dashboard']);
 Route::get('/setting/maintenance', [BrgyOfficialController::class, 'show']);
 Route::get('/setting/account', [AccountController::class, 'show']);
+*//*
+Route::get('/dashboard',[PagesController::class, 'dashboard']);
+Route::get('/blotter',[BlotterController::class, 'show']);
+Route::get('/schedule',[ScheduleController::class, 'show']);
+Route::get('/setting/maintenance',[BrgyOfficialController::class, 'show']);
 */
 
 //start von
@@ -74,7 +81,25 @@ Route::get('certificate/table/type', [CertificateController::class, 'certificate
 Route::post('certificate/table/type', [CertificateController::class, 'certtypesubmit'])->name('certtypesubmit.post');
 Route::get('certificate/table/type/{cert_id}/edit', [CertificateController::class, 'certtypeedit'])->name('certtypesubmit.edit');
 Route::delete('certificate/table/type/{cert_id}', [CertificateController::class, 'certtypedelete'])->name('certtypedelete.delete');
+Route::get('sampledata', [PagesController::class, 'sampledata']);
 
+Route::resource('books', BooksController::class);
+//end von
+
+//start giannpogi
+Route::resource('/setting/account', AccountController::class);
+
+//test
+Route::get("login", [UserController::class, 'login']);
+Route::get("profile", [UserController::class, 'profile']);
+Route::get("register", [UserController::class, 'register']);
+Route::post("register", [UserController::class, 'register_check']);
+Route::post("login", [UserController::class, 'check']);
+Route::get("logout", [UserController::class, 'logout']);
+
+Route::post("/setting/account/form",[AccountController::class, 'accountSettingCheck'])->name("accountSettingCheck");
+
+Route::get("/setting/account/session/table", [AccountController::class, 'getSessionTable'])->name("getSessionTable");
 
 //end von
 
@@ -100,28 +125,6 @@ Route::resource('scheduletoday', ScheduleTodayController::class);
 Route::resource('settled', SettledCasesController::class);
 
 // Rojhon pogi paren
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
