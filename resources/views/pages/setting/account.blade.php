@@ -213,6 +213,15 @@
                               <span class="text-danger error_text create_account_form_verify_password_error"></span>
                            </div>
 
+                           {{-- type --}}
+                           <div class="mb-3">
+                              <label for="create_account_form_type">Select user type:</label>
+                              <select class="form-control" id="create_account_form_type" name="create_account_form_type">
+                                <option>client</option>
+                                <option>admin</option>
+                              </select>
+                           </div>
+
                            <hr class="mb-4">
                            <div class="text-center button-center d-flex justify-content-center">
                               {{-- submit --}}
@@ -405,14 +414,13 @@
                serverSide: true,
                ajax: "{{ route('account.index') }}",
                columns: [
-               {data: 'action', name: 'action', orderable: true, searchable: true},
-               {data: 'account_id', name: 'account_id', visible:false},
-               {data: 'first_name', name: 'manage_account_form_firstname'},
-               {data: 'last_name', name: 'manage_account_form_lastname'},
-               {data: 'username', name: 'manage_account_form_username'},
-               {data: 'email', name: 'manage_account_form_email'},
-               {data: 'type', name: 'manage_account_form_type'},
-
+               {data: 'action', name: 'action', orderable: false, searchable: true},
+               {data: 'account_id', name: 'account_id', visible:false , searchable: false},
+               {data: 'first_name', name: 'manage_account_form_firstname', orderable: false, searchable: true},
+               {data: 'last_name', name: 'manage_account_form_lastname', orderable: false, searchable: true},
+               {data: 'username', name: 'manage_account_form_username', orderable: false, searchable: true},
+               {data: 'email', name: 'manage_account_form_email', orderable: false, searchable: true},
+               {data: 'type', name: 'manage_account_form_type', orderable: false, searchable: true},
                ]
 
             });
@@ -426,8 +434,8 @@
                columns: [
                {data: 'session_id', name: 'session_id', visible:false},
                {data: 'user_id', name: 'user_id', visible:false},
-               {data: 'username', name: 'username'},
-               {data: 'login_at', name: 'login_at'},
+               {data: 'username', name: 'username',  orderable: false},
+               {data: 'login_at', name: 'login_at', orderable: true},
                ]
 
             });

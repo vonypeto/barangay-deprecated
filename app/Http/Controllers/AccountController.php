@@ -126,7 +126,7 @@ class AccountController extends Controller
                   'username'=>$request->create_account_form_username,
                   'email'=>$request->create_account_form_email,
                   'password'=>Hash::make($request->create_account_form_password),
-                  'type'=> "admin",
+                  'type'=> $request->create_account_form_type,
              ];
 
              $query = DB::table('accounts')->insert($values);
