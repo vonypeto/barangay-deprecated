@@ -16,10 +16,10 @@
   <button class="btn btn-success text-white " href="#home">New Blotter Record <i class="fa fa-plus"></i></button>
 
   <div class="search-container">
-    <form action="/action_page.php">
+
       <input class="global_filter" type="text" id="global_filter" placeholder="Search..." name="search">
       <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
+
   </div>
 </div>
 
@@ -53,7 +53,7 @@
 
 
 
-  <table id="resident" class="dataTables_info table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer">
+  <table id="resident" class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer">
             <thead>
                <tr class="headings">
                   <th class="column-title">Action</th>

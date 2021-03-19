@@ -2,6 +2,12 @@
 
 @extends('layouts.apps')
 @section('content')
+
+
+
+
+
+
 <div class="col-sm-12 text-left ">
    <h1 class="border-bottom border-bot pt-3">Barangay Setting</h1>
 </div>
@@ -69,7 +75,21 @@
                     <div class="form-group">
                         <label for="name" class="col-sm-2 control-label">Position</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" id="position" name="position" placeholder="Enter Position" value="" maxlength="50" required="">
+
+                            <select name="position" id="position" style="height:38px; width: 100%">
+                            <option value="">-Select Position Status-</option>
+                            <option value="Punong Barangay">Punong Barangay</option>
+                            <option value="SK Chairman">SK Chairman</option>
+                            <option value="Barangay Secretary">Barangay Secretary</option>
+                            <option value="Barangay Treasurer">Barangay Treasurer</option>
+                            <option value="Kagawad">Kagawad</option>
+                          </select>
+
+
+
+
+
+
                         </div>
                     </div>
                     <div class="form-group">
@@ -130,7 +150,7 @@
                     @csrf
                     <input hidden id="barangay_id" name="barangay_id" value="{{ $Barangayimage->barangay_id ?? '' }}">
                     <div class="mb-3">
-                        <label for="email">Barangay Logo Dimension: MAX:500px</label>
+                        <label for="email">Barangay Logo Dimension: MAX:300px</label>
                         <input id="profile_image" type="file" class="form-control" class="text-center" value="{{ $Barangayimage->image ?? '' }}"  name="image" style="padding: 0px !important">
                         <div class="invalid-feedback">
                            Invalid Logo or no image
@@ -186,18 +206,6 @@
 
 
 </div>
-
-
-   <script type="text/javascript">
-    $(function () {
-
-
-
-    });
-  </script>
-
-
-
 
 
 
@@ -307,9 +315,7 @@
 </div>
 
 
-
-
-
+<!--
 <div class="modal fade" id="brgymodal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -338,7 +344,7 @@
     </div>
 </div>
 
-
+-->
 
 
 

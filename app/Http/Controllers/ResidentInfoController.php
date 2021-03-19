@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\Models\area_setting;
-use App\Models\PersonInvolveController;
+
 use Carbon\Carbon;
+use PDF;
 class ResidentInfoController extends Controller
 {
 
@@ -34,6 +35,8 @@ class ResidentInfoController extends Controller
                  })
                    ->rawColumns(['checkbox','action'])
                     ->make(true);
+
+
 
 
 

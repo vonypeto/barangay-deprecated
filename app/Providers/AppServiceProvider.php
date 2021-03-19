@@ -30,5 +30,13 @@ class AppServiceProvider extends ServiceProvider
             $view->with('image',$image);
 
         });
+        view()->composer('pages.certificate',function($view){
+            $layout = DB::table('certificate_layouts')
+            ->where('layout_id','=','1')->first();
+            $view->with('layout',$layout);
+
+        });
+
+
     }
 }

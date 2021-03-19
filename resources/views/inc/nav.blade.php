@@ -1,11 +1,9 @@
 
 
 <div class="bg-light border-right" id="sidebar-wrapper">
-   <div class="sidebar-heading text-center">University of Morong Rizal</div>
-   <div class="container-fluid text-center pr-0 pl-0 ">
 
       @include('layouts.image')
-   </div>
+
    <div class="list-group list-group-flush w-100 pt-3 bg-light">
       <li class="list-none"><a href="/dashboard"  class="list-group-item list-group-item-action bg-light text-adjust {{ (request()->is('dashboard*')) ? 'active-page' : '' }}"><i class="fa fa-home fa-lg icon-adjust"></i> Dashboard</a> </li>
       <li class="list-none"><a href="/resident"       class="list-group-item list-group-item-action bg-light text-adjust {{ (request()->is('resident*')) ? 'active-page' : '' }}"><i class="fa fa-user-o fa-lg icon-adjust"></i> Resident Information</a> </li>

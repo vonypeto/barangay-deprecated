@@ -11,23 +11,23 @@
 <div class="row pl-4 pr-4   ">
    <div class="col-sm-3 form-group text-center dashboard-box">
       <h5 class="mb-3" >Registered Population</h5>
-      <h1 class="mb-0">1</h1>
+      <h1 class="mb-0">{{ $registered ?? '0'}}</h1>
    </div>
    <div class="col-sm-2 form-group text-center dashboard-box">
       <h5 class="mb-3" >Males</h5>
-      <h1 class="mb-0">1</h1>
+      <h1 class="mb-0">   <td class=" ">{{ $male ?? '0'}}</td></h1>
    </div>
    <div class="col-sm-2 form-group text-center dashboard-box">
       <h5 class="mb-3">List of Request</h5>
-      <h1 class="mb-0">1</h1>
+      <h1 class="mb-0">{{ $certificate_requests ?? '0'}}</h1>
    </div>
    <div class="col-sm-2 form-group text-center dashboard-box">
       <h5 class="mb-3" >Females</h5>
-      <h1 class="">1</h1>
+      <h1 class="">{{ $female ?? '0'}}</h1>
    </div>
    <div class="col-sm-3 form-group text-center dashboard-box">
       <h5 class="mb-3" >Registered Voter</h5>
-      <h1 class="">1</h1>
+      <h1 class="">{{ $voter ?? '0'}}</h1>
    </div>
    <div class="col-sm-12 border border-bot ">
    </div>
@@ -43,7 +43,7 @@
                <tr class="headings">
                   <th class="column-title">Name </th>
                   <th class="column-title">Position </th>
-                  <th class="column-title">Official Committe </th>
+                  <th class="column-title">Year of Services </th>
 
 
                   </th>
@@ -53,19 +53,20 @@
                </tr>
             </thead>
             <tbody>
-               <tr class="even pointer">
-                  <td class=" ">121000040</td>
-                  <td class=" ">May 23, 2014 11:47:56 PM </td>
-                  <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
-                  </td>
+                @if(count($brgy_official))
+                @foreach ($brgy_official as $brgy_official)
+                <tr class="even pointer">
+
+
+                  <td class=" ">{{ $brgy_official->name }}</td>
+                  <td class=" ">{{ $brgy_official->position }}</td>
+                  <td class=" ">{{ $brgy_official->year_of_service }}</td>
+
+
                </tr>
-               <tr class="odd pointer">
-                  <td class=" ">121000039</td>
-                  <td class=" ">May 23, 2014 11:30:12 PM</td>
-                  <td class=" ">121000208 <i class="success fa fa-long-arrow-up"></i>
-                  </td>
-                  </td>
-               </tr>
+               @endforeach
+               @endif
+
             </tbody>
          </table>
       </div>
@@ -83,16 +84,19 @@
                </tr>
             </thead>
             <tbody>
-               <tr class="even pointer">
-                  <td class=" ">121000040</td>
-                  <td class=" ">May 23, 2014 11:47:56 PM </td>
-                  </td>
+                @if(count($area_setting))
+                @foreach ($area_setting as $area_setting)
+                <tr class="even pointer">
+
+
+                  <td class=" ">{{ $area_setting->area }}</td>
+                  <td class=" ">{{ $area_setting->population }}</td>
+
+
+
                </tr>
-               <tr class="odd pointer">
-                  <td class=" ">121000039</td>
-                  <td class=" ">May 23, 2014 11:30:12 PM</td>
-                  </td>
-               </tr>
+               @endforeach
+               @endif
             </tbody>
          </table>
       </div>

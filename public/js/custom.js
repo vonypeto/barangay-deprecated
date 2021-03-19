@@ -472,6 +472,7 @@ $(document).ready(function() {
         }
     });
   });
+  // region delete
   $('body').on('click', '.trash', function () {
 
       var area = $(this).data("id");
@@ -511,7 +512,7 @@ $(document).ready(function() {
         success: function (data) {
             $('#brgyform').trigger("reset");
             $('#brgymodal').modal('hide');
-
+            alert(JSON.stringify(data));
             brgytable.draw();
         },
         error: function (data) {
@@ -592,7 +593,7 @@ $.ajax({
         $("#wrapper").toggleClass("toggled");
     });
 
-
+//filter search bar
     $('input.global_filter').on('keyup click', function() {
         filterGlobal();
         filterschedule();

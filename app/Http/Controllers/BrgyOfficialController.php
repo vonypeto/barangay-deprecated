@@ -75,13 +75,19 @@ class BrgyOfficialController extends Controller
 
     public function barangayPOST(Request $request){
 
+        $barangay = DB::table('brgy_officials')->count();
+        if($barangay <= 10){
         brgy_official::updateOrCreate(['official_id' => $request->official_id],
         ['name' => $request->name,
         'position' => $request->position,
         'official_committe' => $request->official_committe,
         'year_of_service' =>$request->year_of_service]);
         return response()->json(['success'=>'Official saved successfully.']);
+        }else{
 
+
+            return response()->json(['Failed'=>'No more than 11 member.']);
+        }
 
 
     }

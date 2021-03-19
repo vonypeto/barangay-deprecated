@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\area_setting;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
 class PagesController extends Controller
+
 {
     //
 
@@ -46,6 +48,33 @@ class PagesController extends Controller
 
         }
 
+        $deletefile = DB::table('certificate_layouts')
+        ->where('layout_id','=',1)
+        ->first();
+
+
+
+        echo "<br>";
+
+
+
+/*
+      $deletefile = DB::table('certificate_layouts')
+      ->where('layout_id','=',1)
+      ->first();
+      if ($deletefile !== null) {
+          $deletefile = DB::table('certificate_layouts')
+      ->where('layout_id','=',1)
+      ->first();
+      echo  $deletefile->logo_1;
+      Storage::delete($deletefile->logo_1);
+      Storage::delete($deletefile->logo_2);
+      Storage::delete($deletefile->punongbarangay);
+       }
+
+
+*/
+
 
 
        /*
@@ -77,6 +106,13 @@ class PagesController extends Controller
             echo $add;
         }
 */
+    }public function invoice(){
+
+        $pdf = PDF::loadView('invoice');
+        return $pdf->download('invoice.pdf');
+
+
+
     }
 
 
