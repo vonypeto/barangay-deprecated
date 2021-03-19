@@ -8,11 +8,11 @@
 
 <div class="main-wrapper col-sm-12 text-left h-100  pr-0 pl-0 " >
    <div class="col-sm-12 pl-0 pr-0 search-bars" >
-      
+
       <!----------------
          EDIT HERE
          ---------------->
-         
+
          {{-- - Tablink - --}}
          <div class="tab-nav ">
             <button class="tablinks active" onclick="schedules(event, 'schedule')">Account Setting</button>
@@ -20,10 +20,10 @@
             <button class="tablinks"  id="tablink-manage-account" onclick="schedules(event, 'manage')">Manage Account</button>
             <button class="tablinks" onclick="schedules(event, 'session')">Session History</button>
          </div>
-         
+
          {{-- - Account Setting Tablink - --}}
          <div id="schedule" class="tabcontent">
-            
+
             <div class="col-sm-12 pt-2">
                <!-----
                   START HERE
@@ -54,7 +54,7 @@
                               <button class="btn btn-dark float-right" id="lastname_edit">Edit</button>
                            </div>
                         </div>
-                        
+
                         {{-- username --}}
                         <div class="row rounded-lg bg-white p-3 m-2">
                            <div class="col">
@@ -105,7 +105,7 @@
             <div class="container">
                <!-- Trigger the modal with a button -->
                {{-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#account_settings_modal">Open Large Modal</button> --}}
-               
+
                <div class="modal fade " id="account_settings_modal" role="dialog">
                   <div class="modal-dialog modal-lg ">
                      <div class="modal-content">
@@ -118,7 +118,7 @@
                               {{-- hidden var --}}
                               <input type="text" name="current_id" id="current_id" hidden>
                               <input type="text" name="table_edit" id="table_edit" hidden>
-                              
+
                               {{-- Label 1 --}}
                               <div class="form-group row p-2">
                                  <label for="new_input_modal" id="modal_label1"  class="font-weight-bold">Label1</label>
@@ -136,7 +136,7 @@
                                     <span class="text-danger error_text current_password_modal_confirmation_error"></span>
                                  </div>
                               </div>
-                              
+
                               {{-- Label 2 --}}
                               <div class="form-group row p-2">
                                  <label for="current_password_modal" id="modal_label2" class="font-weight-bold">CURRENT PASSWORD</label>
@@ -146,7 +146,7 @@
                                  </div>
                               </div>
 
-                              
+
                               <div class="form-group">
                                  <button type="submit" class="btn btn-primary float-right" id="saveBtn" value="create" >Save changes
                                  </button>
@@ -162,22 +162,22 @@
       <br>
 
                {{-- - Create Account Tablink - --}}
-               
+
                <div id="create" class="tabcontent">
-                  
+
                   <div class="row">
                      <div class="col-md-12 order-md-1 d-flex justify-content-center pt-4" >
                         {{-- ------------------------------------------------- form ------------------------------------------------------ --}}
                         <form class="needs-validation" novalidate="" id="create_account_form">
                            <div class="row">
-                              
+
                               {{-- firstname --}}
                               <div class="col-md-6 mb-3">
                                  <label for="firstname">First name</label>
                                  <input type="text" class="form-control" name="create_account_form_firstname" id="create_account_form_firstname" placeholder="Enter First Name">
                                  <span class="text-danger error_text create_account_form_firstname_error"></span>
                               </div>
-                              
+
                               {{-- lastname --}}
                               <div class="col-md-6 mb-3">
                                  <label for="create_account_form_lastname">Last name</label>
@@ -185,7 +185,7 @@
                                  <span class="text-danger error_text create_account_form_lastname_error"></span>
                               </div>
                            </div>
-                           
+
                            {{-- username --}}
                            <div class="mb-3">
                               <label for="create_account_form_username">Username</label>
@@ -212,7 +212,7 @@
                               <input type="password" class="form-control" name="create_account_form_verify_password" id="create_account_form_verify_password" placeholder="Verify password">
                               <span class="text-danger error_text create_account_form_verify_password_error"></span>
                            </div>
-                           
+
                            <hr class="mb-4">
                            <div class="text-center button-center d-flex justify-content-center">
                               {{-- submit --}}
@@ -224,11 +224,11 @@
                         {{-- ------------------------------------------------- form ------------------------------------------------------ --}}
                      </div>
                   </div>
-                  
+
                </div>
-               
+
                {{-- - Manage Account Tablink - --}}
-               
+
                <div id="manage" class="tabcontent">
                   <div class="row ">
                      <div class="col-sm-12 pl-3 ">
@@ -262,26 +262,26 @@
                                        <span class="text-danger error_text manage_account_confirm_password_error"></span>
                                     </div>
                                  </div>
-                                 
+
                                  <div class="col-sm-12 pl-0 pr-0  ">
                                     <div class="form-group text-right ">
                                        <button type="submit" id="changepasswordBtn"class="btn btn-success account-button " disabled><b>Change Password</b></button>
-                                       
+
                                     </div>
                                  </div>
                               </div>
-                              
+
                            </div>
                         </form>
                         <div class="border-buttom border-bot pl-3 pr-3">
                         </div>
-                        
-                        
+
+
                         <div class="col-sm-12 overflow-auto  pt-2">
-                           
-                           
-                           
-                           <table id="manage-account-table" class="datatable-element table dataTables_info resident table-striped jambo_table bulk_action text-center border" >
+
+
+
+                           <table id="manage-account-table" class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer" >
                               <thead>
                                  <tr class="headings">
                                     <th class="column-title">Action</th>
@@ -291,47 +291,47 @@
                                     <th class="column-title">Username</th>
                                     <th class="column-title">Email</th>
                                     <th class="column-title">Type</th>
-                                    <th class="column-title">Password</th>
-                                 </th>
+
+
                               </tr>
                            </thead>
                            <tbody>
-                              
+
                            </tbody>
                         </table>
-                        <p>Note*: I'll delete id column pag nag bayad na si von.</p>
-                        
+
+
                      </div>
-                     
-                     
-                     
+
+
+
                   </div>
                </div>
             </div>
-            
+
             {{-- - Session History Tablink - --}}
-            
+
             <div id="session" class="tabcontent">
                <div class="topnav navbar ">
                   <button class="btn btn-primary text-white " href="#home">Clear</button>
                   <div class="search-container">
-                     
+
                      <input class="global_filter" type="text" id="global_filter"   placeholder="Search..." name="search">
                      <button type="submit"><i class="fa fa-search"></i></button>
-                     
+
                   </div>
                </div>
                <div class="row">
                   <div class="col-sm-12">
-                     
-                     
-                     
+
+
+
                      <div class="col-sm-12 overflow-auto pt-3 ">
-                        
-                        
-                        
-                        
-                        
+
+
+
+
+
                         <table class="dataTables_info table datatable-element  resident table-striped jambo_table bulk_action text-center border session_history_table">
                            <thead>
                               <tr class="headings">
@@ -339,8 +339,8 @@
                                  <th class="column-title" hidden >user_id </th>
                                  <th class="column-title">Username </th>
                                  <th class="column-title">Login At </th>
-                                 
-                                 
+
+
                               </th>
                               <th class="bulk-actions" hidden colspan="7">
                                  <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
@@ -348,13 +348,13 @@
                            </tr>
                         </thead>
                         <tbody>
-                           
-                           
+
+
                            {{-- @if(count($sessions) > 0)
                               @foreach ($sessions as $sessions)
-                              
-                              
-                              
+
+
+
                               <tr class="even pointer">
                                  <td class=" " hidden>{{ $sessions->session_id }}</td>
                                  <td class=" " hidden>{{ $sessions->user_id }}</td>
@@ -366,25 +366,25 @@
                                --}}
                            </tbody>
                         </table>
-                        
+
                      </div>
                   </div>
-                  
+
                </div>
             </div>
-            
-            
+
+
          </div>
       </div>
-      
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
       <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
       <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-      
+
       <script type="text/javascript">
          $(function() {
-            
+
             //Hidding some shit
             $("#password_edit_modal").hide();
 
@@ -398,7 +398,7 @@
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                }
             });
-            
+
             //Table on Manage Account
             var table = $("#manage-account-table").DataTable({
                processing: true,
@@ -412,9 +412,9 @@
                {data: 'username', name: 'manage_account_form_username'},
                {data: 'email', name: 'manage_account_form_email'},
                {data: 'type', name: 'manage_account_form_type'},
-               {data: 'password', name: 'manage_account_form_password'},
+
                ]
-               
+
             });
 
                //Table on sessionTable
@@ -429,26 +429,26 @@
                {data: 'username', name: 'username'},
                {data: 'login_at', name: 'login_at'},
                ]
-               
+
             });
-            
+
             //Select Button
             $('body').on('click', '#selectBtn', function () {
                var id = $(this).data('id');
                var username = $(this).data('username');
                $("#changepasswordBtn").removeAttr("disabled");
-               
-               
+
+
                $("#manage_account_id").val(id);
 
                $("#manage_account_username").val(username);
             });
-            
+
             //Edit
             $('#manage_account_form').on('submit', function (e) {
                e.preventDefault();
                var id = $("#manage_account_id").val();
-               
+
                if(confirm("Are you sure want to change password!?"))
                {
                   $.ajax({
@@ -456,11 +456,11 @@
                   url: "{{ route('account.index') }}"+'/'+id,
                   data: $('#manage_account_form').serialize(),
                   dataType: 'json',
-                  
+
                   beforeSend:function(){
                      $(document).find('span.error_text').text('');
                   },
-                  
+
                   success: function (data) {
                      if(data.status == 0){
                         $.each(data.error, function(prefix, val){
@@ -474,17 +474,17 @@
                         table.draw();
                      }
                   }
-                  
+
                 });
                }
 
             });
-            
+
             //Delete
             $('body').on('click', '#deleteBtn', function () {
-               
+
                var id = $(this).data("id");
-               
+
                if(id == $("#current_user").data('id')){
                   alert("You cannot delete your own account!!")
                }
@@ -495,7 +495,7 @@
                      $.ajax({
                         type: "DELETE",
                         url: "{{ route('account.index') }}"+'/'+id,
-                        
+
                         success: function (data) {
                            table.draw();
                            sessionTable.draw();
@@ -507,13 +507,13 @@
                       });
                   }
                }
-               
+
             });
-            
+
             //Create Account
-            $("#create_account_form").on('submit', function (e) { 
+            $("#create_account_form").on('submit', function (e) {
                e.preventDefault();
-               
+
                $.ajax({
                   type:"post",
                   url:"{{ route('account.store') }}",
@@ -537,11 +537,11 @@
                      }
                   }
                });
-               
+
             });
 
             //Create Account Reset Button
-            $("#resetBtn").click(function (e) { 
+            $("#resetBtn").click(function (e) {
                $(document).find('span.error_text').text('');
 
             });
@@ -569,9 +569,9 @@
             });
 
             // Modal for firstname edit
-            $('body').on('click', '#firstname_edit', function () { 
-      
-               var id = current_id; 
+            $('body').on('click', '#firstname_edit', function () {
+
+               var id = current_id;
                $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
                   $('#account_settings_modal').modal('toggle');
                   $("#account_settings_modal").show();
@@ -581,15 +581,15 @@
 
                   $('#current_id').val(id);
                   $('#table_edit').val("firstname");
-                  
+
                   isFirstname = true;
                })
             });
 
             // Modal for Lastname edit
-            $('body').on('click', '#lastname_edit', function () { 
-      
-               var id = current_id; 
+            $('body').on('click', '#lastname_edit', function () {
+
+               var id = current_id;
                $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
                   $('#account_settings_modal').modal('toggle');
                   $("#account_settings_modal").show();
@@ -603,7 +603,7 @@
             });
 
             //Modal for username edit
-            $('body').on('click', '#username_edit', function () { 
+            $('body').on('click', '#username_edit', function () {
                var id = current_id;  // var id =  $(this).data('id');
                $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
                $('#account_settings_modal').modal('toggle');
@@ -619,9 +619,9 @@
             })
          });
             // Modal for email edit
-            $('body').on('click', '#email_edit', function () { 
-      
-               var id = current_id; 
+            $('body').on('click', '#email_edit', function () {
+
+               var id = current_id;
                $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
                   $('#account_settings_modal').modal('toggle');
                   $("#account_settings_modal").show();
@@ -637,9 +637,9 @@
             });
 
              // Modal for phone number edit
-            $('body').on('click', '#phonenumber_edit', function () { 
-               
-               var id = current_id; 
+            $('body').on('click', '#phonenumber_edit', function () {
+
+               var id = current_id;
                $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
                   $('#account_settings_modal').modal('toggle');
                   $("#account_settings_modal").show();
@@ -649,11 +649,11 @@
                })
 
             });
-           
+
             // Modal for password edit
-            $('body').on('click', '#password_edit', function () { 
-               
-               var id = current_id; 
+            $('body').on('click', '#password_edit', function () {
+
+               var id = current_id;
                $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
                   $('#account_settings_modal').modal('toggle');
                   $("#account_settings_modal").show();
@@ -663,20 +663,20 @@
 
                   $('#current_id').val(id);
                   $('#table_edit').val("password");
-                  
+
 
                   $("#new_input_modal").attr("type","password");
                   $("#current_password_modal_confirmation").attr("name","current_password_modal_confirmation");
-                  $("#password_edit_modal").show();     
+                  $("#password_edit_modal").show();
                })
            });
 
          //Modal on submit
-         $("#account_settings_form").on('submit', function (e) { 
+         $("#account_settings_form").on('submit', function (e) {
                e.preventDefault();
 
                $firstname = $("#new_input_modal").val();
-             
+
                $.ajax({
                   type:"post",
                   url:"{{ route("accountSettingCheck") }}",
@@ -713,20 +713,20 @@
 
       </script>
       @endsection
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

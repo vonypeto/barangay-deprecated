@@ -12,9 +12,10 @@ use app\Rules\emailValidate;
 
 //Add ons
 use Carbon;
-use Hash;
-use Validator;
-use DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\ValidatesRequests;
 
 // Custom Rules
 use App\Rules\ConfirmPassword;
@@ -34,18 +35,18 @@ class AccountController extends Controller
                         ->orderBy('session_id', 'desc')
                         ->get();
 
-        
-        
+
+
         if ($request->ajax()) {
             $data = Account::latest()->get();
-            
+
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
 
-                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-username="'.$row->username.'" data-id="'.$row->account_id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm" id="selectBtn"></i><i class="fa fa-pencil" aria-hidden="true"></i> Select</a>';
+                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-username="'.$row->username.'" data-id="'.$row->account_id.'" data-original-title="Edit" class="edit btn btn-primary btn-xs pr-4 pl-4" id="selectBtn"></i><i class="fa fa-pencil" aria-hidden="true"></i> </a>';
 
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->account_id.'" data-original-title="Delete" class="btn btn-danger btn-sm" id="deleteBtn"><i class="fa fa-trash" aria-hidden="true"></a>';
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->account_id.'" data-original-title="Delete" class="btn btn-danger btn-xs pr-4 pl-4" id="deleteBtn"><i class="fa fa-trash" aria-hidden="true"></a>';
 
                             return $btn;
                     })
@@ -66,7 +67,7 @@ class AccountController extends Controller
             ->make(true);
         }
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -86,7 +87,7 @@ class AccountController extends Controller
      */
      public function store(Request $request)
      {
- 
+
          $validator = Validator::make($request->all(),[
              "create_account_form_firstname"=>"required",
              "create_account_form_lastname"=>"required",
@@ -102,9 +103,9 @@ class AccountController extends Controller
              "create_account_form_email.required" => "This field cannot be empty",
              "create_account_form_password.required" => "This field cannot be empty",
              "create_account_form_verify_password.required" => "This field cannot be empty",
- 
+
              "create_account_form_email.ends_with" => "Valid email is required",
- 
+
              "create_account_form_password.same" => "Password does not match",
              "create_account_form_verify_password.same" => "Password does not match",
 
@@ -113,9 +114,9 @@ class AccountController extends Controller
 
 
          ]);
- 
- 
-         if (!$validator->passes()) {
+
+
+         if ($validator->fails()) {
              return response()->json(['status'=> 0, 'error'=>$validator->errors()->toArray()]);
          }
          else {
@@ -127,9 +128,9 @@ class AccountController extends Controller
                   'password'=>Hash::make($request->create_account_form_password),
                   'type'=> "admin",
              ];
- 
+
              $query = DB::table('accounts')->insert($values);
- 
+
              if($query) {
                  return response()->json(['status'=>1, 'msg'=> 'Added new account :)']);
              }
@@ -169,9 +170,9 @@ class AccountController extends Controller
      public function update($id, Request $request)
      {
          $accounts = Account::findorfail($id);
- 
+
         //  $request->request->add(['old_database_password' => $accounts->password]);
-         
+
          $validator2 = Validator::make($request->all(),[
              "manage_account_username" => "required",
              "manage_account_new_password" => "required|same:manage_account_confirm_password",
@@ -188,20 +189,20 @@ class AccountController extends Controller
 
             //  "manage_account_current_password.same" => "Does not match with your old password",
             //  "manage_account_current_password.required" => "Password cannot be empty",
-             
- 
+
+
          ]);
- 
-         if (!$validator2->passes()) {
+
+         if ($validator2->fails()) {
              return response()->json(['status'=> 0, 'error'=>$validator2->errors()->toArray()]);
          }
          else {
-             
+
              $accounts -> password = Hash::make($request->manage_account_new_password);
              $accounts->save();
- 
+
              return response()->json(['status'=>1, 'msg'=> 'Password has been changed']);
-             
+
          }
      }
 
@@ -223,7 +224,7 @@ class AccountController extends Controller
     public function accountSettingCheck(Request $request){
         $id = $request->current_id;
         $accounts = Account::findorfail($id);
-        
+
         $validator = Validator::make($request->all(),[
             "new_input_modal" => ["required","sometimes"],
             "new_input_username_modal" => ["required", "unique:accounts,username","sometimes"],
@@ -240,14 +241,14 @@ class AccountController extends Controller
             "new_input_username_modal.unique" => "Username taken.",
             "current_password_modal_confirmation.required" => "Verify your new password!!",
             "current_password_modal_confirmation.same" => "Does not match with new password"
-            
+
         ]);
 
-        if (!$validator->passes()) {
+        if ($validator->fails()) {
             return response()->json(['status'=> 0, 'error'=>$validator->errors()->toArray()]);
         }
         else {
-    
+
             if ($request->table_edit == "firstname") {
                 $accounts -> first_name = $request->new_input_modal;
                 $accounts->save();
@@ -261,14 +262,14 @@ class AccountController extends Controller
             }
 
             if ($request->table_edit == "username") {
-                
+
                 $test = DB::table('sessions')
                 ->where('user_id', '=', $id)
                 ->update(['username' => $request->new_input_username_modal]);
 
                 $accounts -> username = $request->new_input_username_modal;
                 $accounts->save();
-                
+
             }
 
             if ($request->table_edit == "email") {
@@ -281,9 +282,9 @@ class AccountController extends Controller
                 $accounts -> password = Hash::make($request->new_input_modal);
                 $accounts->save();
             }
-    
+
             return response()->json(['msg'=>'Account information has been changed successfully.']);
-            
+
         }
     }
 }
