@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use DB;
 
 class AccountSeeder extends Seeder
 {
@@ -13,6 +14,5 @@ class AccountSeeder extends Seeder
      */
     public function run()
     {
-        //
     }
 }
