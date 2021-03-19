@@ -7,9 +7,13 @@ use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\BlotterController;
+use App\Http\Controllers\PersonInvolveController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\BarangayimageController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\UnscheduleController;
+use App\Http\Controllers\ScheduleTodayController;
+use App\Http\Controllers\SettledCasesController;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -28,12 +32,15 @@ Route::get('/', function () {
 });
 
 
-
+/*
 Route::get('/blotter',[BlotterController::class, 'show']);
 Route::get('/schedule',[ScheduleController::class, 'show']);
 Route::get('/setting/maintenance',[BrgyOfficialController::class, 'show']);
 Route::get('/setting/account',[AccountController::class, 'show']);
-
+Route::get('/dashboard', [PagesController::class, 'dashboard']);
+Route::get('/setting/maintenance', [BrgyOfficialController::class, 'show']);
+Route::get('/setting/account', [AccountController::class, 'show']);
+*/
 
 //start von
 //dashboard
@@ -74,6 +81,25 @@ Route::delete('certificate/table/type/{cert_id}', [CertificateController::class,
 
 
 
+
+
+// Rojhon pogi
+// Blotter
+Route::get('/blotter', [BlotterController::class, 'show']);
+Route::resource('blotters', BlotterController::class);
+
+// Person Involves
+Route::resource('personinvolves', PersonInvolveController::class);
+
+//Settlement Schedule
+Route::get('/schedule', [ScheduleController::class, 'index']);
+
+Route::resource('schedules', ScheduleController::class);
+Route::resource('unschedules', UnscheduleController::class);
+Route::resource('scheduletoday', ScheduleTodayController::class);
+Route::resource('settled', SettledCasesController::class);
+
+// Rojhon pogi paren
 
 
 
@@ -135,3 +161,4 @@ Route::get('/certificate-pdf', function () {
 
 Route::resource('books', BooksController::class);
 Route::get('sampledata', [PagesController::class, 'sampledata']);
+
