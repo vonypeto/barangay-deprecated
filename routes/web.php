@@ -29,6 +29,7 @@ use App\Http\Controllers\AdminPanel\Setting\Barangay\BarangayimageController;
 //Admin Panel End
 
 //Client Side
+
 //Account Login
 use App\Http\Controllers\ClientSide\ResidentAccountController;
 //Home Module
