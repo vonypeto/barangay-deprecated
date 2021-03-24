@@ -42,7 +42,7 @@ class BrgyOfficialController extends Controller
                             ->rawColumns(['action'])
                             ->make(true);
                 }
-                return view('pages.setting.maintenance',[compact('area'),'Barangayimage'=>$Barangayimage,
+                return view('pages.AdminPanel.setting.maintenance',[compact('area'),'Barangayimage'=>$Barangayimage,
                 'official_empty'=>$official_empty]);
 
 

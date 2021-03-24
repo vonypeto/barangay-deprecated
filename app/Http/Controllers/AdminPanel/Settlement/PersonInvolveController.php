@@ -65,7 +65,7 @@ class PersonInvolveController extends Controller
                 ->make(true);
         }
 
-        return view('pages.blotter',  compact('resident'));
+        return view('pages.AdminPanel.blotter',  compact('resident'));
     }
 
 

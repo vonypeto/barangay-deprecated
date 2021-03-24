@@ -38,7 +38,7 @@ class ScheduleController extends Controller
                 ->make(true);
         }
 
-        return view('pages.schedule',  compact('blotters'));
+        return view('pages.AdminPanel.schedule',  compact('blotters'));
     }
 
     public function create()

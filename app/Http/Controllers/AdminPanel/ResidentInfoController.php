@@ -47,7 +47,7 @@ class ResidentInfoController extends Controller
 
         }
 
-        return view('pages.resident',[compact('resident'),'area_setting'=>$area_setting]);
+        return view('pages.AdminPanel.resident',[compact('resident'),'area_setting'=>$area_setting]);
     }
     public function store(Request $request)
     {

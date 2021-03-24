@@ -34,7 +34,7 @@ class BooksController extends Controller
                     ->make(true);
         }
 
-        return view('books',compact('test'));
+        return view('Testing.books',compact('test'));
     }
 
     /**

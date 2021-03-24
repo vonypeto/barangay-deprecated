@@ -47,7 +47,7 @@ class CertificateController extends Controller
 
         }
 
-        return view('pages.certificate',[compact('certrequest'),'brgy_official2'=>$brgy_official,'brgy_official'=>$brgy_official,'puno'=>$puno,'puno2'=>$puno,'approve'=>$puno,'approve2'=>$puno,'content'=>$content]);
+        return view('pages.AdminPanel.certificate',[compact('certrequest'),'brgy_official2'=>$brgy_official,'brgy_official'=>$brgy_official,'puno'=>$puno,'puno2'=>$puno,'approve'=>$puno,'approve2'=>$puno,'content'=>$content]);
     }
 
 

@@ -37,7 +37,7 @@ class BlotterController extends Controller
                 ->make(true);
         }
 
-        return view('pages.blotter',  compact('blotters'));
+        return view('pages.AdminPanel.blotter',  compact('blotters'));
     }
 
 
@@ -99,7 +99,7 @@ class BlotterController extends Controller
     {
         $resident = resident_info::all();
         $blotter = blotters::all();
-        return view('pages.blotter', ['blotter' => $blotter,  'resident' => $resident]);
+        return view('pages.AdminPanel.blotter', ['blotter' => $blotter,  'resident' => $resident]);
     }
 
 

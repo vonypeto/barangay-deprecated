@@ -33,6 +33,6 @@ class SettledCasesController extends Controller
                 ->make(true);
         }
 
-        return view('pages.schedule',  compact('blotters'));
+        return view('pages.AdminPanel.schedule',  compact('blotters'));
     }
 }

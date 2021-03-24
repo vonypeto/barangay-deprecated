@@ -25,7 +25,7 @@ class UserController extends Controller
             return redirect("dashboard");
          }
 
-        return view("pages.user.login");
+        return view("pages.AdminPanel.user.login");
     }
 
     public function check(Request $request){
@@ -64,7 +64,7 @@ class UserController extends Controller
     }
 
     public function register(){
-        return view("pages.user.register");
+        return view("pages.AdminPanel.user.register");
     }
 
     public function register_check(Request $request){
@@ -105,7 +105,7 @@ class UserController extends Controller
         if (!session()->has("user")) {
             return back();
         }
-        return view ("pages.user.profile");
+        return view ("pages.AdminPanel.user.profile");
     }
 
     public function logout(){

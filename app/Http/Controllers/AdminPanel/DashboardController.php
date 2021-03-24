@@ -25,7 +25,7 @@ class DashboardController extends Controller
         $voter = DB::table('resident_infos')
             ->where('voterstatus','=','Yes')->count();
 
-        return view('pages.dashboard',['brgy_official'=>$brgy_official,'area_setting'=>$area_setting,
+        return view('pages.AdminPanel.dashboard',['brgy_official'=>$brgy_official,'area_setting'=>$area_setting,
         'male'=>$male,'female'=>$female,'voter'=>$voter,'registered'=>$registered,'certificate_requests'=>$certificate_requests]);
     }
 }

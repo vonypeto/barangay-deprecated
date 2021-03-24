@@ -151,22 +151,22 @@ Route::get("logout", [UserController::class, 'logout']);
 //Testing Area
 Route::resource('books', BooksController::class);
 Route::get('/invoice', function () {
-    return view('invoice');
-    $pdf = PDF::loadView('invoice')->setOptions(['defaultFont' => 'sans-serif']);;
+    return view('Testing.invoice');
+    $pdf = PDF::loadView('Testing.invoice')->setOptions(['defaultFont' => 'sans-serif']);;
     return $pdf->download('invoice.pdf');
 });
 Route::get('/invoice-pdf', function () {
  //   return view('/invoice-pdf');
-    $pdf = PDF::loadView('invoice-pdf')->setOptions(['defaultFont' => 'sans-serif','isRemoteEnabled' => true,'format' => 'letter']);;
+    $pdf = PDF::loadView('Testing.invoice-pdf')->setOptions(['defaultFont' => 'sans-serif','isRemoteEnabled' => true,'format' => 'letter']);;
     return $pdf->download('invoice.pdf');
 });
 
 Route::get('/certificates', function () {
-    return view('certificate');
+    return view('Testing.certificate');
 });
 Route::get('/certificate-pdf', function () {
-    return view('certificate-pdf');
-    $pdf = PDF::loadView('certificate-pdf')->setPaper('A4','portrait')->setOptions(['defaultFont' => 'sans-serif','isRemoteEnabled' => true]) ;
+    return view('Testingcertificate-pdf');
+    $pdf = PDF::loadView('Testing.certificate-pdf')->setPaper('A4','portrait')->setOptions(['defaultFont' => 'sans-serif','isRemoteEnabled' => true]) ;
     return $pdf->download('certificate.pdf');
 });
 Route::resource('books', BooksController::class);

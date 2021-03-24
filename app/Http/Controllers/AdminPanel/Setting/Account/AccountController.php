@@ -55,7 +55,7 @@ class AccountController extends Controller
                     ->make(true);
         }
 
-        return view('pages.setting.account',compact('accounts','sessions'));
+        return view('pages.AdminPanel.setting.account',compact('accounts','sessions'));
     }
 
     public function getSessionTable(Request $request){
