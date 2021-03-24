@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminPanel\Settlement;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+//Plugins
 use Yajra\DataTables\DataTables;
+//Models
 use App\Models\blotters;
 
 class SettledCasesController extends Controller

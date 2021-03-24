@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminPanel\Setting\Account;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+//Models
 use App\Models\Account;
 use App\Models\Sessions;
+//Plugins
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;

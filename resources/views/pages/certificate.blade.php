@@ -641,15 +641,15 @@
                         <br>
                         <div style=" text-indent: 50px;font-size: 17px ; font-family: Arial, Helvetica, sans-serif; text-align: justify;text-justify: inter-word;">
                            <p >
-                              THIS IS TO CERTIFY THAT _____________, ____ years old, _____ and a resident of <span id="firstcontent">Barangay San Vicente, Sto, Domingo, Albay is known to be a good moral character and law-abiding citizen in the community</span>
+                              THIS IS TO CERTIFY THAT ______________________, _____ years old, ______ and a resident of <span id="firstcontent">THIS IS A TEST :Barangay San Vicente, Sto, Domingo, Albay is known to be a good moral character and law-abiding citizen in the community.</span>
                            </p>
                            <br>
                            <p id="secondcontent">
-                              This certification is being issued upon the request of the above-named person for whatever legal purpose it may serve him best
+                              This certification is being issued upon the request of the above-named person for whatever legal purpose it may serve him best.
                            </p>
                            <br>
                            <p >
-                              <b>DONE AND ISSUED</b> this  ___ day of _____ at the <span id="thirdcontent">office of the punong Barangay....</span>
+                              <b>DONE AND ISSUED</b> this  ___ day of _______________ at the <span id="thirdcontent">office of the punong Barangay....</span>
                            </p>
                            <br>
                         </div>

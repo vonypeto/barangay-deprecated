@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use App\Models\Account;
 use Illuminate\Contracts\Validation\Rule;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 
 class ConfirmPassword implements Rule
 {

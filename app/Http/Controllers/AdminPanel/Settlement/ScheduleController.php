@@ -1,10 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminPanel\Settlement;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+//Models
 use App\Models\person_involve;
 use App\Models\blotters;
-use Illuminate\Http\Request;
+
+
+//Plugins
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Yajra\DataTables\DataTables;

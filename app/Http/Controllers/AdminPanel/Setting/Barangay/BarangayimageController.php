@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminPanel\Setting\Barangay;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\Barangayimage;
 use Illuminate\Http\Request;

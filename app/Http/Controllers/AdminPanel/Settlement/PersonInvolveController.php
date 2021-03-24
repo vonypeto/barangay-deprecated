@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminPanel\Settlement;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+//Models
 use App\Models\blotters;
 use App\Models\resident_info;
 use App\Models\person_involve;
-use Illuminate\Http\Request;
+//Plugins
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 
@@ -64,44 +67,10 @@ class PersonInvolveController extends Controller
 
         return view('pages.blotter',  compact('resident'));
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\person_involve  $person_involve
-     * @return \Illuminate\Http\Response
-     */
-    public function show(person_involve $person_involve)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\person_involve  $person_involve
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $resident = resident_info::find($id);
@@ -109,26 +78,5 @@ class PersonInvolveController extends Controller
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\person_involve  $person_involve
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, person_involve $person_involve)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\person_involve  $person_involve
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(person_involve $person_involve)
-    {
-        //
-    }
 }

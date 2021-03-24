@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminPanel;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+//Models
 use App\Models\blotters;
 use App\Models\resident_info;
 use App\Models\person_involve;
-use Illuminate\Http\Request;
+//Plugins
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\Foreach_;
 
 class BlotterController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
         $blotters = blotters::latest()->get();
@@ -41,22 +40,7 @@ class BlotterController extends Controller
         return view('pages.blotter',  compact('blotters'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
@@ -110,12 +94,7 @@ class BlotterController extends Controller
         return response()->json(['success' => 'NewBlotter saved successfully.']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\blotter  $blotter
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(blotters $blotter)
     {
         $resident = resident_info::all();
@@ -123,12 +102,7 @@ class BlotterController extends Controller
         return view('pages.blotter', ['blotter' => $blotter,  'resident' => $resident]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\blotter  $blotter
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
 
@@ -139,24 +113,10 @@ class BlotterController extends Controller
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\blotter  $blotter
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, blotters $blotter)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\blotter  $blotter
-     * @return \Illuminate\Http\Response
-     */
+
+
+
     public function destroy($id)
     {
         blotters::find($id)->delete();

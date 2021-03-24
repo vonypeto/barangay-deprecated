@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ClientSide;
 
-use App\Models\area_setting;
+use App\Http\Controllers\Controller;
+use App\Models\resident_account;
 use Illuminate\Http\Request;
 
-class AreaSettingController extends Controller
+class ResidentAccountController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class AreaSettingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\area_setting  $area_setting
+     * @param  \App\Models\resident_account  $resident_account
      * @return \Illuminate\Http\Response
      */
-    public function show(area_setting $area_setting)
+    public function show(resident_account $resident_account)
     {
         //
     }
@@ -52,10 +53,10 @@ class AreaSettingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\area_setting  $area_setting
+     * @param  \App\Models\resident_account  $resident_account
      * @return \Illuminate\Http\Response
      */
-    public function edit(area_setting $area_setting)
+    public function edit(resident_account $resident_account)
     {
         //
     }
@@ -64,10 +65,10 @@ class AreaSettingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\area_setting  $area_setting
+     * @param  \App\Models\resident_account  $resident_account
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, area_setting $area_setting)
+    public function update(Request $request, resident_account $resident_account)
     {
         //
     }
@@ -75,10 +76,10 @@ class AreaSettingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\area_setting  $area_setting
+     * @param  \App\Models\resident_account  $resident_account
      * @return \Illuminate\Http\Response
      */
-    public function destroy(area_setting $area_setting)
+    public function destroy(resident_account $resident_account)
     {
         //
     }

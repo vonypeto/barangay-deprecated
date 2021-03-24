@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminPanel\Setting\Account;
 
+use App\Http\Controllers\Controller;
 //Models
 use App\Models\Account;
 use App\Models\Sessions;

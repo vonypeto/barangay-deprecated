@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminPanel\Setting\Barangay;
 
+use App\Http\Controllers\Controller;
 use App\Models\brgy_official;
 use App\Models\area_setting;
 use Illuminate\Http\Request;

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminPanel;
 
+use App\Http\Controllers\Controller;
 use App\Models\Certificate_layout;
 use App\Models\Certificate_request;
 use Yajra\DataTables\DataTables;

@@ -1,25 +1,29 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminPanel\Settlement;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
-use App\Models\blotters;
 
-class UnscheduleController extends Controller
+//Models
+use App\Models\blotters;
+//Plugins
+use Yajra\DataTables\DataTables;
+use Carbon\Carbon;
+
+class ScheduleTodayController extends Controller
 {
     public function index(Request $request)
     {
         $blotters = blotters::latest()->get();
 
         if ($request->ajax()) {
-            $unschedule = blotters::where('schedule', '=', 'Unschedule')
-                ->whereNull('schedule_date')
-                // ->orWhereNull('schedule_time')
+            $today = blotters::where('schedule', '=', 'Schedule')
+                ->where('schedule_date', '=', Carbon::today()->toDateString())
                 ->get();
 
-            return Datatables::of($unschedule)
+
+            return Datatables::of($today)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
 

@@ -1,12 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminPanel;
 
+use App\Http\Controllers\Controller;
+//Models
 use App\Models\resident_info;
+use App\Models\area_setting;
 use Illuminate\Http\Request;
+
+//Plugins
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
-use App\Models\area_setting;
+
 
 use Carbon\Carbon;
 use PDF;
