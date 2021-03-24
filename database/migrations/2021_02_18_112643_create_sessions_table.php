@@ -18,6 +18,7 @@ class CreateSessionsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->string('username',255);
             $table->timestampTz("login_at");
+            
 
             // $table->foreign('user_id','username')
             //     ->references('account_id','username')

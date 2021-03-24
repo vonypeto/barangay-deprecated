@@ -217,8 +217,8 @@
                            <div class="mb-3">
                               <label for="create_account_form_type">Select user type:</label>
                               <select class="form-control" id="create_account_form_type" name="create_account_form_type">
-                                <option>client</option>
-                                <option>admin</option>
+                                <option>Encoder</option>
+                                <option>Admin</option>
                               </select>
                            </div>
 
@@ -578,9 +578,9 @@
 
             // Modal for firstname edit
             $('body').on('click', '#firstname_edit', function () {
-
                var id = current_id;
-               $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
+               $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) 
+               {
                   $('#account_settings_modal').modal('toggle');
                   $("#account_settings_modal").show();
 

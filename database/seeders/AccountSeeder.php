@@ -21,7 +21,7 @@ class AccountSeeder extends Seeder
             'username'=>'giann',
             'email'=>'giann@gmail.com',
             'password'=>Hash::make('giann'),
-            'type'=> "admin",
+            'type'=> "Admin",
         ]);
 
         DB::table('accounts')->insert([
@@ -30,7 +30,7 @@ class AccountSeeder extends Seeder
             'username'=>'rojhon',
             'email'=>'rojhon@gmail.com',
             'password'=>Hash::make('rojhon'),
-            'type'=> "admin",
+            'type'=> "Admin",
         ]);
 
         DB::table('accounts')->insert([
@@ -39,7 +39,7 @@ class AccountSeeder extends Seeder
             'username'=>'von',
             'email'=>'von@gmail.com',
             'password'=>Hash::make('von'),
-            'type'=> "admin",
+            'type'=> "Admin",
         ]);
 
         DB::table('accounts')->insert([
@@ -48,16 +48,16 @@ class AccountSeeder extends Seeder
             'username'=>'salen',
             'email'=>'salen@gmail.com',
             'password'=>Hash::make('salen'),
-            'type'=> "admin",
+            'type'=> "Admin",
         ]);
 
         DB::table('accounts')->insert([
-            'first_name'=>'client',
-            'last_name'=>'client',
-            'username'=>'client',
-            'email'=>'client@gmail.com',
-            'password'=>Hash::make('client'),
-            'type'=> "client",
+            'first_name'=>'Encoder',
+            'last_name'=>'Encoder',
+            'username'=>'Encoder',
+            'email'=>'Encoder@gmail.com',
+            'password'=>Hash::make('Encoder'),
+            'type'=> "Encoder",
         ]);
     }
 }
