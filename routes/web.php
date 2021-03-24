@@ -115,8 +115,27 @@ Route::get("logout", [UserController::class, 'logout']);
 
 // Client Side Start
 
-
-
+Route::get('/home', function () {
+    return view('pages.ClientSide.userdashboard.homepage');
+});
+Route::get('/clientschedule', function () {
+    return view('pages.ClientSide.userdashboard.schedule');
+});
+Route::get('/clientblotter', function () {
+    return view('pages.ClientSide.userdashboard.blotter');
+});
+Route::get('/clientcertificate', function () {
+    return view('pages.ClientSide.userdashboard.certificate');
+});
+Route::get('/clientaccountsetting', function () {
+    return view('pages.ClientSide.userdashboard.accountsetting');
+});
+Route::get('/login', function () {
+    return view('pages.ClientSide.userlogin.login');
+});
+Route::get('/register', function () {
+    return view('pages.ClientSide.userlogin.register');
+});
 
 //Client Side End
 
