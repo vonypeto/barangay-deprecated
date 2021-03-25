@@ -25,11 +25,7 @@
 <body style="background-image: url({{ URL::asset('images/background.png') }}); background-repeat:no-repeat; background-size: cover ">
 <header class="header-blue" style="padding-bottom: 0px;">
         <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-            <div class="container-fluid"><a class="navbar-brand" href="/home" style="font-size: 45px;font-family: bodoni mt;"><img src="{{ URL::to('images/logo.png') }}" style="resize: both;width: 80px;margin-right: 30px;">University of Rizal System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navcol-1">
-                    <form class="form-inline mr-auto" target="_self">
-                        <div class="form-group mb-0"><label for="search-field"></label></div>
-                    </form>
+            <div class="container-fluid"><p class="navbar-brand" style="font-size: 45px;font-family: bodoni mt;"><img src="{{ URL::to('images/logo.png') }}" style="resize: both;width: 80px;margin-right: 30px;">University of Rizal System</p>
                 </div>
             </div>
         </nav>
@@ -64,9 +60,14 @@
           </form>
           {{-- end form --}}
 
+
           <br><a href="/barangay/register">Don't have an account?? Register!</a>
+          <br><a href="/login">Go to admin login ></a>
         </div>
       </div>
+      <p class="text-white ">I'll remove the admin link after we're done testing</p>
+      <p class="text-white ">Make sure u migrate:fresh & db:seed before loging in</p>
+      <p class="text-white ">Check notes on web.php</p>
     </div>
   </div>
 </div>

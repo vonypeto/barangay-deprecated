@@ -15,10 +15,13 @@ class CreateResidentAccountsTable extends Migration
     {
         Schema::create('resident_accounts', function (Blueprint $table) {
             $table->id('resident_account_id')->nullable();
-            $table->string('username')->nullable();
-            $table->string('firstname')->nullable();
-            $table->string('lastname')->nullable();
             $table->biginteger('linked_id')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('username')->unique()->nullable();
+            $table->string('email')->unique()->nullable();
+            $table->string('password')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

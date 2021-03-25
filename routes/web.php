@@ -101,6 +101,7 @@ Route::resource('/setting/account', AccountController::class);
 Route::post("/setting/account/form",[AccountController::class, 'accountSettingCheck'])->name("accountSettingCheck");
 Route::get("/setting/account/session/table", [AccountController::class, 'getSessionTable'])->name("getSessionTable");
 
+    // User Login Section
 Route::get("/login", [UserController::class, 'login']);
 Route::get("/profile", [UserController::class, 'profile']);
 Route::post("/login", [UserController::class, 'check']);
@@ -109,8 +110,9 @@ Route::get("/logout", [UserController::class, 'logout']);
 //Admin Panel End
 
 
-
-
+// NOTES for Developer
+// Create Controller for blotters, schedule, and certificate
+// for seeding, type in command line: composer dump-autoload
 // Client Side Start
 
 Route::get('barangay/home', function () {
@@ -129,12 +131,16 @@ Route::get('/barangay/accountsetting', function () {
     return view('pages.ClientSide.userdashboard.accountsetting');
 });
 
-//test
-Route::get("/barangay/login", [UserController::class, 'client_login']);
-Route::post("/barangay/login", [UserController::class, 'client_check']);
-Route::get("/barangay/register", [UserController::class, 'client_register']);
-Route::post("/barangay/register", [UserController::class, 'client_register_check']);
-Route::get("/barangay/logout", [UserController::class, 'client_logout']);
+// Client Login
+Route::get("/barangay/login", [ResidentAccountController::class, 'client_login']);
+Route::post("/barangay/login", [ResidentAccountController::class, 'client_check']);
+Route::get("/barangay/register", [ResidentAccountController::class, 'client_register']);
+Route::post("/barangay/register", [ResidentAccountController::class, 'client_register_check']);
+Route::get("/barangay/logout", [ResidentAccountController::class, 'client_logout']);
+
+// Client Modal on Account Setting
+Route::get("/barangay/{resident_id}/edit", [ResidentAccountController::class, 'edit']);
+Route::post("/barangay/accountsetting/check",[ResidentAccountController::class, 'ClientAccountSettingCheck'])->name("ClientAccountSettingCheck");
 
 //barangay Side End
 

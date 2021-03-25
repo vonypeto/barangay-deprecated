@@ -2,6 +2,7 @@
 @section('content')
 
 <input type="hidden" id="current_user" data-id = {{ session("user.id") }}>
+
 <div class="col-sm-12 text-left ">
    <h1 class="border-bottom border-bot pt-3">Account</h1>
 </div>
@@ -75,7 +76,7 @@
                                  <button class="btn btn-dark float-right" id="email_edit">Edit</button>
                               </div>
                         </div>
-                        {{-- phone number --}}
+                        {{-- phone number
                            <div class="row rounded-lg bg-white p-3 m-2">
                               <div class="col">
                                  <p class="m-0"><b>PHONE NUMBER</b></p>
@@ -84,7 +85,7 @@
                               <div class="col align-self-center">
                                  <button class="btn btn-dark float-right" id="phonenumber_edit">Edit</button>
                               </div>
-                        </div>
+                        </div> --}}
                         {{-- password --}}
                         <div class="row rounded-lg bg-white p-3 m-2">
                            <div class="col align-self-center">
@@ -394,10 +395,7 @@
       <script type="text/javascript">
          $(function() {
 
-            //Hidding some shit
-            $("#password_edit_modal").hide();
-
-            //Testing varibles
+            //Global varibles
             var current_id = $("#current_user").data("id");
             var isFirstname = false;
             showUserInfo(current_id);
@@ -563,6 +561,9 @@
                   $("#account_email").text(data.email);
                })
             }
+            
+            //Hidding label 3 for Account Setting Modal
+            $("#password_edit_modal").hide();
 
             //On modal close
             $("#account_settings_modal").on("hidden.bs.modal", function () {
@@ -645,18 +646,18 @@
             });
 
              // Modal for phone number edit
-            $('body').on('click', '#phonenumber_edit', function () {
+            // $('body').on('click', '#phonenumber_edit', function () {
 
-               var id = current_id;
-               $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
-                  $('#account_settings_modal').modal('toggle');
-                  $("#account_settings_modal").show();
+            //    var id = current_id;
+            //    $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) {
+            //       $('#account_settings_modal').modal('toggle');
+            //       $("#account_settings_modal").show();
 
-                  $('#modal_label1').text("NEW PHONENUMBER");
-                  $("#new_input_modal").val("Wala pang phone number hehe");
-               })
+            //       $('#modal_label1').text("NEW PHONENUMBER");
+            //       $("#new_input_modal").val("Wala pang phone number hehe");
+            //    })
 
-            });
+            // });
 
             // Modal for password edit
             $('body').on('click', '#password_edit', function () {

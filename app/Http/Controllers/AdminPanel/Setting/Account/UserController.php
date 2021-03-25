@@ -4,15 +4,16 @@ namespace App\Http\Controllers\AdminPanel\Setting\Account;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 //Models
 use App\Models\Account;
 use App\Models\Sessions;
+
 //Plugins
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
-
 
 // Custom Rules
 use App\Rules\ConfirmPassword;
@@ -26,14 +27,6 @@ class UserController extends Controller
          }
 
         return view("pages.AdminPanel.user.login");
-    }
-
-    public function client_login(){
-        if (session()->has("client")) {
-            return redirect("/barangay/home");
-         }
-
-        return view('pages.ClientSide.userlogin.login');
     }
 
     public function check(Request $request){
@@ -68,30 +61,6 @@ class UserController extends Controller
         else {
             return redirect("dashboard");
         }
-
-    }
-
-    public function client_check(Request $request){
-
-        $validator = Validator::make($request->all(), [
-            "client_login_email" => ["required", new EmailExists],
-            "client_login_password" => ["required", new ConfirmPassword($request->client_login_email)]
-        ],
-        [
-            "client_login_email.required" => "Enter your username!!!",
-            "client_login_password.required" => "Enter your password!!!"
-        ])->validate();
-
-        $client = Account::where("email","=", $request->client_login_email)->first();
-
-        session('client');
-        session(['client.email' => $request->client_login_email]);
-        session(['client.firstname' => $client->first_name]);
-        session(['client.id' => $client->account_id]);
-        session(['client.type' => $client->type]);
-
-        return redirect("/barangay/home");
-        
 
     }
 
@@ -131,15 +100,6 @@ class UserController extends Controller
 
         return back()->with('success_register', 'Account successfully registered!');
     }
-
-    public function profile(){
-
-        if (!session()->has("user")) {
-            return back();
-        }
-        return view ("pages.AdminPanel.user.profile");
-    }
-
     
     public function logout(){
         if (session()->has("user")) {
@@ -149,11 +109,4 @@ class UserController extends Controller
         return redirect ("login");
     }
 
-    public function client_logout(){
-        if (session()->has("client")) {
-            session()->pull("client");
-        }
-
-        return redirect ("/barangay/login");
-    }
 }

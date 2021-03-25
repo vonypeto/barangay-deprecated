@@ -13,7 +13,8 @@
 
   <title>Login</title>
 </head>
-<body>
+<body style="background-image: url({{ URL::asset('images/background.png') }}); background-repeat:no-repeat; background-size: cover ">
+  <h1 class="text-white m-4">Admin Login</h1>
 <div class="container">
   <div class="row">
     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -43,9 +44,12 @@
             <button class="btn btn-lg btn-primary btn-block text-uppercase mt-3" id="loginBtn" type="submit">Log in</button>
           </form>
           {{-- end form --}}
-
+          <br><a href="/barangay/login">Go to client login ></a>
         </div>
       </div>
+      <p class="text-white ">I'll remove the client link after we're done testing</p>
+      <p class="text-white ">Make sure u migrate:fresh & db:seed before loging in</p>
+      <p class="text-white ">Check notes on web.php</p>
     </div>
   </div>
 </div>

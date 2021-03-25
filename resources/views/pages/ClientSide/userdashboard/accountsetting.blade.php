@@ -2,13 +2,19 @@
 <html lang="en" style="position: relative;min-height: 100%;">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Account Setting</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+    <link href=" {{ URL::asset('css/app.css') }}" rel="stylesheet">
+    <link href=" https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
     <link rel="stylesheet" href={{ URL::asset('css/ClientCSS/Footer-Clean.css') }}>
     <link rel="stylesheet" href={{ URL::asset('css/ClientCSS/Header-Blue.css') }}>
@@ -16,6 +22,8 @@
 </head>
 
 <body style="margin: 0 0 100px;">
+    <input type="hidden" id = "current_resident" data-id = {{ session("resident.id") }}>
+
     <header class="header-blue" style="padding-bottom: 0px;">
         <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
             <div class="container-fluid"><a class="navbar-brand" href="/barangay/home" style="font-size: 45px;font-family: bodoni mt;"><img src="{{ URL::to('images/logo.png') }}" style="resize: both;width: 80px;margin-right: 30px;">University of Rizal System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -23,7 +31,7 @@
                     <form class="form-inline mr-auto" target="_self">
                         <div class="form-group mb-0"><label for="search-field"></label></div>
                     </form>
-                    <p class="navbar-text" style="margin-top: 15px;margin-right: 11px;color: white;font-size: 20px;"><i class="fa fa-user" style="margin-right: 5px;"></i>{{session("client.firstname")}}</p><span class="navbar-text"> </span>
+                    <p class="navbar-text" id="navbar-username" style="margin-top: 15px;margin-right: 11px;color: white;font-size: 20px;"><i class="fa fa-user" style="margin-right: 5px;"></i>{{session("resident.firstname")}}</p><span class="navbar-text"> </span>
                     <div class="dropdown" style="font-size: 20px;"><a class="dropdown-toggle" aria-expanded="false" data-toggle="dropdown" href="#" style="color: white;"><i class="fa fa-cog" style="margin-right: 5px;"></i>Settings</a>
                         <div class="dropdown-menu dropleft" style="resize: both;width: 80px;padding: 0px;"><a class="dropdown-item" href="/barangay/accountsetting" style="resize: both;width: 80px;padding: 5px;font-size: 75%;">Account Settings</a><a class="dropdown-item" href="/barangay/logout" style="resize: both;width: 80px;padding: 5px;font-size: 75%;">Log-out</a></div>
                     </div>
@@ -43,58 +51,56 @@
 
 
     <div class="container">
-               <!-- Trigger the modal with a button -->
-               {{-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#account_settings_modal">Open Large Modal</button> --}}
 
-               <div class="modal fade " id="account_settings_modal" role="dialog">
-                  <div class="modal-dialog modal-lg ">
-                     <div class="modal-content">
-                        <div class="modal-header bg-dark text-white">
-                           <h4 class="modal-title ">Change Account Settings</h4>
-                           <button type="button" class="close text-white" data-dismiss="modal" >&times;</button>
-                        </div>
-                        <div class="modal-body">
-                           <form id="account_settings_form" name="account_settings_form" class="form-horizontal m-2">
-                              {{-- hidden var --}}
-                              <input type="text" name="current_id" id="current_id" hidden>
-                              <input type="text" name="table_edit" id="table_edit" hidden>
-
-                              {{-- Label 1 --}}
-                              <div class="form-group row p-2">
-                                 <label for="new_input_modal" id="modal_label1"  class="font-weight-bold">Label1</label>
-                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control font-weight-bold" id="new_input_modal" name="new_input_modal">
-                                    <span class="text-danger error_text new_input_modal_error new_input_email_modal_error new_input_username_modal_error"></span>
-                                 </div>
-                              </div>
-
-                              {{-- Label 3 // this only show when password is being change --}}
-                              <div class="form-group row p-2" id="password_edit_modal">
-                                 <label for="current_password_modal_confirmation" id="modal_label2" class="font-weight-bold">CONFIRM NEW PASSWORD</label>
-                                 <div class="col-sm-12">
-                                    <input type="password" id="current_password_modal_confirmation" name="current_password_modal" placeholder="Confirm New Password" class="form-control ">
-                                    <span class="text-danger error_text current_password_modal_confirmation_error"></span>
-                                 </div>
-                              </div>
-
-                              {{-- Label 2 --}}
-                              <div class="form-group row p-2">
-                                 <label for="current_password_modal" id="modal_label2" class="font-weight-bold">CURRENT PASSWORD</label>
-                                 <div class="col-sm-12">
-                                    <input type="password" id="current_password_modal" name="current_password_modal" placeholder="Enter Password to save changes" class="form-control ">
-                                    <span class="text-danger error_text current_password_modal_error"></span>
-                                 </div>
-                              </div>
-
-
-                              <div class="form-group">
-                                 <button type="submit" class="btn btn-primary float-right" id="saveBtn" value="create" >Save changes
-                                 </button>
-                              </div>
-                           </form>                            
-                        </div>
-                    </div>
+        <div class="modal fade " id="account_settings_modal" role="dialog">
+            <div class="modal-dialog modal-lg ">
+                <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h4 class="modal-title ">Change Account Settings</h4>
+                    <button type="button" class="close text-white" data-dismiss="modal" >&times;</button>
                 </div>
+                <div class="modal-body">
+                    <form id="account_settings_form" name="account_settings_form" class="form-horizontal m-2">
+                        {{-- hidden var --}}
+                        <input type="text" name="current_id" id="current_id" hidden>
+                        <input type="text" name="table_edit" id="table_edit" hidden>
+
+                        {{-- Label 1 --}}
+                        <div class="form-group row p-2">
+                            <label for="new_input_modal" id="modal_label1"  class="font-weight-bold">Label1</label>
+                            <div class="col-sm-12">
+                            <input type="text" class="form-control font-weight-bold" id="new_input_modal" name="new_input_modal">
+                            <span class="text-danger error_text new_input_modal_error new_input_email_modal_error new_input_username_modal_error"></span>
+                            </div>
+                        </div>
+
+                        {{-- Label 3 // this only show when password is being change --}}
+                        <div class="form-group row p-2" id="password_edit_modal">
+                            <label for="current_password_modal_confirmation" id="modal_label2" class="font-weight-bold">CONFIRM NEW PASSWORD</label>
+                            <div class="col-sm-12">
+                            <input type="password" id="current_password_modal_confirmation" name="current_password_modal" placeholder="Confirm New Password" class="form-control ">
+                            <span class="text-danger error_text current_password_modal_confirmation_error"></span>
+                            </div>
+                        </div>
+
+                        {{-- Label 2 --}}
+                        <div class="form-group row p-2">
+                            <label for="current_password_modal" id="modal_label2" class="font-weight-bold">CURRENT PASSWORD</label>
+                            <div class="col-sm-12">
+                            <input type="password" id="current_password_modal" name="current_password_modal" placeholder="Enter Password to save changes" class="form-control ">
+                            <span class="text-danger error_text current_password_modal_error"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary float-right" id="saveBtn" value="create" >Save changes
+                            </button>
+                        </div>
+                    </form>                            
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -130,13 +136,6 @@
                         <p id="account_email" class="m-0">Account Email</p>
                     </div>
                     <div class="col align-self-center"><button class="btn btn-primary btn btn-dark float-right" id="email_edit" type="button">Edit</button></div>
-                </div>
-                <div id="PhoneNumber" class="row rounded-lg bg-white p-3 m-2">
-                    <div class="col">
-                        <p class="m-0" style="font-weight: bold;">PHONE NUMBER</p>
-                        <p id="account_phone_number" class="m-0">Account Phone Number</p>
-                    </div>
-                    <div class="col align-self-center"><button class="btn btn-primary btn btn-dark float-right" id="phonenumber_edit" type="button">Edit</button></div>
                 </div>
                 <div id="Password" class="row rounded-lg bg-white p-3 m-2">
                     <div class="col align-self-center">
@@ -180,8 +179,195 @@
             </div>
         </div>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+
+
+
+    <script type="text/javascript">
+       $(function() {
+            //Global Varibles
+            var current_id = {{ session("resident.id") }};
+            var isFirstname = false;
+            showUserInfo(current_id);
+
+            //Ajax
+            $.ajaxSetup({
+               headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               }
+            });
+
+        //For hidding modal label 3
+        $("#password_edit_modal").hide();
+
+        //On modal close
+        $("#account_settings_modal").on("hidden.bs.modal", function () {
+            $("#account_settings_form")[0].reset();
+            $(document).find('span.error_text').text('');
+            $("#password_edit_modal").hide();
+            $("#new_input_modal").attr("name","new_input_modal");
+            $("#current_password_modal_confirmation").attr("name","current_password_modal");
+            $("#new_input_modal").attr("type","text");
+            isFirstname = false;
+        });
+
+               // Show info for Client Account Setting
+               function showUserInfo(id){
+            $.get('/barangay/' + id +'/edit', function (data) {
+                $("#account_firstname").text(data.first_name);
+                $("#account_lastname").text(data.last_name);
+                $("#account_username").text(data.username);
+                $("#account_email").text(data.email);
+            })
+        }
+
+        // Modal for firstname edit
+        $('body').on('click', '#firstname_edit', function () {
+            var id = current_id;
+            $.get('/barangay/' + id +'/edit', function (data) 
+            {
+                $('#account_settings_modal').modal('toggle');
+                $("#account_settings_modal").show();
+
+                $('#modal_label1').text("NEW FIRST NAME");
+                $("#new_input_modal").val(data.first_name);
+
+                $('#current_id').val(id);
+                $('#table_edit').val("firstname");
+
+                isFirstname = true;
+            })
+        });
+
+        // Modal for Lastname edit
+        $('body').on('click', '#lastname_edit', function () {
+
+            var id = current_id;
+            $.get('/barangay/' + id +'/edit', function (data) {
+                $('#account_settings_modal').modal('toggle');
+                $("#account_settings_modal").show();
+
+                $('#modal_label1').text("NEW LAST NAME");
+                $("#new_input_modal").val(data.last_name);
+
+                $('#current_id').val(id);
+                $('#table_edit').val("lastname");
+            })
+        });
+
+        //Modal for username edit
+        $('body').on('click', '#username_edit', function () {
+            var id = current_id;  
+            $.get('/barangay/' + id +'/edit', function (data)  {
+            $('#account_settings_modal').modal('toggle');
+            $("#account_settings_modal").show();
+
+            $('#modal_label1').text("NEW USERNAME");
+            $("#new_input_modal").val(data.username);
+
+            $("#new_input_modal").attr("name","new_input_username_modal");
+
+            $('#current_id').val(id);
+            $('#table_edit').val("username");
+            })
+        });
+
+        // Modal for email edit
+        $('body').on('click', '#email_edit', function () {
+
+            var id = current_id;
+            $.get('/barangay/' + id +'/edit', function (data)  {
+                $('#account_settings_modal').modal('toggle');
+                $("#account_settings_modal").show();
+
+                $('#modal_label1').text("NEW EMAIL");
+                $("#new_input_modal").val(data.email);
+
+                $("#new_input_modal").attr("name","new_input_email_modal");
+
+                $('#current_id').val(id);
+                $('#table_edit').val("email");
+            })
+        });
+
+        // Modal for password edit
+        $('body').on('click', '#password_edit', function () {
+
+            var id = current_id;
+            $.get('/barangay/' + id +'/edit', function (data) {
+                $('#account_settings_modal').modal('toggle');
+                $("#account_settings_modal").show();
+
+                $('#modal_label1').text("NEW PASSWORD");
+                $("#new_input_modal").attr("placeholder", "Enter new password");
+
+                $('#current_id').val(id);
+                $('#table_edit').val("password");
+
+
+                $("#new_input_modal").attr("type","password");
+                $("#current_password_modal_confirmation").attr("name","current_password_modal_confirmation");
+                $("#password_edit_modal").show();
+            })
+        });
+
+        //Modal on submit
+        $("#account_settings_form").on('submit', function (e) {
+            e.preventDefault();
+
+            $firstname = $("#new_input_modal").val();
+
+            $.ajax({
+                type:"post",
+                url:"{{ route("ClientAccountSettingCheck") }}",
+                data: $("#account_settings_form").serialize(),
+                dataType:"json",
+                beforeSend:function(){
+                    $(document).find('span.error_text').text('');
+                },
+                success: function (data) {
+                    if(data.status == 0){
+                    $.each(data.error, function(prefix, val){
+                        $('span.'+prefix+"_error").text(val[0]);
+                    });
+                    }
+                    else{
+                    $('#account_settings_modal').modal('hide');
+                    alert(data.msg);
+                    showUserInfo(current_id);
+                    $("#account_settings_form")[0].reset();
+                    $(document).find('span.error_text').text('');
+
+                    if(isFirstname == true){
+                        $("#navbar-username").html('<i class="fa fa-user" style="margin-right: 5px;"></i>' + $firstname );
+                    }
+                    }
+                }
+            });
+        });
+
+       }) // end of ready function
+
+
+
+
+
+    </script>
 </body>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+
+<script type="text/javascript" src=" {{ URL::asset('js/app.js') }}"></script>
+
+<!---datatable-->
+
+
+<script type="text/javascript" src=" https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+
+
+
+<script type="text/javascript" src="{{ URL::asset('js/custom.js') }}"></script>
+
+<!--pagination-->
+<script type="text/javascript" src="{{ URL::asset('js/pagination.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/pagination.min.js') }}"></script>
 </html>
