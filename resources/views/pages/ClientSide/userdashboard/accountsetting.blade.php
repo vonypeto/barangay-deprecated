@@ -22,9 +22,9 @@
                     <form class="form-inline mr-auto" target="_self">
                         <div class="form-group mb-0"><label for="search-field"></label></div>
                     </form>
-                    <p class="navbar-text" style="margin-top: 15px;margin-right: 11px;color: white;font-size: 20px;"><i class="fa fa-user" style="margin-right: 5px;"></i>Username</p><span class="navbar-text"> </span>
+                    <p class="navbar-text" style="margin-top: 15px;margin-right: 11px;color: white;font-size: 20px;"><i class="fa fa-user" style="margin-right: 5px;"></i>{{session("client.firstname")}}</p><span class="navbar-text"> </span>
                     <div class="dropdown" style="font-size: 20px;"><a class="dropdown-toggle" aria-expanded="false" data-toggle="dropdown" href="#" style="color: white;"><i class="fa fa-cog" style="margin-right: 5px;"></i>Settings</a>
-                        <div class="dropdown-menu dropleft" style="resize: both;width: 80px;padding: 0px;"><a class="dropdown-item" href="#" style="resize: both;width: 80px;padding: 5px;font-size: 75%;">Account Settings</a><a class="dropdown-item" href="#" style="resize: both;width: 80px;padding: 5px;font-size: 75%;">Log-out</a></div>
+                        <div class="dropdown-menu dropleft" style="resize: both;width: 80px;padding: 0px;"><a class="dropdown-item" href="#" style="resize: both;width: 80px;padding: 5px;font-size: 75%;">Account Settings</a><a class="dropdown-item" href="/client/login" style="resize: both;width: 80px;padding: 5px;font-size: 75%;">Log-out</a></div>
                     </div>
                 </div>
             </div>

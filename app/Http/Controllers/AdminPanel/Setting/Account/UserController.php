@@ -28,6 +28,14 @@ class UserController extends Controller
         return view("pages.AdminPanel.user.login");
     }
 
+    public function client_login(){
+        if (session()->has("user")) {
+            return redirect("home");
+         }
+
+        return view('pages.ClientSide.userlogin.login');
+    }
+
     public function check(Request $request){
 
         $validator = Validator::make($request->all(), [
@@ -63,11 +71,35 @@ class UserController extends Controller
 
     }
 
-    public function register(){
-        return view("pages.AdminPanel.user.register");
+    public function client_check(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            "client_login_email" => ["required", new EmailExists],
+            "client_login_password" => ["required", new ConfirmPassword($request->client_login_email)]
+        ],
+        [
+            "client_login_email.required" => "Enter your username!!!",
+            "client_login_password.required" => "Enter your password!!!"
+        ])->validate();
+
+        $client = Account::where("email","=", $request->client_login_email)->first();
+
+        session('client');
+        session(['client.email' => $request->client_login_email]);
+        session(['client.firstname' => $client->first_name]);
+        session(['client.id' => $client->account_id]);
+        session(['client.type' => $client->type]);
+
+        return redirect("home");
+        
+
     }
 
-    public function register_check(Request $request){
+    public function client_register(){
+        return view("pages.ClientSide.userlogin.register");
+    }
+
+    public function client_register_check(Request $request){
 
         $validator = Validator::make($request->all(), [
             "register_firstname" => "required",

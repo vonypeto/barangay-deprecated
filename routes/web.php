@@ -101,12 +101,10 @@ Route::resource('/setting/account', AccountController::class);
 Route::post("/setting/account/form",[AccountController::class, 'accountSettingCheck'])->name("accountSettingCheck");
 Route::get("/setting/account/session/table", [AccountController::class, 'getSessionTable'])->name("getSessionTable");
 
-Route::get("login", [UserController::class, 'login']);
-Route::get("profile", [UserController::class, 'profile']);
-Route::get("register", [UserController::class, 'register']);
-Route::post("register", [UserController::class, 'register_check']);
-Route::post("login", [UserController::class, 'check']);
-Route::get("logout", [UserController::class, 'logout']);
+Route::get("/login", [UserController::class, 'login']);
+Route::get("/profile", [UserController::class, 'profile']);
+Route::post("/login", [UserController::class, 'check']);
+Route::get("/logout", [UserController::class, 'logout']);
 
 //Admin Panel End
 
@@ -130,12 +128,18 @@ Route::get('/clientcertificate', function () {
 Route::get('/clientaccountsetting', function () {
     return view('pages.ClientSide.userdashboard.accountsetting');
 });
-Route::get('/login', function () {
-    return view('pages.ClientSide.userlogin.login');
+Route::get('/client/login', function () {
+    return view();
 });
-Route::get('/register', function () {
+Route::get('/client/register', function () {
     return view('pages.ClientSide.userlogin.register');
 });
+
+//test
+Route::get("/client/login", [UserController::class, 'client_login']);
+Route::post("/client/login", [UserController::class, 'client_check']);
+Route::get("client/register", [UserController::class, 'client_register']);
+Route::post("client/register", [UserController::class, 'client_register_check']);
 
 //Client Side End
 

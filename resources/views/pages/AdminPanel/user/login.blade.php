@@ -44,7 +44,6 @@
           </form>
           {{-- end form --}}
 
-          <br><a href="register">Don't have an account?? Register!</a>
         </div>
       </div>
     </div>

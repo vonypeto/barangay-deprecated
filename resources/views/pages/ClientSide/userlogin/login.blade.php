@@ -41,31 +41,30 @@
         <div class="card-body">
           <h5 class="card-title text-center">Log In</h5>
           {{-- form --}}
-          {{-- <form class="log-in-form" action="login" method="post">  --}}
-          <form class="log-in-form" action="home" method="get"> 
+          <form class="log-in-form" action="/client/login" method="post"> 
             @csrf
             <div class="form-label-group mt-2">
-              <label for="login_email">Email address</label>
-              <input type="text" id="login_email" name="login_email" class="form-control" placeholder="Email address" autofocus
-              value={{ old('login_email')}}>
-              @error('login_email')
+              <label for="client_login_email">Email address</label>
+              <input type="text" id="client_login_email" name="client_login_email" class="form-control" placeholder="Email address" autofocus
+              value={{ old('client_login_email')}}>
+              @error('client_login_email')
               <span class="text-danger error_text create_account_form_lastname_error"> {{ $message }}</span>
               @enderror
             </div>
 
             <div class="form-label-group mt-2">
-              <label for="login_password">Password</label>
-              <input type="password" id="login_password" name="login_password" class="form-control" placeholder="Password" >
-              @error('login_password')
+              <label for="client_login_password">Password</label>
+              <input type="password" id="client_login_password" name="client_login_password" class="form-control" placeholder="Password" >
+              @error('client_login_password')
               <span class="text-danger error_text create_account_form_lastname_error">{{ $message }}</span>
               @enderror
             </div>
 
-            <button class="btn btn-lg btn-primary btn-block text-uppercase mt-3" id="loginBtn" type="submit">Log in</button>
+            <button class="btn btn-lg btn-primary btn-block text-uppercase mt-3" id="clientLoginBtn" type="submit">Log in</button>
           </form>
           {{-- end form --}}
 
-          <br><a href="register">Don't have an account?? Register!</a>
+          <br><a href="/client/register">Don't have an account?? Register!</a>
         </div>
       </div>
     </div>
