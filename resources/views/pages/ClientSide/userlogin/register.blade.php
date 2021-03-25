@@ -42,7 +42,7 @@
           @endif
           <h5 class="card-title text-center">Register</h5>
           {{-- form --}}
-          <form class="register-form" action="/client/register" method="post">
+          <form class="register-form" action="/barangay/register" method="post">
             @csrf
             <div class="form-label-group mt-2">
               <label for="register_firstname">First name</label>
@@ -104,7 +104,7 @@
           </form>
           {{-- end form --}}
 
-          <br><a href="/client/login">Have an account?? Login!</a>
+          <br><a href="/barangay/login">Have an account?? Login!</a>
         </div>
       </div>
     </div>

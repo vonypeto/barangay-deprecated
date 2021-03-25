@@ -29,8 +29,8 @@ class UserController extends Controller
     }
 
     public function client_login(){
-        if (session()->has("user")) {
-            return redirect("home");
+        if (session()->has("client")) {
+            return redirect("/barangay/home");
          }
 
         return view('pages.ClientSide.userlogin.login');
@@ -90,7 +90,7 @@ class UserController extends Controller
         session(['client.id' => $client->account_id]);
         session(['client.type' => $client->type]);
 
-        return redirect("home");
+        return redirect("/barangay/home");
         
 
     }
@@ -126,7 +126,7 @@ class UserController extends Controller
         $user->username = $request->register_username;
         $user->email = $request->register_email;
         $user->password = Hash::make($request->register_password);
-        $user->type = "client";
+        $user->type = "Client";
         $query = $user->save();
 
         return back()->with('success_register', 'Account successfully registered!');
@@ -140,11 +140,20 @@ class UserController extends Controller
         return view ("pages.AdminPanel.user.profile");
     }
 
+    
     public function logout(){
         if (session()->has("user")) {
             session()->pull("user");
         }
 
         return redirect ("login");
+    }
+
+    public function client_logout(){
+        if (session()->has("client")) {
+            session()->pull("client");
+        }
+
+        return redirect ("/barangay/login");
     }
 }

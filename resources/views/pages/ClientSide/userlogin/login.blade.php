@@ -41,7 +41,7 @@
         <div class="card-body">
           <h5 class="card-title text-center">Log In</h5>
           {{-- form --}}
-          <form class="log-in-form" action="/client/login" method="post"> 
+          <form class="log-in-form" action="/barangay/login" method="post"> 
             @csrf
             <div class="form-label-group mt-2">
               <label for="client_login_email">Email address</label>
@@ -64,7 +64,7 @@
           </form>
           {{-- end form --}}
 
-          <br><a href="/client/register">Don't have an account?? Register!</a>
+          <br><a href="/barangay/register">Don't have an account?? Register!</a>
         </div>
       </div>
     </div>

@@ -113,35 +113,30 @@ Route::get("/logout", [UserController::class, 'logout']);
 
 // Client Side Start
 
-Route::get('/home', function () {
+Route::get('barangay/home', function () {
     return view('pages.ClientSide.userdashboard.homepage');
 });
-Route::get('/clientschedule', function () {
+Route::get('/barangay/schedule', function () {
     return view('pages.ClientSide.userdashboard.schedule');
 });
-Route::get('/clientblotter', function () {
+Route::get('/barangay/blotter', function () {
     return view('pages.ClientSide.userdashboard.blotter');
 });
-Route::get('/clientcertificate', function () {
+Route::get('/barangay/certificate', function () {
     return view('pages.ClientSide.userdashboard.certificate');
 });
-Route::get('/clientaccountsetting', function () {
+Route::get('/barangay/accountsetting', function () {
     return view('pages.ClientSide.userdashboard.accountsetting');
-});
-Route::get('/client/login', function () {
-    return view();
-});
-Route::get('/client/register', function () {
-    return view('pages.ClientSide.userlogin.register');
 });
 
 //test
-Route::get("/client/login", [UserController::class, 'client_login']);
-Route::post("/client/login", [UserController::class, 'client_check']);
-Route::get("client/register", [UserController::class, 'client_register']);
-Route::post("client/register", [UserController::class, 'client_register_check']);
+Route::get("/barangay/login", [UserController::class, 'client_login']);
+Route::post("/barangay/login", [UserController::class, 'client_check']);
+Route::get("/barangay/register", [UserController::class, 'client_register']);
+Route::post("/barangay/register", [UserController::class, 'client_register_check']);
+Route::get("/barangay/logout", [UserController::class, 'client_logout']);
 
-//Client Side End
+//barangay Side End
 
 
 
