@@ -45,7 +45,7 @@ use App\Http\Controllers\PagesController;
 
 //Redirect
 Route::get('/', function () {
-    return redirect('/home');
+    return redirect('/barangay/home');
 });
 
 
