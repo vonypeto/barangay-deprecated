@@ -14,6 +14,10 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
+        if (!session()->has("user")) {
+            return redirect("login");
+        }
+        
         $brgy_official = brgy_official::all();
         $area_setting = area_setting::all();
         $registered = DB::table('resident_infos')->count();

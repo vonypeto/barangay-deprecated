@@ -20,6 +20,10 @@ class ResidentInfoController extends Controller
 
     public function index(Request $request)
     {
+        if (!session()->has("user")) {
+            return redirect("login");
+        }
+        
         $area_setting = area_setting::all();
 
         $resident = resident_info::latest()->get();
