@@ -497,6 +497,7 @@
 
             $('body').on('click', '.editSchedule', function() {
         var blotter_id = $(this).data('id');
+        $('#saveBtn').attr("disabled", false);
 
         $.get("{{ route('schedules.index') }}" +'/' + blotter_id +'/edit', function (data) {
          $('#editscheduledata').modal('show');
@@ -517,6 +518,7 @@
         });
 
         $('#saveBtn').click(function (e) {
+           $(this).attr("disabled", true);
                 e.preventDefault();
                 $.ajax({
                   data: $('#blotterform').serialize(),

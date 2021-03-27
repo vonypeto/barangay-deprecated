@@ -522,6 +522,7 @@
 
 
              $('#createNewBlotter').click(function () {
+               $("#saveBtn").attr("disabled", false);
                  $('#saveBtn').val("create-blotter");
                  $('#blotter_id').val('');
                  $('#blotterform').trigger("reset");
@@ -571,6 +572,7 @@
 
              $('body').on('click', '.editBlotter', function () {
                var blotter_id = $(this).data('id');
+               $("#saveBtn").attr("disabled", false);
                $('#blotterform').trigger("reset");
                $.get("{{ route('blotters.index') }}" +'/' + blotter_id +'/edit', function (data) {
                   $('#modelHeading').html("Edit Blotter");
@@ -627,6 +629,7 @@
             });
          
              $('#saveBtn').click(function (e) {
+               $(this).attr("disabled", true);
                 e.preventDefault();
                 $.ajax({
                   data: $('#blotterform').serialize(),
