@@ -19,6 +19,7 @@ use App\Http\Controllers\AdminPanel\Settlement\ScheduleTodayController;
 use App\Http\Controllers\AdminPanel\Settlement\SettledCasesController;
 //Certificate Module
 use App\Http\Controllers\AdminPanel\CertificateController;
+use App\Http\Controllers\AdminPanel\PrintController;
 use Barryvdh\DomPDF\Facade as PDF;
 //Setting Module:Account Section
 use App\Http\Controllers\AdminPanel\Setting\Account\AccountController;
@@ -84,7 +85,11 @@ Route::get('certificate/table/type', [CertificateController::class, 'certificate
 Route::post('certificate/table/type', [CertificateController::class, 'certtypesubmit'])->name('certtypesubmit.post');
 Route::get('certificate/table/type/{cert_id}/edit', [CertificateController::class, 'certtypeedit'])->name('certtypesubmit.edit');
 Route::delete('certificate/table/type/{cert_id}', [CertificateController::class, 'certtypedelete'])->name('certtypedelete.delete');
-Route::get('sampledata', [PagesController::class, 'sampledata']);
+Route::GET('certificate/print/cert', [PrintController::class, 'Print'])->name('Print.post');
+//Route::get('certificate/print/cert', [PrintController::class, 'index'])->name('Print.index');
+
+//Route::post('certificate/print/cert', [CertificateController::class, 'storerequest'])->name('storerequest.post');
+
 
 
 //Maintenance Moduule
@@ -189,10 +194,11 @@ Route::get('/certificates', function () {
     return view('Testing.certificate');
 });
 Route::get('/certificate-pdf', function () {
-    return view('Testingcertificate-pdf');
+    return view('Testing.certificate-pdf');
     $pdf = PDF::loadView('Testing.certificate-pdf')->setPaper('A4','portrait')->setOptions(['defaultFont' => 'sans-serif','isRemoteEnabled' => true]) ;
     return $pdf->download('certificate.pdf');
 });
 Route::resource('books', BooksController::class);
 Route::get('sampledata', [PagesController::class, 'sampledata']);
+
 // Testing Area End

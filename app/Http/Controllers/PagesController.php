@@ -48,6 +48,7 @@ class PagesController extends Controller
 
         }
 
+
         $deletefile = DB::table('certificate_layouts')
         ->where('layout_id','=',1)
         ->first();

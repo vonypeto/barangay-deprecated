@@ -433,7 +433,7 @@
 
          //show cert type
          $('#createcert').click(function () {
-
+            $('#certtypeform').trigger("reset");
                $('#certificate_list_id').val('');
              //  $('#certtypeform').trigger("reset");
                $('#modelHeading').html("Certificate Form");
@@ -482,7 +482,7 @@
              })
           });
 
-
+          // delete type of certificate
            $('body').on('click', '.deletetype', function () {
 
                var cert_id = $(this).data("id");
@@ -503,6 +503,40 @@
 
          });
 
+         function downloadFile(response) {
+            var blob = new Blob([response], {type: 'application/pdf'})
+            var url = URL.createObjectURL(blob);
+            location.assign(url);
+        }
+            //print
+         $('#printcert').click(function (e) {
+             alert(1);
+               e.preventDefault();
+           $.ajax({
+                 data: $('#createform').serialize(),
+                 url: "{{ route('Print.post') }}",
+                 type: "GET",
+
+                 xhrFields: {
+                responseType: 'blob'
+                },
+                success: function (data) {
+                     $('#createform').trigger("reset");
+                     $('#createmodal').modal('hide');
+                     var blob = new Blob([response]);
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = "Certificate.pdf";
+                    link.click();
+
+                 },
+                 error: function (data) {
+                     console.log('Error:', data);
+
+                 }
+             }).done(downloadFile);
+         });
+
          });
          //preview certificate
          function previewtype() {
@@ -513,9 +547,15 @@
                $('#createmodal').modal('show');
            },500);
 
+           var id;
+          id = document.getElementById("certificate_list_id").value
+
+
+          document.getElementById("print_id").setAttribute('value',id);
 
 
          }
+         //print
 
       </script>
    </div>
@@ -639,7 +679,7 @@
                         <br>
                         <br>
                         <br>
-                        <div style=" text-indent: 50px;font-size: 17px ; font-family: Arial, Helvetica, sans-serif; text-align: justify;text-justify: inter-word;">
+                        <div style=" text-indent: 50px;font-size: 17px ; font-family: Arial, Helvetica, sans-serif;text-justify: inter-word;">
                            <p >
                               THIS IS TO CERTIFY THAT ______________________, _____ years old, ______ and a resident of <span id="firstcontent">THIS IS A TEST :Barangay San Vicente, Sto, Domingo, Albay is known to be a good moral character and law-abiding citizen in the community.</span>
                            </p>
@@ -673,12 +713,11 @@
                      </div>
                   </div>
                </div>
-               <input value="" name="certificatecreate" id="certificatecreate" hidden>
-               <input value="" name="certificatecreate" id="certificatecreate" hidden>
-               <input value="" name="certificatecreate" id="certificatecreate" hidden>
-               <input value="" name="certificatecreate" id="certificatecreate" hidden>
+               <input value="" name="print_id" id="print_id" hidden>
+
                <div class="text-center button-center d-flex justify-content-center modal-footer">
-                  <a class="btn btn-success" data-dismiss="modal">Close</a>
+                  <a class="btn btn-primary" data-dismiss="modal">Close</a>
+                  <button class="btn btn-success"  id="printcert" >Print</button>
                </div>
             </form>
          </div>
