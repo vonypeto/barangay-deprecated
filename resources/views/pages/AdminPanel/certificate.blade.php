@@ -477,7 +477,8 @@
                  $('#certificate_name').val(data.certificate_name);
                  $('#price').val(data.price);
                  $('#certificate_type').val(data.certificate_type);
-
+                 certificate_name
+                 $('#certificate_name').html(data.certificate_name);
 
              })
           });
@@ -510,8 +511,9 @@
         }
             //print
          $('#printcert').click(function (e) {
-             alert(1);
+
                e.preventDefault();
+               /*
            $.ajax({
                  data: $('#createform').serialize(),
                  url: "{{ route('Print.post') }}",
@@ -534,7 +536,53 @@
                      console.log('Error:', data);
 
                  }
-             }).done(downloadFile);
+             });
+
+*/
+
+                            $.ajax({
+
+                type: 'GET',
+
+                data: $('#createform').serialize(),
+                 url: "{{ route('Print.post') }}",
+
+                xhrFields: {
+
+                    responseType: 'blob'
+
+                },
+
+                success: function(response){
+
+                    var blob = new Blob([response]);
+
+                    var link = document.createElement('a');
+
+                    link.href = window.URL.createObjectURL(blob);
+
+                    link.download = "certificate.pdf";
+
+                    link.click();
+                    $('#createform').trigger("reset");
+                     $('#createmodal').modal('hide');
+                },
+
+                error: function(blob){
+
+                    console.log(blob);
+
+                }
+
+                })//.done(downloadFile);
+
+
+
+
+
+
+
+
          });
 
          });
@@ -645,7 +693,7 @@
                      </p>
                      <div id="punong2" style='font-size:22px;font-family: "Times New Roman, Times, serif";padding:0px'><b>   {{ $layout->office ?? 'Office not set'  }}</b>
                      </div>
-                     <div style='font-size:24px;font-family: "Times New Roman, Times, serif;padding:0px'><u><b>C E R T I F I C A T I O N</b></u>
+                     <div style='font-size:24px;font-family: "Times New Roman, Times, serif;padding:0px'><u><b id="certificate_name">C E R T I F I C A T I O N</b></u>
                      </div>
                   </div>
                   <div class="column-left text-left" >
@@ -681,15 +729,15 @@
                         <br>
                         <div style=" text-indent: 50px;font-size: 17px ; font-family: Arial, Helvetica, sans-serif;text-justify: inter-word;">
                            <p >
-                              THIS IS TO CERTIFY THAT ______________________, _____ years old, ______ and a resident of <span id="firstcontent">THIS IS A TEST :Barangay San Vicente, Sto, Domingo, Albay is known to be a good moral character and law-abiding citizen in the community.</span>
+                              THIS IS TO CERTIFY THAT ______________________, _____ years old, ______ and a resident of <span id="firstcontent">start of the paragraph</span>
                            </p>
                            <br>
                            <p id="secondcontent">
-                              This certification is being issued upon the request of the above-named person for whatever legal purpose it may serve him best.
-                           </p>
+                            start of the paragraph
+                               </p>
                            <br>
                            <p >
-                              <b>DONE AND ISSUED</b> this  ___ day of _______________ at the <span id="thirdcontent">office of the punong Barangay....</span>
+                              <b>DONE AND ISSUED</b> this  ___ day of _______________ at the <span id="thirdcontent">start of the paragraph</span>
                            </p>
                            <br>
                         </div>
