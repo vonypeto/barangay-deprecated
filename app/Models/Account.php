@@ -10,7 +10,7 @@ class Account extends Model
     use HasFactory;
     protected $table = 'accounts';
     //Primary Key
-    public $primaryKey = 'accounts_id';
+    public $primaryKey = 'account_id';
     // Timestamps
     public $timestamps = true;
 }
