@@ -18,11 +18,14 @@
 
 <body style="margin: 0 0 100px;">
     <input type="hidden" id = "current_resident" data-id = {{ session("resident.id") }}>
-    
+
     <header class="header-blue" style="padding-bottom: 0px;">
         <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
             <div class="container-fluid"><a class="navbar-brand" href="/barangay/home" style="font-size: 45px;font-family: bodoni mt;"><img src="{{ URL::to('images/logo.png') }}" style="resize: both;width: 80px;margin-right: 30px;">University of Rizal System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navcol-1">
+
+
+
                     <form class="form-inline mr-auto" target="_self">
                         <div class="form-group mb-0"><label for="search-field"></label></div>
                     </form>
@@ -46,16 +49,54 @@
         <li class="nav-item"><a class="nav-link" href="#">Info</a></li>
     </ul>
     <section class="contact-clean" style="padding-bottom: 140px;">
-        <form method="post">
-            <h2 class="text-center">Certificate Request Form</h2><label style="font-weight: bold;">Name</label>
-            <div class="form-group"><input class="form-control" type="text" name="name" placeholder="Enter Name" required=""></div><label style="font-weight: bold;">Description</label>
-            <div class="form-group"><textarea class="form-control" name="Description" placeholder="Write Description" rows="14" required="" minlength="10" maxlength="500"></textarea></div><label style="font-weight: bold;">Certificate Type</label><select class="form-control">
-    <optgroup label="Certificate Type">
-        <option value="12" selected>Indigancy</option>
-        <option value="13">Barangay Clearance</option>
-        <option value="14">Kabobohan ni Von</option>
-    </optgroup>
-</select>
+           <!--FORM-->
+        <form action="/barangay/certificate" method="post">
+            @csrf
+            <input hidden  type="text" value="{{ session("resident.id") }}" id="resident_id" name="resident_id">
+            <h2 class="text-center">Certificate Request Form</h2>
+            <label style="font-weight: bold;">Name</label>
+            <div class="form-group">
+                <input class="form-control" type="text" name="name" placeholder="Enter Name" >
+                @error('name')
+                <span class="text-danger error_text"> {{ $message }}</span>
+                @enderror
+            </div>
+            <label style="font-weight: bold;">Age</label>
+            <div class="form-group">
+                <input class="form-control" type="number" name="age" placeholder="Enter age" onkeypress="return isNumberKey(event)">
+                @error('age')
+                <span class="text-danger error_text"> {{ $message }}</span>
+                @enderror
+            </div>
+            <label style="font-weight: bold;">Gender</label>
+            <div class="form-group border solid pt-2 pl-2">
+                <input readonly type="radio" id="male" name="gender" value="Male">
+                <label for="male">Male</label><br>
+                <input readonly type="radio" id="female" name="gender" value="Female">
+                <label for="female">Female</label>
+                @error('gender')
+                <span class="text-danger error_text"> {{ $message }}</span>
+                @enderror
+            </div>
+
+            <label style="font-weight: bold;">Description</label>
+            <div class="form-group"><textarea class="form-control" name="Description" placeholder="Write Description" rows="14" required="" minlength="10" maxlength="500"></textarea></div>
+            <label style="font-weight: bold;">Certificate Type</label>
+
+
+
+
+
+            <select name="request_type" class="form-control">
+
+
+                    @if(count($certificate ) > 0)
+                    @foreach ($certificate  as $certificate )
+                    <option value="{{  $certificate->certificate_type 	}}" >{{ $certificate->certificate_type 	 }}</option>
+                    @endforeach
+                    @endif
+                </select>
+
             <div class="form-group"><button class="btn btn-primary" type="submit">send </button></div>
         </form>
     </section>

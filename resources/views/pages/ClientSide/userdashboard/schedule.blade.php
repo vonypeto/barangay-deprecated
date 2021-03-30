@@ -17,7 +17,7 @@
 
 <body style="margin: 0 0 100px;">
     <input type="hidden" id = "current_resident" data-id = {{ session("resident.id") }}>
-    
+
     <header class="header-blue" style="padding-bottom: 0px;">
         <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
             <div class="container-fluid"><a class="navbar-brand" href="/barangay/home" style="font-size: 45px;font-family: bodoni mt;"><img src="{{ URL::to('images/logo.png') }}" style="resize: both;width: 80px;margin-right: 30px;">University of Rizal System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -46,61 +46,82 @@
         <li class="nav-item"><a class="nav-link" href="#">Info</a></li>
     </ul>
     <div style="margin: 30px;margin-bottom: 80px;">
-        <div class="jumbotron" style="margin-bottom: 175px;">
-            <div class="container bg-dark" style="margin: 0 auto;color: white;padding: 15px;border-radius: 25px;margin-bottom: 10px;">
-                <div class="row justify-content-center">
-                    <div class="col col-5">
-                        <div>
-                            <div class="row">
-                                <div class="col col-5">
-                                    <h4 style="text-align: right;font-family: times new roman;">Name:</h4>
-                                </div>
-                                <div class="col">
-                                    <h4 style="text-align: left;font-family: times new roman;">Salen, Arch Angel A.</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-5">
-                        <div>
-                            <div class="row">
-                                <div class="col col-2">
-                                    <h4 style="text-align: right;font-family: times new roman;">Price:</h4>
-                                </div>
-                                <div class="col col-5">
-                                    <h4 style="text-align: left;font-family: times new roman;">Php 50</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="d-flex justify-content-center">
+        @if (session()->has("success_certificate"))
+        <div class="alert alert-success">
+          {{ session()->get("success_certificate")}}
+        </div>
+        @endif
+    </div>
+    <div class="jumbotron" style="margin-bottom: 175px;padding-top: 0px;background-color: white !important;">
+
+
+
+
+
+
+
+
+
+            <div class="album py-5 bg-white">
+                <div class="text-center">
+                <h1 >Certificate</h1>
+                <br>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col col-5">
-                        <div>
-                            <div class="row">
-                                <div class="col col-5">
-                                    <h4 style="text-align: right;font-family: times new roman;">CertificateType:</h4>
+
+                <div class="container">
+
+                  <div class="row">
+                    @if(count($request_list))
+                    @foreach ($request_list as $request_list)
+                    <div class="col-md-4">
+                      <div class="card mb-4 box-shadow">
+                         <div class="bg-info text-white text-center pt-2" stlye="height: 100px">
+                            <h4>{{ $request_list->request_type }}</h4>
+                        </div>
+
+                        <div class="card-body">
+                          <div class="card-text border-bottom solid">
+
+
+                            <div class="row text-center">
+                                <div class="col-sm-6">
+                                    <h5>Price</h5>
+                                    <h5>{{ $request_list->price }}</h5>
                                 </div>
-                                <div class="col">
-                                    <h4 style="text-align: left;font-family: times new roman;">Barangay Clearance</h4>
+                                <div class="col-sm-6">
+                                    <h5>Paid</h5>
+                                    <h5>{{ $request_list->paid }}</h5>
                                 </div>
+
                             </div>
                         </div>
-                    </div>
-                    <div class="col col-5">
-                        <div>
-                            <div class="row">
-                                <div class="col col-2">
-                                    <h4 style="text-align: right;font-family: times new roman;">Paid:</h4>
-                                </div>
-                                <div class="col col-5">
-                                    <h4 style="text-align: left;font-family: times new roman;">no</h4>
-                                </div>
-                            </div>
+                          <div class="d-flex justify-content-between align-items-center">
+                              <small class="pl-2"> {{ Carbon\Carbon::parse($request_list->created_at)->toDateString() }}</small>
+                            <hr>
+                            <div class="btn-group">
+                                <a href="schedule/{{ $request_list->request_id }}" class="btn btn-sm btn-outline-secondary">View</a>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Print</button>
+                              </div>
+
+                          </div>
                         </div>
+                      </div>
                     </div>
+
+
+
+
+
+                    @endforeach
+                    @endif
+                    </div>
+
+
+
+                  </div>
                 </div>
-            </div>
+
         </div>
     </div>
     <footer class="footer-clean" style="background-color: gray;position: absolute;left: 0;bottom: 0;height: 174px;width: 100%;overflow: hidden;margin-top: 30px;">

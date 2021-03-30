@@ -124,7 +124,7 @@ class ResidentAccountController extends Controller
         session(['resident.id' => $resident->resident_account_id]);
 
         return redirect("/barangay/home");
-        
+
     }
 
     public function client_register(){

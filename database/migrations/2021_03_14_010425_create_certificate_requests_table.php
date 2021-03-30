@@ -23,11 +23,15 @@ class CreateCertificateRequestsTable extends Migration
             $table->string('gender')->nullable();
             $table->string('paid')->nullable();
             $table->string('price')->nullable();
-
+            $table->BigInteger('cert_id')->unsigned();
             $table->string('request_type')->nullable();
             $table->foreign('resident_id')
             ->references('resident_account_id')
             ->on('resident_accounts')
+            ->onDelete('cascade');
+            $table->foreign('cert_id')
+            ->references('certificate_list_id')
+            ->on('certificate_lists')
             ->onDelete('cascade');
             $table->timestamps();
         });

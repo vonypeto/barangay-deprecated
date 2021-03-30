@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\area_setting;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
+use App\Models\Certificate_request;
 class PagesController extends Controller
 
 {
@@ -15,10 +16,11 @@ class PagesController extends Controller
 
         $area_setting = DB::table('area_settings')
         ->where('area','=','gitna')->first();
+        $request_list = Certificate_request::where('resident_id','=',session("resident.id"))->orderBy('created_at', 'desc')->first();
 
        // echo $add + $area_setting->population;
-
-
+        echo $request_list->request_id;
+        echo "<br>";
         $resident_area = DB::table('area_settings')
         ->where('area','=','gitna')->count();
 

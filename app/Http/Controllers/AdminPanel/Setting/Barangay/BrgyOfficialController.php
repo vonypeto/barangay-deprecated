@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\Models\Barangayimage;
-
+use Illuminate\Support\Facades\Validator;
 
 class BrgyOfficialController extends Controller
 {
@@ -103,11 +103,38 @@ class BrgyOfficialController extends Controller
 
         // area setting
         if (area_setting::where('area', '=', $request->area)->exists()) {
-            return response()->json(['Duplicate'=>'Area Not Saved.']);
+            return response()->json(['status'=>1,'Duplicate'=>'Duplicate Name']);
          }else{
-            area_setting::updateOrCreate(['area_id' => $request->area_id],
-            ['area' => $request->area]);
-            return response()->json(['success'=>'Area saved successfully.']);
+
+
+            $validator = Validator::make($request->all(), [
+
+                'area' => 'required',
+
+
+
+            ],[
+
+            "area.required" => "Field cannot be empty or contain duplicate",
+            ]
+        );
+
+
+            if ($validator->fails()) {
+
+
+
+                return response()->json(['error'=>$validator->errors()]);
+
+
+            }else{
+
+                area_setting::updateOrCreate(['area_id' => $request->area_id],
+                ['area' => $request->area]);
+                return response()->json(['success'=>'Area saved successfully.']);
+            }
+
+
          }
          //count the number of resident living on the area
          $data = DB::table('area_settings')

@@ -561,7 +561,7 @@
                   $("#account_email").text(data.email);
                })
             }
-            
+
             //Hidding label 3 for Account Setting Modal
             $("#password_edit_modal").hide();
 
@@ -580,7 +580,7 @@
             // Modal for firstname edit
             $('body').on('click', '#firstname_edit', function () {
                var id = current_id;
-               $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data) 
+               $.get("{{ route('account.index') }}" +'/' + id +'/edit', function (data)
                {
                   $('#account_settings_modal').modal('toggle');
                   $("#account_settings_modal").show();

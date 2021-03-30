@@ -90,7 +90,7 @@
 
 
                   <td class=" ">{{ $area_setting->area }}</td>
-                  <td class=" ">{{ $area_setting->population }}</td>
+                  <td class=" ">{{ $area_setting->population ?? '0'}}</td>
 
 
 

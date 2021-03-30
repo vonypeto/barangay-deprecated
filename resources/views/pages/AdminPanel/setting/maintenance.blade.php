@@ -294,11 +294,18 @@
             </div>
             <div class="modal-body">
                 <form id="areaform" name="areaform" class="form-horizontal">
+                    <div class="alert alert-danger print-error-msg" style="display:none">
+
+                        <ul></ul>
+
+                    </div>
                    <input type="hidden" name="area_id" id="area_id">
                     <div class="form-group">
                         <label for="name" class="col-sm-2 control-label">Area</label>
                         <div class="col-sm-12">
                             <input type="text" class="form-control" id="area" name="area" placeholder="Enter Area/Purok" value="" maxlength="50" required="">
+                            <span class="text-danger error-text area_err"></span>
+                            <span class="text-danger error-text area_dup"></span>
                         </div>
                     </div>
 

@@ -34,8 +34,9 @@ use App\Http\Controllers\AdminPanel\Setting\Barangay\BarangayimageController;
 //Account Login
 use App\Http\Controllers\ClientSide\ResidentAccountController;
 //Home Module
-use App\Http\Controllers\ClientSide\HomeController;
-
+use App\Http\Controllers\ClientSide\ClearanceController;
+//Schedule
+use App\Http\Controllers\ClientSide\ScheduleClientController;
 //Client Side End
 //Testing Area
 use App\Http\Controllers\BooksController;
@@ -79,6 +80,8 @@ Route::resource('settled', SettledCasesController::class);
 
 Route::resource('certificate', CertificateController::class);
 Route::get('certificate/table/paid', [CertificateController::class, 'certrequestpaid'])->name('certrequestpaid.index');
+Route::get('certificate/table/unpaid', [CertificateController::class, 'index'])->name('certrequestunpaid.index');
+
 Route::post('certificate/table/paid', [CertificateController::class, 'storerequest'])->name('storerequest.post');
 Route::delete('certificate/table/paid/{request_id}', [CertificateController::class, 'deleterequest'])->name('deleterequest.delete');
 Route::get('certificate/table/type', [CertificateController::class, 'certificate_type'])->name('certificate_type.index');
@@ -119,19 +122,33 @@ Route::get("/logout", [UserController::class, 'logout']);
 // Create Controller for blotters, schedule, and certificate
 // for seeding, type in command line: composer dump-autoload
 // Client Side Start
+//Certificate page
+Route::get("/barangay/certificate/", [ClearanceController::class, 'index'])->name("certificateclient.index");
+Route::post("/barangay/certificate/", [ClearanceController::class, 'store'])->name("certificateclient.store");
+
+//schedule page
+
+Route::resource('/barangay/schedule', ScheduleClientController::class);
+
+
+
+
+
+
+
+
+
 
 Route::get('barangay/home', function () {
     return view('pages.ClientSide.userdashboard.homepage');
 });
-Route::get('/barangay/schedule', function () {
-    return view('pages.ClientSide.userdashboard.schedule');
-});
+
 Route::get('/barangay/blotter', function () {
     return view('pages.ClientSide.userdashboard.blotter');
 });
-Route::get('/barangay/certificate', function () {
-    return view('pages.ClientSide.userdashboard.certificate');
-});
+//Route::get('/barangay/certificate', function () {
+//    return view('pages.ClientSide.userdashboard.certificate');
+//});
 Route::get('/barangay/accountsetting', function () {
     return view('pages.ClientSide.userdashboard.accountsetting');
 });

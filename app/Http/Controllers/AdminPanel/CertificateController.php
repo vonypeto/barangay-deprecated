@@ -138,7 +138,7 @@ class CertificateController extends Controller
 
 
 
-        return response()->json('Saved');
+        return response()->json(['Success'=>'Data saved successfully']);
     }
 
 

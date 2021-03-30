@@ -271,6 +271,7 @@ $('#regionsaves').click(function (e) {
 
     //BUTTOM SUBMIT MODAL
     $('#submit').click(function(e) {
+        alert(1);
         e.preventDefault();
         $(this).html('Save');
         $(this).html('Submit');
@@ -457,6 +458,18 @@ $(document).ready(function() {
       $('#areaform').trigger("reset");
       $('#areamodal').modal('show');
   });
+  function printErrorMsg (msg) {
+
+    $.each( msg, function( key, value ) {
+
+    console.log(key);
+
+      $('.'+key+'_err').text(value);
+
+    });
+
+}
+
   //insert and edit area
   $('#regionsave').click(function (e) {
       e.preventDefault();
@@ -467,15 +480,23 @@ $(document).ready(function() {
         type: "POST",
         dataType: 'json',
         success: function (data) {
-            $('#areaform').trigger("reset");
-            $('#areamodal').modal('hide');
-            alert(JSON.stringify(data));
-            table.draw();
+
+            if($.isEmptyObject(data.error)){
+
+
+                $('#areaform').trigger("reset");
+                $('#areamodal').modal('hide');
+                alert(JSON.stringify(data));
+                table.draw();
+
+            }else{
+
+                printErrorMsg(data.error);
+
+            }
+
         },
-        error: function (data) {
-            console.log('Error:', data);
-            $('#regionsave').html('Save Changes');
-        }
+
     });
   });
   // region delete

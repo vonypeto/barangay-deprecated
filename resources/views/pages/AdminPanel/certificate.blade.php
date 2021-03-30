@@ -26,7 +26,7 @@
                         <tr class="headings">
                            <th class="column-title">Name </th>
                            <th class="column-title">Requested </th>
-                           <th class="column-title">Paid</th>
+
                            <th class="column-title">Action</th>
                         </tr>
                      </thead>
@@ -43,7 +43,7 @@
                         <tr class="headings">
                            <th class="column-title">Name </th>
                            <th class="column-title">Requested </th>
-                           <th class="column-title">Paid</th>
+
                            <th class="column-title">Action</th>
                         </tr>
                      </thead>
@@ -232,7 +232,7 @@
                ajax: "{{ route('certrequestpaid.index') }}",
                columns: [{data: 'name',name: 'name'
                    },{data: 'request_type',name: 'request_type'
-                   },{data: 'paid',name: 'paid'
+
                    },{
                        data: 'action',
                        name: 'action',
@@ -246,10 +246,10 @@
                processing: true,
 
                serverSide: true,
-               ajax: "{{ route('certificate.index') }}",
+               ajax: "{{ route('certrequestunpaid.index') }}",
                columns: [{data: 'name',name: 'name'
                    },{data: 'request_type',name: 'request_type'
-                   },{data: 'paid',name: 'paid'
+
 
                    },{
                        data: 'action',
@@ -339,7 +339,7 @@
                    "<br>"+province+"<br><b ><u>"+barangay+"</u></b>");
                    $('#punong2').html("<b>"+ office +"</b>");
 
-                   this.reset();
+
 
 
 
@@ -474,11 +474,13 @@
                  $('#firstcontent').html(data.content_1);
                  $('#secondcontent').html(data.content_2);
                  $('#thirdcontent').html(data.content_3);
-                 $('#certificate_name').val(data.certificate_name);
-                 $('#price').val(data.price);
+                 $('#certificate_namesss').val(data.certificate_name);
+                 $('#pricess').val(data.price);
                  $('#certificate_type').val(data.certificate_type);
-                 certificate_name
-                 $('#certificate_name').html(data.certificate_name);
+
+
+
+              //   $('#certificate_name').html(data.certificate_name);
 
              })
           });
@@ -809,13 +811,13 @@
                <div class="form-group">
                   <label for="name" class="col-sm-4 control-label">Certificate Name</label>
                   <div class="col-sm-12">
-                     <input type="text" required class="form-control" id="certificate_name" name="certificate_name" placeholder="C E R T I F I C A T E" value="" maxlength="50" required="">
+                     <input type="text" required class="form-control" id="certificate_namesss" name="certificate_name" placeholder="C E R T I F I C A T E" value="" maxlength="50" required="">
                   </div>
                </div>
                <div class="form-group">
                   <label for="name" class="col-sm-2 control-label">Price</label>
                   <div class="col-sm-12">
-                     <input type="number" onkeypress="return isNumberKey(event)" required class="form-control" id="price" name="price" placeholder="0"  required="">
+                     <input type="number" onkeypress="return isNumberKey(event)" required class="form-control" id="pricess" name="price" placeholder="0"  required="">
                   </div>
                </div>
 
