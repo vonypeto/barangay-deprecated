@@ -128,8 +128,13 @@ Route::post("/barangay/certificate/", [ClearanceController::class, 'store'])->na
 
 //schedule page
 
-Route::resource('/barangay/schedule', ScheduleClientController::class);
 
+
+Route::get('/barangay/schedule/', [ScheduleClientController::class, 'index'])->name("scheduleclientindex.get");
+Route::get('/barangay/schedule/{schedule}', [ScheduleClientController::class, 'show'])->name("scheduleclientshow.get");
+Route::get('/barangay/schedule/print/{schedule_id}', [ScheduleClientController::class, 'printclient'])->name("scheduleclientprint.get");
+
+//Route::get('/barangay/schedule/{id}', [ScheduleClientController::class, 'print'])->name("scheduleclientid.get");
 
 
 

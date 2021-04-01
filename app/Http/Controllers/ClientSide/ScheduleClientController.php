@@ -33,7 +33,7 @@ class ScheduleClientController extends Controller
 
 
 
-    public function store(Request $request)
+    public function printclient($schedule_id)
     {
 
         $brgy_official = brgy_official::where('position','!=','Punong Barangay')
@@ -44,20 +44,18 @@ class ScheduleClientController extends Controller
         ->get();
         $layout = DB::table('certificate_layouts')
         ->where('layout_id','=','1')->first();
-       $content = Certificate_list::Where('certificate_list_id','=',$request->print_id)->first();
-    //  $content = Certificate_list::Where('certificate_list_id','=',1)->first();
-        $certrequest = Certificate_request::latest()
-        ->where('paid','=','No')
-        ->get();
-        $pdf = PDF::loadView('pages.AdminPanel.PDF.certificatepdf',compact('puno','brgy_official','content','approve','layout' ))->setPaper('A4','portrait')->setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]) ;
-        $path = public_path('pdf/');
-       $fileName =  $content->certificate_list_id.'.'. 'pdf' ;
-       $pdf->save($path . '/' . $fileName);
-        $pdf = public_path('pdf/'.$fileName);
+       $request_list =Certificate_request::find($schedule_id);
+
+       $content = Certificate_list::Where('certificate_list_id','=',$request_list->cert_id)->first();
+        $pdf = PDF::loadView('pages.AdminPanel.PDF.certificateclientpdf',compact('puno','brgy_official','content','approve','layout','request_list' ))->setPaper('A4','portrait')->setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]) ;
+    //   $path = public_path('pdf/');
+     //  $fileName =  $content->certificate_list_id.'.'. 'pdf' ;
+    //   $pdf->save($path . '/' . $fileName);
+    //    $pdf = public_path('pdf/'.$fileName);
 
        // return view('pages.AdminPanel.PDF.certificatepdf',compact('puno','brgy_official','content','approve' ,'layout'));
-       return response()->download($pdf);
-     // return $pdf->stream('certificate.pdf'); //test
+    //   return response()->download($pdf);
+     return $pdf->stream('certificate.pdf'); //test
 
 
 

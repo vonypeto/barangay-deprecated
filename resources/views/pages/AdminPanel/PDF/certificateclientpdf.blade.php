@@ -57,7 +57,7 @@
               <br>
               <div style="text-align: justify;text-indent: 15px;font-size: 17px ; font-family: Arial, Helvetica, sans-serif;">
                 <span style=" text-align: justify;text-justify: inter-word; ">
-                   THIS IS TO CERTIFY THAT __________________, _____ years old, ______ and a resident of <span id="firstcontent">{{ $content->content_1 ?? 'Paragraph not set' }}</span>
+                   THIS IS TO CERTIFY THAT {{ $request_list->name }}, {{ $request_list->age }} years old, {{ $request_list->gender }} and a resident of <span id="firstcontent">{{ $content->content_1 ?? 'Paragraph not set' }}</span>
                 </span>
             </div>
 
@@ -68,12 +68,15 @@
                 </span>
                 </div>
                     <br>
+
                 <div  style="text-align: justify;text-indent: 15px;font-size: 17px ; font-family: Arial, Helvetica, sans-serif;">
                     <span >
-                      Done and issued this  ___ day of _______________ at the <span id="thirdcontent">{{ $content->content_1 ?? 'Paragraph not set' }}</span>
+                      Done and issued this  {{ Carbon\Carbon::parse($request_list->created_at)->format('d') }} day of  {{ Carbon\Carbon::parse($request_list->created_at)->format('F, Y ') }} at the <span id="thirdcontent">{{ $content->content_1 ?? 'Paragraph not set' }}</span>
                     </span>
               </div>
-
+              <br>
+              <br>
+              <br>
               <div class="row">
                  <br>
                  <br>
@@ -88,9 +91,9 @@
                                 <p >Date Issued</p>
                             </div>
                             <div style="display: table-cell;" >
-                              <p >: </p>
+                              <p >: {{ $request_list->request_id }} </p>
                               <p >: P {{ $content->price ?? 'Paragraph not set' }}</p>
-                              <p >:</p>
+                              <p >: {{ Carbon\Carbon::parse($request_list->created_at)->toDateString() }}</p>
                             </div>
                         </div>
                     </div>
@@ -101,7 +104,7 @@
                     @if(count($approve))
                     @foreach ($approve as $approve)
                     <span class="text-center" style="text-transform: uppercase;
-                       text-align:center">{{ $approve->name }}</span><span>{{ $approve->position }}<span>
+                       text-align:center">{{ $approve->name }}</span><p>{{ $approve->position }}<p>
                     @endforeach
                     @endif
                  </div>

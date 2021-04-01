@@ -556,33 +556,19 @@
                 },
 
                 success: function(response){
-
                     var blob = new Blob([response]);
-
                     var link = document.createElement('a');
-
                     link.href = window.URL.createObjectURL(blob);
-
                     link.download = "certificate.pdf";
-
                     link.click();
                     $('#createform').trigger("reset");
                      $('#createmodal').modal('hide');
                 },
-
-                error: function(blob){
-
-                    console.log(blob);
-
-                }
+                    error: function(blob){
+                        console.log(blob);
+                    }
 
                 })//.done(downloadFile);
-
-
-
-
-
-
 
 
          });
