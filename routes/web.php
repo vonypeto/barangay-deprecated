@@ -35,6 +35,9 @@ use App\Http\Controllers\ClientSide\ResidentAccountController;
 //Home Module
 use App\Http\Controllers\ClientSide\HomeController;
 
+// Blotter
+use App\Http\Controllers\ClientSide\BlotterController as ClientBlotterController;
+
 //Client Side End
 //Testing Area
 use App\Http\Controllers\BooksController;
@@ -52,7 +55,7 @@ Route::get('/', function () {
 //Admin Panel Start
 
 //Dashboard Module
-Route::get('/dashboard',[DashboardController::class, 'dashboard']);
+Route::get('/dashboard', [DashboardController::class, 'dashboard']);
 
 //Resident Module
 Route::resource('resident', ResidentInfoController::class);
@@ -88,20 +91,20 @@ Route::get('sampledata', [PagesController::class, 'sampledata']);
 
 
 //Maintenance Moduule
-    // Barangay Setting Section
+// Barangay Setting Section
 Route::resource('setting/maintenance', BrgyOfficialController::class);
 Route::get('setting/maintenance/official/table', [BrgyOfficialController::class, 'barangay'])->name('barangay.index');
 Route::post('setting/maintenance/official/table', [BrgyOfficialController::class, 'barangayPOST'])->name('barangay.post');
 Route::get('setting/maintenance/official/table/{barangay}/edit', [BrgyOfficialController::class, 'barangayedit'])->name('barangay.edit');
 Route::delete('setting/maintenance/official/table/{barangay}/', [BrgyOfficialController::class, 'barangaydelete'])->name('barangay.destroy');
-Route::post('setting/maintenance/barangay/image', [ BarangayimageController::class, 'store' ])->name('image.store');
+Route::post('setting/maintenance/barangay/image', [BarangayimageController::class, 'store'])->name('image.store');
 
-    // Account Setting Section
+// Account Setting Section
 Route::resource('/setting/account', AccountController::class);
-Route::post("/setting/account/form",[AccountController::class, 'accountSettingCheck'])->name("accountSettingCheck");
+Route::post("/setting/account/form", [AccountController::class, 'accountSettingCheck'])->name("accountSettingCheck");
 Route::get("/setting/account/session/table", [AccountController::class, 'getSessionTable'])->name("getSessionTable");
 
-    // User Login Section
+// User Login Section
 Route::get("/login", [UserController::class, 'login']);
 Route::get("/profile", [UserController::class, 'profile']);
 Route::post("/login", [UserController::class, 'check']);
@@ -121,9 +124,12 @@ Route::get('barangay/home', function () {
 Route::get('/barangay/schedule', function () {
     return view('pages.ClientSide.userdashboard.schedule');
 });
-Route::get('/barangay/blotter', function () {
-    return view('pages.ClientSide.userdashboard.blotter');
-});
+// Blotter
+Route::get("/barangay/blotter/{residentid}", [ClientBlotterController::class, 'index']);
+Route::get("/barangay/blotter/pdf/{resident_id}/{blotterid}", [ClientBlotterController::class, 'pdf']);
+Route::resource("barangayblotter", ClientBlotterController::class);
+
+// Blotter End
 Route::get('/barangay/certificate', function () {
     return view('pages.ClientSide.userdashboard.certificate');
 });
@@ -140,7 +146,7 @@ Route::get("/barangay/logout", [ResidentAccountController::class, 'client_logout
 
 // Client Modal on Account Setting
 Route::get("/barangay/{resident_id}/edit", [ResidentAccountController::class, 'edit']);
-Route::post("/barangay/accountsetting/check",[ResidentAccountController::class, 'ClientAccountSettingCheck'])->name("ClientAccountSettingCheck");
+Route::post("/barangay/accountsetting/check", [ResidentAccountController::class, 'ClientAccountSettingCheck'])->name("ClientAccountSettingCheck");
 
 //barangay Side End
 
@@ -180,8 +186,8 @@ Route::get('/invoice', function () {
     return $pdf->download('invoice.pdf');
 });
 Route::get('/invoice-pdf', function () {
- //   return view('/invoice-pdf');
-    $pdf = PDF::loadView('Testing.invoice-pdf')->setOptions(['defaultFont' => 'sans-serif','isRemoteEnabled' => true,'format' => 'letter']);;
+    //   return view('/invoice-pdf');
+    $pdf = PDF::loadView('Testing.invoice-pdf')->setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled' => true, 'format' => 'letter']);;
     return $pdf->download('invoice.pdf');
 });
 
@@ -190,7 +196,7 @@ Route::get('/certificates', function () {
 });
 Route::get('/certificate-pdf', function () {
     return view('Testingcertificate-pdf');
-    $pdf = PDF::loadView('Testing.certificate-pdf')->setPaper('A4','portrait')->setOptions(['defaultFont' => 'sans-serif','isRemoteEnabled' => true]) ;
+    $pdf = PDF::loadView('Testing.certificate-pdf')->setPaper('A4', 'portrait')->setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled' => true]);
     return $pdf->download('certificate.pdf');
 });
 Route::resource('books', BooksController::class);
