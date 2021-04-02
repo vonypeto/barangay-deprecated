@@ -113,6 +113,7 @@ Route::get("/logout", [UserController::class, 'logout']);
 // NOTES for Developer
 // Create Controller for blotters, schedule, and certificate
 // for seeding, type in command line: composer dump-autoload
+
 // Client Side Start
 
 Route::get('barangay/home', function () {
@@ -129,6 +130,12 @@ Route::get('/barangay/certificate', function () {
 });
 Route::get('/barangay/accountsetting', function () {
     return view('pages.ClientSide.userdashboard.accountsetting');
+});
+Route::get('/barangay/news', function () {
+    return view('pages.ClientSide.userdashboard.news');
+});
+Route::get('/barangay/info', function () {
+    return view('pages.ClientSide.userdashboard.info');
 });
 
 // Client Login
