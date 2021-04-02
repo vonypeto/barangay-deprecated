@@ -49,7 +49,7 @@
         <li class="nav-item"><a class="nav-link" href="#">Info</a></li>
     </ul>
 
-
+    {{-- Modal --}}
     <div class="container">
 
         <div class="modal fade " id="account_settings_modal" role="dialog">
@@ -104,48 +104,224 @@
     </div>
 
 
-    <div style="margin-bottom: 227px;padding-left: 50px;">
-        <h2 style="margin: 20px;">My Acount</h2>
-        <div class="container rounded-lg bg-dark col-8 p-3 m-3" style="margin-left: 100px;">
-            <h3 class="text-white">Customize Information</h3>
-            <div class="container p-2">
-                <div id="Firstname" class="row rounded-lg bg-white p-3 m-2">
-                    <div class="col">
-                        <p class="m-0" style="font-weight: bold;">FIRST NAME</p>
-                        <p id="account_firstname" class="m-0">Account Firstname</p>
+    <div style="margin-bottom: 227px;">
+        <h1 class="m-3 mt-5 text-center">Edit Your Account Information</h1>
+        
+        <form id="resident_accountsetting_form" class="p-4">
+            {{ csrf_field() }}
+            <input type="hidden" name="resident_id" id="resident_id" value="{{ session("resident.id") }}">
+            <input type="hidden" name="resident_email" id="resident_email" value="{{ session("resident.email") }}">
+            <div class="rounded shadow-lg border border-secondary p-4" style="font-size: 20px">
+                {{-- Basic info --}}
+                <h2 style="color: rgb(3, 50, 112); ">Basic Info</h2><hr>
+                {{-- 1st row --}}
+                <div class="form-row p-3">
+                    <div class="form-group col-md-6">
+                        <label for="resident_accountsetting_firstname">First Name</label>
+                        <input type="text" class="form-control" id="resident_accountsetting_firstname" name="resident_accountsetting_firstname" placeholder="N/A">
                     </div>
-                    <div class="col align-self-center"><button class="btn btn-primary btn btn-dark float-right" id="firstname_edit" type="button">Edit</button></div>
+                    
+                    <div class="form-group col-md-6">
+                        <label for="resident_accountsetting_lastname">Last Name</label>
+                        <input type="text" class="form-control" id="resident_accountsetting_lastname" name="resident_accountsetting_lastname" placeholder="N/A">
+                    </div>
+                    
+                    <div class="form-group col-md-6">
+                        <label for="resident_accountsetting_middlename">Midlle Name</label>
+                        <input type="text" class="form-control" id="resident_accountsetting_middlename" name="resident_accountsetting_middlename" placeholder="N/A">
+                    </div>
+                    
+                    <div class="form-group col-md-6">
+                        <label for="resident_accountsetting_alias">Alias</label>
+                        <input type="text" class="form-control" id="resident_accountsetting_alias" name="resident_accountsetting_alias" placeholder="N/A">
+                    </div>
                 </div>
-                <div id="Lastname" class="row rounded-lg bg-white p-3 m-2">
-                    <div class="col">
-                        <p class="m-0" style="font-weight: bold;">LAST NAME</p>
-                        <p id="account_lastname" class="m-0">Account Lastname</p>
+                
+                {{-- 2nd row --}}
+                <div class="form-row p-3">
+                    
+                    <div class="form-group col-md-5">
+                        <label for="resident_accountsetting_birthday">Birthday</label>
+                        <input type="date" id="resident_accountsetting_birthday" name="resident_accountsetting_birthday"  class="form-control ">
                     </div>
-                    <div class="col align-self-center"><button class="btn btn-primary btn btn-dark float-right" id="lastname_edit" type="button">Edit</button></div>
+                    
+                    <div class="form-group col-md-5">
+                        <label for="resident_accountsetting_birthplace">Place of Birth</label>
+                        <input type="text" id="resident_accountsetting_birthplace" name="resident_accountsetting_birthplace"  class="form-control " placeholder="Ex: Morong, Rizal">
+                    </div>
+                    
+                    <div class="form-group col-md-2 pl-2">
+                        <label class="row pl-2" for="resident_accountsetting_age">Age </label>
+                        <input type="text" id="resident_accountsetting_age" name="resident_accountsetting_age"  class="form-control " placeholder="Ex: 14">
+                    </div>
+                    
+                    <div class="form-group col-md-4">
+                        <label for="resident_accountsetting_gender">Gender</label>
+                        <select class="form-control" id="resident_accountsetting_gender" name="resident_accountsetting_gender">
+                            <option value="">-Select Gender-</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group col-md-4">
+                        <label for="resident_accountsetting_height">Height</label>
+                        <input type="number" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" name="resident_accountsetting_height" id="resident_accountsetting_height" placeholder="N/A" value="0">
+                    </div>
+                    
+                    <div class="form-group col-md-4">
+                        <label for="resident_accountsetting_weight">Weight</label>
+                        <input type="number" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" name="resident_accountsetting_weight" id="resident_accountsetting_weight" placeholder="N/A" value="0">
+                    </div>
                 </div>
-                <div id="Username" class="row rounded-lg bg-white p-3 m-2">
-                    <div class="col">
-                        <p class="m-0" style="font-weight: bold;">USERNAME</p>
-                        <p id="account_username" class="m-0">Account Username</p>
+                
+                {{-- 3rd row --}}
+                <div class="form-row p-3">
+                    <div class="col-md-6  form-group" >
+                        <label for="resident_accountsetting_voterstatus">Voter Status</label>
+                        <select class="form-control" id="resident_accountsetting_voterstatus" name="resident_accountsetting_voterstatus">
+                            <option value="">-Select Voter Status-</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
                     </div>
-                    <div class="col align-self-center"><button class="btn btn-primary btn btn-dark float-right" id="username_edit" type="button">Edit</button></div>
+                    
+                    <div class="col-md-6 item form-group">
+                        <label for="resident_accountsetting_civilstatus">Civil Status</label>
+                        <select class="form-control" name="resident_accountsetting_civilstatus" id="resident_accountsetting_civilstatus">
+                            <option value="">-Select Marital Status-</option>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Widowed">Widowed</option>
+                            <option value="Separated">Separated</option>
+                            <option value="Divorced">Divorced</option>
+                        </select>
+                        
+                    </div>
+                    
+                    <div class="col-md-12 form-group">
+                        <label for="resident_accountsetting_citizenship">CitizenShip</label>
+                        <input type="text" id="resident_accountsetting_citizenship" name="resident_accountsetting_citizenship" placeholder="Ex: Filipino"   class="form-control ">
+                    </div>
                 </div>
-                <div id="Email" class="row rounded-lg bg-white p-3 m-2">
-                    <div class="col">
-                        <p class="m-0" style="font-weight: bold;">EMAIL</p>
-                        <p id="account_email" class="m-0">Account Email</p>
+                
+                {{-- 4th row --}}
+                <div class="form-row p-3" >
+                    <div class="col-sm-6 form-group" >
+                        <label for="resident_accountsetting_telephone">Telephone</label>
+                        <input type="text" class="form-control"   name="resident_accountsetting_telephone" id="resident_accountsetting_telephone" placeholder="Ex: 123-45-678">
                     </div>
-                    <div class="col align-self-center"><button class="btn btn-primary btn btn-dark float-right" id="email_edit" type="button">Edit</button></div>
+                    
+                    <div class="col-sm-6 form-group">
+                        <label for="resident_accountsetting_mobile">Mobile</label>
+                        <input type="text" class="form-control" name="resident_accountsetting_mobile" id="resident_accountsetting_mobile"  placeholder="Ex: 09166041823" value="">
+                        <span class="text-danger error_text resident_accountsetting_mobile_error" style="text-align:left;font-size:18px;" ></span>
+                    </div>
+                    
+                    <div class="col-sm-6 form-group">
+                        <label for="resident_accountsetting_address_1">Address 1 </label>
+                        <textarea id="resident_accountsetting_address_1" name="resident_accountsetting_address_1" placeholder="Ex: P.O. Box 1201, Manila Central Post Office 1050 Manila"  class="form-control " rows="2" style="resize: none;"></textarea>  
+                    </div>
+                    
+                    <div class="col-sm-6 form-group">
+                        <label for="resident_accountsetting_address_2">Address 2</label>
+                        <textarea type="textbox" id="resident_accountsetting_address_2" name="resident_accountsetting_address_2" placeholder="Ex: P.O. Box 1121, Araneta Center Post Office 1135 Quezon City, Metro Manila"  class="form-control " rows="2" style="resize: none;"></textarea>
+                    </div>
+                    
+                    <div class="col-md-12 form-group">
+                        <label for="resident_accountsetting_area">Area</label><br>
+                        <select name="resident_accountsetting_area" id="resident_accountsetting_area" class="form-control ">
+                            <option value="">-Select Area-</option>
+                            @if(count($area_setting) > 0)
+                            @foreach ($area_setting as $area_setting)
+                            <option value="{{  $area_setting->area }}" >{{ $area_setting->area }}</option>
+                            
+                            @endforeach
+                            @endif
+                            
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-12 form-group">
+                        <label for="resident_accountsetting_email">Email</label>
+                        <input type="email" id="resident_accountsetting_email" name="resident_accountsetting_email"  placeholder="Ex: johnmark@gmail.com" class="form-control ">
+                        
+                    </div>
                 </div>
-                <div id="Password" class="row rounded-lg bg-white p-3 m-2">
-                    <div class="col align-self-center">
-                        <p class="m-0" style="font-weight: bold;">PASSWORD</p>
+            
+            </div>
+
+            <div class="rounded shadow-lg border border-secondary p-4 mt-5" style="font-size: 20px">
+                {{-- Parents/Guardians/Spouse --}}
+                <h2 style="color: rgb(3, 50, 112)">Parents/Guardians/Spouse</h2><hr>
+                
+                {{-- 1st row --}}
+                <div class="form-row p-3">
+                    <div class="form-group col-md-12">
+                        <label for="resident_accountsetting_father">Father's Name</label>
+                        <input type="text" class="form-control" name="resident_accountsetting_father" id="resident_accountsetting_father" placeholder="N/A">
                     </div>
-                    <div class="col align-self-center"><button class="btn btn-primary btn btn-dark float-right" id="password_edit" type="button">Edit</button></div>
+                    
+                    <div class="form-group col-md-12">
+                        <label for="resident_accountsetting_mother">Mother's Name</label>
+                        <input type="text" class="form-control" name="resident_accountsetting_mother" id="resident_accountsetting_mother" placeholder="N/A">
+                    </div>
+                    
+                    <div class="form-group col-md-12">
+                        <label for="resident_accountsetting_spouse">Spouse</label>
+                        <input type="text" class="form-control" name="resident_accountsetting_spouse" id="resident_accountsetting_spouse" placeholder="N/A">
+                    </div>
+                    
                 </div>
             </div>
-        </div>
+                
+            <div class="rounded shadow-lg border border-secondary p-4 mt-5" style="font-size: 20px">
+                {{-- Social Welfare Services --}}
+                <h2 style="color: rgb(3, 50, 112)">Social Welfare Services</h2><hr>
+                
+                <div class="form-row p-3">
+                    <div class="form-group col-md-12">
+                        <label for="resident_accountsetting_PAG_IBIG">PAG-IBIG</label>
+                        <input type="text" class="form-control" onkeypress="return isNumberKey(event)"  name="resident_accountsetting_PAG_IBIG" id="resident_accountsetting_PAG_IBIG" placeholder="Ex: 1234-5678-9101" maxlength = "14" value="">
+                    </div>
+                    
+                    <div class="form-group col-md-12">
+                        <label for="resident_accountsetting_PHILHEALTH">PHILHEALTH</label>
+                        <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="resident_accountsetting_PHILHEALTH" id="resident_accountsetting_PHILHEALTH" placeholder="Ex: 0028-1215160-9" maxlength = "14" value="">
+                    </div>
+                    
+                    <div class="form-group col-md-12">
+                        <label for="resident_accountsetting_SSS">SSS</label>
+                        <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="resident_accountsetting_SSS" id="resident_accountsetting_SSS" placeholder="Ex: 04-0751449-0"  maxlength = "12" value="">
+                    </div>
+                    
+                    <div class="form-group col-md-12">
+                        <label for="resident_accountsetting_TIN">TIN</label>
+                        <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="resident_accountsetting_TIN" id="resident_accountsetting_TIN" placeholder="Ex: 123-456-789-000" maxlength = "15" value="">
+                    </div>
+                
+                </div>
+            </div>
+
+            {{-- confirmation --}}
+            <div class="rounded shadow-lg border border-secondary p-4 mt-5" style="font-size: 30px">
+                <div class="form-row  justify-content-around">
+                    <h2 style="color: rgb(3, 50, 112)" class="col-12">Confirmation</h2><hr>
+                    <input type="password" class="form-control col-8" id="resident_accountsetting_password" name="resident_accountsetting_password" placeholder="Enter password to save changes">
+                    <input type="submit" class="btn btn-success col-2" id="resident_accountsetting_submit" name="resident_accountsetting_submit" value="Save Changes">
+                </div>
+                <div class="form-row  justify-content-around">
+                    <span class="text-danger error_text resident_accountsetting_password_error col-8" style="text-align:left;font-size:18px;" ></span>
+                    <div class="col-2"></div>
+                </div>
+
+            </div>
+               
+        </form>
+        {{-- end of form --}}
     </div>
+
     <footer class="footer-clean" style="background-color: gray;position: absolute;left: 0;bottom: 0;height: 174px;width: 100%;overflow: hidden;margin-top: 30px;">
         <div class="container">
             <div class="row justify-content-center">
@@ -180,13 +356,11 @@
         </div>
     </footer>
 
-
-
     <script type="text/javascript">
        $(function() {
             //Global Varibles
-            var current_id = {{ session("resident.id") }};
-            var isFirstname = false;
+            var current_id = $("#current_resident").data("id");
+            alert(current_id);
             showUserInfo(current_id);
 
             //Ajax
@@ -196,160 +370,73 @@
                }
             });
 
-        //For hidding modal label 3
-        $("#password_edit_modal").hide();
+            function showUserInfo(id){
+               $.get('/barangay' +'/' + id +'/edit', function (data) {
+                    //Basic Info
+                    $("#resident_accountsetting_firstname").val(data.firstname);
+                    $("#resident_accountsetting_lastname").val(data.lastname);
+                    $("#resident_accountsetting_middlename").val(data.middlename);
+                    $("#resident_accountsetting_alias").val(data.alias);
+                    $("#resident_accountsetting_birthday").val(data.birthday);
+                    $("#resident_accountsetting_birthplace").val(data.birth_of_place);
+                    $("#resident_accountsetting_age").val(data.age);
+                    $("#resident_accountsetting_gender").val(data.gender);
+                    $("#resident_accountsetting_height").val(data.height);
+                    $("#resident_accountsetting_weight").val(data.weight);
+                    $("#resident_accountsetting_voterstatus").val(data.voterstatus);
+                    $("#resident_accountsetting_civilstatus").val(data.civilstatus);
+                    $("#resident_accountsetting_citizenship").val(data.citizenship);
+                    $("#resident_accountsetting_telephone").val(data.telephone_no);
+                    $("#resident_accountsetting_mobile").val(data.mobile_no);
+                    $("#resident_accountsetting_address_1").val(data.address1);
+                    $("#resident_accountsetting_address_2").val(data.address2);
+                    $("#resident_accountsetting_area").val(data.area);
+                    $("#resident_accountsetting_email").val(data.email);
 
-        //On modal close
-        $("#account_settings_modal").on("hidden.bs.modal", function () {
-            $("#account_settings_form")[0].reset();
-            $(document).find('span.error_text').text('');
-            $("#password_edit_modal").hide();
-            $("#new_input_modal").attr("name","new_input_modal");
-            $("#current_password_modal_confirmation").attr("name","current_password_modal");
-            $("#new_input_modal").attr("type","text");
-            isFirstname = false;
-        });
+                    //Parents/Guardians/Spouse
+                    $("#resident_accountsetting_father").val(data.father);
+                    $("#resident_accountsetting_mother").val(data.mother);
+                    $("#resident_accountsetting_spouse").val(data.spouse);
 
-               // Show info for Client Account Setting
-               function showUserInfo(id){
-            $.get('/barangay/' + id +'/edit', function (data) {
-                $("#account_firstname").text(data.first_name);
-                $("#account_lastname").text(data.last_name);
-                $("#account_username").text(data.username);
-                $("#account_email").text(data.email);
-            })
-        }
+                    //Social Welfare Services
+                    $("#resident_accountsetting_PAG_IBIG").val(data.PAG_IBIG);
+                    $("#resident_accountsetting_PHILHEALTH").val(data.PHILHEALTH);
+                    $("#resident_accountsetting_SSS").val(data.SSS);
+                    $("#resident_accountsetting_TIN").val(data.TIN);
+               })
+            }
 
-        // Modal for firstname edit
-        $('body').on('click', '#firstname_edit', function () {
-            var id = current_id;
-            $.get('/barangay/' + id +'/edit', function (data) 
-            {
-                $('#account_settings_modal').modal('toggle');
-                $("#account_settings_modal").show();
+            $("#resident_accountsetting_form").on('submit', function (e) {
+               e.preventDefault();
 
-                $('#modal_label1').text("NEW FIRST NAME");
-                $("#new_input_modal").val(data.first_name);
+               $firstname = $("#new_input_modal").val();
 
-                $('#current_id').val(id);
-                $('#table_edit').val("firstname");
+               $.ajax({
+                  type:"POST",
+                  url:"{{ route('client_accountsetting_check') }}",
+                  data: $("#resident_accountsetting_form").serialize(),
+                  dataType:"json",
+                  beforeSend:function(){
+                     $(document).find('span.error_text').text('');
+                  },
+                  success: function (data) {
+                     if(data.status == 0){
+                        $.each(data.error, function(prefix, val){
+                           $('span.'+prefix+"_error").text(val[0]);
+                        });
+                     }
+                     else{
+                        alert(data.msg);
+                        showUserInfo(current_id);
+                        $("#resident_accountsetting_form")[0].reset();
+                        $(document).find('span.error_text').text('');
+                     }
+                  }
+               });
 
-                isFirstname = true;
-            })
-        });
-
-        // Modal for Lastname edit
-        $('body').on('click', '#lastname_edit', function () {
-
-            var id = current_id;
-            $.get('/barangay/' + id +'/edit', function (data) {
-                $('#account_settings_modal').modal('toggle');
-                $("#account_settings_modal").show();
-
-                $('#modal_label1').text("NEW LAST NAME");
-                $("#new_input_modal").val(data.last_name);
-
-                $('#current_id').val(id);
-                $('#table_edit').val("lastname");
-            })
-        });
-
-        //Modal for username edit
-        $('body').on('click', '#username_edit', function () {
-            var id = current_id;  
-            $.get('/barangay/' + id +'/edit', function (data)  {
-            $('#account_settings_modal').modal('toggle');
-            $("#account_settings_modal").show();
-
-            $('#modal_label1').text("NEW USERNAME");
-            $("#new_input_modal").val(data.username);
-
-            $("#new_input_modal").attr("name","new_input_username_modal");
-
-            $('#current_id').val(id);
-            $('#table_edit').val("username");
-            })
-        });
-
-        // Modal for email edit
-        $('body').on('click', '#email_edit', function () {
-
-            var id = current_id;
-            $.get('/barangay/' + id +'/edit', function (data)  {
-                $('#account_settings_modal').modal('toggle');
-                $("#account_settings_modal").show();
-
-                $('#modal_label1').text("NEW EMAIL");
-                $("#new_input_modal").val(data.email);
-
-                $("#new_input_modal").attr("name","new_input_email_modal");
-
-                $('#current_id').val(id);
-                $('#table_edit').val("email");
-            })
-        });
-
-        // Modal for password edit
-        $('body').on('click', '#password_edit', function () {
-
-            var id = current_id;
-            $.get('/barangay/' + id +'/edit', function (data) {
-                $('#account_settings_modal').modal('toggle');
-                $("#account_settings_modal").show();
-
-                $('#modal_label1').text("NEW PASSWORD");
-                $("#new_input_modal").attr("placeholder", "Enter new password");
-
-                $('#current_id').val(id);
-                $('#table_edit').val("password");
-
-
-                $("#new_input_modal").attr("type","password");
-                $("#current_password_modal_confirmation").attr("name","current_password_modal_confirmation");
-                $("#password_edit_modal").show();
-            })
-        });
-
-        //Modal on submit
-        $("#account_settings_form").on('submit', function (e) {
-            e.preventDefault();
-
-            $firstname = $("#new_input_modal").val();
-
-            $.ajax({
-                type:"post",
-                url:"{{ route("ClientAccountSettingCheck") }}",
-                data: $("#account_settings_form").serialize(),
-                dataType:"json",
-                beforeSend:function(){
-                    $(document).find('span.error_text').text('');
-                },
-                success: function (data) {
-                    if(data.status == 0){
-                    $.each(data.error, function(prefix, val){
-                        $('span.'+prefix+"_error").text(val[0]);
-                    });
-                    }
-                    else{
-                    $('#account_settings_modal').modal('hide');
-                    alert(data.msg);
-                    showUserInfo(current_id);
-                    $("#account_settings_form")[0].reset();
-                    $(document).find('span.error_text').text('');
-
-                    if(isFirstname == true){
-                        $("#navbar-username").html('<i class="fa fa-user" style="margin-right: 5px;"></i>' + $firstname );
-                    }
-                    }
-                }
             });
-        });
 
        }) // end of ready function
-
-
-
-
 
     </script>
 </body>

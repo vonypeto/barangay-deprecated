@@ -34,6 +34,8 @@ use App\Http\Controllers\AdminPanel\Setting\Barangay\BarangayimageController;
 use App\Http\Controllers\ClientSide\ResidentAccountController;
 //Home Module
 use App\Http\Controllers\ClientSide\HomeController;
+//AccountSettings
+use App\Http\Controllers\ClientSide\ResidentUserAccountController;
 
 //Client Side End
 //Testing Area
@@ -127,20 +129,18 @@ Route::get('/barangay/blotter', function () {
 Route::get('/barangay/certificate', function () {
     return view('pages.ClientSide.userdashboard.certificate');
 });
-Route::get('/barangay/accountsetting', function () {
-    return view('pages.ClientSide.userdashboard.accountsetting');
-});
+Route::get('/barangay/accountsetting', [ResidentAccountController::class, 'index']);
 
 // Client Login
-Route::get("/barangay/login", [ResidentAccountController::class, 'client_login']);
-Route::post("/barangay/login", [ResidentAccountController::class, 'client_check']);
-Route::get("/barangay/register", [ResidentAccountController::class, 'client_register']);
-Route::post("/barangay/register", [ResidentAccountController::class, 'client_register_check']);
-Route::get("/barangay/logout", [ResidentAccountController::class, 'client_logout']);
+Route::get("/barangay/login", [ResidentUserAccountController::class, 'client_login']);
+Route::post("/barangay/login", [ResidentUserAccountController::class, 'client_check']);
+Route::get("/barangay/register", [ResidentUserAccountController::class, 'client_register']);
+Route::post("/barangay/register", [ResidentUserAccountController::class, 'client_register_check']);
+Route::get("/barangay/logout", [ResidentUserAccountController::class, 'client_logout']);
 
 // Client Modal on Account Setting
 Route::get("/barangay/{resident_id}/edit", [ResidentAccountController::class, 'edit']);
-Route::post("/barangay/accountsetting/check",[ResidentAccountController::class, 'ClientAccountSettingCheck'])->name("ClientAccountSettingCheck");
+Route::post("/barangay/accountsetting/check",[ResidentAccountController::class, 'clientaccountsettingcheck'])->name("client_accountsetting_check");
 
 //barangay Side End
 
