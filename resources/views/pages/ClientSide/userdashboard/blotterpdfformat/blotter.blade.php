@@ -8,96 +8,97 @@
 
 
     <div class="row">
+
       <div class="column-right text-right" >
-        <img  style="width: 120PX" src="{{  public_path('logo/logo1.jpg') }}" alt="logo">
+        <img  style="width: 120PX" src="{{ storage_path('app/'.$certificate_layout[0]->logo_1) }}" alt="logo">
       </div>
       <div class="column-center text-center" >
-       <p style='font-size:19px;font-family: "Times New Roman, Times, serif"; text-align: center;'> REPUBLIC OF THE PHILIPPINES<br>
-        MUNICIPALITY OF BARAS<br>
-        PROVINCE OF RIZAL<br>
-         <b style="text-align: center;"><u>BARANGAY CONCEPCION</u></b>
+       <p style='font-size:19px;font-family: "Times New Roman, Times, serif"; text-align: center; text-transform: uppercase;'> REPUBLIC OF THE PHILIPPINES<br>
+        MUNICIPALITY OF {{ $certificate_layout[0]->municipality ?: 'Not Set'}}<br>
+        PROVINCE OF {{ $certificate_layout[0]->province ?: 'Not Set'}}<br>
+         <b style="text-align: center;"><u>BARANGAY {{ $certificate_layout[0]->barangay ?: 'Not Set'}}</u></b>
         </p>
         <div style='font-size:22px;font-family: "Times New Roman, Times, serif"; text-align: center;'><b>EXTRACT COPY FROM BARANGAY BLOTTER</b>
-
         </div>
-
       </div>
-
       <div class="column-left" >
-        <img  style="width: 120PX" src="{{  public_path('logo/logo2.jpg') }}" alt="logo">
+        <img  style="width: 120PX"  src="{{ storage_path('app/'.$certificate_layout[0]->logo_2) }}" alt="logo">
       </div>
-    </div>
 
+    </div>
 
     <div class="content">
 
-      <h4 style="margin-bottom: 2.5rem;"><b>TO WHOM IT MAY CONCERN:</b></h4>
-      <h4><b style="margin-left: 5rem;">THIS IS TO CERTIFY</b> that as per record available in the Barangay BLotter on Barangay Conception, the following data exixts:</h4>
+      <h4 style="margin-bottom: 1.5rem;"><b>TO WHOM IT MAY CONCERN:</b></h4>
 
-      <div style="margin-top: 2rem;" class="data-row">
+      <h4><b style="margin-left: 5rem;">THIS IS TO CERTIFY</b> that as per record available in the Barangay BLotter on Barangay {{ $certificate_layout[0]->barangay ?: 'Not Set' }}, the following data exixts:</h4>
+   
+      
+
+      <div style="margin-top: 1.5rem;" class="data-row">
           <div class="data-row-1">
-              <h4>BLotter No</h4>
-              <h4>Date Reported</h4>
-              <h4>Time Reported</h4>
+              <p><b>Blotter No</b></p>
+              <p><b>Date Reported</b></p>
+              <p><b>Time Reported</b></p>
           </div>
 
           <div class="data-row-2" style="text-align: center; ">
-              <h4>:{{ $data[0]->blotter_id }}</h4>
-              <h4>:{{ $data[0]->date_reported }}</h4>
-              <h4>:{{ $data[0]->time_reported }}</h4>
+              <p>:{{ $data[0]->blotter_id }}</p>
+              <p>:{{ $data[0]->date_reported }}</p>
+              <p>:{{ $data[0]->time_reported }}</p>
           </div>
         
       </div>
 
-      <h4><b>FOR RECORD:</b></h4>
+      <p><b>FOR RECORD:</b></p>
 
-      <h4 style="text-align: center; margin-bottom: 4rem;"><b>"{{ $data[0]->incident_type }}"</b></h4>
+      <p style="text-align: center; margin-bottom: 1rem;"><b>"{{ $data[0]->incident_type }}"</b></p>
                       
       <div class="row">
         <div class="col-sm-3" >
-          <h4>Complainants</h4>
+          <p><b>Complainants</b></p>
         </div>
 
         <div class="col-sm-8" >
           @for ($i = 0; $i < $complainant->count(); $i++)
-            <h4>: {{ $complainant[$i]->person_involve }}</h4>
+            <p>: {{ $complainant[$i]->person_involve }}</p>
           @endfor
          </div>
       </div>
 
       <div class="row">
         <div class="col-sm-3" >
-          <h4>Respondents</h4>
+          <p><b>Respondents</b></p>
         </div>
 
           <div class="col-sm-8" >
           @for ($i = 0; $i < $respondent->count(); $i++)
-            <h4>: {{ $respondent[$i]->person_involve }}</h4>
+            <p>: {{ $respondent[$i]->person_involve }}</p>
           @endfor
          </div>
       </div>
 
       <div class="row">
         <div class="col-sm-3" >
-          <h4>Victims</h4>
+          <p><b>Victims</b></p>
         </div>
 
         <div class="col-sm-8" >
           @for ($i = 0; $i < $victim->count(); $i++)
-            <h4>: {{ $victim[$i]->person_involve }}</h4>
+            <p>: {{ $victim[$i]->person_involve }}</p>
           @endfor
          </div>
       </div>
 
       <div class="row">
         <div class="col-sm-3" >
-          <h4>Attackers</h4>
+          <p><b>Attackers</b></p>
 
         </div>
 
         <div class="col-sm-8" >
           @for ($i = 0; $i < $attacker->count(); $i++)
-            <h4>: {{ $attacker[$i]->person_involve }}</h4>
+            <p>: {{ $attacker[$i]->person_involve }}</p>
           @endfor
          </div>
       </div>
@@ -105,11 +106,11 @@
       <div class="row">
 
         <div class="col-sm-3" >
-          <h4>Occurence</h4>
+          <p><b>Occurence</b></p>
         </div>
 
         <div class="col-sm-8" >
-          <h4>: {{ $data[0]->time_incident }} of {{ $data[0]->date_incident }} at {{ $data[0]->incident_location }}</h4>
+          <p>: {{ $data[0]->time_incident }} of {{ $data[0]->date_incident }} at {{ $data[0]->incident_location }}</p>
          </div>
 
       </div>
@@ -117,18 +118,18 @@
       <div class="row">
 
         <div class="col-sm-3" >
-          <h4>Narrative Report</h4>
+          <p><b>Narrative Report</b></p>
         </div>
 
         <div class="col-sm-8" >
-          <h4>: <span style="margin-left: 2rem;"></span> {{ $data[0]->incident_narrative }}</h4>
+          <p>: <span style="margin-left: 4rem;"></span> {{ $data[0]->incident_narrative }}</p>
          </div>
 
       </div>
 
       <div style="text-align: right;">
-        <h4><b>RONALDO PLECRIDA</b></h4>
-        <h4>Barangay Captain</h4>
+        <p><b>RONALDO PLECRIDA</b></p>
+        <p>Barangay Captain</p>
     </div>
       
    
@@ -177,9 +178,6 @@
     .data-row .data-row-1{
       float: left;
     }
-
-  
-
 
     </style>
 

@@ -8,6 +8,7 @@ use App\Models\blotters;
 use App\Models\person_involve;
 use App\Models\resident_account;
 use App\Models\resident_info;
+use App\Models\Certificate_layout;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class BlotterController extends Controller
         $data = DB::table('person_involves')
             ->where('person_involves.resident_id',  $residentid)
             ->join('blotters', 'blotters.blotter_id', '=', 'person_involves.blotter_id')
-            ->select('blotters.blotter_id', 'blotters.incident_type', 'blotters.status', 'blotters.date_reported', 'blotters.incident_narrative')
+            ->select('blotters.blotter_id', 'blotters.incident_location', 'blotters.incident_type', 'blotters.status', 'blotters.date_reported', 'blotters.incident_narrative')
             ->get();
         return view('pages.ClientSide.userdashboard.blotter', [
             "data" => $data
@@ -61,6 +62,8 @@ class BlotterController extends Controller
         $attacker = person_involve::where('blotter_id', $blotter->blotter_id)
             ->where('involvement_type', "Attacker")->get();
 
+        $certificate_layout = Certificate_layout::all();
+
 
         // return view(
         //     'pages.ClientSide.userdashboard.blotterpdfformat.blotter',
@@ -69,7 +72,8 @@ class BlotterController extends Controller
         //         "complainant" => $complainant,
         //         "respondent" => $respondent,
         //         "victim" => $victim,
-        //         "attacker" => $attacker
+        //         "attacker" => $attacker,
+        //         "certificate_layout" => $certificate_layout
         //     ]
         // );
         $pdf = PDF::loadView(
@@ -79,7 +83,8 @@ class BlotterController extends Controller
                 "complainant" => $complainant,
                 "respondent" => $respondent,
                 "victim" => $victim,
-                "attacker" => $attacker
+                "attacker" => $attacker,
+                "certificate_layout" => $certificate_layout
             ]
         );
         return $pdf->download('blotter.pdf');

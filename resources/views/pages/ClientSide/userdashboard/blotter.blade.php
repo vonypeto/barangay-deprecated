@@ -103,8 +103,8 @@
                     <div class="card-container">
                         <div class="card-header">
                             <h4>{{ $item->incident_type }}</h4>
+                            <h6>{{ $item->incident_location}}</h6>
                             <h6>{{ $item->status }}</h6>
-                            <h6>Blotter ID - {{ $item->blotter_id}}</h6>
                         </div>
 
                         <div class="card-content">
