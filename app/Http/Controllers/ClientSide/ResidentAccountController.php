@@ -7,11 +7,14 @@ use Illuminate\Http\Request;
 
 //Models
 use App\Models\resident_account;
+use App\Models\resident_info;
+use App\Models\area_setting;
 
 //Plugins
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Arr;
 use Carbon\Carbon;
 
 // Custom Rules
@@ -27,7 +30,18 @@ class ResidentAccountController extends Controller
      */
     public function index()
     {
-        //
+        if (!session()->has("resident")) {
+            return redirect("/barangay/login");
+        }
+
+        $resident_id =  session("resident.id") ;
+
+        $area_setting = area_setting::all();
+        $resident = resident_info::latest()->get();
+        $resident_account = resident_account::where("resident_id","=", $resident_id)->first();
+
+
+        return view('pages.ClientSide.userdashboard.accountsetting', [compact('resident'),'area_setting'=>$area_setting], compact('resident_account') );
     }
 
     /**
@@ -70,8 +84,8 @@ class ResidentAccountController extends Controller
      */
     public function edit($resident_id)
     {
-        $account = resident_account::find($resident_id);
-        return response()->json($account);
+        $resident_info = resident_info::where("resident_id","=", $resident_id)->first();
+        return response()->json($resident_info);
     }
 
     /**
@@ -97,102 +111,32 @@ class ResidentAccountController extends Controller
         //
     }
 
-    public function client_login(){
-        if (session()->has("client")) {
-            return redirect("/barangay/home");
-         }
-
-        return view('pages.ClientSide.userlogin.login');
-    }
-
-    public function client_check(Request $request){
-
-        $validator = Validator::make($request->all(), [
-            "client_login_email" => ["required", new ResidentEmailExists],
-            "client_login_password" => ["required", new ResidentConfirmPassword($request->client_login_email)]
-        ],
-        [
-            "client_login_email.required" => "Enter your username!!!",
-            "client_login_password.required" => "Enter your password!!!"
-        ])->validate();
-
-        $resident = resident_account::where("email","=", $request->client_login_email)->first();
-
-        session('resident');
-        session(['resident.email' => $request->client_login_email]);
-        session(['resident.firstname' => $resident->first_name]);
-        session(['resident.id' => $resident->resident_account_id]);
-
-        return redirect("/barangay/home");
-
-    }
-
-    public function client_register(){
-        return view("pages.ClientSide.userlogin.register");
-    }
-
-    public function client_register_check(Request $request){
-
-        $validator = Validator::make($request->all(), [
-            "register_firstname" => "required",
-            "register_lastname" => "required",
-            "register_username" => "required",
-            "register_email" => ["required", "ends_with:@gmail.com,@yahoo.com", "unique:resident_accounts,email"],
-            "register_password" => ["required", "confirmed"],
-            "register_password_confirmation" => "required"
-        ],
-        [
-            "register_firstname.required" => "We need to know your name.",
-            "register_lastname.required" => "We need to know your name.",
-            "register_username.required" => "You need a username to register.",
-            "register_email.required" => "Enter an email to register.",
-            "register_email.ends_with" => "we need you to give us a valid email.",
-            "register_password.required" => "Enter your password!!!",
-            "register_password_confirmation.required" => "We need you to verify your password!!!"
-        ])->validate();
-
-
-        $new_resident = new resident_account;
-        $new_resident->first_name = $request->register_firstname;
-        $new_resident->last_name = $request->register_lastname;
-        $new_resident->username = $request->register_username;
-        $new_resident->email = $request->register_email;
-        $new_resident->password = Hash::make($request->register_password);
-        $query = $new_resident->save();
-
-        return back()->with('success_register', 'Account successfully registered!');
-    }
-
-    public function client_logout(){
-        if (session()->has("resident")) {
-            session()->pull("resident");
-        }
-
-        return redirect ("/barangay/login");
-    }
-
-    public function ClientAccountSettingCheck(Request $request){
-        $id = $request->current_id;
-        $resident = resident_account::findorfail($id);
+    public function clientaccountsettingcheck(Request $request){
+        $id = $request->resident_id;
 
         $validator = Validator::make($request->all(),[
-            "new_input_modal" => ["required","sometimes"],
-            "new_input_username_modal" => ["required", "unique:resident_accounts,username","sometimes"],
-            "new_input_email_modal" => ["required", "ends_with:@gmail.com,@yahoo.com","unique:resident_accounts,email", "sometimes"],
-            "current_password_modal_confirmation" => ["required", "same:new_input_modal", "sometimes"],
-            "current_password_modal" => ["required", "sometimes", new ResidentConfirmPassword($resident->email)],
-
+            "resident_accountsetting_password" => ["required", new ResidentConfirmPassword($request->resident_email)],
+            "resident_accountsetting_mobile" => "digits:11|nullable",
+            "resident_accountsetting_telephone" => "digits:8|nullable",
+            "resident_accountsetting_PAG_IBIG" => "digits:14|nullable",
+            "resident_accountsetting_PHILHEALTH" => "digits:14|nullable",
+            "resident_accountsetting_SSS" => "digits:10|nullable",
+            "resident_accountsetting_TIN" => "digits:12|nullable",
+            "resident_accountsetting_email" => ["nullable", "ends_with:@gmail.com,@yahoo.com", "unique:resident_accounts,email,$id,resident_id"],
+            "resident_accountsetting_newpassword" => "confirmed|sometimes",
+            "resident_accountsetting_newpassword_confirmation" => "required|sometimes",
         ],
         [
-            "new_input_modal.required" => "This cannot be empty.",
-            "new_input_email_modal.required" => "This cannot be empty.",
-            "new_input_email_modal.ends_with" => "We need a valid email!!",
-            "new_input_email_modal.unique" => "Thi email is already taken!!",
-            "current_password_modal.required" => "Please enter your password!!",
-            "new_input_username_modal.unique" => "Username taken.",
-            "current_password_modal_confirmation.required" => "Verify your new password!!",
-            "current_password_modal_confirmation.same" => "Does not match with new password"
-
+            "resident_accountsetting_password.required" => "Please enter your password to save changes",
+            "resident_accountsetting_mobile.digits" => "Please enter a valid mobile number.",
+            "resident_accountsetting_telephone.digits" => "Please enter a valid telephone number.",
+            "resident_accountsetting_PAG_IBIG.digits" => "Please enter a valid format.",
+            "resident_accountsetting_PHILHEALTH.digits" => "Please enter a valid format.",
+            "resident_accountsetting_SSS.digits" => "Please enter a valid format.",
+            "resident_accountsetting_TIN.digits" => "Please enter a valid format.",
+            "resident_accountsetting_email.ends_with" => "Please enter a valid email.",
+            "resident_accountsetting_newpassword.confirmed" => "Does not match with confirm password.",
+            "resident_accountsetting_newpassword_confirmation.required" => "Enter again here your new password."
         ]);
 
         if ($validator->fails()) {
@@ -200,34 +144,67 @@ class ResidentAccountController extends Controller
         }
         else {
 
-            if ($request->table_edit == "firstname") {
-                $resident -> first_name = $request->new_input_modal;
-                $resident->save();
-
-                session(['resident.firstname' => $request->new_input_modal]);
+            if ($request->resident_accountsetting_email == null) {
+                $new_email = $request->resident_email;
+            }
+            else {
+                $new_email = $request->resident_accountsetting_email;
             }
 
-            if ($request->table_edit == "lastname") {
-                $resident -> last_name = $request->new_input_modal;
-                $resident->save();
+            session(['resident.firstname' => $request->resident_accountsetting_firstname]);
+            session(['resident.email' => $new_email]);
+
+            // Saving at resident account
+            $values1 = [
+                'last_name' => $request->resident_accountsetting_lastname,
+                'first_name' => $request->resident_accountsetting_firstname,
+                'email'=>$new_email,
+                'username'=>$request->resident_accountsetting_username,
+            ];
+
+            $password = (['password'=>Hash::make($request->resident_accountsetting_newpassword)]);
+
+            if ($password != null) {
+                $values1 += $password;
             }
 
-            if ($request->table_edit == "username") {
+            session(['resident.username' => $request->resident_accountsetting_username]);
 
-                $resident -> username = $request->new_input_username_modal;
-                $resident->save();
 
-            }
 
-            if ($request->table_edit == "email") {
-                $resident -> email = $request->new_input_email_modal;
-                $resident->save();
-            }
+            $query = DB::table('resident_accounts')->where("resident_id","=", $id)->update($values1);
 
-            if ($request->table_edit == "password") {
-                $resident -> password = Hash::make($request->new_input_modal);
-                $resident->save();
-            }
+            // Saving at resident info
+            $values2 = [
+                'lastname' => $request->resident_accountsetting_lastname,
+                'firstname' => $request->resident_accountsetting_firstname,
+                'middlename'=> $request->resident_accountsetting_middlename,
+                'alias' =>$request->resident_accountsetting_alias,
+                'birthday'=>$request->resident_accountsetting_birthday,
+                'age'=>$request->resident_accountsetting_age,
+                'gender'=>$request->resident_accountsetting_gender,
+                'civilstatus'=>$request->resident_accountsetting_civilstatus,
+                'voterstatus'=>$request->resident_accountsetting_voterstatus,
+                'birth_of_place'=>$request->resident_accountsetting_birthplace,
+                'citizenship'=>$request->resident_accountsetting_citizenship,
+                'telephone_no'=>$request->resident_accountsetting_telephone,
+                'mobile_no'=>$request->resident_accountsetting_mobile,
+                'height'=>$request->resident_accountsetting_height,
+                'weight'=>$request->resident_accountsetting_weight,
+                'PAG_IBIG'=>$request->resident_accountsetting_PAG_IBIG,
+                'PHILHEALTH'=>$request->resident_accountsetting_PHILHEALTH,
+                'SSS'=>$request->resident_accountsetting_SSS,
+                'TIN'=>$request->resident_accountsetting_TIN,
+                'email'=>$new_email,
+                'spouse'=>$request->resident_accountsetting_spouse,
+                'father'=>$request->resident_accountsetting_father,
+                'mother'=>$request->resident_accountsetting_mother,
+                'area'=>$request->resident_accountsetting_area,
+                'address_1'=>$request->resident_accountsetting_address_1,
+                'address_2'=>$request->resident_accountsetting_address_2
+            ];
+
+            $query = DB::table('resident_infos')->where("resident_id","=", $id)->update($values2);
 
             return response()->json(['msg'=>'Account information has been changed successfully.']);
 

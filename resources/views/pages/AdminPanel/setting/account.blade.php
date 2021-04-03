@@ -1,7 +1,7 @@
 @extends('layouts.apps')
 @section('content')
 
-<input type="hidden" id="current_user" data-id = {{ session("user.id") }}>
+<input type="hidden" id="current_user" data-id = {{ session("user.id") }}  data-type = {{ session("user.type") }}>
 
 <div class="col-sm-12 text-left ">
    <h1 class="border-bottom border-bot pt-3">Account</h1>
@@ -17,9 +17,9 @@
          {{-- - Tablink - --}}
          <div class="tab-nav ">
             <button class="tablinks active" onclick="schedules(event, 'schedule')">Account Setting</button>
-            <button class="tablinks " onclick="schedules(event, 'create') ">Create Account</button>
+            <button class="tablinks " id="tablink-create-account" onclick="schedules(event, 'create') ">Create Account</button>
             <button class="tablinks"  id="tablink-manage-account" onclick="schedules(event, 'manage')">Manage Account</button>
-            <button class="tablinks" onclick="schedules(event, 'session')">Session History</button>
+            <button class="tablinks" id="tablink-session-history" onclick="schedules(event, 'session')">Session History</button>
          </div>
 
          {{-- - Account Setting Tablink - --}}
@@ -397,8 +397,19 @@
 
             //Global varibles
             var current_id = $("#current_user").data("id");
+            var user_type = $("#current_user").data("type");
+
             var isFirstname = false;
             showUserInfo(current_id);
+            
+            //Hide Navlink
+            if(user_type == "Encoder"){
+            $("#tablink-create-account").hide();
+            $("#tablink-manage-account").hide();
+            $("#tablink-session-history").hide();
+            }
+
+
 
             $.ajaxSetup({
                headers: {

@@ -35,6 +35,11 @@
     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
       <div class="card card-signin my-5">
         <div class="card-body">
+          @if (session()->has("success_register"))
+          <div class="alert alert-success">
+            {{ session()->get("success_register")}}
+          </div>
+          @endif
           <h5 class="card-title text-center">Log In</h5>
           {{-- form --}}
           <form class="log-in-form" action="/barangay/login" method="post"> 

@@ -20,6 +20,10 @@ class BrgyOfficialController extends Controller
      */
     public function index(Request $request)
     {
+        if (!session()->has("user")) {
+            return redirect("login");
+        }
+        
         $Barangayimage = DB::table('barangayimages')
         ->where('barangay_id','=','1')->first();
         $official_empty = brgy_official::orderBy('official_id')

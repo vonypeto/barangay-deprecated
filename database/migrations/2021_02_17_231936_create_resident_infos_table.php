@@ -27,9 +27,9 @@ class CreateResidentInfosTable extends Migration
             $table->string('birth_of_place')->nullable();
             $table->string('citizenship')->nullable();
             $table->string('telephone_no')->nullable();
-            $table->bigInteger('mobile_no')->unsigned()->nullable();
-            $table->bigInteger('height')->unsigned()->nullable();
-            $table->bigInteger('weight')->unsigned()->nullable();
+            $table->string('mobile_no')->nullable();
+            $table->string('height')->nullable();
+            $table->string('weight')->nullable();
             $table->string('PAG_IBIG')->nullable();
             $table->string('PHILHEALTH')->nullable();
             $table->string('SSS')->nullable();

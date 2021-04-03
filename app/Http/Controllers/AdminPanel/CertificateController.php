@@ -17,7 +17,10 @@ class CertificateController extends Controller
 
     public function index(Request $request)
     {
-
+        if (!session()->has("user")) {
+            return redirect("login");
+        }
+        
         $brgy_official = brgy_official::where('position','!=','Punong Barangay')
         ->get();
         $puno = brgy_official::where('position','=','Punong Barangay')

@@ -30,6 +30,10 @@ class AccountController extends Controller
      */
     public function index(Request $request)
     {
+        if (!session()->has("user")) {
+            return redirect("login");
+        }
+        
         $accounts = Account::latest()->get();
 
         $sessions = DB::table('sessions')

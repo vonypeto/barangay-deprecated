@@ -97,6 +97,10 @@ class BlotterController extends Controller
 
     public function show(blotters $blotter)
     {
+        if (!session()->has("user")) {
+            return redirect("login");
+        }
+        
         $resident = resident_info::all();
         $blotter = blotters::all();
         return view('pages.AdminPanel.blotter', ['blotter' => $blotter,  'resident' => $resident]);
