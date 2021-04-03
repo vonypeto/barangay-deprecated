@@ -123,6 +123,7 @@ class ResidentUserAccountController extends Controller
         session('resident');
         session(['resident.email' => $request->client_login_email]);
         session(['resident.firstname' => $resident->first_name]);
+        session(['resident.username' => $resident->username]);
         session(['resident.id' => $resident->resident_id]);
 
         return redirect("/barangay/home");

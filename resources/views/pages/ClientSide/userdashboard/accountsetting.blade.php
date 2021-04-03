@@ -118,12 +118,12 @@
                 <div class="form-row p-3">
                     <div class="form-group col-md-6">
                         <label for="resident_accountsetting_firstname">First Name</label>
-                        <input type="text" class="form-control" id="resident_accountsetting_firstname" name="resident_accountsetting_firstname" placeholder="N/A">
+                        <input type="text" class="form-control" id="resident_accountsetting_firstname" name="resident_accountsetting_firstname" placeholder="N/A" required>
                     </div>
                     
                     <div class="form-group col-md-6">
                         <label for="resident_accountsetting_lastname">Last Name</label>
-                        <input type="text" class="form-control" id="resident_accountsetting_lastname" name="resident_accountsetting_lastname" placeholder="N/A">
+                        <input type="text" class="form-control" id="resident_accountsetting_lastname" name="resident_accountsetting_lastname" placeholder="N/A" required>
                     </div>
                     
                     <div class="form-group col-md-6">
@@ -210,12 +210,13 @@
                 <div class="form-row p-3" >
                     <div class="col-sm-6 form-group" >
                         <label for="resident_accountsetting_telephone">Telephone</label>
-                        <input type="text" class="form-control"   name="resident_accountsetting_telephone" id="resident_accountsetting_telephone" placeholder="Ex: 123-45-678">
+                        <input type="text" class="form-control"   name="resident_accountsetting_telephone" id="resident_accountsetting_telephone" placeholder="Ex: 123-45-678" maxlength="8">
+                        <span class="text-danger error_text resident_accountsetting_telephone_error" style="text-align:left;font-size:18px;" ></span>
                     </div>
                     
                     <div class="col-sm-6 form-group">
                         <label for="resident_accountsetting_mobile">Mobile</label>
-                        <input type="text" class="form-control" name="resident_accountsetting_mobile" id="resident_accountsetting_mobile"  placeholder="Ex: 09166041823" value="">
+                        <input type="text" class="form-control" name="resident_accountsetting_mobile" id="resident_accountsetting_mobile"  placeholder="Ex: 09166041823" value="" maxlength="11">
                         <span class="text-danger error_text resident_accountsetting_mobile_error" style="text-align:left;font-size:18px;" ></span>
                     </div>
                     
@@ -241,12 +242,6 @@
                             @endif
                             
                         </select>
-                    </div>
-                    
-                    <div class="col-md-12 form-group">
-                        <label for="resident_accountsetting_email">Email</label>
-                        <input type="email" id="resident_accountsetting_email" name="resident_accountsetting_email"  placeholder="Ex: johnmark@gmail.com" class="form-control ">
-                        
                     </div>
                 </div>
             
@@ -284,23 +279,58 @@
                     <div class="form-group col-md-12">
                         <label for="resident_accountsetting_PAG_IBIG">PAG-IBIG</label>
                         <input type="text" class="form-control" onkeypress="return isNumberKey(event)"  name="resident_accountsetting_PAG_IBIG" id="resident_accountsetting_PAG_IBIG" placeholder="Ex: 1234-5678-9101" maxlength = "14" value="">
+                        <span class="text-danger error_text resident_accountsetting_PAG_IBIG_error" style="text-align:left;font-size:18px;" ></span>
                     </div>
                     
                     <div class="form-group col-md-12">
                         <label for="resident_accountsetting_PHILHEALTH">PHILHEALTH</label>
                         <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="resident_accountsetting_PHILHEALTH" id="resident_accountsetting_PHILHEALTH" placeholder="Ex: 0028-1215160-9" maxlength = "14" value="">
+                        <span class="text-danger error_text resident_accountsetting_PHILHEALTH_error" style="text-align:left;font-size:18px;" ></span>
                     </div>
                     
                     <div class="form-group col-md-12">
                         <label for="resident_accountsetting_SSS">SSS</label>
-                        <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="resident_accountsetting_SSS" id="resident_accountsetting_SSS" placeholder="Ex: 04-0751449-0"  maxlength = "12" value="">
+                        <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="resident_accountsetting_SSS" id="resident_accountsetting_SSS" placeholder="Ex: 04-0751449-0"  maxlength = "10" value="">
+                        <span class="text-danger error_text resident_accountsetting_SSS_error" style="text-align:left;font-size:18px;" ></span>
                     </div>
                     
                     <div class="form-group col-md-12">
                         <label for="resident_accountsetting_TIN">TIN</label>
-                        <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="resident_accountsetting_TIN" id="resident_accountsetting_TIN" placeholder="Ex: 123-456-789-000" maxlength = "15" value="">
+                        <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="resident_accountsetting_TIN" id="resident_accountsetting_TIN" placeholder="Ex: 123-456-789-000" maxlength = "12" value="">
+                        <span class="text-danger error_text resident_accountsetting_TIN_error" style="text-align:left;font-size:18px;" ></span>
                     </div>
                 
+                </div>
+            </div>
+
+            <div class="rounded shadow-lg border border-secondary p-4 mt-5" style="font-size: 20px">
+                {{-- Account --}}
+                <h2 style="color: rgb(3, 50, 112)">Account</h2><hr>
+                
+                <div class="form-row p-3">
+                    <div class="col-md-12 form-group">
+                        <label for="resident_accountsetting_username">Username</label>
+                        <input type="text" id="resident_accountsetting_username" name="resident_accountsetting_username" value="" placeholder="Enter username" class="form-control ">
+                        <span class="text-danger error_text resident_accountsetting_username_error" style="text-align:left;font-size:18px;" ></span>
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label for="resident_accountsetting_email">Email</label>
+                        <input type="email" id="resident_accountsetting_email" name="resident_accountsetting_email"  placeholder="Ex: johnmark@gmail.com" class="form-control ">
+                        <span class="text-danger error_text resident_accountsetting_email_error" style="text-align:left;font-size:18px;" ></span>
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label for="resident_accountsetting_newpassword">New password</label>
+                        <input type="password" id="resident_accountsetting_newpassword" name="resident_accountsetting_newpassword"  placeholder="Enter new password" class="form-control " minlength="8">
+                        <span class="text-danger error_text resident_accountsetting_newpassword_error" style="text-align:left;font-size:18px;" ></span>
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label for="resident_accountsetting_newpassword_confirmation">Confirm new password</label>
+                        <input type="password" id="resident_accountsetting_newpassword_confirmation" name="resident_accountsetting_newpassword_confirmation"  placeholder="Confirm your password" class="form-control " disabled>
+                        <span class="text-danger error_text resident_accountsetting_newpassword_confirmation_error" style="text-align:left;font-size:18px;" ></span>
+                    </div>
                 </div>
             </div>
 
@@ -357,10 +387,11 @@
     </footer>
 
     <script type="text/javascript">
+    
+
        $(function() {
             //Global Varibles
             var current_id = $("#current_resident").data("id");
-            alert(current_id);
             showUserInfo(current_id);
 
             //Ajax
@@ -386,12 +417,15 @@
                     $("#resident_accountsetting_voterstatus").val(data.voterstatus);
                     $("#resident_accountsetting_civilstatus").val(data.civilstatus);
                     $("#resident_accountsetting_citizenship").val(data.citizenship);
+
+                    // telephone_no = data.telephone_no.replace(/(\d{3})(\d{2})(\d{3})/, "$1-$2-$3");
                     $("#resident_accountsetting_telephone").val(data.telephone_no);
+
                     $("#resident_accountsetting_mobile").val(data.mobile_no);
-                    $("#resident_accountsetting_address_1").val(data.address1);
-                    $("#resident_accountsetting_address_2").val(data.address2);
+
+                    $("#resident_accountsetting_address_1").val(data.address_1);
+                    $("#resident_accountsetting_address_2").val(data.address_2);
                     $("#resident_accountsetting_area").val(data.area);
-                    $("#resident_accountsetting_email").val(data.email);
 
                     //Parents/Guardians/Spouse
                     $("#resident_accountsetting_father").val(data.father);
@@ -403,13 +437,27 @@
                     $("#resident_accountsetting_PHILHEALTH").val(data.PHILHEALTH);
                     $("#resident_accountsetting_SSS").val(data.SSS);
                     $("#resident_accountsetting_TIN").val(data.TIN);
+
+                    //Account
+                    $("#resident_accountsetting_username").val("{{ session('resident.username') }}");
+                    $("#resident_accountsetting_email").val(data.email);
                })
             }
 
+            $("#resident_accountsetting_newpassword").on("blur",  function() {
+               
+                if( $("#resident_accountsetting_newpassword").val() != null){
+                    $("#resident_accountsetting_newpassword_confirmation").removeAttr("disabled");
+
+                }
+
+                if( $("#resident_accountsetting_newpassword").val() == ""){
+                    $("#resident_accountsetting_newpassword_confirmation").attr('disabled', 'disabled');
+                }
+                
+            });
             $("#resident_accountsetting_form").on('submit', function (e) {
                e.preventDefault();
-
-               $firstname = $("#new_input_modal").val();
 
                $.ajax({
                   type:"POST",
@@ -426,10 +474,12 @@
                         });
                      }
                      else{
+                        window.scrollTo(0, 0);
                         alert(data.msg);
                         showUserInfo(current_id);
                         $("#resident_accountsetting_form")[0].reset();
                         $(document).find('span.error_text').text('');
+                        location.reload();
                      }
                   }
                });
