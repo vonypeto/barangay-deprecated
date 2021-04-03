@@ -46,9 +46,6 @@ use App\Http\Controllers\ClientSide\ResidentUserAccountController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\PagesController;
 
-
-
-
 //Redirect
 Route::get('/', function () {
     return redirect('/barangay/home');
@@ -121,7 +118,6 @@ Route::get("/logout", [UserController::class, 'logout']);
 
 //Admin Panel End
 
-
 // NOTES for Developer
 // Create Controller for blotters, schedule, and certificate
 // for seeding, type in command line: composer dump-autoload
@@ -133,8 +129,6 @@ Route::post("/barangay/certificate/", [ClearanceController::class, 'store'])->na
 
 //schedule page
 
-
-
 Route::get('/barangay/schedule/', [ScheduleClientController::class, 'index'])->name("scheduleclientindex.get");
 Route::get('/barangay/schedule/{schedule}', [ScheduleClientController::class, 'show'])->name("scheduleclientshow.get");
 Route::get('/barangay/schedule/print/{schedule_id}', [ScheduleClientController::class, 'printclient'])->name("scheduleclientprint.get");
@@ -142,27 +136,11 @@ Route::get('/barangay/schedule/print/{schedule_id}', [ScheduleClientController::
 //Route::get('/barangay/schedule/{id}', [ScheduleClientController::class, 'print'])->name("scheduleclientid.get");
 
 
-
-
-
-
-
-
-
-Route::get('barangay/home', function () {
-    return view('pages.ClientSide.userdashboard.homepage');
-});
-
-
+Route::get('barangay/home', [HomeController::class, 'resident_home']);
+Route::get('/barangay/news', [HomeController::class, 'resident_news']);
+Route::get('/barangay/info', [HomeController::class, 'resident_info']);
 
 Route::get('/barangay/accountsetting', [ResidentAccountController::class, 'index']);
-
-Route::get('/barangay/news', function () {
-    return view('pages.ClientSide.userdashboard.news');
-});
-Route::get('/barangay/info', function () {
-    return view('pages.ClientSide.userdashboard.info');
-});
 
 // Client Login
 Route::get("/barangay/login", [ResidentUserAccountController::class, 'client_login']);

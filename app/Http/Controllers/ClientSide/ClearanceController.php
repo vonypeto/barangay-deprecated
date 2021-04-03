@@ -17,6 +17,10 @@ class ClearanceController extends Controller
      */
     public function index()
     {
+        if (!session()->has("resident")) {
+            return redirect("/barangay/login");
+        }
+        
         $certificate = Certificate_list::get();
 
         return view('pages.ClientSide.userdashboard.certificate',compact('certificate'));

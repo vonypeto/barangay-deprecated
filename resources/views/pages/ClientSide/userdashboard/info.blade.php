@@ -43,7 +43,7 @@
             <div class="dropdown-menu"><a class="dropdown-item" href="/barangay/schedule">Schedule</a><a class="dropdown-item" href="/barangay/blotter">Blotter</a><a class="dropdown-item" href="/barangay/certificate">Certificates</a></div>
         </li>
         <li class="nav-item"><a class="nav-link" href="/barangay/news">News</a></li>
-        <li class="nav-item active"><a class="nav-link" href="/barangay/info">Info</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/barangay/info">Info</a></li>
     </ul>
     <div style="margin: 50px;">
         <div class="jumbotron">

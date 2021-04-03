@@ -19,6 +19,10 @@ class ScheduleClientController extends Controller
      */
     public function index()
     {
+        if (!session()->has("resident")) {
+            return redirect("/barangay/login");
+        }
+        
         $request_list = Certificate_request::where('resident_id','=',session("resident.id"))->get();
 
 
