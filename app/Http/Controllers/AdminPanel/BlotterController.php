@@ -12,6 +12,7 @@ use App\Models\person_involve;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\Foreach_;
+use Illuminate\Support\Facades\Validator;
 
 class BlotterController extends Controller
 {
@@ -43,55 +44,78 @@ class BlotterController extends Controller
 
     public function store(Request $request)
     {
-
-        // if ($request->schedule_date != null && $request->schedule_time != null) {
-        //     $request->schedule = "Schedule";
-        // } else {
-        //     $request->schedule = "Unschedule";
-        // }
-
-        if ($request->schedule_date != null) {
-            $request->schedule = "Schedule";
-        } else {
-            $request->schedule = "Unschedule";
-        }
-
-        if ($request->status == "Settled") {
-            $request->schedule = "Settled";
-        }
-
-        $blotters = blotters::updateOrCreate(
-            ['blotter_id' => $request->blotter_id],
+        $validator = Validator::make(
+            $request->all(),
             [
-                'incident_location' => $request->incident_location,
-                'incident_type' => $request->incident_type,
-                'date_incident' => $request->date_incident,
-                'time_incident' => $request->time_incident,
-                'date_reported' => $request->date_reported,
-                'time_reported' => $request->time_reported,
-                'status' => $request->status,
-                'schedule_date' => $request->schedule_date,
-                // 'schedule_time' => $request->schedule_time,
-                'schedule' => $request->schedule,
-                'incident_narrative' => $request->incident_narrative
+                "incident_location" => "required",
+                "incident_type" => "required",
+                "date_incident" => "required",
+                "time_incident" => "required",
+                "date_reported" => "required",
+                "time_reported" => "required",
+                "status" => "required",
+                "incident_narrative" => "required",
+                "Complainant" => "required",
+                "Respondent" => "required",
+                "Victim" => "required",
+                "Attacker" => "required"
             ]
+
         );
 
-        $blotter_id = $blotters->blotter_id;
-        DB::table('person_involves')->where('blotter_id',  $blotter_id)->delete();
+        if ($validator->fails()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
 
-        foreach ($request->ids as $key => $ids) {
-            $data = new person_involve();
-            $data->blotter_id = $blotter_id;
-            $data->resident_id = $ids;
-            $data->person_involve = $request->person_involve[$key];
-            $data->involvement_type = $request->involvement_type[$key];
-            $data->save();
+            // if ($request->schedule_date != null && $request->schedule_time != null) {
+            //     $request->schedule = "Schedule";
+            // } else {
+            //     $request->schedule = "Unschedule";
+            // }
+
+            if ($request->schedule_date != null) {
+                $request->schedule = "Schedule";
+            } else {
+                $request->schedule = "Unschedule";
+            }
+
+            if ($request->status == "Settled") {
+                $request->schedule = "Settled";
+            }
+
+            $blotters = blotters::updateOrCreate(
+                ['blotter_id' => $request->blotter_id],
+                [
+                    'incident_location' => $request->incident_location,
+                    'incident_type' => $request->incident_type,
+                    'date_incident' => $request->date_incident,
+                    'time_incident' => $request->time_incident,
+                    'date_reported' => $request->date_reported,
+                    'time_reported' => $request->time_reported,
+                    'status' => $request->status,
+                    'schedule_date' => $request->schedule_date,
+                    // 'schedule_time' => $request->schedule_time,
+                    'schedule' => $request->schedule,
+                    'incident_narrative' => $request->incident_narrative
+                ]
+            );
+
+            $blotter_id = $blotters->blotter_id;
+            DB::table('person_involves')->where('blotter_id',  $blotter_id)->delete();
+
+            foreach ($request->ids as $key => $ids) {
+                $data = new person_involve();
+                $data->blotter_id = $blotter_id;
+                $data->resident_id = $ids;
+                $data->person_involve = $request->person_involve[$key];
+                $data->involvement_type = $request->involvement_type[$key];
+                $data->save();
+            }
+
+
+
+            return response()->json(['success' => 'NewBlotter saved successfully.']);
         }
-
-
-
-        return response()->json(['success' => 'NewBlotter saved successfully.']);
     }
 
 
