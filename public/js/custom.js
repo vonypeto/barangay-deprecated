@@ -564,7 +564,13 @@ $(document).ready(function() {
 
 
 }
+function printErrorMsg (msg) {
+    $.each( msg, function( key, value ) {
+    console.log(key);
+      $('.'+key+'_err').text(value);
+    });
 
+}
   // insert and edit from the modal
   $('#brgysave').click(function (e) {
      // alert("{{ route('barangay.post') }}");
