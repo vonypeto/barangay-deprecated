@@ -437,8 +437,20 @@
                $('#certificate_list_id').val('');
              //  $('#certtypeform').trigger("reset");
                $('#modelHeading').html("Certificate Form");
-
+               $('#content_1_err').html("");
+               $('#content_2_err').html("");
+               $('#content_3_err').html("");
+               $('#certificate_type_err').html("");
+               $('#certificate_name_err').html("");
+               $('#price_err').html("");
            });
+           function printErrorMsg (msg) {
+    $.each( msg, function( key, value ) {
+    console.log(key);
+      $('.'+key+'_err').text(value);
+    });
+
+}
            //certtype submit
            $('#certsubmit').click(function (e) {
                e.preventDefault();
@@ -448,13 +460,27 @@
                  type: "POST",
                  dataType: 'json',
                  success: function (data) {
+
+                    if(data.status == 1){
+
+
                      $('#certtypeform').trigger("reset");
                      $('#certmodal').modal('hide');
                      certtype.draw();
+
+                    }else if(data.status == 0){
+
+
+                        printErrorMsg(data.error);
+
+
+                    }
                  },
+                 /*
                  error: function (data) {
                      console.log('Error:', data);
                  }
+                 */
              });
            });
            //certtype edit
@@ -717,7 +743,7 @@
                         <br>
                         <div style=" text-indent: 50px;font-size: 17px ; font-family: Arial, Helvetica, sans-serif;text-justify: inter-word;">
                            <p >
-                              THIS IS TO CERTIFY THAT ______________________, _____ years old, ______ and a resident of <span id="firstcontent">start of the paragraph</span>
+                              THIS IS TO CERTIFY THAT ___________________, _____ years old, ______ and a resident of <span id="firstcontent">start of the paragraph</span>
                            </p>
                            <br>
                            <p id="secondcontent">
@@ -774,37 +800,43 @@
                   <label for="name" class="col-sm-4 control-label">First Paragraph</label>
                   <div class="col-sm-12">
                      <textarea id="content_1" required name="content_1" rows="5" style=" width:100%;" placeholder="Ex: Barangay Tika, Cebu City. He/She is personally known to me of good moral..."></textarea>
-                  </div>
+                     <span id="content_1_err" class="text-danger error-text content_1_err"></span>
+                    </div>
                </div>
                <div class="form-group">
                   <label for="name" class="col-sm-4 control-label">Second Paragraph</label>
                   <div class="col-sm-12">
                      <textarea id="content_2" required name="content_2" rows="5" style=" width:100%;" placeholder="Ex: To certify further, that he/she has no derogatory and/or criminal records filed in this barangay"></textarea>
-                  </div>
+                     <span id="content_2_err" class="text-danger error-text content_2_err"></span>
+                    </div>
                </div>
                <div class="form-group">
                   <label for="name" class="col-sm-4 control-label">Third Paragraph</label>
                   <div class="col-sm-12">
                      <input type="text" required class="form-control" id="content_3" name="content_3" placeholder="Ex: Barangay Tika, Cebu City" value="" maxlength="50" required="">
-                  </div>
+                     <span id="content_3_err" class="text-danger error-text content_3_err"></span>
+                    </div>
                </div>
                <div class="form-group">
                   <label for="name" class="col-sm-4 control-label">Certificate Type</label>
                   <div class="col-sm-12">
                      <input type="text" required class="form-control" id="certificate_type" name="certificate_type" placeholder="Name" value="" maxlength="50" required="">
-                  </div>
+                     <span id="certificate_type_err" class="text-danger error-text certificate_type_err"></span>
+                    </div>
                </div>
                <div class="form-group">
                   <label for="name" class="col-sm-4 control-label">Certificate Name</label>
                   <div class="col-sm-12">
                      <input type="text" required class="form-control" id="certificate_namesss" name="certificate_name" placeholder="C E R T I F I C A T E" value="" maxlength="50" required="">
-                  </div>
+                     <span id="certificate_name_err" class="text-danger error-text certificate_name_err"></span>
+                    </div>
                </div>
                <div class="form-group">
                   <label for="name" class="col-sm-2 control-label">Price</label>
                   <div class="col-sm-12">
                      <input type="number" onkeypress="return isNumberKey(event)" required class="form-control" id="pricess" name="price" placeholder="0"  required="">
-                  </div>
+                     <span id="price_err" class="text-danger error-text price_err"></span>
+                    </div>
                </div>
 
          <div class="modal-footer">

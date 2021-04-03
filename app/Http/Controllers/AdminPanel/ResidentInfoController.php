@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 //Plugins
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Validator;
 
 use Carbon\Carbon;
 use PDF;
@@ -51,6 +51,43 @@ class ResidentInfoController extends Controller
     }
     public function store(Request $request)
     {
+
+
+        $validator = Validator::make($request->all(), [
+            'lastname' => 'required',
+            'firstname' => 'required',
+            'middlename' => 'required',
+            'alias' => 'required',
+            'birthday' => 'required',
+            'age'  => 'required',
+            'gender' => 'required',
+            'civilstatus'  => 'required',
+            'voterstatus'  => 'required',
+            'birthplace'  => 'required',
+            'citizenship'  => 'required',
+            'telephone'  => 'required',
+            'mobile'  => 'required',
+             'height'  => 'required',
+             'weight'  => 'required',
+            'PAG_IBIG'  => 'required',
+            'PHILHEALTH'  => 'required',
+            'SSS' => 'required',
+            'TIN' => 'required',
+            'email' =>   "required|ends_with:@gmail.com,@yahoo.com|unique:accounts,email",
+            'spouse' => 'required',
+            'father' => 'required',
+            'mother' => 'required',
+            'area' => 'required',
+            'address_1' => 'required',
+            'address_2' => 'required',
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status'=>0,'error'=>$validator->errors()]);
+        }else{
+
+
         resident_info::updateOrCreate(['resident_id' => $request->resident_id],
         ['lastname' => $request->lastname,
         'firstname' => $request->firstname,
@@ -78,7 +115,6 @@ class ResidentInfoController extends Controller
         'area'=>$request->area,
         'address_1'=>$request->address_1,
         'address_2'=>$request->address_2]);
-
         $data = DB::table('area_settings')
         ->select('area')->get();
 
@@ -99,7 +135,9 @@ class ResidentInfoController extends Controller
 
 
 
-        return response()->json(['success'=>'resident saved successfully.']);
+        return response()->json(['status'=>1,'success'=>'resident saved successfully.']);
+        }
+
     }
 
     public function person($resident_id)

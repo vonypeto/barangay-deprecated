@@ -18,12 +18,19 @@ jQuery.ajaxSetup({
 
 $(function() {
 
+    function printErrorMsg (msg) {
+        $.each( msg, function( key, value ) {
+        console.log(key);
+          $('.'+key+'_err').text(value);
+        });
 
+    }
 
 
     var selectAge = document.getElementById("selectAge");
     var contents;
     for (let i = 0; i <= 100; i++) {
+        /*
         if(i == 0 ){
             if(i == 0 ){
 
@@ -31,6 +38,7 @@ $(function() {
             }
 
         }
+        */
 
       contents += "<option>" + i + "</option>";
     }
@@ -146,6 +154,32 @@ $('#regionsaves').click(function (e) {
         $('#residentform').trigger("reset");
         $('#modelHeading').html("Create Resident Data");
         $('#residentmodal').modal('show');
+        $('#lastname_err').html("");
+        $('#firstname_err').html("");
+        $('#middlename_err').html("");
+        $('#alias_err').html("");
+        $('#birthday_err').html("");
+        $('#age_err').html("");
+        $('#birthplace_err').html("");
+        $('#gender_err').html("");
+        $('#voterstatus_err').html("");
+        $('#civilstatus_err').html("");
+        $('#citizenship_err').html("");
+        $('#telephone_err').html("");
+        $('#mobile_err').html("");
+        $('#area_err').html("");
+        $('#height_err').html("");
+        $('#weight_err').html("");
+        $('#email_err').html("");
+        $('#PAG_IBIG_err').html("");
+        $('#PHILHEALTH_err').html("");
+        $('#SSS_err').html("");
+        $('#TIN_err').html("");
+        $('#spouse_err').html("");
+        $('#father_err').html("");
+        $('#mother_err').html("");
+        $('#address_1_err').html("");
+        $('#address_2_err').html("");
 
     });
 
@@ -271,7 +305,7 @@ $('#regionsaves').click(function (e) {
 
     //BUTTOM SUBMIT MODAL
     $('#submit').click(function(e) {
-        alert(1);
+
         e.preventDefault();
         $(this).html('Save');
         $(this).html('Submit');
@@ -283,17 +317,23 @@ $('#regionsaves').click(function (e) {
             type: "POST",
             dataType: 'json',
             success: function(data) {
-                $('#residentmodal').modal('hide');
-                $('#residentform').trigger("reset");
+                if(data.status == 1){
+                    $('#residentmodal').modal('hide');
+                    $('#residentform').trigger("reset");
 
-                table.draw();
+                    table.draw();
+                    }else{
+                        printErrorMsg(data.error);
 
-            },
+
+                    }
+            }/*,
             error: function(data) {
                 console.log('Error:', data);
 
                 $('#submit').html('Save Changes');
             }
+            */
         });
     });
     //delete table
@@ -457,18 +497,10 @@ $(document).ready(function() {
       $('#area_id').val('');
       $('#areaform').trigger("reset");
       $('#areamodal').modal('show');
+      $('#area_err').html("");
+
   });
-  function printErrorMsg (msg) {
 
-    $.each( msg, function( key, value ) {
-
-    console.log(key);
-
-      $('.'+key+'_err').text(value);
-
-    });
-
-}
 
   //insert and edit area
   $('#regionsave').click(function (e) {
@@ -524,7 +556,14 @@ $(document).ready(function() {
 
 
 
+  function duplicateerror (msg) {
+    $(".print-error-msg").find("ul").html('');
+    $(".print-error-msg").css('display','block');
+        $(".print-error-msg").find("ul").append('<li>'+msg+'</li>');
 
+
+
+}
 
   // insert and edit from the modal
   $('#brgysave').click(function (e) {
@@ -537,15 +576,32 @@ $(document).ready(function() {
         type: "POST",
         dataType: 'json',
         success: function (data) {
-            $('#brgyform').trigger("reset");
-            $('#brgymodal').modal('hide');
-            alert(JSON.stringify(data));
-            brgytable.draw();
+
+          //  alert(JSON.stringify(data));
+
+            if(data.status == 1){
+
+
+                $('#brgyform').trigger("reset");
+                $('#brgymodal').modal('hide');
+
+                brgytable.draw();
+
+
+            }else if(data.status == 5){
+
+             var pos =   document.getElementById('position').value;
+                duplicateerror("A Unique Position "+pos+"  is already Existed or member Exceed 11.");
+            }else if(data.status == 0){
+                printErrorMsg(data.error);
+            }
         },
+        /*
         error: function (data) {
             console.log('Error:', data);
             $('#brgysave').html('Save Changes');
         }
+        */
     });
   });
 
@@ -556,6 +612,11 @@ $(document).ready(function() {
       $('#brgyform').trigger("reset");
       $('#brgymodal').modal('show');
       $('#modelHeading').html("Create New Position");
+      $('#name_err').html("");
+      $(".print-error-msg").css('display','none');
+      $('#official_committe_err').html("");
+      $('#position_err').html("");
+      $('#year_of_service_err').html("");
   });
 
   //show modal for editing

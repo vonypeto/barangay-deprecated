@@ -19,7 +19,7 @@ class PagesController extends Controller
         $request_list = Certificate_request::where('resident_id','=',session("resident.id"))->orderBy('created_at', 'desc')->first();
 
        // echo $add + $area_setting->population;
-        echo $request_list->request_id;
+      //  echo $request_list->request_id;
         echo "<br>";
         $resident_area = DB::table('area_settings')
         ->where('area','=','gitna')->count();
@@ -59,7 +59,14 @@ class PagesController extends Controller
 
         echo "<br>";
 
+        $position = DB::table('brgy_officials')->WHERE('position','=','Punong Barangay')->FIRST();
+        echo $position->position;
+        if(!($position->position == 'Punong Barangay' || $position->position == 'Barangay Secretary')  ){
+            echo "exist";
+        }else{
 
+            echo "not";
+        }
 
 /*
       $deletefile = DB::table('certificate_layouts')

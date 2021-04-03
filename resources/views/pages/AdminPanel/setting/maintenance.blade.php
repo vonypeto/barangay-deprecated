@@ -66,10 +66,16 @@
             <div class="modal-body">
                 <form id="brgyform" name="brgyform" class="form-horizontal">
                    <input type="hidden" name="official_id" id="official_id">
-                    <div class="form-group">
+                   <div id="print-error-msg" class="alert alert-danger print-error-msg" style="display:none">
+
+                    <ul></ul>
+
+                </div>
+                   <div class="form-group">
                         <label for="name" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-12">
                             <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" value="" maxlength="50" required="">
+                            <span id="name_err"  class="text-danger error-text name_err"></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -84,11 +90,7 @@
                             <option value="Barangay Treasurer">Barangay Treasurer</option>
                             <option value="Kagawad">Kagawad</option>
                           </select>
-
-
-
-
-
+                          <span id="position_err" class="text-danger error-text position_err"></span>
 
                         </div>
                     </div>
@@ -96,12 +98,15 @@
                         <label for="name" class="col-sm-6 control-label">Official Committee</label>
                         <div class="col-sm-12">
                             <input type="text" class="form-control" id="official_committe" name="official_committe" placeholder="Enter Official Committee" value="" maxlength="50" required="">
+                            <span id="official_committe_err" class="text-danger error-text official_committe_err"></span>
+
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="name" class="col-sm-4 control-label">Year of Service</label>
                         <div class="col-sm-12">
                             <input type="text" class="form-control" id="year_of_service" name="year_of_service" placeholder="Enter Year of Service" value="" maxlength="50" required="">
+                            <span id="year_of_service_err" class="text-danger error-text year_of_service_err"></span>
                         </div>
                     </div>
 
@@ -221,8 +226,6 @@
                      <th class="column-title">Area </th>
                      <th class="column-title">Population </th>
 
-
-
                   </tr>
                </thead>
 
@@ -230,31 +233,6 @@
          </div>
       </div>
    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -304,8 +282,8 @@
                         <label for="name" class="col-sm-2 control-label">Area</label>
                         <div class="col-sm-12">
                             <input type="text" class="form-control" id="area" name="area" placeholder="Enter Area/Purok" value="" maxlength="50" required="">
-                            <span class="text-danger error-text area_err"></span>
-                            <span class="text-danger error-text area_dup"></span>
+                            <span id="area_err" class="text-danger error-text area_err"></span>
+
                         </div>
                     </div>
 

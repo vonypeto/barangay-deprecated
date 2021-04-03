@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\Certificate_list;
 use App\Models\brgy_official;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 class CertificateController extends Controller
 {
 
@@ -169,6 +170,10 @@ class CertificateController extends Controller
     public function certtypesubmit(Request $request)
     {
         $request->validate([
+
+
+        ]);
+        $validator = Validator::make($request->all(), [
             'certificate_list_id' => '',
             'content_1' => 'Required',
             'content_2' => 'Required',
@@ -176,14 +181,21 @@ class CertificateController extends Controller
             'content_3' => 'Required',
             'certificate_name'  => 'Required',
             'certificate_type' => 'Required',
-
         ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(['status'=>0,'error'=>$validator->errors()]);
+        }else{
         Certificate_list::updateOrCreate(['certificate_list_id' => $request->certificate_list_id],
         ['content_1'=>$request->content_1,'content_2'=>$request->content_2,'content_3'=>$request->content_3,'certificate_type'=>$request->certificate_type,'price'=>$request->price,'certificate_name'=>$request->certificate_name]);
 
+        return response()->json(['status'=>1,'Success'=>'Data saved successfully']);
+    }
 
 
-        return response()->json(['Success'=>'Data saved successfully']);
+
+
 
     }
     public function certtypeedit($request_id){

@@ -170,7 +170,7 @@
                                         @if(count($approve))
                                         @foreach ($approve as $approve)
                                         <span class="text-center" style="text-transform: uppercase;
-                                           text-align:center">{{ $approve->name }}</span><span>{{ $approve->position }}<span>
+                                           text-align:center">{{ $approve->name }}</span><br><span>{{ $approve->position }}<span>
                                         @endforeach
                                         @endif
                                      </div>

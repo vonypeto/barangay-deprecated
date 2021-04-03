@@ -39,12 +39,12 @@
                             <div class="col-sm-6" >
                               <label >Last Name</label>
                               <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Ex: Mata" value="" required="">
-
+                              <span id="lastname_err" class="text-danger error-text lastname_err"></span>
                             </div>
                             <div class="col-sm-6 ">
                               <label >First Name</label>
                               <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Ex: John Mark" value="" required="">
-
+                              <span id="firstname_err" class="text-danger error-text firstname_err"></span>
                             </div>
                           </div>
 
@@ -52,12 +52,12 @@
                             <div class="col-sm-6" >
                               <label >Middle Name</label>
                               <input type="text" class="form-control" name="middlename" id="middlename" placeholder="Ex: Panlilio" value="" required="">
-
+                              <span id="middlename_err" class="text-danger error-text middlename_err"></span>
                             </div>
                             <div class="col-sm-6 ">
                               <label >Alias</label>
                               <input type="text" class="form-control" name="alias" id="alias" placeholder="Ex: JM" value="" required="">
-
+                              <span id="alias_err" class="text-danger error-text alias_err"></span>
                             </div>
                           </div>
 
@@ -69,14 +69,16 @@
                             <div class="col-sm-6" >
                               <label >Birthday</label>
                               <input type="date" id="birthday" name="birthday" required="required" class="form-control ">
-
+                              <span id="birthday_err" class="text-danger error-text birthday_err"></span>
                             </div>
                             <div class="col-sm-6 ">
                               <label >Age</label>
                               <br>
-                              <select name="age" id="selectAge" style="height:38px">
+                              <select name="age" id="selectAge" style="height:38px; width: 100%">
                                 <option value="">-Select Age-</option></select>
+
                             </div>
+                            <span id="age_err" class="text-danger error-text age_err"></span>
                           </div>
 
 
@@ -89,10 +91,11 @@
 
 
                          <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Birth of Place
+                            <label class="col-form-label col-md-5 col-sm-5 label-align" for="first-name">Birth of Place
                             </label>
                             <div class="col-md-12 col-sm-12 ">
                                <input type="text" id="birthplace" name="birthplace" placeholder="Ex: Morong, Rizal"   required="required" class="form-control ">
+                               <span id="birthplace_err" class="text-danger error-text birthplace_err"></span>
                             </div>
                          </div>
 
@@ -105,6 +108,7 @@
                                 <label for="male">Male</label><br>
                                 <input type="radio" id="female" name="gender" value="Female">
                                 <label for="female">Female</label><br>    </div>
+                                <span id="gender_err" class="text-danger error-text gender_err"></span>
                          </div>
 
 
@@ -121,6 +125,7 @@
                                 <option value="No">No</option>
 
                               </select>
+                              <span id="voterstatus_err" class="text-danger error-text voterstatus_err"></span>
                             </div>
                             <div class="col-sm-6 item form-group">
                               <label >Civil Status</label>
@@ -133,6 +138,7 @@
                               <option value="Separated">Separated</option>
                               <option value="Divorced">Divorced</option>
                             </select>
+                            <span id="civilstatus_err" class="text-danger error-text civilstatus_err"></span>
                             </div>
                           </div>
 
@@ -141,6 +147,7 @@
                             </label>
                             <div class="col-md-12 col-sm-12 ">
                                <input type="text" id="citizenship" name="citizenship" placeholder="Ex: Filipino"  required="required" class="form-control ">
+                               <span id="citizenship_err" class="text-danger error-text citizenship_err"></span>
                             </div>
                          </div>
 
@@ -151,12 +158,12 @@
                            <div class="col-sm-6" >
                              <label >Telephone</label>
                              <input type="text" class="form-control"   name="telephone" id="telephone" placeholder="Ex: 123-45-678"  value="" required="">
-
+                             <span id="telephone_err" class="text-danger error-text telephone_err"></span>
                            </div>
                            <div class="col-sm-6 ">
                              <label >Mobile</label>
                              <input type="text" class="form-control" name="mobile" id="mobile"  placeholder="Ex: 09166041823" value="" required="">
-
+                             <span id="mobile_err" class="text-danger error-text mobile_err"></span>
                            </div>
                          </div>
                          <div class="item form-group">
@@ -175,6 +182,7 @@
 
 
                                </select>
+                               <span id="area_err" class="text-danger error-text area_err"></span>
                               </div>
                         </div>
 
@@ -185,12 +193,12 @@
                             <div class="col-sm-6" >
                               <label >Height</label>
                               <input type="number" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" name="height" id="height" placeholder="" value="0" required="">
-
+                              <span id="height_err" class="text-danger error-text height_err"></span>
                             </div>
                             <div class="col-sm-6 ">
                               <label >Weight</label>
                               <input type="number" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" name="weight" id="weight" placeholder="" value="0" required="">
-
+                              <span id="weight_err" class="text-danger error-text weight_err"></span>
                             </div>
                           </div>
 
@@ -199,6 +207,7 @@
                             </label>
                             <div class="col-md-12 col-sm-12 ">
                                <input type="email" id="email" name="email" required="required" placeholder="Ex: johnmark@gmail.com" class="form-control ">
+                               <span id="email_err" class="text-danger error-text email_err"></span>
                             </div>
                          </div>
 
@@ -212,12 +221,12 @@
                            <div class="col-sm-6" >
                              <label >PAG-IBIG</label>
                              <input type="text" class="form-control" onkeypress="return isNumberKey(event)"  name="PAG_IBIG" id="PAG_IBIG" placeholder="Ex: 1234-5678-9101" maxlength = "14" value="" required="">
-
+                             <span id="PAG_IBIG_err" class="text-danger error-text PAG_IBIG_err"></span>
                            </div>
                            <div class="col-sm-6 ">
                              <label >PHILHEALTH</label>
                              <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="PHILHEALTH" id="PHILHEALTH" placeholder="Ex: 0028-1215160-9" maxlength = "14" value="" required="">
-
+                             <span id="PHILHEALTH_err" class="text-danger error-text PHILHEALTH_err"></span>
                            </div>
                          </div>
 
@@ -226,12 +235,12 @@
                            <div class="col-sm-6" >
                              <label >SSS</label>
                              <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="SSS" id="SSS" placeholder="Ex: 04-0751449-0"  maxlength = "12" value="" required="">
-
+                             <span id="SSS_err" class="text-danger error-text SSS_err"></span>
                            </div>
                            <div class="col-sm-6 ">
                              <label >TIN</label>
                              <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="TIN" id="TIN" placeholder="Ex: 123-456-789-000" maxlength = "15" value="" required="">
-
+                             <span id="TIN_err" class="text-danger error-text TIN_err"></span>
                            </div>
                          </div>
 
@@ -246,6 +255,7 @@
                             </label>
                             <div class="col-md-12 col-sm-12 ">
                                <input type="text" id="spouse" name="spouse" required="required" placeholder="N/A" class="form-control ">
+                               <span id="spouse_err" class="text-danger error-text spouse_err"></span>
                             </div>
                          </div>
 
@@ -256,6 +266,7 @@
                             </label>
                             <div class="col-md-12 col-sm-12 ">
                                <input type="text" id="father" name="father" placeholder="N/A" required="required" class="form-control ">
+                               <span id="father_err" class="text-danger error-text father_err"></span>
                             </div>
                          </div>
 
@@ -266,6 +277,7 @@
                             </label>
                             <div class="col-md-12 col-sm-12 ">
                                <input type="text" id="mother" name="mother" required="required" value="" placeholder="N/A" class="form-control ">
+                               <span id="mother_err" class="text-danger error-text mother_err"></span>
                             </div>
                          </div>
 
@@ -277,6 +289,8 @@
                             <div class="col-md-12 col-sm-12 ">
                                <input type="text" id="address_1" name="address_1" placeholder="Ex: P.O. Box 1201, Manila Central Post Office
                                1050 Manila" required="required" class="form-control ">
+                               <span id="address_1_err" class="text-danger error-text address_1_err"></span>
+
                             </div>
                          </div>
 
@@ -288,6 +302,7 @@
                             <div class="col-md-12 col-sm-12 ">
                                <input type="text" id="address_2" name="address_2" placeholder="Ex: P.O. Box 1121, Araneta Center Post Office
                                1135 Quezon City, Metro Manila" required="required" class="form-control ">
+                               <span id="address_2_err" class="text-danger error-text address_2_err"></span>
                             </div>
                          </div>
 

@@ -77,20 +77,38 @@ class BrgyOfficialController extends Controller
     public function barangayPOST(Request $request){
 
         $barangay = DB::table('brgy_officials')->count();
+        $position = DB::table('brgy_officials')->WHERE('position','=',$request->position)->FIRST();
+        if(!(($position->position ?? '') == 'Punong Barangay' || ($position->position ?? '') == 'Barangay Secretary' || ($position->position ?? '') == 'SK Chairman' || ($position->position ?? '') == 'Barangay Treasurer'  )){
+
+
         if($barangay <= 10){
-        brgy_official::updateOrCreate(['official_id' => $request->official_id],
-        ['name' => $request->name,
-        'position' => $request->position,
-        'official_committe' => $request->official_committe,
-        'year_of_service' =>$request->year_of_service]);
-        return response()->json(['success'=>'Official saved successfully.']);
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'position' => 'required',
+                'official_committe' => 'required',
+                'year_of_service' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['status'=>0,'error'=>$validator->errors()]);
+            }else{
+                brgy_official::updateOrCreate(['official_id' => $request->official_id],
+                ['name' => $request->name,
+                'position' => $request->position,
+                'official_committe' => $request->official_committe,
+                'year_of_service' =>$request->year_of_service]);
+                return response()->json(['status'=>1,'success'=>'Official saved successfully.']);
+            }
         }else{
-
-
-            return response()->json(['Failed'=>'No more than 11 member.']);
+            return response()->json(['status'=>5,'failed'=>'No more than 11 member.']);
         }
 
+    }else{
 
+
+        return response()->json(['status'=>5,'duplicate'=>'A Unique Position is already Existed or member Exceed 11.']);
+
+    }
     }
 
 
@@ -108,25 +126,14 @@ class BrgyOfficialController extends Controller
 
 
             $validator = Validator::make($request->all(), [
-
                 'area' => 'required',
-
-
-
             ],[
-
             "area.required" => "Field cannot be empty or contain duplicate",
-            ]
-        );
+            ]);
 
 
             if ($validator->fails()) {
-
-
-
                 return response()->json(['error'=>$validator->errors()]);
-
-
             }else{
 
                 area_setting::updateOrCreate(['area_id' => $request->area_id],
