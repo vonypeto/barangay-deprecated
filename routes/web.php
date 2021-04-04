@@ -108,7 +108,14 @@ Route::post('setting/maintenance/barangay/image', [ BarangayimageController::cla
     // Account Setting Section
 Route::resource('/setting/account', AccountController::class);
 Route::post("/setting/account/form",[AccountController::class, 'accountSettingCheck'])->name("accountSettingCheck");
+
+    // Session
 Route::get("/setting/account/session/table", [AccountController::class, 'getSessionTable'])->name("getSessionTable");
+
+    // Resident Manage Account
+Route::get("/setting/account/resident_account/table", [AccountController::class, 'getResidentAccountTable'])->name("ResidentAccountTable");
+Route::patch("/setting/account/resident_account/{id}", [AccountController::class, 'resident_update']);
+Route::delete("/setting/account/resident_account/{id}", [AccountController::class, 'resident_delete']);
 
     // User Login Section
 Route::get("/login", [UserController::class, 'login']);

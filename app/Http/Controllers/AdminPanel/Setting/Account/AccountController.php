@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminPanel\Setting\Account;
 use App\Http\Controllers\Controller;
 //Models
 use App\Models\Account;
+use App\Models\resident_account;
 use App\Models\Sessions;
 
 use Illuminate\Http\Request;
@@ -71,8 +72,28 @@ class AccountController extends Controller
             return Datatables::of($data)
             ->make(true);
         }
+        
     }
 
+    public function getResidentAccountTable(Request $request){
+
+        if ($request->ajax()) {
+            $data = resident_account::latest()->get();
+
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+
+                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-username="'.$row->username.'" data-id="'.$row->resident_account_id.'" data-original-title="Edit" class="edit btn btn-primary btn-xs pr-4 pl-4" id="residentSelectBtn"></i><i class="fa fa-pencil" aria-hidden="true"></i> </a>';
+
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->resident_account_id.'" data-original-title="Delete" class="btn btn-danger btn-xs pr-4 pl-4" id="residentDeleteBtn"><i class="fa fa-trash" aria-hidden="true"></a>';
+
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -182,8 +203,6 @@ class AccountController extends Controller
              "manage_account_username" => "required",
              "manage_account_new_password" => "required|same:manage_account_confirm_password",
              "manage_account_confirm_password" => "required|same:manage_account_new_password",
-
-            //  "manage_account_current_password" => "required|same:old_database_password",
          ],
          [
              "manage_account_username.required" => "Username cannot be empty",
@@ -191,11 +210,6 @@ class AccountController extends Controller
              "manage_account_confirm_password.required" => "Please verify your password",
              "manage_account_new_password.same" => "Password does not match",
              "manage_account_confirm_password.same" => "password does not match",
-
-            //  "manage_account_current_password.same" => "Does not match with your old password",
-            //  "manage_account_current_password.required" => "Password cannot be empty",
-
-
          ]);
 
          if ($validator2->fails()) {
@@ -211,6 +225,35 @@ class AccountController extends Controller
          }
      }
 
+     public function resident_update($id, Request $request)
+     {
+         $resident_account = resident_account::findorfail($id);
+
+         $validator = Validator::make($request->all(),[
+             "manage_resident_account_username" => "required",
+             "manage_resident_account_new_password" => "required|same:manage_resident_account_confirm_password",
+             "manage_resident_account_confirm_password" => "required|same:manage_resident_account_new_password",
+         ],
+         [
+             "manage_resident_account_username.required" => "Username cannot be empty",
+             "manage_resident_account_new_password.required" => "New Password cannot be empty",
+             "manage_resident_account_confirm_password.required" => "Please verify your password",
+             "manage_resident_account_new_password.same" => "Password does not match",
+             "manage_resident_account_confirm_password.same" => "password does not match",
+         ]);
+
+         if ($validator->fails()) {
+             return response()->json(['status'=> 0, 'error'=>$validator->errors()->toArray()]);
+         }
+         else {
+
+             $resident_account -> password = Hash::make($request->manage_resident_account_new_password);
+             $resident_account->save();
+
+             return response()->json(['status'=>1, 'msg'=> 'Password has been changed']);
+
+         }
+     }
 
     /**
      * Remove the specified resource from storage.
@@ -222,6 +265,13 @@ class AccountController extends Controller
     {
         $sessions = DB::table('sessions')->where('user_id', '=', $id)->delete();
         Account::find($id)->delete();
+
+        return response()->json(['success'=>'Account deleted successfully.']);
+    }
+
+    public function resident_delete($id)
+    {
+        resident_account::find($id)->delete();
 
         return response()->json(['success'=>'Account deleted successfully.']);
     }

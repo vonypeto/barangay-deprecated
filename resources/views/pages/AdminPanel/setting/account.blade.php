@@ -19,6 +19,7 @@
             <button class="tablinks active" onclick="schedules(event, 'schedule')">Account Setting</button>
             <button class="tablinks " id="tablink-create-account" onclick="schedules(event, 'create') ">Create Account</button>
             <button class="tablinks"  id="tablink-manage-account" onclick="schedules(event, 'manage')">Manage Account</button>
+            <button class="tablinks"  id="tablink-manage-account" onclick="schedules(event, 'resident')">Manage Resident Account</button>
             <button class="tablinks" id="tablink-session-history" onclick="schedules(event, 'session')">Session History</button>
          </div>
 
@@ -237,84 +238,151 @@
 
                </div>
 
-               {{-- - Manage Account Tablink - --}}
-
-               <div id="manage" class="tabcontent">
-                  <div class="row ">
-                     <div class="col-sm-12 pl-3 ">
-                        <form id="manage_account_form">
-                           <div class="row">
-                              <div class="col-sm-6">
-                                 <input type="hidden" name="id" id="manage_account_id" value="" >
-                                 <div class="form-group row">
-                                    {{-- Username --}}
-                                    <label for="manage_account_username"  class="col-sm-3 col-form-label">Username</label>
-                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control"  name="manage_account_username" id="manage_account_username" placeholder="Select User" value="" readonly>
-                                       <span class="text-danger error_text manage_account_username_error"></span>
-                                    </div>
-                                 </div>
-                                 {{-- New Password --}}
-                                 <div class="form-group row">
-                                    <label for="manage_account_new_password" class="col-sm-3 col-form-label">New Password</label>
-                                    <div class="col-sm-9">
-                                       <input type="password" name="manage_account_new_password" class="form-control" id="manage_account_new_password" placeholder="Enter New Password" value="">
-                                       <span class="text-danger error_text manage_account_new_password_error"></span>
-                                    </div>
+            {{-- - Manage Account Tablink - --}}
+            <div id="manage" class="tabcontent">
+               <div class="row ">
+                  <div class="col-sm-12 pl-3 ">
+                     <form id="manage_account_form">
+                        <div class="row">
+                           <div class="col-sm-6">
+                              <input type="hidden" name="id" id="manage_account_id" value="" >
+                              <div class="form-group row">
+                                 {{-- Username --}}
+                                 <label for="manage_account_username"  class="col-sm-3 col-form-label">Username</label>
+                                 <div class="col-sm-9">
+                                    <input type="text" class="form-control"  name="manage_account_username" id="manage_account_username" placeholder="Select User" value="" readonly>
+                                    <span class="text-danger error_text manage_account_username_error"></span>
                                  </div>
                               </div>
-                              <div class="col-sm-6">
-                                 {{-- Confirm Password --}}
-                                 <div class="form-group row">
-                                    <label for="manage_account_confirm_password" class="col-sm-3 col-form-label">Confirm Password</label>
-                                    <div class="col-sm-9">
-                                       <input type="password" name="manage_account_confirm_password" class="form-control" id="manage_account_confirm_password" placeholder="Confirm Password" value="">
-                                       <span class="text-danger error_text manage_account_confirm_password_error"></span>
-                                    </div>
-                                 </div>
-
-                                 <div class="col-sm-12 pl-0 pr-0  ">
-                                    <div class="form-group text-right ">
-                                       <button type="submit" id="changepasswordBtn"class="btn btn-success account-button " disabled><b>Change Password</b></button>
-
-                                    </div>
+                              {{-- New Password --}}
+                              <div class="form-group row">
+                                 <label for="manage_account_new_password" class="col-sm-3 col-form-label">New Password</label>
+                                 <div class="col-sm-9">
+                                    <input type="password" name="manage_account_new_password" class="form-control" id="manage_account_new_password" placeholder="Enter New Password" value="">
+                                    <span class="text-danger error_text manage_account_new_password_error"></span>
                                  </div>
                               </div>
-
                            </div>
-                        </form>
-                        <div class="border-buttom border-bot pl-3 pr-3">
+                           <div class="col-sm-6">
+                              {{-- Confirm Password --}}
+                              <div class="form-group row">
+                                 <label for="manage_account_confirm_password" class="col-sm-3 col-form-label">Confirm Password</label>
+                                 <div class="col-sm-9">
+                                    <input type="password" name="manage_account_confirm_password" class="form-control" id="manage_account_confirm_password" placeholder="Confirm Password" value="">
+                                    <span class="text-danger error_text manage_account_confirm_password_error"></span>
+                                 </div>
+                              </div>
+                              
+                              <div class="col-sm-12 pl-0 pr-0  ">
+                                 <div class="form-group text-right ">
+                                    <button type="submit" id="changepasswordBtn"class="btn btn-success account-button " disabled><b>Change Password</b></button>
+                                    
+                                 </div>
+                              </div>
+                           </div>
+                           
                         </div>
-
-
-                        <div class="col-sm-12 overflow-auto  pt-2">
-
-
-
-                           <table id="manage-account-table" class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer" >
-                              <thead>
-                                 <tr class="headings">
-                                    <th class="column-title">Action</th>
-                                    <th class="column-title" hidden>Id</th>
-                                    <th class="column-title">Last Name</th>
-                                    <th class="column-title">First Name </th>
-                                    <th class="column-title">Username</th>
-                                    <th class="column-title">Email</th>
-                                    <th class="column-title">Type</th>
-
-
+                     </form>
+                     <div class="border-buttom border-bot pl-3 pr-3">
+                     </div>
+                     
+                     
+                     <div class="col-sm-12 overflow-auto  pt-2">
+                        
+                        
+                        
+                        <table id="manage-account-table" class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer" >
+                           <thead>
+                              <tr class="headings">
+                                 <th class="column-title">Action</th>
+                                 <th class="column-title" hidden>Id</th>
+                                 <th class="column-title">Last Name</th>
+                                 <th class="column-title">First Name </th>
+                                 <th class="column-title">Username</th>
+                                 <th class="column-title">Email</th>
+                                 <th class="column-title">Type</th>
+                                 
+                                 
                               </tr>
                            </thead>
                            <tbody>
-
+                              
                            </tbody>
                         </table>
-
-
                      </div>
+                  </div>
+               </div>
+            </div>
 
-
-
+            {{-- - Manage Resident Account Tablink - --}}
+            <div id="resident" class="tabcontent">
+               <div class="row ">
+                  <div class="col-sm-12 pl-3 ">
+                     <form id="manage_resident_account_form">
+                        <div class="row">
+                           <div class="col-sm-6">
+                              <input type="hidden" name="manage_resident_account_id" id="manage_resident_account_id" value="" >
+                              <div class="form-group row">
+                                 {{-- Username --}}
+                                 <label for="manage_resident_account_username"  class="col-sm-3 col-form-label">Username</label>
+                                 <div class="col-sm-9">
+                                    <input type="text" class="form-control"  name="manage_resident_account_username" id="manage_resident_account_username" placeholder="Select User" value="" readonly>
+                                    <span class="text-danger error_text manage_resident_account_username_error"></span>
+                                 </div>
+                              </div>
+                              {{-- New Password --}}
+                              <div class="form-group row">
+                                 <label for="manage_resident_account_new_password" class="col-sm-3 col-form-label">New Password</label>
+                                 <div class="col-sm-9">
+                                    <input type="password" name="manage_resident_account_new_password" class="form-control" id="manage_resident_account_new_password" placeholder="Enter New Password" value="">
+                                    <span class="text-danger error_text manage_resident_account_new_password_error"></span>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-sm-6">
+                              {{-- Confirm Password --}}
+                              <div class="form-group row">
+                                 <label for="manage_resident_account_confirm_password" class="col-sm-3 col-form-label">Confirm Password</label>
+                                 <div class="col-sm-9">
+                                    <input type="password" name="manage_resident_account_confirm_password" class="form-control" id="manage_resident_account_confirm_password" placeholder="Confirm Password" value="">
+                                    <span class="text-danger error_text manage_resident_account_confirm_password_error"></span>
+                                 </div>
+                              </div>
+                              
+                              <div class="col-sm-12 pl-0 pr-0  ">
+                                 <div class="form-group text-right ">
+                                    <button type="submit" id="resident_changepasswordBtn"class="btn btn-success account-button " disabled><b>Change Password</b></button>
+                                    
+                                 </div>
+                              </div>
+                           </div>
+                           
+                        </div>
+                     </form>
+                     <div class="border-buttom border-bot pl-3 pr-3">
+                     </div>
+                     
+                     
+                     <div class="col-sm-12 overflow-auto  pt-2">
+                        
+                        
+                        
+                        <table id="manage-resident-account-table" class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer" >
+                           <thead>
+                              <tr class="headings">
+                                 <th class="column-title">Action</th>
+                                 <th class="column-title" hidden>Id</th>
+                                 <th class="column-title">Last Name</th>
+                                 <th class="column-title">First Name </th>
+                                 <th class="column-title">Username</th>
+                                 <th class="column-title">Email</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              
+                           </tbody>
+                        </table>
+                     </div>
                   </div>
                </div>
             </div>
@@ -434,6 +502,22 @@
 
             });
 
+               //Table on Manage Resident Account
+               var table = $("#manage-resident-account-table").DataTable({
+               processing: true,
+               serverSide: true,
+               ajax: "{{ route('ResidentAccountTable') }}",
+               columns: [
+               {data: 'action', name: 'action', orderable: false, searchable: true},
+               {data: 'resident_account_id', name: 'resident_account_id', visible:false , searchable: false},
+               {data: 'first_name', name: 'manage_resident_account_form_firstname', orderable: false, searchable: true},
+               {data: 'last_name', name: 'manage_resident_account_form_lastname', orderable: false, searchable: true},
+               {data: 'username', name: 'manage_resident_account_form_username', orderable: false, searchable: true},
+               {data: 'email', name: 'manage_resident_account_form_email', orderable: false, searchable: true},
+               ]
+
+            });
+
                //Table on sessionTable
                var sessionTable = $(".session_history_table").DataTable({
                processing: true,
@@ -455,10 +539,20 @@
                var username = $(this).data('username');
                $("#changepasswordBtn").removeAttr("disabled");
 
-
                $("#manage_account_id").val(id);
 
                $("#manage_account_username").val(username);
+            });
+
+            //Resident Select Button
+            $('body').on('click', '#residentSelectBtn', function () {
+               var id = $(this).data('id');
+               var username = $(this).data('username');
+               $("#resident_changepasswordBtn").removeAttr("disabled");
+
+               $("#manage_resident_account_id").val(id);
+
+               $("#manage_resident_account_username").val(username);
             });
 
             //Edit
@@ -497,6 +591,42 @@
 
             });
 
+            // Resident Edit
+            $('#manage_resident_account_form').on('submit', function (e) {
+               e.preventDefault();
+               var id = $("#manage_resident_account_id").val();
+
+               if(confirm("Are you sure want to change password!?"))
+               {
+                  $.ajax({
+                  type: "PATCH",
+                  url: "/setting/account/resident_account"+'/'+ id,
+                  data: $('#manage_resident_account_form').serialize(),
+                  dataType: 'json',
+
+                  beforeSend:function(){
+                     $(document).find('span.error_text').text('');
+                  },
+
+                  success: function (data) {
+                     if(data.status == 0){
+                        $.each(data.error, function(prefix, val){
+                           $('span.'+prefix+"_error").text(val[0]);
+                        });
+                     }
+                     else{
+                        $("#manage_resident_account_form")[0].reset();
+                        $("#resident_changepasswordBtn").attr("disabled", true);
+                        alert(data.msg);
+                        table.draw();
+                     }
+                  }
+
+                });
+               }
+
+            });
+
             //Delete
             $('body').on('click', '#deleteBtn', function () {
 
@@ -524,7 +654,30 @@
                       });
                   }
                }
+            });
 
+            //Resident Delete
+            $('body').on('click', '#residentDeleteBtn', function () {
+               
+               var id = $(this).data("id");
+               
+               if(confirm("Are you sure want to delete this account!?"))
+               {
+                  $.ajax({
+                     type: "DELETE",
+                     url: "/setting/account/resident_account"+'/'+id,
+                     
+                     success: function (data) {
+                        table.draw();
+                        sessionTable.draw();
+                        alert(data.success);
+                     },
+                     error: function (data) {
+                        console.log('Error:', data);
+                     }
+                  });
+               }
+               
             });
 
             //Create Account
