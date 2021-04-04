@@ -22,82 +22,15 @@ use App\Rules\ResidentEmailExists;
 
 class ResidentUserAccountController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\resident_account  $resident_account
-     * @return \Illuminate\Http\Response
-     */
-    public function show(resident_account $resident_account)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\resident_account  $resident_account
-     * @return \Illuminate\Http\Response
-     */
     public function edit($resident_id)
     {
         $account = resident_account::find($resident_id);
         return response()->json($account);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\resident_account  $resident_account
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, resident_account $resident_account)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\resident_account  $resident_account
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(resident_account $resident_account)
-    {
-        //
-    }
+
 
     public function client_login(){
         if (session()->has("client")) {
@@ -120,6 +53,11 @@ class ResidentUserAccountController extends Controller
 
         $resident = resident_account::where("email","=", $request->client_login_email)->first();
 
+        $layout = DB::table('barangayimages')
+        ->where('barangay_id','=',1)
+        ->first();
+        session('layout');
+        session(['layout.image' => $layout->image]);
         session('resident');
         session(['resident.email' => $request->client_login_email]);
         session(['resident.firstname' => $resident->first_name]);
@@ -127,7 +65,7 @@ class ResidentUserAccountController extends Controller
         session(['resident.id' => $resident->resident_id]);
 
         return redirect("/barangay/home");
-        
+
     }
 
     public function client_register(){
@@ -156,7 +94,7 @@ class ResidentUserAccountController extends Controller
 
         //Validation Success
         $resident_info = resident_info::where("email","=", $request->register_email)->first();
-        
+
         //Check if resident_info exist
         if ($resident_info == null) {
             $new_resident_info = new resident_info;
@@ -182,7 +120,7 @@ class ResidentUserAccountController extends Controller
         $new_resident->email = $request->register_email;
         $new_resident->password = Hash::make($request->register_password);
         $query = $new_resident->save();
-        
+
         return redirect ("/barangay/login")->with('success_register', 'Account successfully registered!');
     }
 

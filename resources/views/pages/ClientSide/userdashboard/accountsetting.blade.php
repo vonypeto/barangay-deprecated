@@ -3,7 +3,7 @@
 
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Account Setting</title>
@@ -26,7 +26,7 @@
 
     <header class="header-blue" style="padding-bottom: 0px;">
         <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-            <div class="container-fluid"><a class="navbar-brand" href="/barangay/home" style="font-size: 45px;font-family: bodoni mt;"><img src="{{ URL::to('images/logo.png') }}" style="resize: both;width: 80px;margin-right: 30px;">University of Rizal System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="container-fluid"><a class="navbar-brand" href="/barangay/home" style="font-size: 45px;font-family: bodoni mt;"><img src="{{Storage::url(session("layout.image"))  }}" style="resize: both;width: 80px;margin-right: 30px;">University of Rizal System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <form class="form-inline mr-auto" target="_self">
                         <div class="form-group mb-0"><label for="search-field"></label></div>
@@ -43,7 +43,7 @@
     <ul class="nav nav-tabs" style="margin-left: 20px;">
         <li class="nav-item"><a class="nav-link" href="/barangay/home"><i class="fa fa-home" style="margin-right: 5px;"></i>Home</a></li>
         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><i class="fa fa-server" style="margin-right: 5px;"></i>Services</a>
-            <div class="dropdown-menu"><a class="dropdown-item" href="/barangay/schedule">Schedule</a><a class="dropdown-item" href="/barangay/blotter">Blotter</a><a class="dropdown-item" href="/barangay/certificate">Certificates</a></div>
+            <div class="dropdown-menu"><a class="dropdown-item" href="/barangay/schedule">Schedule</a><a class="dropdown-item" href="/barangay/blotter/{{ session("resident.id") }}">Blotter</a><a class="dropdown-item" href="/barangay/certificate">Certificates</a></div>
         </li>
         <li class="nav-item"><a class="nav-link" href="/barangay/news">News</a></li>
         <li class="nav-item"><a class="nav-link" href="/barangay/info">Info</a></li>
@@ -97,7 +97,7 @@
                             <button type="submit" class="btn btn-primary float-right" id="saveBtn" value="create" >Save changes
                             </button>
                         </div>
-                    </form>                            
+                    </form>
                 </div>
             </div>
         </div>
@@ -106,7 +106,7 @@
 
     <div style="margin-bottom: 227px;">
         <h1 class="m-3 mt-5 text-center">Edit Your Account Information</h1>
-        
+
         <form id="resident_accountsetting_form" class="p-4">
             {{ csrf_field() }}
             <input type="hidden" name="resident_id" id="resident_id" value="{{ session("resident.id") }}">
@@ -120,41 +120,41 @@
                         <label for="resident_accountsetting_firstname">First Name</label>
                         <input type="text" class="form-control" id="resident_accountsetting_firstname" name="resident_accountsetting_firstname" placeholder="N/A" required>
                     </div>
-                    
+
                     <div class="form-group col-md-6">
                         <label for="resident_accountsetting_lastname">Last Name</label>
                         <input type="text" class="form-control" id="resident_accountsetting_lastname" name="resident_accountsetting_lastname" placeholder="N/A" required>
                     </div>
-                    
+
                     <div class="form-group col-md-6">
                         <label for="resident_accountsetting_middlename">Midlle Name</label>
                         <input type="text" class="form-control" id="resident_accountsetting_middlename" name="resident_accountsetting_middlename" placeholder="N/A">
                     </div>
-                    
+
                     <div class="form-group col-md-6">
                         <label for="resident_accountsetting_alias">Alias</label>
                         <input type="text" class="form-control" id="resident_accountsetting_alias" name="resident_accountsetting_alias" placeholder="N/A">
                     </div>
                 </div>
-                
+
                 {{-- 2nd row --}}
                 <div class="form-row p-3">
-                    
+
                     <div class="form-group col-md-5">
                         <label for="resident_accountsetting_birthday">Birthday</label>
                         <input type="date" id="resident_accountsetting_birthday" name="resident_accountsetting_birthday"  class="form-control ">
                     </div>
-                    
+
                     <div class="form-group col-md-5">
                         <label for="resident_accountsetting_birthplace">Place of Birth</label>
                         <input type="text" id="resident_accountsetting_birthplace" name="resident_accountsetting_birthplace"  class="form-control " placeholder="Ex: Morong, Rizal">
                     </div>
-                    
+
                     <div class="form-group col-md-2 pl-2">
                         <label class="row pl-2" for="resident_accountsetting_age">Age </label>
                         <input type="text" id="resident_accountsetting_age" name="resident_accountsetting_age"  class="form-control " placeholder="Ex: 14">
                     </div>
-                    
+
                     <div class="form-group col-md-4">
                         <label for="resident_accountsetting_gender">Gender</label>
                         <select class="form-control" id="resident_accountsetting_gender" name="resident_accountsetting_gender">
@@ -164,18 +164,18 @@
                             <option value="Others">Others</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group col-md-4">
                         <label for="resident_accountsetting_height">Height</label>
                         <input type="number" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" name="resident_accountsetting_height" id="resident_accountsetting_height" placeholder="N/A" value="0">
                     </div>
-                    
+
                     <div class="form-group col-md-4">
                         <label for="resident_accountsetting_weight">Weight</label>
                         <input type="number" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" name="resident_accountsetting_weight" id="resident_accountsetting_weight" placeholder="N/A" value="0">
                     </div>
                 </div>
-                
+
                 {{-- 3rd row --}}
                 <div class="form-row p-3">
                     <div class="col-md-6  form-group" >
@@ -186,7 +186,7 @@
                             <option value="No">No</option>
                         </select>
                     </div>
-                    
+
                     <div class="col-md-6 item form-group">
                         <label for="resident_accountsetting_civilstatus">Civil Status</label>
                         <select class="form-control" name="resident_accountsetting_civilstatus" id="resident_accountsetting_civilstatus">
@@ -197,15 +197,15 @@
                             <option value="Separated">Separated</option>
                             <option value="Divorced">Divorced</option>
                         </select>
-                        
+
                     </div>
-                    
+
                     <div class="col-md-12 form-group">
                         <label for="resident_accountsetting_citizenship">CitizenShip</label>
                         <input type="text" id="resident_accountsetting_citizenship" name="resident_accountsetting_citizenship" placeholder="Ex: Filipino"   class="form-control ">
                     </div>
                 </div>
-                
+
                 {{-- 4th row --}}
                 <div class="form-row p-3" >
                     <div class="col-sm-6 form-group" >
@@ -213,23 +213,23 @@
                         <input type="text" class="form-control"   name="resident_accountsetting_telephone" id="resident_accountsetting_telephone" placeholder="Ex: 123-45-678" maxlength="8">
                         <span class="text-danger error_text resident_accountsetting_telephone_error" style="text-align:left;font-size:18px;" ></span>
                     </div>
-                    
+
                     <div class="col-sm-6 form-group">
                         <label for="resident_accountsetting_mobile">Mobile</label>
                         <input type="text" class="form-control" name="resident_accountsetting_mobile" id="resident_accountsetting_mobile"  placeholder="Ex: 09166041823" value="" maxlength="11">
                         <span class="text-danger error_text resident_accountsetting_mobile_error" style="text-align:left;font-size:18px;" ></span>
                     </div>
-                    
+
                     <div class="col-sm-6 form-group">
                         <label for="resident_accountsetting_address_1">Address 1 </label>
-                        <textarea id="resident_accountsetting_address_1" name="resident_accountsetting_address_1" placeholder="Ex: P.O. Box 1201, Manila Central Post Office 1050 Manila"  class="form-control " rows="2" style="resize: none;"></textarea>  
+                        <textarea id="resident_accountsetting_address_1" name="resident_accountsetting_address_1" placeholder="Ex: P.O. Box 1201, Manila Central Post Office 1050 Manila"  class="form-control " rows="2" style="resize: none;"></textarea>
                     </div>
-                    
+
                     <div class="col-sm-6 form-group">
                         <label for="resident_accountsetting_address_2">Address 2</label>
                         <textarea type="textbox" id="resident_accountsetting_address_2" name="resident_accountsetting_address_2" placeholder="Ex: P.O. Box 1121, Araneta Center Post Office 1135 Quezon City, Metro Manila"  class="form-control " rows="2" style="resize: none;"></textarea>
                     </div>
-                    
+
                     <div class="col-md-12 form-group">
                         <label for="resident_accountsetting_area">Area</label><br>
                         <select name="resident_accountsetting_area" id="resident_accountsetting_area" class="form-control ">
@@ -237,76 +237,76 @@
                             @if(count($area_setting) > 0)
                             @foreach ($area_setting as $area_setting)
                             <option value="{{  $area_setting->area }}" >{{ $area_setting->area }}</option>
-                            
+
                             @endforeach
                             @endif
-                            
+
                         </select>
                     </div>
                 </div>
-            
+
             </div>
 
             <div class="rounded shadow-lg border border-secondary p-4 mt-5" style="font-size: 20px">
                 {{-- Parents/Guardians/Spouse --}}
                 <h2 style="color: rgb(3, 50, 112)">Parents/Guardians/Spouse</h2><hr>
-                
+
                 {{-- 1st row --}}
                 <div class="form-row p-3">
                     <div class="form-group col-md-12">
                         <label for="resident_accountsetting_father">Father's Name</label>
                         <input type="text" class="form-control" name="resident_accountsetting_father" id="resident_accountsetting_father" placeholder="N/A">
                     </div>
-                    
+
                     <div class="form-group col-md-12">
                         <label for="resident_accountsetting_mother">Mother's Name</label>
                         <input type="text" class="form-control" name="resident_accountsetting_mother" id="resident_accountsetting_mother" placeholder="N/A">
                     </div>
-                    
+
                     <div class="form-group col-md-12">
                         <label for="resident_accountsetting_spouse">Spouse</label>
                         <input type="text" class="form-control" name="resident_accountsetting_spouse" id="resident_accountsetting_spouse" placeholder="N/A">
                     </div>
-                    
+
                 </div>
             </div>
-                
+
             <div class="rounded shadow-lg border border-secondary p-4 mt-5" style="font-size: 20px">
                 {{-- Social Welfare Services --}}
                 <h2 style="color: rgb(3, 50, 112)">Social Welfare Services</h2><hr>
-                
+
                 <div class="form-row p-3">
                     <div class="form-group col-md-12">
                         <label for="resident_accountsetting_PAG_IBIG">PAG-IBIG</label>
                         <input type="text" class="form-control" onkeypress="return isNumberKey(event)"  name="resident_accountsetting_PAG_IBIG" id="resident_accountsetting_PAG_IBIG" placeholder="Ex: 1234-5678-9101" maxlength = "14" value="">
                         <span class="text-danger error_text resident_accountsetting_PAG_IBIG_error" style="text-align:left;font-size:18px;" ></span>
                     </div>
-                    
+
                     <div class="form-group col-md-12">
                         <label for="resident_accountsetting_PHILHEALTH">PHILHEALTH</label>
                         <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="resident_accountsetting_PHILHEALTH" id="resident_accountsetting_PHILHEALTH" placeholder="Ex: 0028-1215160-9" maxlength = "14" value="">
                         <span class="text-danger error_text resident_accountsetting_PHILHEALTH_error" style="text-align:left;font-size:18px;" ></span>
                     </div>
-                    
+
                     <div class="form-group col-md-12">
                         <label for="resident_accountsetting_SSS">SSS</label>
                         <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="resident_accountsetting_SSS" id="resident_accountsetting_SSS" placeholder="Ex: 04-0751449-0"  maxlength = "10" value="">
                         <span class="text-danger error_text resident_accountsetting_SSS_error" style="text-align:left;font-size:18px;" ></span>
                     </div>
-                    
+
                     <div class="form-group col-md-12">
                         <label for="resident_accountsetting_TIN">TIN</label>
                         <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="resident_accountsetting_TIN" id="resident_accountsetting_TIN" placeholder="Ex: 123-456-789-000" maxlength = "12" value="">
                         <span class="text-danger error_text resident_accountsetting_TIN_error" style="text-align:left;font-size:18px;" ></span>
                     </div>
-                
+
                 </div>
             </div>
 
             <div class="rounded shadow-lg border border-secondary p-4 mt-5" style="font-size: 20px">
                 {{-- Account --}}
                 <h2 style="color: rgb(3, 50, 112)">Account</h2><hr>
-                
+
                 <div class="form-row p-3">
                     <div class="col-md-12 form-group">
                         <label for="resident_accountsetting_username">Username</label>
@@ -347,7 +347,7 @@
                 </div>
 
             </div>
-               
+
         </form>
         {{-- end of form --}}
     </div>
@@ -387,7 +387,7 @@
     </footer>
 
     <script type="text/javascript">
-    
+
 
        $(function() {
             //Global Varibles
@@ -445,7 +445,7 @@
             }
 
             $("#resident_accountsetting_newpassword").on("blur",  function() {
-               
+
                 if( $("#resident_accountsetting_newpassword").val() != null){
                     $("#resident_accountsetting_newpassword_confirmation").removeAttr("disabled");
 
@@ -454,7 +454,7 @@
                 if( $("#resident_accountsetting_newpassword").val() == ""){
                     $("#resident_accountsetting_newpassword_confirmation").attr('disabled', 'disabled');
                 }
-                
+
             });
             $("#resident_accountsetting_form").on('submit', function (e) {
                e.preventDefault();

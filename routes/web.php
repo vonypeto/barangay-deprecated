@@ -41,6 +41,9 @@ use App\Http\Controllers\ClientSide\HomeController;
 //AccountSettings
 use App\Http\Controllers\ClientSide\ResidentUserAccountController;
 
+// Blotter
+use App\Http\Controllers\ClientSide\BlotterController as ClientBlotterController;
+
 //Client Side End
 //Testing Area
 use App\Http\Controllers\BooksController;
@@ -55,7 +58,7 @@ Route::get('/', function () {
 //Admin Panel Start
 
 //Dashboard Module
-Route::get('/dashboard',[DashboardController::class, 'dashboard']);
+Route::get('/dashboard', [DashboardController::class, 'dashboard']);
 
 //Resident Module
 Route::resource('resident', ResidentInfoController::class);
@@ -97,15 +100,15 @@ Route::GET('certificate/print/cert', [PrintController::class, 'Print'])->name('P
 
 
 //Maintenance Moduule
-    // Barangay Setting Section
+// Barangay Setting Section
 Route::resource('setting/maintenance', BrgyOfficialController::class);
 Route::get('setting/maintenance/official/table', [BrgyOfficialController::class, 'barangay'])->name('barangay.index');
 Route::post('setting/maintenance/official/table', [BrgyOfficialController::class, 'barangayPOST'])->name('barangay.post');
 Route::get('setting/maintenance/official/table/{barangay}/edit', [BrgyOfficialController::class, 'barangayedit'])->name('barangay.edit');
 Route::delete('setting/maintenance/official/table/{barangay}/', [BrgyOfficialController::class, 'barangaydelete'])->name('barangay.destroy');
-Route::post('setting/maintenance/barangay/image', [ BarangayimageController::class, 'store' ])->name('image.store');
+Route::post('setting/maintenance/barangay/image', [BarangayimageController::class, 'store'])->name('image.store');
 
-    // Account Setting Section
+// Account Setting Section
 Route::resource('/setting/account', AccountController::class);
 Route::post("/setting/account/form",[AccountController::class, 'accountSettingCheck'])->name("accountSettingCheck");
 
@@ -142,12 +145,18 @@ Route::get('/barangay/schedule/print/{schedule_id}', [ScheduleClientController::
 
 //Route::get('/barangay/schedule/{id}', [ScheduleClientController::class, 'print'])->name("scheduleclientid.get");
 
-
+//Miscellaneous
 Route::get('barangay/home', [HomeController::class, 'resident_home']);
 Route::get('/barangay/news', [HomeController::class, 'resident_news']);
 Route::get('/barangay/info', [HomeController::class, 'resident_info']);
-
+//Account
 Route::get('/barangay/accountsetting', [ResidentAccountController::class, 'index']);
+//Blotter
+Route::get("/barangay/blotter/{residentid}", [ClientBlotterController::class, 'index']);
+Route::get("/barangay/blotter/pdf/{resident_id}/{blotterid}", [ClientBlotterController::class, 'pdf']);
+Route::resource("/barangay/blotter", ClientBlotterController::class);
+
+
 
 // Client Login
 Route::get("/barangay/login", [ResidentUserAccountController::class, 'client_login']);
@@ -158,7 +167,7 @@ Route::get("/barangay/logout", [ResidentUserAccountController::class, 'client_lo
 
 // Client Modal on Account Setting
 Route::get("/barangay/{resident_id}/edit", [ResidentAccountController::class, 'edit']);
-Route::post("/barangay/accountsetting/check",[ResidentAccountController::class, 'clientaccountsettingcheck'])->name("client_accountsetting_check");
+Route::post("/barangay/accountsetting/check", [ResidentAccountController::class, 'ClientAccountSettingCheck'])->name("ClientAccountSettingCheck");
 
 //barangay Side End
 
@@ -198,8 +207,8 @@ Route::get('/invoice', function () {
     return $pdf->download('invoice.pdf');
 });
 Route::get('/invoice-pdf', function () {
- //   return view('/invoice-pdf');
-    $pdf = PDF::loadView('Testing.invoice-pdf')->setOptions(['defaultFont' => 'sans-serif','isRemoteEnabled' => true,'format' => 'letter']);;
+    //   return view('/invoice-pdf');
+    $pdf = PDF::loadView('Testing.invoice-pdf')->setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled' => true, 'format' => 'letter']);;
     return $pdf->download('invoice.pdf');
 });
 

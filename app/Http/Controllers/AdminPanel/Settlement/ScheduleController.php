@@ -13,6 +13,7 @@ use App\Models\blotters;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class ScheduleController extends Controller
 {
@@ -50,39 +51,57 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
 
-        // if ($request->schedule_date != null && $request->schedule_time != null) {
-        //     $request->schedule = "Schedule";
-        // } else {
-        //     $request->schedule = "Unschedule";
-        // }
-
-        if ($request->schedule_date != null) {
-            $request->schedule = "Schedule";
-        } else {
-            $request->schedule = "Unschedule";
-        }
-
-        if ($request->status == "Settled") {
-            $request->schedule = "Settled";
-        }
-
-        blotters::updateOrCreate(
-            ['blotter_id' => $request->blotter_id],
+        $validator = Validator::make(
+            $request->all(),
             [
-                'incident_location' => $request->incident_location,
-                'incident_type' => $request->incident_type,
-                'date_incident' => $request->date_incident,
-                'time_incident' => $request->time_incident,
-                'date_reported' => $request->date_reported,
-                'time_reported' => $request->time_reported,
-                'status' => $request->status,
-                'schedule_date' => $request->schedule_date,
-                // 'schedule_time' => $request->schedule_time,
-                'schedule' => $request->schedule
+                "incident_location" => "required",
+                "incident_type" => "required",
+                "date_incident" => "required",
+                "time_incident" => "required",
+                "date_reported" => "required",
+                "time_reported" => "required",
+                "status" => "required",
             ]
+
         );
 
-        return response()->json(['success' => 'NewBlotter saved successfully.']);
+        if ($validator->fails()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            // if ($request->schedule_date != null && $request->schedule_time != null) {
+            //     $request->schedule = "Schedule";
+            // } else {
+            //     $request->schedule = "Unschedule";
+            // }
+
+            if ($request->schedule_date != null) {
+                $request->schedule = "Schedule";
+            } else {
+                $request->schedule = "Unschedule";
+            }
+
+            if ($request->status == "Settled") {
+                $request->schedule = "Settled";
+            }
+
+            blotters::updateOrCreate(
+                ['blotter_id' => $request->blotter_id],
+                [
+                    'incident_location' => $request->incident_location,
+                    'incident_type' => $request->incident_type,
+                    'date_incident' => $request->date_incident,
+                    'time_incident' => $request->time_incident,
+                    'date_reported' => $request->date_reported,
+                    'time_reported' => $request->time_reported,
+                    'status' => $request->status,
+                    'schedule_date' => $request->schedule_date,
+                    // 'schedule_time' => $request->schedule_time,
+                    'schedule' => $request->schedule
+                ]
+            );
+
+            return response()->json(['success' => 'NewBlotter saved successfully.']);
+        }
     }
 
 

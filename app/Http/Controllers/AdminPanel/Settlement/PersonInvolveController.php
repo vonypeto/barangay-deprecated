@@ -30,6 +30,7 @@ class PersonInvolveController extends Controller
                 ->addColumn('add_complainant', function ($row) {
 
                     $chk = '
+                    <input type="checkbox" class="flat icheckbox_flat-green text-center addComplainant' . $row->resident_id . '" name="Complainant" hidden>
                     <input type="checkbox" data-id="' . $row->resident_id . '" class="flat icheckbox_flat-green text-center addComplainant addComplainantp' . $row->resident_id . '" name="ids[]" value="' . $row->resident_id . '">
                     <input type="checkbox" class="flat icheckbox_flat-green text-center addComplainant' . $row->resident_id . '" name="person_involve[]" value="' . $row->lastname . ", " . $row->firstname . " " . $row->middlename . '" hidden>
                     <input type="checkbox" class="flat icheckbox_flat-green text-center addComplainant' . $row->resident_id . '" name="involvement_type[]" value="Complainant" hidden>';
@@ -38,6 +39,7 @@ class PersonInvolveController extends Controller
                 ->addColumn('add_respondent', function ($row) {
 
                     $chk = '
+                    <input type="checkbox" class="flat icheckbox_flat-green text-center addRespondent' . $row->resident_id . '" name="Respondent" hidden>
                     <input type="checkbox" data-id="' . $row->resident_id . '" class="flat icheckbox_flat-green text-center addRespondent addRespondentp' . $row->resident_id . '" name="ids[]" value="' . $row->resident_id . '">
                     <input type="checkbox" class="flat icheckbox_flat-green text-center addRespondent' . $row->resident_id . '" name="person_involve[]" value="' . $row->lastname . ", " . $row->firstname . " " . $row->middlename . '" hidden>
                     <input type="checkbox" class="flat icheckbox_flat-green text-center addRespondent' . $row->resident_id . '" name="involvement_type[]" value="Respondent" hidden>';
@@ -46,6 +48,7 @@ class PersonInvolveController extends Controller
                 ->addColumn('add_victim', function ($row) {
 
                     $chk = '
+                    <input type="checkbox" class="flat icheckbox_flat-green text-center addVictim' . $row->resident_id . '" name="Victim" hidden>
                     <input type="checkbox" data-id="' . $row->resident_id . '" class="flat icheckbox_flat-green text-center addVictim addVictimp' . $row->resident_id . '" name="ids[]" value="' . $row->resident_id . '">
                     <input type="checkbox" class="flat icheckbox_flat-green text-center addVictim' . $row->resident_id . '" name="person_involve[]" value="' . $row->lastname . ", " . $row->firstname . " " . $row->middlename . '" hidden>
                     <input type="checkbox" class="flat icheckbox_flat-green text-center addVictim' . $row->resident_id . '" name="involvement_type[]" value="Victim" hidden>';
@@ -53,6 +56,7 @@ class PersonInvolveController extends Controller
                 })
                 ->addColumn('add_attacker', function ($row) {
                     $chk = '
+                    <input type="checkbox" class="flat icheckbox_flat-green text-center addAttacker' . $row->resident_id . '" name="Attacker" hidden>
                     <input type="checkbox" data-id="' . $row->resident_id . '" class="flat icheckbox_flat-green text-center addAttacker addAttackerp' . $row->resident_id . '" name="ids[]" value="' . $row->resident_id . '">
                     <input type="checkbox" class="flat icheckbox_flat-green text-center addAttacker' . $row->resident_id . '" name="person_involve[]" value="' . $row->lastname . ", " . $row->firstname . " " . $row->middlename . '" hidden>
                     <input type="checkbox" class="flat icheckbox_flat-green text-center addAttacker' . $row->resident_id . '" name="involvement_type[]" value="Attacker" hidden>';
@@ -76,7 +80,4 @@ class PersonInvolveController extends Controller
         $resident = resident_info::find($id);
         return response()->json($resident);
     }
-
-
-
 }

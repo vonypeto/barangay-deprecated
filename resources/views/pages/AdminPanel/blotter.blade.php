@@ -68,6 +68,7 @@
 
                            </tbody>
                         </table>
+                        <span class="text-danger error-text Complainant_error"></span>
 
 
                      </div>
@@ -100,6 +101,8 @@
 
                            </tbody>
                         </table>
+
+                        <span class="text-danger error-text Respondent_error"></span>
 
                      </div>
 
@@ -136,6 +139,8 @@
                            </tbody>
                         </table>
 
+                        <span class="text-danger error-text Victim_error"></span>
+
                      </div>
 
                      <div id="attackers" class="tabcontent">
@@ -165,6 +170,8 @@
 
                            </tbody>
                         </table>
+
+                        <span class="text-danger error-text Attacker_error"></span>
                      </div>
 
 
@@ -179,11 +186,12 @@
                               <div class="col-sm-6" >
                                 <label >Incident Location</label>
                                 <input type="text" id="incident_location" name="incident_location" required="required" class="form-control ">
-
+                                <span class="text-danger error-text incident_location_error"></span>
                               </div>
                               <div class="col-sm-6" >
                                  <label >Incident type</label>
                                  <input type="text" id="incident_type" name="incident_type" required="required" class="form-control ">
+                                 <span class="text-danger error-text incident_type_error"></span>
                                </div>
                             </div>
 
@@ -191,11 +199,13 @@
                               <div class="col-sm-6" >
                                 <label >Date of Incident</label>
                                 <input type="date" id="date_incident" name="date_incident" required="required" class="form-control ">
+                                <span class="text-danger error-text date_incident_error"></span>
 
                               </div>
                               <div class="col-sm-6" >
                                  <label >Time of Incident</label>
                                  <input type="time" id="time_incident" name="time_incident" required="required" class="form-control ">
+                                 <span class="text-danger error-text time_incident_error"></span>
                                </div>
                             </div>
 
@@ -203,11 +213,12 @@
                               <div class="col-sm-6" >
                                 <label >Date Reported</label>
                                 <input type="date" id="date_reported" name="date_reported" required="required" class="form-control ">
-
+                                <span class="text-danger error-text date_reported_error"></span>
                               </div>
                               <div class="col-sm-6" >
                                  <label >Time Reported</label>
                                  <input type="time" id="time_reported" name="time_reported" required="required" class="form-control ">
+                                 <span class="text-danger error-text time_reported_error"></span>
                                </div>
                             </div>
 
@@ -237,6 +248,7 @@
                                      <label for="ongoing">Ongoing</label><br>
                                      <input type="radio" name="status" value="Settled">
                                      <label for="settled">Settled</label><br>
+                                     <span class="text-danger error-text status_error"></span>
                                  </div>
                               </div>
                             </div>
@@ -246,6 +258,7 @@
                               <label for="incident_narrative">Incident Narrative</label>
                               <div class="col-md-12 col-sm-12 ">
                                  <textarea name="incident_narrative" id="incident_narrative" rows="10" style="width: 100%"></textarea>
+                                 <span class="text-danger error-text incident_narrative_error"></span>
                               </div>
                            </div>
 
@@ -372,7 +385,7 @@
                <tr class="headings">
                   <th class="column-title">Action</th>
                   <th class="column-title">Blotter Id </th>
-                  <th class="column-title">BlotterStatus </th>
+                  <th class="column-title">Blotter Status </th>
                   <th class="column-title">Date Recorded </th>
                   <th class="column-title">Time Recorded  </th>
                   <th class="column-title">Incident Type </th>
@@ -386,6 +399,7 @@
             <tbody>
             </tbody>
    </table>
+   <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
          <script type="text/javascript">
 
@@ -522,10 +536,12 @@
 
 
              $('#createNewBlotter').click(function () {
+               $("#saveBtn").attr("disabled", false);
                  $('#saveBtn').val("create-blotter");
                  $('#blotter_id').val('');
                  $('#blotterform').trigger("reset");
                  $('#modelHeading').html("Create New Blotter");
+                 $(document).find('span.error-text').text('');
                  $('#blottermodal').modal('show');
              });
 
@@ -571,6 +587,8 @@
 
              $('body').on('click', '.editBlotter', function () {
                var blotter_id = $(this).data('id');
+               $(document).find('span.error-text').text('');
+               $("#saveBtn").attr("disabled", false);
                $('#blotterform').trigger("reset");
                $.get("{{ route('blotters.index') }}" +'/' + blotter_id +'/edit', function (data) {
                   $('#modelHeading').html("Edit Blotter");
@@ -627,18 +645,32 @@
             });
 
              $('#saveBtn').click(function (e) {
+               
                 e.preventDefault();
+                $(this).attr("disabled", true);
                 $.ajax({
                   data: $('#blotterform').serialize(),
                   url: "{{ route('blotters.store') }}",
                   type: "POST",
                   dataType: 'json',
+                  beforeSend:function(){
+                     $(document).find('span.error-text').text('');
+                  },
                   success: function (data) {
-
-                      $('#blotterform').trigger("reset");
+                     if(data.status == 0){
+                        // $('.incident_location_error').html("The incident location is required.");
+                        $.each(data.error, function(prefix, val){
+                           $('span.'+prefix+'_error').text(val[0]);
+                        });
+                        $('#saveBtn').attr("disabled", false);
+                     }
+                     else{
+                     $(document).find('span.error-text').text('');
+                     $('#blotterform').trigger("reset");
                       $('#blottermodal').modal('hide');
+                      $('.error-msgg').html("");
                       table.draw();
-
+                     }
                   },
                   error: function (data) {
                       console.log('Error:', data);

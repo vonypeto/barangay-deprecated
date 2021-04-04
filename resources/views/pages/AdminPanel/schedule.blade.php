@@ -90,11 +90,12 @@
                               <div class="col-sm-6" >
                                 <label >Incident Location</label>
                                 <input type="text" id="incident_location" name="incident_location" required="required" class="form-control ">
-            
+                                <span class="text-danger error-text incident_location_error"></span>
                               </div>
                               <div class="col-sm-6" >
                                  <label >Incident type</label>
                                  <input type="text" id="incident_type" name="incident_type" required="required" class="form-control ">
+                                 <span class="text-danger error-text incident_type_error"></span>
                                </div>
                             </div>
                            
@@ -102,11 +103,12 @@
                               <div class="col-sm-6" >
                                 <label >Date of Incident</label>
                                 <input type="date" id="date_incident" name="date_incident" required="required" class="form-control ">
-            
+                                <span class="text-danger error-text date_incident_error"></span>
                               </div>
                               <div class="col-sm-6" >
                                  <label >Time of Incident</label>
                                  <input type="time" id="time_incident" name="time_incident" required="required" class="form-control ">
+                                 <span class="text-danger error-text time_incident_error"></span>
                                </div>
                             </div>
             
@@ -114,11 +116,12 @@
                               <div class="col-sm-6" >
                                 <label >Date Reported</label>
                                 <input type="date" id="date_reported"  name="date_reported" required="required" class="form-control ">
-            
+                                <span class="text-danger error-text date_reported_error"></span>
                               </div>
                               <div class="col-sm-6" >
                                  <label >Time Reported</label>
                                  <input type="time" id="time_reported" name="time_reported" required="required" class="form-control ">
+                                 <span class="text-danger error-text time_reported_error"></span>
                                </div>
                             </div>
             
@@ -150,6 +153,7 @@
                                      <label for="ongoing">Ongoing</label><br>
                                      <input type="radio" name="status" value="Settled">
                                      <label for="settled">Settled</label><br>    
+                                     <span class="text-danger error-text status_error"></span>
                                  </div>
                               </div>
                             </div>
@@ -157,7 +161,7 @@
                            
                      <div class="item form-group" style="margin-top: 1rem;">
                         <div class="col-md-12 col-sm-12 offset-md-4">
-                           <button type="submit" id="saveBtn" class="btn btn-success">Save New Blotters</button>
+                           <button type="submit" id="saveBtn" class="btn btn-success">Save</button>
                            <a class="btn btn-primary" type="button" data-dismiss="modal" style="margin-left: 4px;" >Cancel</a>
                            <input class="btn btn-primary" type="reset" value="Reset">
                         </div>
@@ -497,6 +501,8 @@
 
             $('body').on('click', '.editSchedule', function() {
         var blotter_id = $(this).data('id');
+         $(document).find('span.error-text').text('');
+        $('#saveBtn').attr("disabled", false);
 
         $.get("{{ route('schedules.index') }}" +'/' + blotter_id +'/edit', function (data) {
          $('#editscheduledata').modal('show');
@@ -517,21 +523,33 @@
         });
 
         $('#saveBtn').click(function (e) {
+           $(this).attr("disabled", true);
                 e.preventDefault();
                 $.ajax({
                   data: $('#blotterform').serialize(),
                   url: "{{ route('schedules.store') }}",
                   type: "POST",
                   dataType: 'json',
+                  beforeSend:function(){
+                     $(document).find('span.error-text').text('');
+                  },
                   success: function (data) {
-             
-                     //  $('#blotterform').trigger("reset");
-                      $('#editscheduledata').modal('hide');
+
+                       if(data.status == 0){
+                        // $('.incident_location_error').html("The incident location is required.");
+                        $.each(data.error, function(prefix, val){
+                           $('span.'+prefix+'_error').text(val[0]);
+                        });
+                        $('#saveBtn').attr("disabled", false);
+                     }
+                     else{
+                     $(document).find('span.error-text').text('');
+                     $('#editscheduledata').modal('hide');
                       table_schedule.draw();
                       table_unschedule.draw();
                       table_today.draw();
                       table_settled.draw();
-                  
+                     }
                   },
                   error: function (data) {
                       console.log('Error:', data);
