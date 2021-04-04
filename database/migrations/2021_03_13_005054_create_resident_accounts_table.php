@@ -14,7 +14,7 @@ class CreateResidentAccountsTable extends Migration
     public function up()
     {
         Schema::create('resident_accounts', function (Blueprint $table) {
-            $table->id('resident_account_id')->nullable();
+            $table->id('resident_account_id');
             $table->biginteger('resident_id')->nullable()->unique()->unsigned();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
