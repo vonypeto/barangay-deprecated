@@ -55,7 +55,7 @@ class AccountSeeder extends Seeder
             'first_name'=>'Encoder',
             'last_name'=>'Encoder',
             'username'=>'Encoder',
-            'email'=>'Encoder@gmail.com',
+            'email'=>'encoder@gmail.com',
             'password'=>Hash::make('encoder'),
             'type'=> "Encoder",
         ]);

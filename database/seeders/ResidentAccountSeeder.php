@@ -16,6 +16,7 @@ class ResidentAccountSeeder extends Seeder
     public function run()
     {
         DB::table('resident_accounts')->insert([
+            'resident_id'=> 1,
             'first_name'=>'giann',
             'last_name'=>'giann',
             'username'=>'giann',
@@ -24,6 +25,7 @@ class ResidentAccountSeeder extends Seeder
         ]);
 
         DB::table('resident_accounts')->insert([
+            'resident_id'=> 2,
             'first_name'=>'rojhon',
             'last_name'=>'rojhon',
             'username'=>'rojhon',
@@ -32,6 +34,7 @@ class ResidentAccountSeeder extends Seeder
         ]);
 
         DB::table('resident_accounts')->insert([
+            'resident_id'=> 3,
             'first_name'=>'von',
             'last_name'=>'von',
             'username'=>'von',
@@ -40,6 +43,7 @@ class ResidentAccountSeeder extends Seeder
         ]);
 
         DB::table('resident_accounts')->insert([
+            'resident_id'=> 4,
             'first_name'=>'salen',
             'last_name'=>'salen',
             'username'=>'salen',
@@ -48,11 +52,12 @@ class ResidentAccountSeeder extends Seeder
         ]);
 
         DB::table('resident_accounts')->insert([
-            'first_name'=>'Encoder',
-            'last_name'=>'Encoder',
-            'username'=>'Encoder',
-            'email'=>'Encoder@gmail.com',
-            'password'=>Hash::make('Encoder'),
+            'resident_id'=> 5,
+            'first_name'=>'test',
+            'last_name'=>'test',
+            'username'=>'test',
+            'email'=>'test@gmail.com',
+            'password'=>Hash::make('test'),
         ]);
     }
 }
