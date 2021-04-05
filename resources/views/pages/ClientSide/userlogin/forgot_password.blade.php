@@ -20,7 +20,7 @@
     
   </script>
 
-  <title>Login</title>
+  <title>Forgot Password</title>
 </head>
 <body style="background-image: url({{ URL::asset('images/background.png') }}); background-repeat:no-repeat; background-size: cover ">
 
@@ -36,35 +36,11 @@
             {{ session()->get("success_register")}}
           </div>
           @endif
-          <h5 class="card-title text-center">Log In</h5>
-          {{-- form --}}
-          <form class="log-in-form" action="/barangay/login" method="post"> 
-            @csrf
-            <div class="form-label-group mt-2">
-              <label for="client_login_email">Email address</label>
-              <input type="text" id="client_login_email" name="client_login_email" class="form-control" placeholder="Email address" autofocus
-              value={{ old('client_login_email')}}>
-              @error('client_login_email')
-              <span class="text-danger error_text create_account_form_lastname_error"> {{ $message }}</span>
-              @enderror
-            </div>
-
-            <div class="form-label-group mt-2">
-              <label for="client_login_password">Password</label>
-              <input type="password" id="client_login_password" name="client_login_password" class="form-control" placeholder="Password" >
-              @error('client_login_password')
-              <span class="text-danger error_text create_account_form_lastname_error">{{ $message }}</span>
-              @enderror
-              <br><a href="/barangay/forgot_password">Forgot your password?</a>
-            </div>
-
-            <button class="btn btn-lg btn-primary btn-block text-uppercase mt-3" id="clientLoginBtn" type="submit">Log in</button>
-          </form>
-          {{-- end form --}}
-
+          <h5 class="card-title text-center">Message</h5>
+          <p>Please contact the barangay to have a new password. Sorry for the inconvenience.</p>
 
           <br><a href="/barangay/register">Don't have an account?? Register!</a>
-          <br><a href="/login">Go to admin login ></a>
+          <br><a href="/barangay/login">< Back to login page</a>
         </div>
       </div>
       <br><br><br><br>

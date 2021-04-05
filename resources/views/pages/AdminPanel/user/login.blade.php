@@ -47,9 +47,6 @@
           <br><a href="/barangay/login">Go to client login ></a>
         </div>
       </div>
-      <p class="text-white ">I'll remove the client link after we're done testing</p>
-      <p class="text-white ">Make sure u migrate:fresh & db:seed before loging in</p>
-      <p class="text-white ">Check notes on web.php</p>
     </div>
   </div>
 </div>

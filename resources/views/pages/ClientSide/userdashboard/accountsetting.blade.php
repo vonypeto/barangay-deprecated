@@ -24,85 +24,7 @@
 <body style="margin: 0 0 100px;">
     <input type="hidden" id = "current_resident" data-id = {{ session("resident.id") }}>
 
-    <header class="header-blue" style="padding-bottom: 0px;">
-        <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-            <div class="container-fluid"><a class="navbar-brand" href="/barangay/home" style="font-size: 45px;font-family: bodoni mt;"><img src="{{Storage::url(session("layout.image"))  }}" style="resize: both;width: 80px;margin-right: 30px;">University of Rizal System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navcol-1">
-                    <form class="form-inline mr-auto" target="_self">
-                        <div class="form-group mb-0"><label for="search-field"></label></div>
-                    </form>
-                    <p class="navbar-text" id="navbar-username" style="margin-top: 15px;margin-right: 11px;color: white;font-size: 20px;"><i class="fa fa-user" style="margin-right: 5px;"></i>{{session("resident.firstname")}}</p><span class="navbar-text"> </span>
-                    <div class="dropdown" style="font-size: 20px;"><a class="dropdown-toggle" aria-expanded="false" data-toggle="dropdown" href="#" style="color: white;"><i class="fa fa-cog" style="margin-right: 5px;"></i>Settings</a>
-                        <div class="dropdown-menu dropleft" style="resize: both;width: 80px;padding: 0px;"><a class="dropdown-item" href="/barangay/accountsetting" style="resize: both;width: 80px;padding: 5px;font-size: 75%;">Account Settings</a><a class="dropdown-item" href="/barangay/logout" style="resize: both;width: 80px;padding: 5px;font-size: 75%;">Log-out</a></div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <ul class="nav nav-tabs" style="margin-left: 20px;">
-        <li class="nav-item"><a class="nav-link" href="/barangay/home"><i class="fa fa-home" style="margin-right: 5px;"></i>Home</a></li>
-        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><i class="fa fa-server" style="margin-right: 5px;"></i>Services</a>
-            <div class="dropdown-menu"><a class="dropdown-item" href="/barangay/schedule">Schedule</a><a class="dropdown-item" href="/barangay/blotter/{{ session("resident.id") }}">Blotter</a><a class="dropdown-item" href="/barangay/certificate">Certificates</a></div>
-        </li>
-        <li class="nav-item"><a class="nav-link" href="/barangay/news">News</a></li>
-        <li class="nav-item"><a class="nav-link" href="/barangay/info">Info</a></li>
-    </ul>
-
-    {{-- Modal --}}
-    <div class="container">
-
-        <div class="modal fade " id="account_settings_modal" role="dialog">
-            <div class="modal-dialog modal-lg ">
-                <div class="modal-content">
-                <div class="modal-header bg-dark text-white">
-                    <h4 class="modal-title ">Change Account Settings</h4>
-                    <button type="button" class="close text-white" data-dismiss="modal" >&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form id="account_settings_form" name="account_settings_form" class="form-horizontal m-2">
-                        {{-- hidden var --}}
-                        <input type="text" name="current_id" id="current_id" hidden>
-                        <input type="text" name="table_edit" id="table_edit" hidden>
-
-                        {{-- Label 1 --}}
-                        <div class="form-group row p-2">
-                            <label for="new_input_modal" id="modal_label1"  class="font-weight-bold">Label1</label>
-                            <div class="col-sm-12">
-                            <input type="text" class="form-control font-weight-bold" id="new_input_modal" name="new_input_modal">
-                            <span class="text-danger error_text new_input_modal_error new_input_email_modal_error new_input_username_modal_error"></span>
-                            </div>
-                        </div>
-
-                        {{-- Label 3 // this only show when password is being change --}}
-                        <div class="form-group row p-2" id="password_edit_modal">
-                            <label for="current_password_modal_confirmation" id="modal_label2" class="font-weight-bold">CONFIRM NEW PASSWORD</label>
-                            <div class="col-sm-12">
-                            <input type="password" id="current_password_modal_confirmation" name="current_password_modal" placeholder="Confirm New Password" class="form-control ">
-                            <span class="text-danger error_text current_password_modal_confirmation_error"></span>
-                            </div>
-                        </div>
-
-                        {{-- Label 2 --}}
-                        <div class="form-group row p-2">
-                            <label for="current_password_modal" id="modal_label2" class="font-weight-bold">CURRENT PASSWORD</label>
-                            <div class="col-sm-12">
-                            <input type="password" id="current_password_modal" name="current_password_modal" placeholder="Enter Password to save changes" class="form-control ">
-                            <span class="text-danger error_text current_password_modal_error"></span>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary float-right" id="saveBtn" value="create" >Save changes
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    @include('inc.client_nav')
 
     <div style="margin-bottom: 227px;">
         <h1 class="m-3 mt-5 text-center">Edit Your Account Information</h1>
@@ -112,6 +34,12 @@
             <input type="hidden" name="resident_id" id="resident_id" value="{{ session("resident.id") }}">
             <input type="hidden" name="resident_email" id="resident_email" value="{{ session("resident.email") }}">
             <div class="rounded shadow-lg border border-secondary p-4" style="font-size: 20px">
+
+                <div class="alert alert-success" id="success_msg">
+                  
+                </div>
+
+
                 {{-- Basic info --}}
                 <h2 style="color: rgb(3, 50, 112); ">Basic Info</h2><hr>
                 {{-- 1st row --}}
@@ -394,6 +322,8 @@
             var current_id = $("#current_resident").data("id");
             showUserInfo(current_id);
 
+            $("#success_msg").hide();
+
             //Ajax
             $.ajaxSetup({
                headers: {
@@ -475,11 +405,13 @@
                      }
                      else{
                         window.scrollTo(0, 0);
-                        alert(data.msg);
+                        $("#success_msg").text(data.msg);
+                        $("#success_msg").show();
                         showUserInfo(current_id);
                         $("#resident_accountsetting_form")[0].reset();
-                        $(document).find('span.error_text').text('');
-                        location.reload();
+                        $("#resident_accountsetting_newpassword_confirmation").attr('disabled', 'disabled');
+                        $("#navbar-firstname").html('<i class="fa fa-user" style="margin-right: 5px;"></i>' + data.firstname);
+                        $(document).find('span.error_text').text("");
                      }
                   }
                });
