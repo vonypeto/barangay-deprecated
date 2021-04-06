@@ -20,7 +20,7 @@
 <ul class="nav nav-tabs" style="margin-left: 20px;">
     <li class="nav-item"><a class="nav-link active" href="/barangay/home"><i class="fa fa-home" style="margin-right: 5px;"></i>Home</a></li>
     <li class="nav-item dropdown"><a class="dropdown-toggle nav-link " aria-expanded="false" data-toggle="dropdown" href="#"><i class="fa fa-server" style="margin-right: 5px;"></i>Services</a>
-        <div class="dropdown-menu"><a class="dropdown-item" href="/barangay/schedule">Schedule</a><a class="dropdown-item" href="/barangay/blotter">Blotter</a><a class="dropdown-item" href="/barangay/certificate">Certificates</a></div>
+        <div class="dropdown-menu"><a class="dropdown-item" href="/barangay/schedule">Schedule</a><a class="dropdown-item" href="/barangay/blotter/{{ session("resident.id") }}">Blotter</a><a class="dropdown-item" href="/barangay/certificate">Certificates</a></div>
     </li>
     <li class="nav-item"><a class="nav-link" href="/barangay/news">News</a></li>
     <li class="nav-item"><a class="nav-link" href="/barangay/info">Info</a></li>
