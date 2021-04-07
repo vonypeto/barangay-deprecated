@@ -16,12 +16,12 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
- 	"ext-gd": "*",
+    	"ext-gd": "*",
         "league/flysystem-aws-s3-v3": "~1.0",
         "league/flysystem-cached-adapter": "~1.0",
         "league/flysystem-sftp": "~1.0",
         "nesbot/carbon": "^2.45",
-        "yajra/laravel-datatables-oracle": "^9.15",
+        "yajra/laravel-datatables-oracle": "^9.15"
 
     },
     "require-dev": {
