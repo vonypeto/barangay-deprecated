@@ -21,17 +21,7 @@ class BarangayimageController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:300||dimensions:max_width=300,max_height=300',
 
         ]);
-
-
-
-
-        $file = $request->file('image');
-        $s3 = Storage::disk('s3');
-
-
      //   $path = $request->file('image')->store('public/images');
-
-     $path = $request->file('image')->store('public/images');
 
 
 /*
@@ -46,7 +36,7 @@ class BarangayimageController extends Controller
          ]);
 */
 
-
+        $path = $request->file('image')->store('public/images');
         $deletefile = DB::table('barangayimages')
         ->where('barangay_id','=',$request->barangay_id)
         ->first();
@@ -54,12 +44,11 @@ class BarangayimageController extends Controller
             $deletefile = DB::table('barangayimages')
         ->where('barangay_id','=',$request->barangay_id)
         ->first();
-
-       Storage::delete($deletefile->image);
-
+        Storage::disk('s3')->delete($deletefile->image);
          }
          /** @var \Illuminate\Filesystem\FilesystemManager $disk */
-
+         $disk = Storage::disk('s3');
+         $url = $disk->url($path);
 
 
         Barangayimage::updateOrCreate(['barangay_id' => $request->barangay_id],
@@ -67,10 +56,10 @@ class BarangayimageController extends Controller
         'barangay_name' => $request->barangay_name,
         'province'=>$request->province,
         'image'=>$path,
-
+         'url' => $url
 
         ]);
-         //
+
         return redirect('/setting/maintenance')
                         ->with('success','Post has been created successfully.');
     }
