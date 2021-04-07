@@ -75,7 +75,7 @@
         <div class="container " style="margin: 0 auto;color: white;padding: 15px;border-radius: 25px;margin-bottom: 10px;">
 
             <div class="row justify-content-center">
-                @foreach ($data as $item)
+                @forelse ($data as $item)
                 <div class="col col-4" style="margin-bottom: 4rem">
 
                     <div class="card-container">
@@ -94,8 +94,9 @@
                     </div>
 
                 </div>
-
-                @endforeach
+                @empty
+                    <h5 style="color: black;">You have no Blotter Report.</h5>
+                @endforelse
             </div>
 
 
