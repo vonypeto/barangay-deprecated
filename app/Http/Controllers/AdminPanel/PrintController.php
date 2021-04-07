@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
 
+use Illuminate\Support\Facades\Storage;
+
 class PrintController extends Controller
 {
 
@@ -54,6 +56,13 @@ class PrintController extends Controller
        $pdf->save($path . '/' . $fileName);
         $pdf = public_path('pdf/'.$fileName);
 
+/*
+
+        $path = $request->file('image')->store('public/images',"s3");
+        /** @var \Illuminate\Filesystem\FilesystemManager $disk
+        $disk = Storage::disk('s3');
+        $url = $disk->url($path);
+         */
        // return view('pages.AdminPanel.PDF.certificatepdf',compact('puno','brgy_official','content','approve' ,'layout'));
        return response()->download($pdf);
      // return $pdf->stream('certificate.pdf'); //test
