@@ -21,7 +21,7 @@
         <div class="jumbotron" style="background-color: rgba(255,255,255,0);padding-top: 30px;padding-bottom: 10px;">
             <div class="container" style="padding-bottom: 20px;background-color: #bcbec1;">
                 <div class="row" style="background-color: rgba(255,255,255,0);">
-                    <div class="col-md-6" style="background-color: rgba(255,255,255,0);padding: 20px;"><img src="{{ URL::to('images/Tempclipboard-image.png') }}" style="resize: both;width: 500px;height: 400px;"></div>
+                    <div class="col-md-6" style="background-color: rgba(255,255,255,0);padding: 20px;"><img src="{{ URL::to('images/Tempclipboard-image.png') }}" style="resize: both;width: 100%;height: 100%;"></div>
                     <div class="col-md-6" style="background-color: rgba(255,255,255,0);">
                         <h4>This is a title</h4>
                         <p style="margin: 42px;"><br>&nbsp; &nbsp; &nbsp; &nbsp; According to a TTS /AAS statement, its team members who have been “operating under the shadows of top-secrecy for decades” believe that “there is sufficient credible evidence of UAP that proves exotic technologies exist that could revolutionize the human experience.”&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; This could represent the beginning of a trend towards a new openness on the part of the U.S. government. These people know more than any of us, and they will be releasing important data on UAP in the future. As an investgative reporter with a long standing interest in this subject, who has worked with a few Academy team members in the past, I was shown some of this data at a meeting with them on Oct 4.<br><br></p>
@@ -36,7 +36,7 @@
                         <h4>Ravens Accused Of Stealing Groceries From Alaska Costco Customers<br></h4>
                         <p style="margin: 42px;"><br>&nbsp; &nbsp; &nbsp; &nbsp; According to a TTS /AAS statement, its team members who have been “operating under the shadows of top-secrecy for decades” believe that “there is sufficient credible evidence of UAP that proves exotic technologies exist that could revolutionize the human experience.”&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; This could represent the beginning of a trend towards a new openness on the part of the U.S. government. These people know more than any of us, and they will be releasing important data on UAP in the future. As an investgative reporter with a long standing interest in this subject, who has worked with a few Academy team members in the past, I was shown some of this data at a meeting with them on Oct 4.<br><br></p>
                     </div>
-                    <div class="col-md-6" style="background-color: rgba(255,255,255,0);padding: 20px;"><img src="{{ URL::to('images/Tempclipboard-image-1.png') }}" style="resize: both;width: 500px;height: 400px;"></div>
+                    <div class="col-md-6" style="background-color: rgba(255,255,255,0);padding: 20px;"><img src="{{ URL::to('images/Tempclipboard-image-1.png') }}" style="resize: both;width: 100%;height: 100%;"></div>
                 </div>
             </div>
         </div>
