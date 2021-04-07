@@ -10,5 +10,5 @@ class Barangayimage extends Model
     use HasFactory;
     public $primaryKey = 'barangay_id';
 
-    protected $fillable = ['barangay_name','barangay_id','image','province','city'];
+    protected $fillable = ['barangay_name','barangay_id','image','province','city','url'];
 }

@@ -17,6 +17,7 @@ class CreateBarangayimagesTable extends Migration
             $table->id('barangay_id');
             $table->string('barangay_name')->nullable();
             $table->string('image')->nullable();
+            $table->string('url')->nullable();
             $table->text('city')->nullable();
             $table->text('province')->nullable();
             $table->timestamps();

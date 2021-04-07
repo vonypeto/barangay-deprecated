@@ -8,6 +8,7 @@ use App\Models\Barangayimage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+
 class BarangayimageController extends Controller
 {
 
@@ -21,10 +22,29 @@ class BarangayimageController extends Controller
 
         ]);
 
-        $path = $request->file('image')->store('public/images');
 
 
 
+        $file = $request->file('image');
+        $s3 = Storage::disk('s3');
+
+
+     //   $path = $request->file('image')->store('public/images');
+
+        $path = $request->file('image')->store('public/images',"s3");
+
+        $disk =Storage::disk('s3')->getVisibility($path);
+/*
+         $image = Barangayimage::create([
+
+            'city' => $request->city,
+            'barangay_name' => $request->barangay_name,
+            'province'=>$request->province,
+            'image'=>basename($path),
+            'url' => Storage::disk('s3')->url($path)
+
+         ]);
+*/
 
 
         $deletefile = DB::table('barangayimages')
@@ -35,18 +55,22 @@ class BarangayimageController extends Controller
         ->where('barangay_id','=',$request->barangay_id)
         ->first();
 
-        Storage::delete($deletefile->image);
+       // Storage::delete($deletefile->image);
+        Storage::disk('s3')->delete($deletefile->image);
          }
-
-
-
-
-
-
+         /** @var \Illuminate\Filesystem\FilesystemManager $disk */
+         $disk = Storage::disk('s3');
+         $url = $disk->url($path);
 
 
         Barangayimage::updateOrCreate(['barangay_id' => $request->barangay_id],
-        ['city' => $request->city,'barangay_name' => $request->barangay_name,'province'=>$request->province,'image'=>$path]);
+        ['city' => $request->city,
+        'barangay_name' => $request->barangay_name,
+        'province'=>$request->province,
+        'image'=>$path,
+         'url' => $url
+
+        ]);
 
         return redirect('/setting/maintenance')
                         ->with('success','Post has been created successfully.');
