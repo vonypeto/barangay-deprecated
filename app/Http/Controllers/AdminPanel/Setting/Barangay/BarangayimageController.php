@@ -18,7 +18,7 @@ class BarangayimageController extends Controller
             'barangay_name' => 'Required',
             'city' => 'Required',
             'province' => 'Required',
-            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:300||dimensions:max_width=300,max_height=300',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:500||dimensions:max_width=500,max_height=500',
 
         ]);
 

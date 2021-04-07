@@ -155,7 +155,7 @@
                     @csrf
                     <input hidden id="barangay_id" name="barangay_id" value="{{ $Barangayimage->barangay_id ?? '' }}">
                     <div class="mb-3">
-                        <label for="email">Barangay Logo Dimension: MAX:300px</label>
+                        <label for="email">Barangay Logo Dimension: MAX:500px</label>
                         <input id="profile_image" type="file" class="form-control" class="text-center" value="{{ $Barangayimage->image ?? '' }}"  name="image" style="padding: 0px !important">
                         <div class="invalid-feedback">
                            Invalid Logo or no image
