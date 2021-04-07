@@ -42,6 +42,18 @@ class AppServiceProvider extends ServiceProvider
             $view->with('layout',$layout);
 
         });
+        view()->composer('inc.client_nav',function($view){
+            $image = DB::table('barangayimages')
+            ->where('barangay_id','=','1')->first();
+            $view->with('image',$image);
+
+        });
+        view()->composer('inc.client_nav_login',function($view){
+            $image = DB::table('barangayimages')
+            ->where('barangay_id','=','1')->first();
+            $view->with('image',$image);
+
+        });
 
     }
 }

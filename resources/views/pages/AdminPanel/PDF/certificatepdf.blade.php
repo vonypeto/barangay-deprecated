@@ -64,13 +64,13 @@
                 <br>
                 <div style="text-align: justify;text-indent: 15px;font-size: 17px ; font-family: Arial, Helvetica, sans-serif;">
                 <span  id="secondcontent">
-                    {{ $content->content_1 ?? 'Paragraph not set' }}
+                    {{ $content->content_2 ?? 'Paragraph not set' }}
                 </span>
                 </div>
                     <br>
                 <div  style="text-align: justify;text-indent: 15px;font-size: 17px ; font-family: Arial, Helvetica, sans-serif;">
                     <span >
-                      Done and issued this  ___ day of _______________ at the <span id="thirdcontent">{{ $content->content_1 ?? 'Paragraph not set' }}</span>
+                      Done and issued this  ___ day of _______________ at the <span id="thirdcontent">{{ $content->content_3 ?? 'Paragraph not set' }}</span>
                     </span>
               </div>
 
