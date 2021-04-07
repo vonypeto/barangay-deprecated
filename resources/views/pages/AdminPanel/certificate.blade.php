@@ -138,7 +138,7 @@
             <div class="col-sm-6 border solid overflow-auto">
                <div class="row">
                   <div class="column-right text-right" >
-                     <img style="width: 120px" id="logo1create" class="logo1create" src="{{  Storage::url($layout->logo_1 ?? 'Logo not set')  }}">
+                     <img style="width: 120px" id="logo1create" class="logo1create" src="{{  url($layout->logo_1 ?? 'Logo not set')  }}">
                   </div>
                   <div class="column-center text-center" >
                      <p id="heading"  style='font-size:19px;font-family: "Times New Roman, Times, serif";'> REPUBLIC OF THE PHILIPPINES<br>
@@ -152,14 +152,14 @@
                      </div>
                   </div>
                   <div class="column-left text-left" >
-                     <img style="width: 120px" id="logo2create" class="logo2create" src="{{  Storage::url($layout->logo_2 ?? 'Logo not set')  }}">
+                     <img style="width: 120px" id="logo2create" class="logo2create" src="{{ url($layout->logo_2 ?? 'Logo not set')  }}">
                   </div>
                </div>
                <div class="box">
-                  <img  id="logobackground1" class="background-opacity text-center" style="height: 450px;margin-left: 30%;margin-top: 40px" src="{{  Storage::url($layout->logo_2 ?? 'background photo no set')  }}">
+                  <img  id="logobackground1" class="background-opacity text-center" style="height: 450px;margin-left: 30%;margin-top: 40px" src="{{  url($layout->logo_2 ?? 'background photo no set')  }}">
                   <div class="row text">
                      <div class="column-body-left text-center " >
-                        <img  id="punongbarangay1" style="width: 120px" src="{{  Storage::url($layout->punongbarangay ?? '2X2 PIC of punong barangay not set')  }}">
+                        <img  id="punongbarangay1" style="width: 120px" src="{{  url($layout->punongbarangay ?? '2X2 PIC of punong barangay not set')  }}">
                         <div class="form-group" style='font-size:16px;font-family: "Times New Roman, Times, serif;'>
                            @foreach ($puno as $puno)
                            <p ><b>{{ $puno->name }}</b><br>{{ $puno->position }}</p>
@@ -697,7 +697,7 @@
             <form id="createform" name="createform" class="form-horizontal">
                <div class="row">
                   <div class="column-right text-right" >
-                     <img style="width: 120px" id="logo1create1" class="logo1create1" src="{{  Storage::url($layout->logo_1 ?? 'Logo not set')  }}">
+                     <img style="width: 120px" id="logo1create1" class="logo1create1" src="{{  url($layout->logo_1 ?? 'Logo not set')  }}">
                   </div>
                   <div class="column-center text-center" >
                      <p id="heading2" style='font-size:19px;font-family: "Times New Roman, Times, serif";'> REPUBLIC OF THE PHILIPPINES<br>
@@ -711,14 +711,14 @@
                      </div>
                   </div>
                   <div class="column-left text-left" >
-                     <img style="width: 120px" id="logo2create2" class="logo2create" src="{{  Storage::url($layout->logo_2 ?? 'Logo not set')  }}">
+                     <img style="width: 120px" id="logo2create2" class="logo2create" src="{{  url($layout->logo_2 ?? 'Logo not set')  }}">
                   </div>
                </div>
                <div class="box">
-                  <img  id="logobackground2" class="background-opacity text-center" style="height: 450px;margin-left: 30%;margin-top: 40px" src="{{  Storage::url($layout->logo_2 ?? 'background logo not set')  }}">
+                  <img  id="logobackground2" class="background-opacity text-center" style="height: 450px;margin-left: 30%;margin-top: 40px" src="{{ url($layout->logo_2 ?? 'background logo not set')  }}">
                   <div class="row text">
                      <div class="column-body-left text-center " >
-                        <img id="punongbarangay2" style="width: 120px" src="{{  Storage::url($layout->punongbarangay ?? '2X2 PIC of punong barangay not set')  }}">
+                        <img id="punongbarangay2" style="width: 120px" src="{{  url($layout->punongbarangay ?? '2X2 PIC of punong barangay not set')  }}">
                         <div class="form-group" style='font-size:16px;font-family: "Times New Roman, Times, serif;'>
                            @if(count($puno2))
                            @foreach ($puno2 as $puno2)

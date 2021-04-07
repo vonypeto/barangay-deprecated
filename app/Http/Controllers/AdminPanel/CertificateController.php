@@ -20,7 +20,7 @@ class CertificateController extends Controller
         if (!session()->has("user")) {
             return redirect("login");
         }
-        
+
         $brgy_official = brgy_official::where('position','!=','Punong Barangay')
         ->get();
         $puno = brgy_official::where('position','=','Punong Barangay')
@@ -129,16 +129,25 @@ class CertificateController extends Controller
             $deletefile = DB::table('certificate_layouts')
         ->where('layout_id','=',$request->certificate_id)
         ->first();
-        Storage::delete($deletefile->logo_1);
-        Storage::delete($deletefile->logo_2);
-        Storage::delete($deletefile->punongbarangay);
+        Storage::disk('s3')->delete($deletefile->logo_1);
+        Storage::disk('s3')->delete($deletefile->logo_2);
+        Storage::disk('s3')->delete($deletefile->punongbarangay);
+
          }
 
-        $path1 = $request->file('logo1')->store('public/images');
-        $path2 = $request->file('logo2')->store('public/images');
-        $path3 = $request->file('punongbarangay')->store('public/images');
+        $path1 = $request->file('logo1')->store('public/images','s3');
+        $path2 = $request->file('logo2')->store('public/images','s3');
+        $path3 = $request->file('punongbarangay')->store('public/images','s3');
+         /** @var \Illuminate\Filesystem\FilesystemManager $disk */
+        $disk = Storage::disk('s3');
+        $url1 = $disk->url($path1);
+        $url2 = $disk->url($path2);
+        $url3 = $disk->url($path3);
+
+
+
         Certificate_layout::updateOrCreate(['layout_id' => $request->certificate_id],
-        ['logo_1' => $path1,'logo_2' => $path2 ,'punongbarangay' => $path3,'province'=>$request->province,'municipality'=>$request->municipality,'barangay'=>$request->barangay,'office'=>$request->office]);
+        ['logo_1' => $url1,'logo_2' => $url2 ,'punongbarangay' => $url3,'province'=>$request->province,'municipality'=>$request->municipality,'barangay'=>$request->barangay,'office'=>$request->office]);
 
 
 
