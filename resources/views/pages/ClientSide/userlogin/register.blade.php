@@ -8,9 +8,9 @@
   <link href=" {{ URL::asset('css/app.css') }}" rel="stylesheet">
   <link href=" https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/homepage_css/Footer-Clean.css">
-  <link rel="stylesheet" href="css/homepage_css/Header-Blue.css">
-  <link rel="stylesheet" href="css/homepage_css/styles.css">
+  <link rel="stylesheet" href={{ URL::asset('css/ClientCSS/Footer-Clean.css') }}>
+  <link rel="stylesheet" href={{ URL::asset('css/ClientCSS/Header-Blue.css') }}>
+  <link rel="stylesheet" href={{ URL::asset('css/ClientCSS/styles.css') }}>
 
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
@@ -19,20 +19,12 @@
   <title>Register</title>
 </head>
 <body style="background-image: url({{ URL::asset('images/background.png') }}); background-repeat:no-repeat; background-size: cover ">
-<header class="header-blue" style="padding-bottom: 0px;">
-        <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-            <div class="container-fluid"><a class="navbar-brand" href="/home" style="font-size: 45px;font-family: bodoni mt;"><img src="{{ URL::to('images/logo.png') }}" style="resize: both;width: 80px;margin-right: 30px;">University of Rizal System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navcol-1">
-                    <form class="form-inline mr-auto" target="_self">
-                        <div class="form-group mb-0"><label for="search-field"></label></div>
-                    </form>
-                </div>
-            </div>
-        </nav>
-    </header>
+
+  @include('inc.client_nav_login')
+
 <div class="container">
-  <div class="row">
-    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+  <div class="row justify-content-center">
+    <div class="col-sm-9 col-md-7 col-lg-5">
       <div class="card card-signin my-5">
         <div class="card-body">
           <h5 class="card-title text-center">Register</h5>

@@ -31,9 +31,8 @@ class ResidentUserAccountController extends Controller
 
 
 
-
     public function client_login(){
-        if (session()->has("client")) {
+        if (session()->has("resident")) {
             return redirect("/barangay/home");
          }
 
@@ -56,8 +55,8 @@ class ResidentUserAccountController extends Controller
         $layout = DB::table('barangayimages')
         ->where('barangay_id','=',1)
         ->first();
-        session('layout');
-        session(['layout.image' => $layout->image]);
+        // session('layout');
+        // session(['layout.image' => $layout->image]);
         session('resident');
         session(['resident.email' => $request->client_login_email]);
         session(['resident.firstname' => $resident->first_name]);
@@ -69,6 +68,10 @@ class ResidentUserAccountController extends Controller
     }
 
     public function client_register(){
+        if (session()->has("resident")) {
+            return redirect("/barangay/home");
+        }
+
         return view("pages.ClientSide.userlogin.register");
     }
 
@@ -77,7 +80,7 @@ class ResidentUserAccountController extends Controller
         $validator = Validator::make($request->all(), [
             "register_firstname" => "required",
             "register_lastname" => "required",
-            "register_username" => "required",
+            "register_username" => ["required","unique:resident_accounts,username"],
             "register_email" => ["required", "ends_with:@gmail.com,@yahoo.com", "unique:resident_accounts,email"],
             "register_password" => ["required", "confirmed"],
             "register_password_confirmation" => "required"
@@ -89,7 +92,8 @@ class ResidentUserAccountController extends Controller
             "register_email.required" => "Enter an email to register.",
             "register_email.ends_with" => "we need you to give us a valid email.",
             "register_password.required" => "Enter your password!!!",
-            "register_password_confirmation.required" => "We need you to verify your password!!!"
+            "register_password_confirmation.required" => "We need you to verify your password!!!",
+            "register_username.unique"=> "Username has already been taken."
         ])->validate();
 
         //Validation Success
@@ -130,6 +134,18 @@ class ResidentUserAccountController extends Controller
         }
 
         return redirect ("/barangay/login");
+    }
+
+    public function client_forgot_password(){
+        if (session()->has("resident")) {
+            return redirect("/barangay/home");
+        }
+
+        if (session()->has("resident")) {
+            session()->pull("resident");
+        }
+
+        return view ("pages.ClientSide.userlogin.forgot_password");
     }
 
 }

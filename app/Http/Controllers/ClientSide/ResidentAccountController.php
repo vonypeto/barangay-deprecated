@@ -153,6 +153,7 @@ class ResidentAccountController extends Controller
 
             session(['resident.firstname' => $request->resident_accountsetting_firstname]);
             session(['resident.email' => $new_email]);
+            session(['resident.username' => $request->resident_accountsetting_username]);
 
             // Saving at resident account
             $values1 = [
@@ -162,15 +163,11 @@ class ResidentAccountController extends Controller
                 'username'=>$request->resident_accountsetting_username,
             ];
 
-            $password = (['password'=>Hash::make($request->resident_accountsetting_newpassword)]);
 
-            if ($password != null) {
+            if ($request->resident_accountsetting_newpassword != "") {
+                $password = (['password'=>Hash::make($request->resident_accountsetting_newpassword)]);
                 $values1 += $password;
             }
-
-            session(['resident.username' => $request->resident_accountsetting_username]);
-
-
 
             $query = DB::table('resident_accounts')->where("resident_id","=", $id)->update($values1);
 
@@ -206,7 +203,7 @@ class ResidentAccountController extends Controller
 
             $query = DB::table('resident_infos')->where("resident_id","=", $id)->update($values2);
 
-            return response()->json(['msg'=>'Account information has been changed successfully.']);
+            return response()->json(['msg'=>'Account information has been changed successfully.','firstname'=>$request->resident_accountsetting_firstname]);
 
         }
     }
