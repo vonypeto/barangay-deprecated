@@ -70,7 +70,7 @@ class BarangayimageController extends Controller
 
 
         ]);
-
+         //
         return redirect('/setting/maintenance')
                         ->with('success','Post has been created successfully.');
     }
