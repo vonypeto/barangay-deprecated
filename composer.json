@@ -21,7 +21,7 @@
         "league/flysystem-sftp": "~1.0",
         "nesbot/carbon": "^2.45",
         "yajra/laravel-datatables-oracle": "^9.15",
-        "ext-gd": "*"
+
     },
     "require-dev": {
         "facade/ignition": "^2.5",
