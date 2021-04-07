@@ -31,9 +31,9 @@ class BarangayimageController extends Controller
 
      //   $path = $request->file('image')->store('public/images');
 
-        $path = $request->file('image')->store('public/images',"s3");
+     $path = $request->file('image')->store('public/images');
 
-        $disk =Storage::disk('s3')->getVisibility($path);
+
 /*
          $image = Barangayimage::create([
 
@@ -55,12 +55,11 @@ class BarangayimageController extends Controller
         ->where('barangay_id','=',$request->barangay_id)
         ->first();
 
-       // Storage::delete($deletefile->image);
-        Storage::disk('s3')->delete($deletefile->image);
+       Storage::delete($deletefile->image);
+
          }
          /** @var \Illuminate\Filesystem\FilesystemManager $disk */
-         $disk = Storage::disk('s3');
-         $url = $disk->url($path);
+
 
 
         Barangayimage::updateOrCreate(['barangay_id' => $request->barangay_id],
@@ -68,7 +67,7 @@ class BarangayimageController extends Controller
         'barangay_name' => $request->barangay_name,
         'province'=>$request->province,
         'image'=>$path,
-         'url' => $url
+
 
         ]);
 
