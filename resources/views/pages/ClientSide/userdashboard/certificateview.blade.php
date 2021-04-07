@@ -23,7 +23,7 @@
     @include('inc.client_nav')
 
     <div style="margin: 20px;">
-        
+
             <section class="contact-clean text-center" style="padding-bottom: 140px;">
                 <div class="container container-smaller">
                     <div class="row">
@@ -46,7 +46,7 @@
 
                             <div class="row">
                             <div class="column-right text-right" >
-                               <img style="width: 120px" id="logo1create1" class="logo1create1" src="http://{{  request()->getHost()}}{{  Storage::url($layout->logo_1 ?? 'Logo not set')  }}">
+                               <img style="width: 120px" id="logo1create1" class="logo1create1" src="{{ url($layout->logo_1 ?? 'Logo not set')  }}">
                             </div>
                             <div class="column-center text-center" >
                                <p id="heading2" style='font-size:19px;font-family: "Times New Roman, Times, serif";'> REPUBLIC OF THE PHILIPPINES<br>
@@ -60,14 +60,14 @@
                                </div>
                             </div>
                             <div class="column-left text-left" >
-                               <img style="width: 120px" id="logo2create2" class="logo2create" src="http://{{  request()->getHost()}}{{  Storage::url($layout->logo_2 ?? 'Logo not set')  }}">
+                               <img style="width: 120px" id="logo2create2" class="logo2create" src="{{  url($layout->logo_2 ?? 'Logo not set')  }}">
                             </div>
                          </div>
                          <div class="box">
-                            <img  id="logobackground2" class="background-opacity text-center" style="height: 450px;margin-left: 30%;margin-top: 40px" src="http://{{  request()->getHost()}}{{  Storage::url($layout->logo_2 ?? 'background logo not set')  }}">
+                            <img  id="logobackground2" class="background-opacity text-center" style="height: 450px;margin-left: 30%;margin-top: 40px" src="{{  url($layout->logo_2 ?? 'background logo not set')  }}">
                             <div class="row text">
                                <div class="column-body-left text-center " >
-                                  <img id="punongbarangay2" style="width: 120px" src="http://{{  request()->getHost()}}{{  Storage::url($layout->punongbarangay ?? '2X2 PIC of punong barangay not set')  }}">
+                                  <img id="punongbarangay2" style="width: 120px" src="{{  url($layout->punongbarangay ?? '2X2 PIC of punong barangay not set')  }}">
                                   <div class="form-group" style='font-size:16px;font-family: "Times New Roman, Times, serif;'>
                                      @if(count($puno))
                                      @foreach ($puno as $puno)
@@ -99,14 +99,14 @@
                                     <br>
                                     <div style="text-align: justify;text-indent: 15px;font-size: 17px ; font-family: Arial, Helvetica, sans-serif;">
                                     <span  id="secondcontent">
-                                        {{ $content->content_1 ?? 'Paragraph not set' }}
+                                        {{ $content->content_2 ?? 'Paragraph not set' }}
                                     </span>
                                     </div>
                                         <br>
 
                                     <div  style="text-align: justify;text-indent: 15px;font-size: 17px ; font-family: Arial, Helvetica, sans-serif;">
                                         <span >
-                                          Done and issued this  {{ Carbon\Carbon::parse($request_list->created_at)->format('d') }} day of  {{ Carbon\Carbon::parse($request_list->created_at)->format('F, Y ') }} at the <span id="thirdcontent">{{ $content->content_1 ?? 'Paragraph not set' }}</span>
+                                          Done and issued this  {{ Carbon\Carbon::parse($request_list->created_at)->format('d') }} day of  {{ Carbon\Carbon::parse($request_list->created_at)->format('F, Y ') }} at the <span id="thirdcontent">{{ $content->content_3 ?? 'Paragraph not set' }}</span>
                                         </span>
                                   </div>
                                   <br>
