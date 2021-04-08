@@ -35,7 +35,7 @@
                      <span aria-hidden="true">&times;</span>
                      </button>
                   </div>
-         
+
                   <div class="modal-body">
                      <h6 id="blotterid_schedule"></h6>
                      <h6 id="schedule_data"></h6>
@@ -54,14 +54,14 @@
                            </tr>
                         </thead>
                         <tbody class="blotter-list-data">
-              
+
 
                         </tbody>
                      </table>
 
-                 
+
                   </div>
-         
+
                   <div class="modal-footer text-white">
                   </div>
                </div>
@@ -77,15 +77,15 @@
                      <span aria-hidden="true">&times;</span>
                      </button>
                   </div>
-         
+
                   <div class="modal-body">
                      <h6 id="edit_blotterid_schedule"></h6>
 
                      <form id="blotterform"  name="blotterform" class="modal-input">
                         {{ csrf_field() }}
-            
+
                            <input type="hidden" name="blotter_id" id="blotter_id">
-            
+
                            <div class="row" style="margin-left: 0px;margin-right: 0px;">
                               <div class="col-sm-6" >
                                 <label >Incident Location</label>
@@ -98,7 +98,7 @@
                                  <span class="text-danger error-text incident_type_error"></span>
                                </div>
                             </div>
-                           
+
                            <div class="row" style="margin-left: 0px;margin-right: 0px;">
                               <div class="col-sm-6" >
                                 <label >Date of Incident</label>
@@ -111,7 +111,7 @@
                                  <span class="text-danger error-text time_incident_error"></span>
                                </div>
                             </div>
-            
+
                             <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top:1rem;">
                               <div class="col-sm-6" >
                                 <label >Date Reported</label>
@@ -124,41 +124,41 @@
                                  <span class="text-danger error-text time_reported_error"></span>
                                </div>
                             </div>
-            
+
                             <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top:1rem;">
                               <div class="col-sm-6" >
                                 <label >Date Schedule</label>
                                 <input type="date" id="schedule_date" name="schedule_date" required="required" class="form-control ">
                                 <input type="text" name="schedule" hidden>
-            
+
                               </div>
-            
+
                               {{-- <div class="col-sm-6" >
                                  <label >Time Schedule</label>
                                  <input type="time" id="schedule_time" name="schedule_time" required="required" class="form-control ">
                                </div> --}}
-                      
+
                             </div>
 
-                            
-                      
+
+
                             <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top:1rem;">
-                                  
+
                               <div class="col-sm-6" >
                                  <label class="col-form-label col-md-3 col-sm-3 label-align">Status
                                  </label>
-            
+
                                  <div class="col-md-12 col-sm-12 ">
                                      <input type="radio" name="status" value="Ongoing">
                                      <label for="ongoing">Ongoing</label><br>
                                      <input type="radio" name="status" value="Settled">
-                                     <label for="settled">Settled</label><br>    
+                                     <label for="settled">Settled</label><br>
                                      <span class="text-danger error-text status_error"></span>
                                  </div>
                               </div>
                             </div>
-            
-                           
+
+
                      <div class="item form-group" style="margin-top: 1rem;">
                         <div class="col-md-12 col-sm-12 offset-md-4">
                            <button type="submit" id="saveBtn" class="btn btn-success">Save</button>
@@ -166,11 +166,11 @@
                            <input class="btn btn-primary" type="reset" value="Reset">
                         </div>
                      </div>
-        
+
                   </form>
 
                   </div>
-         
+
                   <div class="modal-footer text-white">
                   </div>
                </div>
@@ -181,7 +181,7 @@
 
 
 
-         <div id="schedule" class="tabcontent">
+         <div id="schedule" class="tabcontent overflow-auto">
 
 
 
@@ -227,7 +227,7 @@
 
 
 
-         <div id="unschedule" class="tabcontent">
+         <div id="unschedule" class="tabcontent overflow-auto">
 
 
 
@@ -277,7 +277,7 @@
 
 
 
-         <div id="schedule_today" class="tabcontent">
+         <div id="schedule_today" class="tabcontent overflow-auto">
 
 
 
@@ -328,7 +328,7 @@
 
 
 
-         <div id="case" class="tabcontent">
+         <div id="case" class="tabcontent overflow-auto">
 
 
 
@@ -430,10 +430,10 @@
                    var api = this.api();
                    $('#numberof_scheduled').html(api.rows().data().length)
                 }
-                  
+
             });
 
-            
+
             var table_unschedule = $('.table_unschedule').DataTable({
                 processing: true,
                 serverSide: true,
@@ -454,10 +454,10 @@
                    $('#numberof_unscheduled').html(api.rows().data().length)
                    $('#numberof_unsettleded').html(apiSchedule.rows().data().length + api.rows().data().length)
                 }
-                  
+
             });
 
-            
+
             var table_today = $('.table_today').DataTable({
                 processing: true,
                 serverSide: true,
@@ -472,10 +472,10 @@
                     {     data: 'date_incident', name: 'date_incident'},
                     { data: 'time_incident', name: 'time_incident'}
                 ]
-                  
+
             });
 
-            
+
             var table_settled = $('.table_settled').DataTable({
                 processing: true,
                 serverSide: true,
@@ -494,7 +494,7 @@
                    var api = this.api();
                    $('#numberof_settled').html(api.rows().data().length)
                 }
-                  
+
             });
 
             //Edit Schedule
@@ -559,7 +559,7 @@
 
 
 
-           
+
 
 // View Schedule
       $('body').on('click', '.viewSchedule', function() {
