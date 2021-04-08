@@ -83,7 +83,9 @@ class ResidentUserAccountController extends Controller
             "register_username" => ["required","unique:resident_accounts,username"],
             "register_email" => ["required", "ends_with:@gmail.com,@yahoo.com", "unique:resident_accounts,email"],
             "register_password" => ["required", "confirmed"],
-            "register_password_confirmation" => "required"
+            "register_password_confirmation" => "required",
+            "register_gender" => "required",
+            "register_voter_status" => "required",
         ],
         [
             "register_firstname.required" => "We need to know your name.",
@@ -93,7 +95,9 @@ class ResidentUserAccountController extends Controller
             "register_email.ends_with" => "we need you to give us a valid email.",
             "register_password.required" => "Enter your password!!!",
             "register_password_confirmation.required" => "We need you to verify your password!!!",
-            "register_username.unique"=> "Username has already been taken."
+            "register_username.unique"=> "Username has already been taken.",
+            "register_gender.required"=> "This field cannot be empty.",
+            "register_voter_status.required"=> "This field cannot be empty."
         ])->validate();
 
         //Validation Success
@@ -111,6 +115,9 @@ class ResidentUserAccountController extends Controller
         $new_resident_info->firstname = $request->register_firstname;
         $new_resident_info->lastname = $request->register_lastname;
         $new_resident_info->email = $request->register_email;
+        $new_resident_info->gender = $request->register_gender;
+        $new_resident_info->voterstatus = $request->register_voter_status;
+        
         $query = $new_resident_info->save();
 
         // $resident_info = resident_info::where("email","=", $request->register_email)->first();
