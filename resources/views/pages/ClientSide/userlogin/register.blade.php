@@ -131,13 +131,9 @@
         var old_gender = $("#register_gender").data("old");
         var old_voter_status = $("#register_voter_status").data("old");
         
-        alert(old_gender);
-        alert(old_voter_status);
-
         $("#register_gender").val(old_gender);
         $("#register_voter_status").val(old_voter_status);
       })
-
   </script>
 
 </body>
