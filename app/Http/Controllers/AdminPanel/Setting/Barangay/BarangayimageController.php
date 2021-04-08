@@ -25,8 +25,6 @@ class BarangayimageController extends Controller
 
 
 
-        $file = $request->file('image');
-        $s3 = Storage::disk('s3');
 
 
      //   $path = $request->file('image')->store('public/images');
