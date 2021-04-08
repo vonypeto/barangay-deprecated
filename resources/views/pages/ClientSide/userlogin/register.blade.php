@@ -59,6 +59,34 @@
               @enderror
             </div>
 
+            {{-- Gender --}}
+            <div class="form-label-group mt-2">
+              <label for="register_gender">Gender</label>
+              <select class="form-control" id="register_gender" name="register_gender" data-old="{{ old('register_gender')}}">
+                <option value="">-Select Gender-</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+              @error('register_gender')
+              <span class="text-danger error_text"> {{ $message }}</span>
+              @enderror
+            </div>
+
+            {{-- Voter Status --}}
+            <div class="form-label-group mt-2">
+              <label for="register_voter_status">Voter Status</label>
+              <select class="form-control" id="register_voter_status" name="register_voter_status" data-old="{{ old('register_voter_status')}}">
+                <option value="">-Select Status-</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+
+              @error('register_voter_status')
+              <span class="text-danger error_text"> {{ $message }}</span>
+              @enderror
+            </div>
+
             {{-- email address --}}
             <div class="form-label-group mt-2">
               <label for="register_email">Email address</label>
@@ -97,6 +125,20 @@
     </div>
   </div>
 </div>
+
+  <script type="text/javascript">
+      $(function() {
+        var old_gender = $("#register_gender").data("old");
+        var old_voter_status = $("#register_voter_status").data("old");
+        
+        alert(old_gender);
+        alert(old_voter_status);
+
+        $("#register_gender").val(old_gender);
+        $("#register_voter_status").val(old_voter_status);
+      })
+
+  </script>
 
 </body>
 </html>
