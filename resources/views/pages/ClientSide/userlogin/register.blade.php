@@ -86,7 +86,7 @@
               <span class="text-danger error_text"> {{ $message }}</span>
               @enderror
             </div>
-            
+
             {{-- email address --}}
             <div class="form-label-group mt-2">
               <label for="register_email">Email address</label>
@@ -125,6 +125,16 @@
     </div>
   </div>
 </div>
+
+  <script type="text/javascript">
+      $(function() {
+        var old_gender = $("#register_gender").data("old");
+        var old_voter_status = $("#register_voter_status").data("old");
+        
+        $("#register_gender").val(old_gender);
+        $("#register_voter_status").val(old_voter_status);
+      })
+  </script>
 
 </body>
 </html>
