@@ -56,7 +56,7 @@
                       
       <div class="row" style="margin-bottom: 1rem;">
         <div class="col-sm-3" >
-          <span style="margin-right: 2rem;"><b>Complainants</b></span>
+          <span style="display:inline-block; margin-right: 2rem;"><b>Complainants</b></span>
           @for ($i = 0; $i < $complainant->count(); $i++)
           <span><b>:</b> {{ $complainant[$i]->person_involve }}</span>
         @endfor
@@ -65,7 +65,7 @@
 
       <div class="row" style="margin-bottom: 1rem;">
         <div class="col-sm-3" >
-          <span style="margin-right: 2.6rem;"><b>Respondents</b></span>
+          <span style="display:inline-block; margin-right: 2.6rem;"><b>Respondents</b></span>
           @for ($i = 0; $i < $respondent->count(); $i++)
           <span><b>:</b> {{ $respondent[$i]->person_involve }}</span>
         @endfor
@@ -74,7 +74,7 @@
 
       <div class="row" style="margin-bottom: 1rem;">
         <div class="col-sm-3" >
-          <span  style="margin-right: 4.8rem;"><b>Victims</b></span>
+          <span  style="display:inline-block; margin-right: 4.8rem;"><b>Victims</b></span>
           @for ($i = 0; $i < $victim->count(); $i++)
           <span><b>:</b> {{ $victim[$i]->person_involve }}</span>
         @endfor
@@ -83,7 +83,7 @@
 
       <div class="row" style="margin-bottom: 1rem;">
         <div class="col-sm-3" >
-          <span  style="margin-right: 3.9rem;"><b>Attackers</b></span>
+          <span  style="display:inline-block; margin-right: 3.9rem;"><b>Attackers</b></span>
           @for ($i = 0; $i < $attacker->count(); $i++)
           <span><b>:</b> {{ $attacker[$i]->person_involve }}</span>
         @endfor
@@ -93,7 +93,7 @@
       <div class="row">
 
         <div class="col-sm-3" >
-          <span style="margin-right: 3.6rem;"><b>Occurence</b></span>
+          <span style="display:inline-block; margin-right: 3.6rem;"><b>Occurence</b></span>
           <span><b>:</b> {{ $data[0]->time_incident }} of {{ $data[0]->date_incident }} at {{ $data[0]->incident_location }}</span>
         </div>
       </div>
@@ -105,7 +105,7 @@
         </div>
 
         <div class="col-sm-8" >
-          <p>: <span style="margin-left: 4rem;"></span> {{ $data[0]->incident_narrative }}</p>
+          <p>: <span style="display:inline-block; margin-left: 4rem;"></span> {{ $data[0]->incident_narrative }}</p>
          </div>
 
       </div>
