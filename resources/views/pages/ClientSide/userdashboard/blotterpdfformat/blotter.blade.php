@@ -10,7 +10,7 @@
     <div class="row">
 
       <div class="column-right text-right" >
-        <img  style="width: 120PX" src="{{ storage_path('app/'.$certificate_layout[0]->logo_1) }}" alt="logo">
+        <img  style="width: 120PX" src="http://{{  request()->getHost()}}{{  Storage::url( $certificate_layout[0]->logo_1 ?? 'Logo not set')  }}" alt="logo">
       </div>
       <div class="column-center text-center" >
        <p style='font-size:19px;font-family: "Times New Roman, Times, serif"; text-align: center; text-transform: uppercase;'> REPUBLIC OF THE PHILIPPINES<br>
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="column-left" >
-        <img  style="width: 120PX"  src="{{ storage_path('app/'.$certificate_layout[0]->logo_2) }}" alt="logo">
+        <img  style="width: 120PX"  src="http://{{  request()->getHost()}}{{  Storage::url( $certificate_layout[0]->logo_2 ?? 'Logo not set')  }}"  alt="logo">
       </div>
 
     </div>
@@ -54,65 +54,48 @@
 
       <p style="text-align: center; margin-bottom: 1rem;"><b>"{{ $data[0]->incident_type }}"</b></p>
                       
-      <div class="row">
+      <div class="row" style="margin-bottom: 1rem;">
         <div class="col-sm-3" >
-          <p><b>Complainants</b></p>
-        </div>
-
-        <div class="col-sm-8" >
+          <span style="margin-right: 2rem;"><b>Complainants</b></span>
           @for ($i = 0; $i < $complainant->count(); $i++)
-            <span><b>:</b>{{ $complainant[$i]->person_involve }}</span>
-          @endfor
-         </div>
+          <span><b>:</b> {{ $complainant[$i]->person_involve }}</span>
+        @endfor
+        </div>
       </div>
 
-      <div class="row">
+      <div class="row" style="margin-bottom: 1rem;">
         <div class="col-sm-3" >
-          <p><b>Respondents</b></p>
-        </div>
-
-          <div class="col-sm-8" >
+          <span style="margin-right: 2.6rem;"><b>Respondents</b></span>
           @for ($i = 0; $i < $respondent->count(); $i++)
-            <span><b>:</b> {{ $respondent[$i]->person_involve }}</span>
-          @endfor
-         </div>
+          <span><b>:</b> {{ $respondent[$i]->person_involve }}</span>
+        @endfor
+        </div>
       </div>
 
-      <div class="row">
+      <div class="row" style="margin-bottom: 1rem;">
         <div class="col-sm-3" >
-          <p><b>Victims</b></p>
-        </div>
-
-        <div class="col-sm-8" >
+          <span  style="margin-right: 4.8rem;"><b>Victims</b></span>
           @for ($i = 0; $i < $victim->count(); $i++)
-            <span><b>:</b> {{ $victim[$i]->person_involve }}</span>
-          @endfor
-         </div>
+          <span><b>:</b> {{ $victim[$i]->person_involve }}</span>
+        @endfor
+        </div>
       </div>
 
-      <div class="row">
+      <div class="row" style="margin-bottom: 1rem;">
         <div class="col-sm-3" >
-          <p><b>Attackers</b></p>
-
-        </div>
-
-        <div class="col-sm-8" >
+          <span  style="margin-right: 3.9rem;"><b>Attackers</b></span>
           @for ($i = 0; $i < $attacker->count(); $i++)
-            <span><b>:</b> {{ $attacker[$i]->person_involve }}</span>
-          @endfor
-         </div>
+          <span><b>:</b> {{ $attacker[$i]->person_involve }}</span>
+        @endfor
+        </div>
       </div>
 
       <div class="row">
 
         <div class="col-sm-3" >
-          <p><b>Occurence</b></p>
+          <span style="margin-right: 3.6rem;"><b>Occurence</b></span>
+          <span><b>:</b> {{ $data[0]->time_incident }} of {{ $data[0]->date_incident }} at {{ $data[0]->incident_location }}</span>
         </div>
-
-        <div class="col-sm-8" >
-          <p>: {{ $data[0]->time_incident }} of {{ $data[0]->date_incident }} at {{ $data[0]->incident_location }}</p>
-         </div>
-
       </div>
 
       <div class="row">
