@@ -61,7 +61,7 @@
 
         <div class="col-sm-8" >
           @for ($i = 0; $i < $complainant->count(); $i++)
-            <p>: {{ $complainant[$i]->person_involve }}</p>
+            <span><b>:</b>{{ $complainant[$i]->person_involve }}</span>
           @endfor
          </div>
       </div>
@@ -73,7 +73,7 @@
 
           <div class="col-sm-8" >
           @for ($i = 0; $i < $respondent->count(); $i++)
-            <p>: {{ $respondent[$i]->person_involve }}</p>
+            <span><b>:</b> {{ $respondent[$i]->person_involve }}</span>
           @endfor
          </div>
       </div>
@@ -85,7 +85,7 @@
 
         <div class="col-sm-8" >
           @for ($i = 0; $i < $victim->count(); $i++)
-            <p>: {{ $victim[$i]->person_involve }}</p>
+            <span><b>:</b> {{ $victim[$i]->person_involve }}</span>
           @endfor
          </div>
       </div>
@@ -98,7 +98,7 @@
 
         <div class="col-sm-8" >
           @for ($i = 0; $i < $attacker->count(); $i++)
-            <p>: {{ $attacker[$i]->person_involve }}</p>
+            <span><b>:</b> {{ $attacker[$i]->person_involve }}</span>
           @endfor
          </div>
       </div>
