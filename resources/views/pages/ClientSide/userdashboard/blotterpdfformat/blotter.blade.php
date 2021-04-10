@@ -10,7 +10,7 @@
     <div class="row">
 
       <div class="column-right text-right" >
-        <img  style="width: 120PX" src="{{ storage_path('app/'.$certificate_layout[0]->logo_1) }}" alt="logo">
+        <img  style="width: 120PX" src="http://{{  request()->getHost()}}{{  Storage::url( $certificate_layout[0]->logo_1 ?? 'Logo not set')  }}" alt="logo">
       </div>
       <div class="column-center text-center" >
        <p style='font-size:19px;font-family: "Times New Roman, Times, serif"; text-align: center; text-transform: uppercase;'> REPUBLIC OF THE PHILIPPINES<br>
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="column-left" >
-        <img  style="width: 120PX"  src="{{ storage_path('app/'.$certificate_layout[0]->logo_2) }}" alt="logo">
+        <img  style="width: 120PX"  src="http://{{  request()->getHost()}}{{  Storage::url( $certificate_layout[0]->logo_2 ?? 'Logo not set')  }}"  alt="logo">
       </div>
 
     </div>
@@ -32,8 +32,8 @@
       <h4 style="margin-bottom: 1.5rem;"><b>TO WHOM IT MAY CONCERN:</b></h4>
 
       <h4><b style="margin-left: 5rem;">THIS IS TO CERTIFY</b> that as per record available in the Barangay BLotter on Barangay {{ $certificate_layout[0]->barangay ?: 'Not Set' }}, the following data exixts:</h4>
-   
-      
+
+
 
       <div style="margin-top: 1.5rem;" class="data-row">
           <div class="data-row-1">
@@ -47,72 +47,55 @@
               <p>:{{ $data[0]->date_reported }}</p>
               <p>:{{ $data[0]->time_reported }}</p>
           </div>
-        
+
       </div>
 
       <p><b>FOR RECORD:</b></p>
 
       <p style="text-align: center; margin-bottom: 1rem;"><b>"{{ $data[0]->incident_type }}"</b></p>
-                      
-      <div class="row">
-        <div class="col-sm-3" >
-          <p><b>Complainants</b></p>
-        </div>
 
-        <div class="col-sm-8" >
+      <div class="row" style="margin-bottom: 1rem;">
+        <div class="col-sm-3" >
+          <span style="display:inline-block; margin-right: 2rem;"><b>Complainants</b></span>
           @for ($i = 0; $i < $complainant->count(); $i++)
-            <p>: {{ $complainant[$i]->person_involve }}</p>
-          @endfor
-         </div>
+          <span><b>:</b> {{ $complainant[$i]->person_involve }}</span>
+        @endfor
+        </div>
       </div>
 
-      <div class="row">
+      <div class="row" style="margin-bottom: 1rem;">
         <div class="col-sm-3" >
-          <p><b>Respondents</b></p>
-        </div>
-
-          <div class="col-sm-8" >
+          <span style="display:inline-block; margin-right: 2.6rem;"><b>Respondents</b></span>
           @for ($i = 0; $i < $respondent->count(); $i++)
-            <p>: {{ $respondent[$i]->person_involve }}</p>
-          @endfor
-         </div>
+          <span><b>:</b> {{ $respondent[$i]->person_involve }}</span>
+        @endfor
+        </div>
       </div>
 
-      <div class="row">
+      <div class="row" style="margin-bottom: 1rem;">
         <div class="col-sm-3" >
-          <p><b>Victims</b></p>
-        </div>
-
-        <div class="col-sm-8" >
+          <span  style="display:inline-block; margin-right: 4.8rem;"><b>Victims</b></span>
           @for ($i = 0; $i < $victim->count(); $i++)
-            <p>: {{ $victim[$i]->person_involve }}</p>
-          @endfor
-         </div>
+          <span><b>:</b> {{ $victim[$i]->person_involve }}</span>
+        @endfor
+        </div>
       </div>
 
-      <div class="row">
+      <div class="row" style="margin-bottom: 1rem;">
         <div class="col-sm-3" >
-          <p><b>Attackers</b></p>
-
-        </div>
-
-        <div class="col-sm-8" >
+          <span  style="display:inline-block; margin-right: 3.9rem;"><b>Attackers</b></span>
           @for ($i = 0; $i < $attacker->count(); $i++)
-            <p>: {{ $attacker[$i]->person_involve }}</p>
-          @endfor
-         </div>
+          <span><b>:</b> {{ $attacker[$i]->person_involve }}</span>
+        @endfor
+        </div>
       </div>
 
       <div class="row">
 
         <div class="col-sm-3" >
-          <p><b>Occurence</b></p>
+          <span style="display:inline-block; margin-right: 3.6rem;"><b>Occurence</b></span>
+          <span><b>:</b> {{ $data[0]->time_incident }} of {{ $data[0]->date_incident }} at {{ $data[0]->incident_location }}</span>
         </div>
-
-        <div class="col-sm-8" >
-          <p>: {{ $data[0]->time_incident }} of {{ $data[0]->date_incident }} at {{ $data[0]->incident_location }}</p>
-         </div>
-
       </div>
 
       <div class="row">
@@ -122,7 +105,7 @@
         </div>
 
         <div class="col-sm-8" >
-          <p>: <span style="margin-left: 4rem;"></span> {{ $data[0]->incident_narrative }}</p>
+          <p>: <span style="display:inline-block; margin-left: 4rem;"></span> {{ $data[0]->incident_narrative }}</p>
          </div>
 
       </div>
@@ -131,8 +114,8 @@
         <p><b>RONALDO PLECRIDA</b></p>
         <p>Barangay Captain</p>
     </div>
-      
-   
+
+
       </div>
 
 
@@ -149,7 +132,6 @@
       box-sizing: border-box;
     }
 
-   
     .column-left {
       float: left;
       width: 20%;
@@ -160,24 +142,19 @@
       float: left;
       width:60%;
       padding: 0px;
-      height: 190px; 
+      height: 190px;
     }
     .column-right {
       float: left;
       width: 20%;
-
-      height: 190px; 
+      height: 190px;
     }
-
     .data-row{
       float: left;
       width: 100%;
       margin-bottom: 2rem;
     }
-
     .data-row .data-row-1{
       float: left;
     }
-
     </style>
-
