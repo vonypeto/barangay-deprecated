@@ -30,7 +30,7 @@
   "version": "1.0.1",
   "main": "webpack.mix.js",
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/vonypeto"
+    "registry":"https://npm.pkg.github.com/@vonypeto"
   },
   "directories": {
     "test": "tests"
