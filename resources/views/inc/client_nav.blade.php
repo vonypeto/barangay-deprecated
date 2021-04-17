@@ -1,3 +1,6 @@
+<link rel="icon"
+type="image/png"
+href="{{  Storage::url($image->image ?? 'Logo not set')  }}">
 <header class="header-blue" style="padding-bottom: 0px;">
     <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
         <div class="container-fluid"><a class="navbar-brand" href="/barangay/home" style="font-size: 45px;font-family: bodoni mt;"><img src="{{ URL::to($image->url ?? 'Logo not set') }}" style="resize: both;width: 100px;margin-right: 30px;"><p class="navbar-brand" id="client_navbar" style="font-size: 45px;">{{ $image->barangay_name ?? 'Logo not set' }}</p></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -25,3 +28,4 @@
     <li class="nav-item"><a class="nav-link" href="/barangay/news">News</a></li>
     <li class="nav-item"><a class="nav-link" href="/barangay/info">Info</a></li>
 </ul>
+

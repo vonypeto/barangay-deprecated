@@ -54,5 +54,11 @@ class AppServiceProvider extends ServiceProvider
             $view->with('image',$image);
 
         });
+        view()->composer('layouts.apps',function($view){
+            $image = DB::table('barangayimages')
+            ->where('barangay_id','=','1')->first();
+            $view->with('image',$image);
+
+        });
     }
 }
