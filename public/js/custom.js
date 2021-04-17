@@ -186,7 +186,32 @@ $('#regionsaves').click(function (e) {
     //Resident module ResidentEdit
     $('body').on('click', '.editResident', function() {
 
-
+        $('#lastname_err').html("");
+        $('#firstname_err').html("");
+        $('#middlename_err').html("");
+        $('#alias_err').html("");
+        $('#birthday_err').html("");
+        $('#age_err').html("");
+        $('#birthplace_err').html("");
+        $('#gender_err').html("");
+        $('#voterstatus_err').html("");
+        $('#civilstatus_err').html("");
+        $('#citizenship_err').html("");
+        $('#telephone_err').html("");
+        $('#mobile_err').html("");
+        $('#area_err').html("");
+        $('#height_err').html("");
+        $('#weight_err').html("");
+        $('#email_err').html("");
+        $('#PAG_IBIG_err').html("");
+        $('#PHILHEALTH_err').html("");
+        $('#SSS_err').html("");
+        $('#TIN_err').html("");
+        $('#spouse_err').html("");
+        $('#father_err').html("");
+        $('#mother_err').html("");
+        $('#address_1_err').html("");
+        $('#address_2_err').html("");
         var resident_id = $(this).data('id');
 
 
