@@ -6,9 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Barangay System</title>
 
-      <link rel="icon"
-      type="image/png"
-      href="{{  Storage::url($image->image ?? 'Logo not set')  }}">
+
       <link href=" {{ URL::asset('css/app.css') }}" rel="stylesheet">
       <link href=" https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
 
