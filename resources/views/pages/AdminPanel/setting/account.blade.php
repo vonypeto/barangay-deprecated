@@ -19,7 +19,7 @@
             <button class="tablinks active" onclick="schedules(event, 'schedule')">Account Setting</button>
             <button class="tablinks " id="tablink-create-account" onclick="schedules(event, 'create') ">Create Account</button>
             <button class="tablinks"  id="tablink-manage-account" onclick="schedules(event, 'manage')">Manage Account</button>
-            <button class="tablinks"  id="tablink-manage-account" onclick="schedules(event, 'resident')">Manage Resident Account</button>
+            <button class="tablinks"  id="tablink-resident-manage-account" onclick="schedules(event, 'resident')">Manage Resident Account</button>
             <button class="tablinks" id="tablink-session-history" onclick="schedules(event, 'session')">Session History</button>
          </div>
 
@@ -472,12 +472,10 @@
             
             //Hide Navlink
             if(user_type == "Encoder"){
+            $("#tablink-resident-manage-account").hide();
             $("#tablink-create-account").hide();
             $("#tablink-manage-account").hide();
-            $("#tablink-session-history").hide();
             }
-
-
 
             $.ajaxSetup({
                headers: {
@@ -522,6 +520,7 @@
                var sessionTable = $(".session_history_table").DataTable({
                processing: true,
                dom: 'lrtip',
+               "order": [[ 3, "desc" ]],
                serverSide: true,
                ajax: "/setting/account/session/table",
                columns: [
