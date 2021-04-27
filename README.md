@@ -62,6 +62,14 @@ note: Xampp mysql service must be running
 4. Visit the link provided by the terminal such as `127.0.0.1:8000`  
 note: to run the website on localhost for developing testing just run this on the terminal where the code is `php artisan serve`
 
+To access the Server Side panel we provided a seed generated account
+
+    ```
+    Username: giann@gmail.com
+    Password: giann
+    Usertype: Admin
+    ```	
+
 ## Advanced details
 
 ### Dependencies
