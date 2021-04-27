@@ -39,15 +39,26 @@ This system require a list of program to function and run on the local device
 
 ## Usage
 
-1. Run Xampp first by going to the directory where you installed it and open this `xampp-control.exe` and only run the `mysql service`
+1. Run Xampp first by going to the directory where you installed it and open this `xampp-control.exe` and run the `mysql service` and `apache service`
 
-2. After installation process, run the following command on the directory where you clone the source code:
+2. Create a database for the barangay system before creating table.
+    go to the url
+
+    ```
+    http://localhost/phpmyadmin/server_sql.php
+    ```	
+    type this command
+    ```
+    CREATE DATABASE barangay
+    ```	
+
+3. After installation process, run the following command on the directory where you clone the source code:
 
     ```
     php artisan serve && php artisan migrate && php artisan db:seed
     ```	
 note: Xampp mysql service must be running 
-3. Visit the link provided by the terminal such as `127.0.0.1:8000`  
+4. Visit the link provided by the terminal such as `127.0.0.1:8000`  
 note: to run the website on localhost for developing testing just run this on the terminal where the code is `php artisan serve`
 
 ## Advanced details
