@@ -3,9 +3,9 @@
    <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
       <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="width=device-width, initial-scale=2">
       <title>Barangay System</title>
-      
+
       <link href=" {{ URL::asset('css/app.css') }}" rel="stylesheet">
       <link href=" https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
 
